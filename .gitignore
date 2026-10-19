@@ -1,0 +1,198 @@
+# =============================================================================
+# LugandaGPT .gitignore
+# Conservative Python-oriented ignore rules.
+# Docs, source, tests, configs, and dataset *metadata* are NOT ignored.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Python caches and compiled files
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+
+# -----------------------------------------------------------------------------
+# Virtual environments
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.conda/
+miniconda3/
+env.bak/
+venv.bak/
+
+# -----------------------------------------------------------------------------
+# Local environment-variable files, API credentials, secrets
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+secrets/
+.secrets/
+credentials.json
+credentials.*
+service-account*.json
+*.pem
+*.key
+*.pfx
+*.p12
+token.json
+tokens.json
+*.token
+.netrc
+
+# -----------------------------------------------------------------------------
+# Model checkpoints, weights, and large downloaded model artifacts
+# -----------------------------------------------------------------------------
+# Note: rules the directory itself (`checkpoints/`) would stop Git from ever
+# descending into it, so the `.gitkeep` negation below could never match.
+# Matching `checkpoints/*` lets the negation apply while still excluding
+# every file and subdirectory inside.
+checkpoints/*
+!checkpoints/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.gguf
+*.ggml
+*.onnx
+*.h5
+*.msgpack
+*.model
+*.pb
+saved_models/
+models/
+model_weights/
+hf_cache/
+.cache/huggingface/
+~/.cache/huggingface/
+transformers_cache/
+wandb/
+mlruns/
+lightning_logs/
+runs/
+
+# -----------------------------------------------------------------------------
+# Datasets (raw data ignored by default)
+# Metadata needed for reproducibility MAY be committed.
+# -----------------------------------------------------------------------------
+data/**/*.csv
+data/**/*.tsv
+data/**/*.jsonl
+data/**/*.ndjson
+data/**/*.parquet
+data/**/*.arrow
+data/**/*.feather
+data/**/*.orc
+data/**/*.avro
+data/**/*.txt
+data/**/*.zip
+data/**/*.tar
+data/**/*.tar.gz
+data/**/*.tgz
+data/**/*.gz
+data/**/*.bz2
+data/**/*.xz
+data/**/*.7z
+data/**/*.rar
+datasets/
+raw_data/
+corpora/
+*.sqlite
+*.sqlite3
+*.db
+
+# Keep documentation and dataset metadata committed.
+#
+# Intended method for committing APPROVED dataset metadata or benchmark files:
+# raw data stays excluded by the rules above; an approved small file is
+# re-included with a narrow, commented, path-specific negation, e.g.:
+#   # approved small benchmark set (project director, 2026-10-19)
+#   !data/benchmark/
+# Scope negations to the exact approved directory. Never add a broad negation
+# (e.g. `!data/**`) that could re-include raw datasets.
+# Prefer metadata formats that are not ignored at all: .md, .json, .yaml, .yml.
+
+# -----------------------------------------------------------------------------
+# Experiment caches and outputs
+# -----------------------------------------------------------------------------
+*.tmp
+*.temp
+.cache/
+.pytest_fixtures/
+.cursor/
+.numba_cache/
+.ipynb_checkpoints/
+
+# -----------------------------------------------------------------------------
+# Logs and local temporary files
+# -----------------------------------------------------------------------------
+*.log
+logs/
+*.out
+*.pid
+*.seed
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+tmp/
+temp/
+scratch/
+
+# -----------------------------------------------------------------------------
+# IDE / editor local settings
+# -----------------------------------------------------------------------------
+.idea/
+.vscode/*
+!.vscode/settings.sample.json
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# -----------------------------------------------------------------------------
+# OS / local server artifacts (project lives under XAMPP htdocs)
+# -----------------------------------------------------------------------------
+*.stackdump
