@@ -27,6 +27,10 @@ provider are **undecided** pending research and benchmarking.
   documentation is in place, environment and tooling still to come.
 - No datasets, training code, models, or experiments exist yet.
 - No model has been trained or evaluated.
+- Local tooling now includes the project reporter: read-only activity
+  collection, local report generation, and optional Telegram delivery to
+  the private group. Scheduled delivery stays disabled until the project
+  director enables it (see the [reporter guide](docs/PROJECT_REPORTER_README.md)).
 
 See the [roadmap](docs/ROADMAP.md) for the staged plan.
 
@@ -40,9 +44,9 @@ LugandaGPT/
 ├── checkpoints/         Model checkpoints (ignored by Git; empty)
 ├── data/                Dataset governance (metadata only; no raw data)
 ├── docs/                Project documentation
-├── reports/             Generated reports and results (empty)
-├── src/                 Source code (empty)
-├── tests/               Tests (empty)
+├── reports/             Generated reports and results (reporter output, ignored by Git)
+├── src/                 Source code (project reporter under src\reporter)
+├── tests/               Python test suite
 └── tokenizer/           Tokenizer tooling and experiments (empty)
 ```
 
@@ -54,6 +58,8 @@ LugandaGPT/
 - [Decisions](docs/DECISIONS.md): architecture decision records
 - [Experiment log](docs/EXPERIMENT_LOG.md): experiment record template
 - [Evaluation plan](docs/EVALUATION_PLAN.md): benchmark and rubric design
+- [Reporter spec](docs/PROJECT_REPORTER_SPEC.md): requirements for automatic reporting and Telegram delivery
+- [Reporter guide](docs/PROJECT_REPORTER_README.md): running the reporter, checking delivery, retrying failures, enabling scheduling
 - [Data governance](data/README.md): dataset requirements and rules
 - [Agents](AGENTS.md): engineering instructions and working arrangement
 

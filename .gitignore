@@ -182,6 +182,20 @@ temp/
 scratch/
 
 # -----------------------------------------------------------------------------
+# Project Reporter local output
+# -----------------------------------------------------------------------------
+# The reporter writes report archives, scheduler state, delivery logs,
+# recorded test output and human activity notes under reports/reporter/.
+# That output stays local by default: raw data, chat ids, delivery history
+# and paths have no business in Git history. Reports are preserved on disk
+# for review, and a report can be committed later by adding a narrow,
+# commented, path-specific negation after project-director approval.
+# The `/*` form (not the directory itself) keeps the `.gitkeep` negation
+# matching, the same rule already used for checkpoints/ above.
+reports/reporter/*
+!reports/reporter/.gitkeep
+
+# -----------------------------------------------------------------------------
 # IDE / editor local settings
 # -----------------------------------------------------------------------------
 .idea/

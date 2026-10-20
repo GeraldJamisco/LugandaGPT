@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>LugandaGPT | Project Reporter</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="LugandaGPT Project Reporter home">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-copy">
+          <strong>LugandaGPT</strong>
+          <small>PROJECT REPORTER</small>
+        </span>
+      </a>
+      <div class="topbar-right">
+        <span class="environment"><span class="live-dot"></span> Local workspace</span>
+        <div class="badges" aria-label="System status">
+          <span id="schedule-badge" class="badge">schedule: …</span>
+          <span id="telegram-badge" class="badge">telegram: …</span>
+          <span id="reporter-badge" class="badge">read-only</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <div>
+          <p class="eyebrow">ENGINEERING OVERVIEW</p>
+          <h1>Project control room</h1>
+          <p class="intro-copy">A grounded view of progress, delivery, and what needs attention next.</p>
+        </div>
+        <div class="intro-meta">
+          <span class="meta-label">Workspace mode</span>
+          <strong>Read-only monitoring</strong>
+        </div>
+      </section>
+
+      <p class="notice" id="model-status">
+        <span class="notice-icon" aria-hidden="true">i</span>
+        <span>No trained LugandaGPT model exists. This dashboard does not evaluate a model.</span>
+      </p>
+
+      <section class="action-panel" aria-labelledby="actions-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">QUICK ACTIONS</p>
+            <h2 id="actions-title">Reporter controls</h2>
+          </div>
+          <span class="section-note">Actions run locally</span>
+        </div>
+        <div class="actions">
+          <button id="btn-generate" class="button button-primary"><span aria-hidden="true">↻</span> Generate report</button>
+          <button id="btn-deliver" class="button button-secondary"><span aria-hidden="true">➤</span> Retry delivery</button>
+          <button id="btn-telegram-test" class="button button-secondary"><span aria-hidden="true">➤</span> Test Telegram delivery</button>
+          <button id="btn-enable" class="button button-secondary"><span aria-hidden="true">◷</span> Enable schedule</button>
+          <button id="btn-disable" class="button button-danger">Disable schedule</button>
+        </div>
+        <div class="action-feedback">
+          <span class="feedback-mark" aria-hidden="true"></span>
+          <p class="hint" id="action-result" role="status" aria-live="polite">No action run in this session.</p>
+        </div>
+        <p class="helper-copy">Automatic reporting remains disabled until a manual report and Telegram delivery test both succeed.</p>
+      </section>
+
+      <section class="overview-section" aria-label="Project overview">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AT A GLANCE</p>
+            <h2>Project overview</h2>
+          </div>
+          <span class="section-note">Evidence-based status</span>
+        </div>
+        <div class="grid overview-grid">
+          <article class="card card-featured">
+            <div class="card-heading"><span class="card-icon icon-project" aria-hidden="true">◈</span><h2>Project status</h2></div>
+            <dl id="status-list" class="status-list"><dt>Loading status</dt><dd>…</dd></dl>
+          </article>
+          <article class="card">
+            <div class="card-heading"><span class="card-icon icon-git" aria-hidden="true">⌘</span><h2>Latest Git activity</h2></div>
+            <div id="git-block">Loading Git activity…</div>
+          </article>
+          <article class="card">
+            <div class="card-heading"><span class="card-icon icon-spend" aria-hidden="true">$</span><h2>Verified spending</h2></div>
+            <div id="spending-block">Checking verified usage…</div>
+          </article>
+          <article class="card">
+            <div class="card-heading"><span class="card-icon icon-telegram" aria-hidden="true">➤</span><h2>Telegram delivery</h2></div>
+            <div id="telegram-block">Loading Telegram status…</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid detail-grid" aria-label="Project details">
+        <article class="card card-wide">
+          <div class="card-heading"><span class="card-icon icon-activity" aria-hidden="true">⌁</span><h2>Activity timeline</h2></div>
+          <p class="card-description">Recent repository and project events, with their recorded evidence.</p>
+          <div id="timeline-block">Loading activity…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-schedule" aria-hidden="true">◷</span><h2>Reporting schedule</h2></div>
+          <div id="schedule-block">Loading schedule…</div>
+        </article>
+        <article class="card card-wide">
+          <div class="card-heading"><span class="card-icon icon-reports" aria-hidden="true">▤</span><h2>Latest report and delivery</h2></div>
+          <p class="card-description">Generation and Telegram delivery outcome of the most recent runs, with any report still waiting for delivery.</p>
+          <div id="reporting-block">Loading reporting status…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-tests" aria-hidden="true">✓</span><h2>Tests</h2></div>
+          <div id="tests-block">Loading test records…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-experiments" aria-hidden="true">⌬</span><h2>Experiments</h2></div>
+          <div id="experiments-block">Loading experiments…</div>
+        </article>
+        <article class="card card-wide">
+          <div class="card-heading"><span class="card-icon icon-blockers" aria-hidden="true">!</span><h2>Blockers and decisions</h2></div>
+          <p class="card-description">Open dependencies that affect the next phase.</p>
+          <div id="blockers-block">Loading blockers…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-milestones" aria-hidden="true">⚑</span><h2>Upcoming milestones</h2></div>
+          <div id="milestones-block">Loading milestones…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-delivery" aria-hidden="true">≋</span><h2>Delivery log</h2></div>
+          <div id="delivery-block">Loading delivery history…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-reports" aria-hidden="true">▤</span><h2>Recent reports</h2></div>
+          <div id="reports-block">Loading reports…</div>
+        </article>
+        <article class="card card-wide">
+          <div class="card-heading"><span class="card-icon icon-history" aria-hidden="true">◴</span><h2>Report history</h2></div>
+          <div id="history-block">Loading report history…</div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><span class="card-icon icon-public" aria-hidden="true">↗</span><h2>Public update drafts</h2></div>
+          <div id="public-block">Loading public update status…</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div>
+        <strong>LugandaGPT Project Reporter</strong>
+        <p id="generated-at">Collecting dashboard data…</p>
+      </div>
+      <div class="footer-security"><span class="security-icon" aria-hidden="true">●</span><span>Local dashboard · 127.0.0.1 · No public endpoint</span></div>
+    </footer>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
