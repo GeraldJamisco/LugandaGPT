@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-2026-002",
+  "raw_record": "reports/experiments/gemma-retest-20261020-232851.json",
+  "reviewer": "Teacher Schmarc",
+  "review_date": "2026-10-21",
+  "source": "Project owner relay in chat",
+  "review_type": "Native-language review of one published translation example and one teacher-supplied conversational example",
+  "translation_example": {
+    "prompt": "Translate to Luganda:\nThe farmers need better seeds to improve their harvest.",
+    "model_output": "Abalimi beetaaga ensigo ennungi okwongera ku bikungulwa byabwe.",
+    "teacher_supplied_comparison": "Abalimi betaaga ensigo enunji okwongera okulogoosa mu makungula gaabwe",
+    "verbatim_assessment": "the published translation is excellent on this if i am to award marks, i would give it 99%",
+    "informal_percentage": 99,
+    "score_status": "Teacher's informal percentage on one example. Not a benchmark score and not evidence of general translation quality."
+  },
+  "conversational_example": {
+    "prompt": "Respond in Luganda: Abalimi betaaga ensigo enunji okwongera okulogoosa mu makungula gaabwe",
+    "model_output": "Farmers need to plant more maize seeds to increase their production.",
+    "verbatim_assessment": "yes the prompt says to respond in luganda but instead english is the one that was produced, which means that instructions were not followed, and also there is a an introduction of two words maize = kasooli and production which could mean two things, same in english as harvest and production meaning is slightly the same as amakungula",
+    "language_instruction_followed": false,
+    "content_fidelity_issues": [
+      "Introduced maize (kasooli), which was not in the prompt.",
+      "Introduced production. The teacher notes that production and harvest overlap slightly in meaning with amakungula."
+    ]
+  },
+  "candidate_implication": "Translation-only candidate supported on this example. Conversational and instruction-following use is not supported on this example.",
+  "notes": "The review was received after the model run. It is recorded here so the raw measurement record remains unchanged."
+}

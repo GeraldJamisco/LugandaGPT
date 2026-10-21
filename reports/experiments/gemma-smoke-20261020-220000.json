@@ -1,0 +1,66 @@
+{
+  "experiment_type": "non-benchmark smoke test",
+  "status": "completed",
+  "mode": "4bit",
+  "device": "cpu",
+  "model_id": "AmplifiedAccess/Luganda-gemma-1b-it",
+  "model_revision": "5d0f24b80a09f582708ff397c989331d7d7b536f",
+  "base_model_id": "google/gemma-3-1b-it",
+  "base_model_revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+  "adapter_id": "AmplifiedAccess/Luganda-gemma-1b-it",
+  "adapter_revision": "5d0f24b80a09f582708ff397c989331d7d7b536f",
+  "tokenizer_id": "google/gemma-3-1b-it",
+  "tokenizer_revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+  "chat_template_path": "D:\\LugandaGPT\\models\\luganda-gemma-adapter\\chat_template.jinja",
+  "quantization": "nf4",
+  "compute_dtype": "float32",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 64,
+    "pad_token_id": "eos_token_id"
+  },
+  "seed": null,
+  "prompt": "Write a short greeting to a person you are meeting for the first time. Respond in Luganda.",
+  "prompt_sha256": "2095bba302dfaacba560edf0291cf1607b26faaf26e206ff95ac769ad38fe670",
+  "licence_status": "Owner accepted Gemma terms on 2026-10-21; adapter Apache-2.0; SALT CC BY-SA 4.0 and combined distribution unresolved.",
+  "approval_reference": "Owner approval 2026-10-21: Gemma terms, pinned download, one 4-bit CPU smoke test",
+  "operator": "GeraldJamisco",
+  "os": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.13.14",
+  "hardware": {
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "physical_cores": 8,
+    "logical_cores": 12,
+    "system_ram_gb": 7.7,
+    "gpu_available": false
+  },
+  "framework_versions": {
+    "torch": "2.7.1+cpu",
+    "transformers": "4.53.2",
+    "peft": "0.18.1",
+    "bitsandbytes": "0.50.2"
+  },
+  "memory_before": {
+    "process_rss_mb": 326.9,
+    "system_available_mb": 2172.4
+  },
+  "errors": [],
+  "chat_template_sha256": "7de1c58e208eda46e9c7f86397df37ec49883aeece39fb961e0a6b24088dd3c4",
+  "load_seconds": 13.025,
+  "memory_after_load": {
+    "process_rss_mb": 605.6,
+    "system_available_mb": 2170.6
+  },
+  "generate_seconds": 16.332,
+  "prompt_tokens": 29,
+  "output_tokens": 17,
+  "output": "Nnamukuba omuntu omulala nga nnamukolera.",
+  "finish_reason": "eos_or_stop",
+  "memory_after_generate": {
+    "process_rss_mb": 1309.9,
+    "system_available_mb": 1758.5
+  },
+  "total_seconds": 29.388,
+  "timestamp_utc": "2026-10-20T22:00:31.951825+00:00",
+  "record_path": "reports\\experiments\\gemma-smoke-20261020-220000.json"
+}

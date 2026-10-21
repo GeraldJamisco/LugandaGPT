@@ -1,0 +1,280 @@
+# Proposed configuration for the first bounded LugandaGPT fine-tuning smoke test.
+# Status: proposed. Execution is not authorized.
+# This file records the intended experiment. It is not evidence that a run occurred.
+# Values marked "candidate" have not been verified in the Runpod GPU environment.
+
+experiment:
+  id: RUNPOD-SMOKE-001
+  name: gemma3-1b-lora-smoke
+  date_prepared: 2026-10-21
+  status: proposed
+  authorization_status: authorized_in_principle_subject_to_prerequisites
+  execution_authorized: false
+  approval_reference: docs/DECISIONS.md D-008
+  approval_scope: >-
+    Bounded gate: licence and data review, teacher agreements, 100-example
+    pilot, separate evaluation set, and a 50 to 100 example training smoke
+    test. Full fine-tuning, deployment, publication, and release are excluded.
+  existing_adapter_role: translation_baseline_only
+  full_run_authorized: false
+
+base_model:
+  id: google/gemma-3-1b-it
+  revision: dcc83ea841ab6100d6b47a070329e1ba4cf78752
+  gated: true
+  license: Gemma Terms of Use
+  parameter_count: 999885952
+  hidden_size: 1152
+  num_hidden_layers: 26
+  vocab_size: 262144
+  context_limit: 32768
+  weight_dtype: bfloat16
+
+tokenizer:
+  revision: dcc83ea841ab6100d6b47a070329e1ba4cf78752
+  chat_template_sha256: 7de1c58e208eda46e9c7f86397df37ec49883aeece39fb961e0a6b24088dd3c4
+  pad_token: <pad>
+  pad_token_id: 0
+  bos_token_id: 2
+  eos_token: <eos>
+  eos_token_id: 1
+  end_of_turn_token: <end_of_turn>
+  end_of_turn_token_id: 106
+  generation_eos_token_ids:
+    - 1
+    - 106
+  add_special_tokens: false
+  trust_remote_code: false
+
+quantization:
+  load_in_4bit: true
+  quant_type: nf4
+  double_quant: true
+  compute_dtype: bfloat16
+  quant_storage: uint8
+  use_cpu: false
+
+lora:
+  task_type: CAUSAL_LM
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  use_dora: false
+  use_rslora: false
+  init_lora_weights: true
+  modules_to_save: []
+  expected_trainable_parameters: 13045760
+
+dataset:
+  raw_format: messages
+  training_view: conversational_prompt_completion
+  version: pilot-v1-unapproved
+  provenance_path: data/provenance/pilot-v1.json
+  split_hashes:
+    train: pending
+    validation: pending
+    heldout: pending
+    evaluation: pending
+  train_path: data/pilot/v1/train.jsonl
+  validation_path: data/pilot/v1/validation.jsonl
+  heldout_path: data/pilot/v1/heldout.jsonl
+  evaluation_path: data/evaluation/feasibility-v1.jsonl
+  max_train_examples: 70
+  max_validation_examples: 15
+  max_heldout_examples: 15
+  max_evaluation_items: 24
+  expand_assistant_turns: true
+  max_length: 1024
+  non_conversation_max_tokens: 512
+  conversation_max_tokens: 1024
+  packing: false
+  shuffle_train: true
+  seed: 42
+  deduplicate: true
+  contamination_check: exact_and_8gram
+  native_review_required: true
+  teacher_consent_required: true
+  licence_record_required: true
+
+training:
+  framework: trl.SFTTrainer
+  framework_version: "0.20.0"
+  output_dir: /workspace/runs/gemma3-1b-lora-smoke-20261021
+  run_name: gemma3-1b-lora-smoke-20261021
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 8
+  effective_batch_size: 8
+  num_train_epochs: 3
+  # max_steps is a hard cap and takes precedence over num_train_epochs.
+  max_steps: 30
+  learning_rate: 0.0002
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  max_grad_norm: 0.3
+  optim: paged_adamw_8bit
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 0.00000001
+  bf16: true
+  fp16: false
+  tf32: false
+  bf16_full_eval: true
+  gradient_checkpointing: true
+  gradient_checkpointing_kwargs:
+    use_reentrant: false
+  assistant_only_loss: false
+  completion_only_loss: true
+  dataset_kwargs:
+    add_special_tokens: false
+  eval_strategy: steps
+  eval_steps: 10
+  eval_on_start: true
+  save_strategy: steps
+  save_steps: 10
+  save_total_limit: 3
+  save_only_model: false
+  save_safetensors: true
+  load_best_model_at_end: false
+  logging_steps: 1
+  logging_first_step: true
+  report_to: none
+  push_to_hub: false
+  hub_model_id: null
+  resume_from_checkpoint: null
+  seed: 42
+  data_seed: 42
+  dataloader_num_workers: 2
+  dataset_num_proc: 2
+  remove_unused_columns: true
+  torch_compile: false
+  use_liger_kernel: false
+  average_tokens_across_devices: true
+  include_num_input_tokens_seen: true
+
+inference:
+  do_sample: false
+  max_new_tokens: 256
+  repetition_penalty: 1.0
+  batch_size: 1
+  seed: 42
+  compare_models:
+    - base
+    - existing_adapter
+    - new_adapter
+  existing_adapter_path: null
+  new_adapter_path: null
+  record_raw_outputs: true
+  record_finish_reason: true
+  native_reviewers_per_response: 2
+  adjudicator_required: true
+  blind_model_identity: true
+  randomize_response_order: true
+  call_results_benchmark_scores: false
+
+hardware:
+  provider: Runpod
+  cloud: Secure Cloud
+  gpu: NVIDIA GeForce RTX 4090
+  gpu_count: 1
+  vram_gb: 24
+  cpu_and_ram: record_actual_at_launch
+  container_disk_gb: 30
+  volume_disk_gb: 20
+  network_volume: false
+  region: any_available_record_actual
+  image: pytorch_cuda_template_record_exact_tag
+  python: "3.11"
+  cuda: record_actual_at_launch
+
+budget:
+  cash_cap_usd: 20.00
+  cash_cap_includes:
+    - compute
+    - storage
+    - sales_tax
+    - payment_fees
+  credit_purchase_usd: 10.00
+  require_tax_inclusive_charge_at_or_below_cap: true
+  gpu_hourly_usd: 0.89
+  container_disk_hourly_usd: 0.00410959
+  volume_disk_hourly_usd: 0.00273973
+  estimated_total_hourly_usd: 0.89684932
+  estimated_six_hour_usd: 5.38
+  hard_runtime_hours: 6
+  hard_credit_stop_usd: 8.00
+  low_balance_alert_usd: 4.00
+  auto_pay: false
+  prepaid_card_allowed: false
+  prepaid_card_minimum_usd: 100.00
+  unattended_run_allowed: false
+  retry_limit: 1
+  native_authoring_and_review_in_cap: false
+
+artifacts:
+  export_adapter: true
+  export_tokenizer: true
+  export_training_config: true
+  export_environment_freeze: true
+  export_raw_model_outputs: true
+  export_native_review_records: true
+  export_checksums: true
+  export_cost_record: true
+  export_before_terminate: true
+  terminate_after_export: true
+  leave_stopped_pod: false
+  leave_network_volume: false
+
+run_record:
+  status: not_run
+  pod_id: null
+  region: null
+  host: null
+  image_digest: null
+  started_at_utc: null
+  ended_at_utc: null
+  runtime_seconds: null
+  gpu_hours: null
+  peak_vram_gb: null
+  final_credit_charge_usd: null
+  final_cash_charge_usd: null
+  remaining_credit_usd: null
+  driver_version: null
+  cuda_version: null
+  training_log_path: null
+  checkpoint_manifest_path: null
+  artifact_manifest_path: null
+
+dependencies:
+  python: "3.11"
+  torch: "2.7.1"
+  torch_cuda: "12.6"
+  transformers: "4.53.2"
+  peft: "0.18.1"
+  accelerate: "1.8.1"
+  bitsandbytes: "0.50.2"
+  datasets: "5.0.1"
+  trl: "0.20.0"
+  huggingface_hub: "0.34.3"
+  tokenizers: "0.21.4"
+  safetensors: "0.8.0"
+  sentencepiece: "0.2.2"
+  cuda: record_actual_at_launch
+  driver: record_actual_at_launch
+
+notes:
+  - The base chat template has no generation markers, so assistant_only_loss is not used.
+  - Training uses conversational prompt-completion records with completion_only_loss=true.
+  - The existing adapter is evaluated as a translation baseline, not as the V1 candidate.
+  - No benchmark score may be reported from this smoke test.
+  - No dataset or teacher approval exists at the time this configuration was prepared.

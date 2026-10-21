@@ -2,9 +2,15 @@
 
 **Document ID:** LGP-BENCH-SPEC
 
-**Version:** 0.1-draft
+**Specification version:** 1.0
 
-**Status:** Draft for project-owner review. Not approved.
+**Benchmark version:** Not frozen. Draft items use `0.1-draft`.
+
+**Status:** Approved by the Project Director on 2026-10-20. This approval
+covers the specification only. No benchmark version, item set, native review,
+evaluation run, or release is approved.
+
+**Approval record:** `docs/DECISIONS.md`, D-007.
 
 **Date:** 2026-10-20
 
@@ -58,12 +64,12 @@ replace the categories or dimensions.
 evidence, and Phase 1 exit-criteria mapping. This document is the operational
 benchmark specification that the research document links to.
 
-If this specification is approved, the project owner decides whether to:
+The project owner has not yet decided whether to:
 
 - merge its operational details into `docs/EVALUATION_PLAN.md`; or
 - keep it as a companion specification referenced by that plan.
 
-No such merge is performed by this draft.
+No such merge is performed by this specification.
 
 ---
 
@@ -71,7 +77,7 @@ No such merge is performed by this draft.
 
 | Item | Status |
 |---|---|
-| Benchmark specification approved | No |
+| Benchmark specification approved | Yes (specification version 1.0; D-007) |
 | Benchmark version frozen | No |
 | Prompt authoring started | No |
 | Prompts written | No |
@@ -84,8 +90,10 @@ No such merge is performed by this draft.
 | Phase 1 complete | No |
 | D-005 changed | No |
 
-This is a proposal. Nothing in it is a measured result, an approval record,
-or evidence of Luganda quality.
+This is an approved specification. Nothing in it is a measured result, a
+benchmark approval record, a native-review record, or evidence of Luganda
+quality. Approval of this document does not approve a benchmark version or
+authorize evaluation.
 
 ---
 
@@ -1159,23 +1167,27 @@ inventory. Unknown training data is recorded as unknown, not as clean.
 - Automated metrics and AI judgments are supporting evidence, not ground
   truth.
 - Local memory estimates are arithmetic, not measured peak memory.
-- This specification is a draft and has not been approved.
+- This specification is approved, but no benchmark version has been frozen or
+  approved.
 
 ---
 
 ## 19. Decisions requiring project-owner approval
 
-All decisions below are open. No decision is approved by this document.
+The Project Director approved this specification's current contents, recorded
+in D-007. That approval resolves O-01 and the specification-content decisions
+O-03 through O-07. The remaining decisions need separate owner actions,
+information, or authorization.
 
 | ID | Decision | Proposal in this document | Status |
 |---|---|---|---|
-| O-01 | Approve this specification as the benchmark specification for review | Version `0.1-draft` | Open |
+| O-01 | Approve this specification as the benchmark specification | Specification version `1.0` | Approved (D-007) |
 | O-02 | Approve the draft category allocation | 6/7/6/6/5/5/6/5/4, total 50 | Open |
-| O-03 | Approve the item schema and stable ID scheme | Section 6 | Open |
-| O-04 | Approve prompt and response language rules | Section 7 | Open |
-| O-05 | Approve reference-answer and ambiguity policy | Sections 8 and 9 | Open |
-| O-06 | Approve the five-point scale and anchors | Section 11 | Open |
-| O-07 | Approve the applicability matrix and the no-composite rule | Sections 10 and 11 | Open |
+| O-03 | Approve the item schema and stable ID scheme | Section 6 | Approved as specification content (D-007) |
+| O-04 | Approve prompt and response language rules | Section 7 | Approved as specification content (D-007) |
+| O-05 | Approve reference-answer and ambiguity policy | Sections 8 and 9 | Approved as specification content (D-007) |
+| O-06 | Approve the five-point scale and anchors | Section 11 | Approved as specification content (D-007) |
+| O-07 | Approve the applicability matrix and the no-composite rule | Sections 10 and 11 | Approved as specification content (D-007) |
 | O-08 | Approve the native reviewer panel, qualifications, compensation, consent, and data retention | Section 12 | Open |
 | O-09 | Approve calibration, disagreement, adjudication, and agreement thresholds | Section 12 | Open |
 | O-10 | Approve the optional translation track | Section 16 | Open |
@@ -1184,8 +1196,29 @@ All decisions below are open. No decision is approved by this document.
 | O-13 | Approve the budget for native review and any hosted inference | Section 13 | Open |
 | O-14 | Approve legal and licence review for any source-derived item | Sections 6, 8, and 17 | Open |
 | O-15 | Approve prompt authoring and the start of native review | This is the next phase after approval | Open |
-| O-16 | Decide whether to add a decision record for the approved benchmark specification and whether to update roadmap or README status | Not done here | Open |
+| O-16 | Decide whether to add a decision record for the approved benchmark specification and whether to update roadmap or README status | D-007 records the specification approval | Partially resolved |
 | O-17 | Approve reporting, exclusion, and release rules | Sections 14 and 15 | Open |
+
+Remaining owner input:
+
+- O-02 needs an explicit final allocation decision. This specification still
+  calls the distribution a draft.
+- O-08 needs the reviewer panel size, qualifications, dialect coverage,
+  compensation, consent terms, and data-retention terms.
+- O-09 needs an approved agreement statistic and numeric threshold, plus the
+  recalibration rule tied to that threshold.
+- O-10 needs an explicit in-scope or out-of-scope decision for translation
+  evaluation.
+- O-11 needs the public/private status of the item file, the approved storage
+  path, and any commit exception for the item file.
+- O-12 needs the model shortlist, access path, and run plan.
+- O-13 needs the native-review and hosted-inference budget.
+- O-14 needs legal and licence clearance for any source-derived item.
+- O-15 needs authorization to author prompts and begin native review.
+- O-16 is only partly resolved. D-007 adds the decision record, but the owner
+  has not decided whether to update roadmap or README status.
+- O-17 needs release authorization. The reporting and exclusion rules are in
+  the approved specification, but no benchmark release is approved.
 
 D-005 is not among these decisions. It remains open and unchanged.
 
@@ -1223,6 +1256,10 @@ These are dependencies, not completed work.
 ## 21. Review checklist
 
 ### 21.1 Project-owner checklist
+
+The Project Director approved the specification contents on 2026-10-20
+(D-007). The unchecked items below are benchmark-preparation confirmations,
+not claims about native review or benchmark release.
 
 - [ ] The nine categories are preserved.
 - [ ] The seven dimensions are preserved.
@@ -1265,8 +1302,9 @@ These are dependencies, not completed work.
 
 ## 22. Approval record template
 
-This section is a template. It is blank because the specification is not
-approved.
+This section is a template for a benchmark approval record. It is blank
+because no benchmark version is frozen or approved. The specification
+approval is recorded in `docs/DECISIONS.md`, D-007, not in this template.
 
 ```
 Specification version:
@@ -1288,7 +1326,8 @@ Items reviewed:
 Sign-off date:
 ```
 
-No approval is recorded in this draft.
+No benchmark approval is recorded here. Native-review sign-off and benchmark
+release remain separate requirements.
 
 ---
 
@@ -1296,7 +1335,8 @@ No approval is recorded in this draft.
 
 | Version | Date | Change | Status |
 |---|---|---|---|
-| 0.1-draft | 2026-10-20 | Initial benchmark specification for owner review | Draft |
+| 0.1-draft | 2026-10-20 | Initial benchmark specification for owner review | Draft; superseded by 1.0 |
+| 1.0 | 2026-10-20 | Recorded Project Director approval of the specification contents. Corrected approval metadata and resolved O-01 and O-03 through O-07. No substantive benchmark rules changed. | Approved |
 
 ---
 
@@ -1306,7 +1346,7 @@ No approval is recorded in this draft.
   seven dimensions, approximately 50-prompt target, contamination principles.
 - `docs/PHASE-1-RESEARCH.md`: resource validation, model shortlist, evidence,
   and Phase 1 exit-criteria mapping.
-- `docs/DECISIONS.md`: D-001 to D-006.
+- `docs/DECISIONS.md`: D-001 to D-007.
 - `docs/ROADMAP.md`: Phase 1 objectives and exit criteria.
 - `docs/EXPERIMENT_LOG.md`: experiment record template.
 - `data/README.md`: dataset governance and provenance requirements.

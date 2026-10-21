@@ -23,9 +23,9 @@ provider are **undecided** pending research and benchmarking.
 
 ## Current development status
 
-- Phase 0 (project foundation, documentation, Git hygiene) is underway:
-  documentation is in place, environment and tooling still to come.
-- No datasets, training code, models, or experiments exist yet.
+- Phase 0 (project foundation, documentation, Git hygiene) and early preparation are underway.
+- No approved Luganda training dataset and no trained model exist. A project-authored English source draft exists for the 100-example pilot; native translation and review are pending.
+- Guarded training, inference, source-validation, and benchmark tooling is present, but no GPU training run has occurred.
 - No model has been trained or evaluated.
 - Local tooling now includes the project reporter: read-only activity
   collection, local report generation, and optional Telegram delivery to
@@ -40,14 +40,14 @@ See the [roadmap](docs/ROADMAP.md) for the staged plan.
 LugandaGPT/
 ├── AGENTS.md            Engineering rules and working arrangement
 ├── README.md            This file
-├── configs/             Experiment and model configurations (empty)
+├── configs/             Proposed experiment and model configurations
 ├── checkpoints/         Model checkpoints (ignored by Git; empty)
-├── data/                Dataset governance (metadata only; no raw data)
+├── data/                Data governance, English source draft, and no approved training data
 ├── docs/                Project documentation
-├── reports/             Generated reports and results (reporter output, ignored by Git)
-├── src/                 Source code (project reporter under src\reporter)
+├── reports/             Gate, source, and research reports
+├── src/                 Benchmark, training-preparation, and reporter code
 ├── tests/               Python test suite
-└── tokenizer/           Tokenizer tooling and experiments (empty)
+└── tokenizer/           Tokenizer tooling and pinned checks
 ```
 
 ## Documentation
@@ -58,6 +58,9 @@ LugandaGPT/
 - [Decisions](docs/DECISIONS.md): architecture decision records
 - [Experiment log](docs/EXPERIMENT_LOG.md): experiment record template
 - [Evaluation plan](docs/EVALUATION_PLAN.md): benchmark and rubric design
+- [Benchmark specification](docs/BENCHMARK-SPECIFICATION.md): approved benchmark specification
+- [Pilot data specification](docs/PILOT-DATA-SPECIFICATION.md): Luganda training schema and English source draft
+- [English source pilot report](reports/ENGLISH-SOURCE-PILOT-REPORT.md): counts, validation, and outstanding translation work
 - [Reporter spec](docs/PROJECT_REPORTER_SPEC.md): requirements for automatic reporting and Telegram delivery
 - [Reporter guide](docs/PROJECT_REPORTER_README.md): running the reporter, checking delivery, retrying failures, enabling scheduling
 - [Data governance](data/README.md): dataset requirements and rules

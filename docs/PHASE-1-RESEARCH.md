@@ -4,6 +4,12 @@
 research input, not an approved plan. It does not claim that any model was
 run, that any dataset was acquired, or that any Luganda output was reviewed.
 
+**Update 2026-10-21:** The Project Director reports that native Luganda
+speakers are available and have agreed to collaborate. The consultation
+statements below describe the earlier research snapshot and are not a
+current availability statement. Formal consent, compensation, retention, and
+review terms remain outstanding. See D-009.
+
 This revision replaces the earlier Phase 1 working draft at the same path
 and is still a draft. It is not an approval record.
 

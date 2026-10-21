@@ -1,0 +1,62 @@
+{
+  "canonical_sha256": "fb17b85c14b56b6b512f4a76d93ff716770705b5580ecfefe92c3b9dfc71d51f",
+  "capability_counts": {
+    "formal_comprehension": 17,
+    "formal_generation": 17,
+    "instruction_following": 16,
+    "question_answering": 17,
+    "rewriting_formal_luganda": 17,
+    "short_conversation": 16
+  },
+  "composition": {
+    "constraint_examples": 100,
+    "multi_sentence": 72,
+    "prior_context_conversations": 16,
+    "uncertainty_cases": 16
+  },
+  "created_date": "2026-10-21",
+  "dataset_name": "LugandaGPT English source pilot and feasibility evaluation draft",
+  "evaluation_capability_counts": {
+    "formal_comprehension": 4,
+    "formal_generation": 4,
+    "instruction_following": 4,
+    "question_answering": 4,
+    "rewriting_formal_luganda": 4,
+    "short_conversation": 4
+  },
+  "evaluation_count": 24,
+  "files": {
+    "evaluation": "evaluation_en.jsonl",
+    "pilot": "pilot_en.jsonl",
+    "translator_export": "translator_export.csv"
+  },
+  "native_review_status_counts": {
+    "pending": 124
+  },
+  "near_duplicate_check": "exact normalized text and 8-word overlap",
+  "notes": "Derived from the canonical source_draft.json. The English source is not a Luganda training dataset. All translation and native review fields remain pending.",
+  "owner_confirmation": {
+    "formal_agreements": "Not documented yet. No signed agreement or formal consent record is present in the repository.",
+    "report_date": "2026-10-21",
+    "reported_by": "Project Director",
+    "statement": "Native Luganda speakers are available and have agreed to collaborate. Working arrangements were discussed. Compensation is intended after the project earns its first dollar."
+  },
+  "pilot_count": 100,
+  "pilot_split_counts": {
+    "heldout": 15,
+    "train": 70,
+    "validation": 15
+  },
+  "schema_version": "english-source-v1-draft",
+  "sha256": {
+    "evaluation": "d518754aab09f61a4f8da5a88712e86ae3fe95a075ef7d6824c04f546b48e088",
+    "pilot": "82f7d9b3ce82915a3cca828f6f76078fa9b01d130407b57831b3f72a232afb69",
+    "translator_export": "a6054001ee40b0feacae119016a4911f496ce0f9caba50af96d7c5ff3a49461d"
+  },
+  "status": "draft_pending_translation_and_native_review",
+  "training_authorized": false,
+  "training_blocker": "No Luganda translations, native reviews, formal provenance, or training authorization exist.",
+  "translation_status_counts": {
+    "pending": 124
+  }
+}
