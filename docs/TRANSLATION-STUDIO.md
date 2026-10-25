@@ -183,17 +183,9 @@ An administrator can mark a payment as cleared on the administration payments pa
 
 This is not a payment-processing feature. The local app does not move money, store payment credentials, or prove that a payment was transferred. The owner must complete the actual payment outside the app and record a note or reference. Formal compensation terms, tax treatment, and payment records remain the owner's responsibility.
 
-## PHP deployment edition
+## Supported implementation
 
-A cPanel-friendly PHP edition is available under `php/`. It uses the same SQLite database, accounts, password hashes, translations, reviews, rewards, and cleared payments as the Python edition. Start it locally from the repository root:
-
-```powershell
-php -S 127.0.0.1:8088 -t php
-```
-
-Open `http://127.0.0.1:8088/`. The database path is set in `php/config.php` or through the `STUDIO_DB` environment variable. On a live domain, keep the database outside `public_html`, use HTTPS, and make the database file writable only by the PHP process.
-
-The PHP edition covers login, translation, autosave, review, assignment, user creation, rewards, and payment clearing. Source import, training-data validation, and training-preparation export remain in the Python edition. See `php/README.md` for cPanel upload and database placement.
+`src/translation_studio/` is the sole supported Translation Studio implementation. For PythonAnywhere package contents and manual deployment instructions, see [`deployment/translation-studio/README.md`](../deployment/translation-studio/README.md).
 
 ## Security
 

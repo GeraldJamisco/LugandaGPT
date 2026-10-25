@@ -301,7 +301,7 @@ unchanged. The 24-item feasibility set is not a benchmark.
 
 ---
 
-## D-014 - PHP deployment edition for cPanel
+## D-014 - PHP deployment edition for cPanel (retired)
 
 **Context:** The owner needs to deploy the studio on a cPanel domain where configuring a Python application is inconvenient. The existing SQLite database, users, and password hashes should remain usable.
 
@@ -311,7 +311,7 @@ unchanged. The 24-item feasibility set is not a benchmark.
 
 **Consequences:** The PHP edition requires the `pdo_sqlite` extension and a writable database path. The database should be stored outside public web access. Training export, training validation, benchmark work, and model execution are not reimplemented in PHP. The live domain must use HTTPS and must not expose the database or credentials. Public deployment remains an owner decision.
 
-**Status:** Accepted for the PHP deployment edition.
+**Status:** Retired. Superseded by D-016. This record is retained as project history.
 
 ---
 
@@ -326,3 +326,17 @@ unchanged. The 24-item feasibility set is not a benchmark.
 **Consequences:** The additive migration creates `reward_earnings` and adds `amount_cents` to `reward_payments`, retaining the existing dollar column for compatibility. Back up an existing database before running `init-db` with this version. The app records payment history only; it does not move money. Older payment records remain aggregate records and are assigned to contribution history in chronological order for display.
 
 **Status:** Accepted for local reward accounting. Production migration and deployment remain separate owner actions.
+
+---
+
+## D-016 - Python Translation Studio as the sole supported implementation
+
+**Context:** The project has a Python Translation Studio and a separate PHP implementation. Maintaining two applications creates duplicated workflows and risks differences in behavior and maintenance.
+
+**Decision:** Retire and remove the legacy PHP application. The Python application in `src/translation_studio/` is the sole supported Translation Studio. Continue preparing PythonAnywhere releases from `deployment/translation-studio/`.
+
+**Rationale:** A single maintained application keeps workflows and deployment guidance aligned with the Python source of truth.
+
+**Consequences:** This retirement does not change the database schema, initialize or migrate a database, or alter stored records. The Python deployment package remains separate from the live database and must be deployed manually under the existing approval process.
+
+**Status:** Accepted.

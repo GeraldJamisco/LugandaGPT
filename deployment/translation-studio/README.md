@@ -69,7 +69,7 @@ deployment/translation-studio/
 - The training stack and `requirements-training.txt`
 - Training or evaluation datasets, including the canonical English source draft
 - Generated exports and reports
-- Benchmark, reporter, PHP, and test code
+- Benchmark, reporter, and test code
 - Virtual environments and Python bytecode
 
 ## Updating the existing PythonAnywhere application

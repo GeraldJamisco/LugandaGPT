@@ -1,6 +1,6 @@
 # Translation Studio Implementation Report
 
-**Status:** working local application. Ready for owner review and a supervised manual acceptance test. Not deployed.
+**Status:** Historical implementation report from 2026-10-23. The Python Translation Studio is now the sole supported implementation. PythonAnywhere package preparation is documented separately in `deployment/translation-studio/README.md`.
 
 **Date:** 2026-10-23
 
@@ -110,16 +110,6 @@
 - Calm green, cream, and gold palette.
 - No external fonts, analytics, trackers, or assets.
 
-### PHP deployment edition
-
-A second deployment path is available under `php/` for cPanel hosting:
-
-- PHP 8.1+ with PDO SQLite.
-- Uses the same SQLite database, users, password hashes, translations, reviews, rewards, and payment records as the Python edition.
-- Covers login, translator work, autosave, review, reviewer and translator rewards, cleared payments, assignment, user creation, item inspection, return-for-correction, and disagreement resolution.
-- Reuses the same responsive CSS and JavaScript.
-- Training-data validation and training-preparation export remain in the Python edition.
-
 ## 2. How to start on Windows
 
 From the repository root:
@@ -145,22 +135,6 @@ http://127.0.0.1:8765/
 The `create-user` command prompts for a password. There are no hardcoded credentials.
 
 Create the translator and reviewer with the same command and `--role translator` or `--role reviewer`.
-
-### PHP edition
-
-From the repository root, with an existing database:
-
-```powershell
-php -S 127.0.0.1:8088 -t php
-```
-
-Open:
-
-```text
-http://127.0.0.1:8088/
-```
-
-The PHP edition reads the database path from `php/config.php` or the `STUDIO_DB` environment variable. See `php/README.md` for cPanel upload, database placement, and permissions.
 
 ## 3. Access model
 
@@ -223,8 +197,6 @@ The full suite output includes an expected reporter failure message from an exis
 - The teacher reward card and Rewards page rendered, including the approved-only rule and payment estimate note.
 - The review dashboard and review workspace rendered.
 - The administrator dashboard rendered with source import status, counts, assignment controls, reward estimates, and audit history.
-- The PHP edition rendered login, teacher work, review, reviewer Reviewed state, rewards, and administrator payment pages.
-- A payment was marked cleared in PHP and appeared as a cleared payment on the reviewer Rewards page.
 - Static assets loaded without a JavaScript console error on the inspected pages.
 
 The visual check was desktop-sized. Mobile behavior is verified by responsive CSS and the viewport meta, but it has not been tested on a real phone.
@@ -252,9 +224,7 @@ The canonical source file was not rewritten. The studio stores source JSON in it
 - The app does not translate or call an AI model.
 - Dataset approval in the studio is not training authorization.
 - Formal consent, compensation, retention, licence, provenance, and release terms remain outstanding.
-- The local server must be restarted after Python code changes. Templates reload automatically, but Python modules do not. The home page now shows a restart message instead of a 500 when a stale server lacks the reward context.
-- The PHP edition requires `pdo_sqlite`, a writable database path, and a database created or populated by the Python edition. It does not include source import, training-data validation, or training export.
-- The PHP edition has no automated PHP test suite. Its core login, translation, review, reward, and payment paths were checked manually.
+- The Python Translation Studio is the sole supported implementation. This report records the state of an earlier implementation snapshot; its historical test counts and browser checks are not current verification results. The local server must be restarted after Python code changes. Templates reload automatically, but Python modules do not. The home page now shows a restart message instead of a 500 when a stale server lacks the reward context.
 - The reward dashboard is an estimate only. It does not process payments, store payment credentials, or record a completed payout.
 - The formal compensation schedule, payment method, tax treatment, and payment records remain outstanding.
 - A working-tree file `docs/teacher_passwords_and_usernames.md` appears to contain account credentials. It was not read or modified. It is now ignored by Git. Move any credentials to a password manager and delete that file before sharing or committing the repository.
@@ -279,18 +249,11 @@ Created:
 - `docs/TRANSLATION-STUDIO.md`
 - `reports/TRANSLATION-STUDIO-REPORT.md`
 - `requirements-studio.txt`
-- `php/index.php`
-- `php/config.php`
-- `php/README.md`
-- `php/assets/studio.css`
-- `php/assets/studio.js`
-- `php/assets/favicon.svg`
-- `php/storage/.htaccess`
 
 Changed:
 
-- `.gitignore` for the local studio database, exports, PHP storage, and credential-file exclusion.
-- `docs/DECISIONS.md` with D-010, D-011, D-012, D-013, and D-014.
+- `.gitignore` for the local studio database, exports, and credential-file exclusion.
+- `docs/DECISIONS.md` with D-010 through D-016, including the retirement decision.
 - `README.md` with the studio documentation link and status.
 - `data/README.md` with the studio working-data note.
 

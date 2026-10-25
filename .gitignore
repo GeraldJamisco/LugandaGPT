@@ -160,9 +160,6 @@ data/studio/backups/
 data/studio/exports/
 # Plaintext credentials must never be committed.
 docs/teacher_passwords_and_usernames.md
-php/storage/*.sqlite3
-php/storage/*.sqlite3-*
-php/storage/*.db
 
 # -----------------------------------------------------------------------------
 # Experiment caches and outputs
