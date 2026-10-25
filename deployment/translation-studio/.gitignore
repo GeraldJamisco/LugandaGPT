@@ -1,0 +1,7 @@
+data/studio/*.sqlite3
+data/studio/*.sqlite3-*
+data/studio/*.db
+data/exports/*
+!data/exports/.gitkeep
+__pycache__/
+*.pyc

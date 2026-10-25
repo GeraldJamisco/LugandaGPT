@@ -1,0 +1,32 @@
+<section class="card contributor-reward-card" aria-labelledby="reward-summary-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Confirmed reward rate</p>
+      <h2 id="reward-summary-title">Your rewards</h2>
+    </div>
+    <a class="btn btn-secondary btn-small" href="/rewards">View reward history</a>
+  </div>
+  <p class="small muted">
+    {% if reward.kind == 'translator' %}
+    You earn ${{ "%.2f"|format(reward.per_contribution_usd) }} for each translation approved by a reviewer.
+    {% else %}
+    You earn ${{ "%.2f"|format(reward.per_review_usd) }} for each valid review you complete, whatever your decision.
+    {% endif %}
+    The project owner records a payment after it has been completed.
+  </p>
+  <div class="grid grid-4 reward-summary-grid">
+    {% if reward.kind == 'translator' %}
+    <div class="progress-card"><strong>{{ reward.approved_count }}</strong><span>Approved translations</span></div>
+    <div class="progress-card"><strong>{{ reward.pending_count }}</strong><span>Pending approval</span></div>
+    <div class="progress-card"><strong>{{ reward.revision_count }}</strong><span>Revision requested, not yet approved</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.per_contribution_usd) }}</strong><span>Per approved translation</span></div>
+    {% else %}
+    <div class="progress-card"><strong>{{ reward.review_count }}</strong><span>Completed valid reviews</span></div>
+    <div class="progress-card"><strong>{{ reward.pending_count }}</strong><span>Reviews awaiting your action</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.per_review_usd) }}</strong><span>Per completed review</span></div>
+    {% endif %}
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.accrued_usd) }}</strong><span>Total earned</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.paid_usd) }}</strong><span>Paid so far</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.available_usd) }}</strong><span>Outstanding balance</span></div>
+  </div>
+</section>

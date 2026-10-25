@@ -40,6 +40,18 @@ mistaken for Luganda training data. The training validator continues to
 require native-authored Luganda, reviewed references, consent, licences, and
 approval.
 
+## Translation Studio working data
+
+The local Translation Studio stores translation drafts, submitted versions,
+reviews, assignments, accounts, and audit events in
+`data/studio/studio.sqlite3`. The database and exports under
+`data/studio/exports/` are ignored by Git. A review approval or dataset
+preparation approval in the studio is not training authorization and does not
+replace consent, licence, provenance, retention, or release approval.
+
+Back up the studio database with the documented `backup` command. Treat the
+backup as private project data. See `docs/TRANSLATION-STUDIO.md`.
+
 ---
 
 ## Required record for every dataset

@@ -242,3 +242,87 @@ agreement or authorize a paid run. The approved benchmark specification is
 unchanged. The 24-item feasibility set is not a benchmark.
 
 **Status:** Accepted for source preparation only. Training remains blocked.
+
+---
+
+## D-010 - Local Translation Studio on the existing Python stack
+
+**Context:** Native-speaking teachers need a simple way to translate the 124 English source records and review each other's work. The repository already uses Python and has no web framework. The work is local and private. The project must not add a public service, external login, paid infrastructure, or an AI translation API.
+
+**Decision:** Build a local-only Translation Studio in `src/translation_studio/` using the Python standard library WSGI server, SQLite, and the Jinja2 package already present in the environment. Keep imported English source records read-only. Store translations, immutable submitted versions, reviews, resolutions, audit events, and dataset-preparation fields separately. Keep translation status, review status, collaboration and consent status, licence status, and dataset approval separate. Exports must pass the existing training-record validator, and evaluation items are excluded from training exports by default. The default server binds to `127.0.0.1`. A trusted local network option is documented but is not a public deployment.
+
+**Rationale:** This gives teachers a usable browser interface without adding a database service, cloud dependency, authentication provider, or model call. Keeping studio work in a separate SQLite database prevents the English source draft and review workflow from being mistaken for approved training data. Submitted versions and review history remain inspectable.
+
+**Consequences:** The studio requires a local setup command and a local SQLite backup procedure. It has no public registration, email reset, TLS, or deployment approval. Running the server on a trusted local network is an explicit operator action, and public exposure is not authorized. The approved benchmark specification is unchanged. Training remains blocked until the existing data, provenance, consent, licence, review, and authorization requirements are met.
+
+**Status:** Accepted for local development only.
+
+---
+
+## D-011 - Approved-translation reward display
+
+**Context:** The Project Director wants a simple motivation for translators: $2 for every 10 translations completed and approved. The studio should show teachers how much approved work has accumulated after login. Actual payment, formal compensation terms, tax handling, and payment records are separate project responsibilities.
+
+**Decision:** The Translation Studio displays an estimated reward of $0.20 per approved translation, with a $2 reward reached at every 10 approved translations. Only translations whose current version has passed review count. Drafts, returned work, disputed work, and unapproved work do not count. The dashboard labels the amount as an estimate and states that payment is not recorded in the local app.
+
+**Rationale:** Showing approved progress and a small accruing reward gives translators visible feedback without pretending that a payment has occurred or creating a payment-processing integration. The rule remains separate from dataset approval, consent, licence, and training authorization.
+
+**Consequences:** The owner still needs to confirm formal compensation terms, payment schedule, payment method, tax treatment, and records. A review approval can later be reversed, so the estimate can go down. The studio does not move money, store payment credentials, or claim that a translator has been paid. The owner dashboard shows estimated rewards by translator for planning and review.
+
+**Status:** Accepted for display and motivation only.
+
+---
+
+## D-012 - Background passage translation is required
+
+**Context:** The work screen shows a Luganda background passage for source examples that contain an English passage. A missing passage was displayed as "Not translated", which made it unclear whether translators could ignore it. The passage is needed for comprehension and question-answering examples.
+
+**Decision:** When a source example has a background passage, its Luganda translation is required before the translation can be submitted for review or approved. The Luganda passage is included in the user message of the training-preparation record, before the final question or request. Reviewers cannot approve a translation with a missing required passage. Administrators can return submitted work for correction without deleting translation or review history.
+
+**Rationale:** Removing the passage would make a comprehension or question-answering example incomplete. The training example must include the same context that the English source supplies. Making the requirement explicit prevents incomplete work from looking finished.
+
+**Consequences:** Missing passage text blocks review approval and dataset preparation. A translator can correct it after the item is returned. The studio does not silently fill the passage or treat it as optional.
+
+**Status:** Accepted.
+
+---
+
+## D-013 - Reviewer rewards and cleared payment records
+
+**Context:** The Project Director wants reviewer accounts to receive a share of $0.10 per completed review. The owner also needs a way to record when a payment has been completed so the reviewer's available balance clears and new work can accumulate again.
+
+**Decision:** Reviewer accounts accrue $0.10 for each completed review submission. The Rewards page and reviewer dashboard show total earned, total cleared, and the available amount since the last cleared payment. Administrators can mark a payment as cleared from the administration payments page. Recording a cleared payment subtracts the paid amount from the available balance while preserving the full review and payment history.
+
+**Rationale:** A separate payment record lets the owner acknowledge completed payments without deleting work history. Available earnings can reset after payment while the total earned and the review history remain visible.
+
+**Consequences:** The local app records payment clearing only. It does not move money, store payment credentials, or prove that a bank transfer occurred. The owner must complete the actual payment outside the app and enter a note or reference. Formal compensation terms, tax treatment, and payment records remain the owner's responsibility.
+
+**Status:** Accepted for local reward accounting only.
+
+---
+
+## D-014 - PHP deployment edition for cPanel
+
+**Context:** The owner needs to deploy the studio on a cPanel domain where configuring a Python application is inconvenient. The existing SQLite database, users, and password hashes should remain usable.
+
+**Decision:** Add a PHP 8.1+ deployment edition under `php/`. It uses PDO SQLite, the same database schema, and the same PBKDF2 password hashes. It covers login, translation work, autosave, review, reviewer rewards, translator rewards, cleared payments, assignment, user creation, item inspection, return-for-correction, and disagreement resolution. The Python edition remains the reference implementation for training-data validation and training-preparation export.
+
+**Rationale:** PHP is the native deployment path on most cPanel hosts. Reusing SQLite and the existing password hashes avoids a database migration and keeps the accounts and work already created in the local studio.
+
+**Consequences:** The PHP edition requires the `pdo_sqlite` extension and a writable database path. The database should be stored outside public web access. Training export, training validation, benchmark work, and model execution are not reimplemented in PHP. The live domain must use HTTPS and must not expose the database or credentials. Public deployment remains an owner decision.
+
+**Status:** Accepted for the PHP deployment edition.
+
+---
+
+## D-015 - Confirmed contributor reward rates and earnings ledger
+
+**Context:** The Project Director confirmed a reward rate of $0.20 per reviewer-approved translation and $0.20 per valid completed review. The previous reviewer rate in D-013 was $0.10 and reward amounts were hidden pending confirmation.
+
+**Decision:** Use one central integer-cent rate configuration for both contribution types. Record each earned translation reward once per item and each review reward once per review record. Preserve existing cleared-payment administration and calculate balances in integer cents. On database initialization, backfill reviewer rewards from valid stored review records and translation rewards only for translations that currently satisfy the existing approval eligibility checks. Do not infer earnings for earlier translation versions whose approval state cannot be established from current records.
+
+**Rationale:** A durable earnings row preserves the first qualifying approval even if a translation is later reopened. Unique database indexes prevent retries from creating duplicate rewards. Existing review and translation records provide the evidence for the limited backfill.
+
+**Consequences:** The additive migration creates `reward_earnings` and adds `amount_cents` to `reward_payments`, retaining the existing dollar column for compatibility. Back up an existing database before running `init-db` with this version. The app records payment history only; it does not move money. Older payment records remain aggregate records and are assigned to contribution history in chronological order for display.
+
+**Status:** Accepted for local reward accounting. Production migration and deployment remain separate owner actions.

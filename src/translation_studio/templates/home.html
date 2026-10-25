@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% set title = "Welcome" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">LugandaGPT Translation Studio</p>
+      <h1>Welcome to LugandaGPT Translation Studio.</h1>
+      <p>We are building an AI assistant designed to understand and communicate naturally in Luganda. Your work helps us prepare and check examples that teach the system how to use the language correctly.</p>
+      <p>You will read an example in English, write its Luganda version, and save your work. Another speaker may review the translation to help us improve its accuracy and naturalness.</p>
+      {% if user.role == 'translator' %}
+      <div class="button-row">
+        <a class="btn btn-gold" href="{{ '/work/' ~ next_item if next_item else '/work' }}">Start translating</a>
+        <a class="btn btn-secondary" href="/work">Continue my work</a>
+        <a class="hero-link" href="/progress">View my progress</a>
+      </div>
+      {% elif user.role == 'reviewer' %}
+      <div class="button-row">
+        <a class="btn btn-gold" href="/review">Review translations</a>
+        <a class="btn btn-secondary" href="/home">Refresh my dashboard</a>
+      </div>
+      {% else %}
+      <div class="button-row">
+        <a class="btn btn-gold" href="/admin">Open administration</a>
+        <a class="btn btn-secondary" href="/review">Review translations</a>
+      </div>
+      {% endif %}
+    </div>
+    <aside class="hero-flow" aria-label="How the work moves">
+      <p class="eyebrow">How your work moves</p>
+      {% if user.role == 'translator' %}
+      <div class="flow-step"><span>1</span><p>Read the English example and its context.</p></div>
+      <div class="flow-step"><span>2</span><p>Write the Luganda version and save it safely.</p></div>
+      <div class="flow-step"><span>3</span><p>A second speaker reviews it independently.</p></div>
+      <div class="flow-step"><span>4</span><p>You can see feedback and correct your work if needed.</p></div>
+      {% elif user.role == 'reviewer' %}
+      <div class="flow-step"><span>1</span><p>Read the English source and the full translation.</p></div>
+      <div class="flow-step"><span>2</span><p>Check meaning, register, and every constraint.</p></div>
+      <div class="flow-step"><span>3</span><p>Record a clear decision and specific comments.</p></div>
+      <div class="flow-step"><span>4</span><p>The project owner resolves disagreements.</p></div>
+      {% else %}
+      <div class="flow-step"><span>1</span><p>Import the validated English source.</p></div>
+      <div class="flow-step"><span>2</span><p>Assign translators and reviewers.</p></div>
+      <div class="flow-step"><span>3</span><p>Monitor review, feedback, and disagreements.</p></div>
+      <div class="flow-step"><span>4</span><p>Prepare dataset records without bypassing validation.</p></div>
+      {% endif %}
+    </aside>
+  </div>
+</section>
+
+{% if user.role == 'translator' %}
+<h2>Your work at a glance</h2>
+<div class="grid grid-4">
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting to be translated</span></div>
+  <div class="progress-card"><strong>{{ counts.saved }}</strong><span>Saved translations</span></div>
+  <div class="progress-card"><strong>{{ counts.returned }}</strong><span>Returned for correction</span></div>
+  <div class="progress-card"><strong>{{ counts.ready }}</strong><span>Ready for review</span></div>
+</div>
+
+{% if reward is defined and reward %}
+{% include "reward_summary_card.html" %}
+{% elif user.role == 'translator' %}
+<div class="callout" style="margin-top: 1rem;">
+  <strong>The reward dashboard is not loaded.</strong> Stop the local server, start it again with the same command, and refresh this page. Your saved work is not affected.
+</div>
+{% endif %}
+<div class="card" style="margin-top: 1rem;">
+  <h2>What to do next</h2>
+  {% if next_item %}
+  <p>Continue with the next example in your assigned work. Your saved text is waiting for you.</p>
+  <a class="btn btn-primary" href="/work/{{ next_item }}">Open the next example</a>
+  {% elif counts.total %}
+  <p>You have no unfinished example. You can review your saved work or wait for reviewer feedback.</p>
+  <a class="btn btn-secondary" href="/progress">View my progress</a>
+  {% else %}
+  <p>No work has been assigned yet. The project administrator will assign examples to you.</p>
+  {% endif %}
+</div>
+{% elif user.role == 'reviewer' %}
+<h2>Your review work at a glance</h2>
+<div class="grid grid-3">
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting for your review</span></div>
+  <div class="progress-card"><strong>{{ counts.completed }}</strong><span>Completed reviews</span></div>
+  <div class="progress-card"><strong>{{ counts.total }}</strong><span>Assigned to you</span></div>
+</div>
+{% if reward is defined and reward %}
+{% include "reward_summary_card.html" %}
+{% endif %}
+<div class="card" style="margin-top: 1rem;">
+  <h2>How review works</h2>
+  <p>Open an assigned translation, compare it with the English source, and record a decision. You can approve it, ask for revision, or say that you cannot assess it yet. Your comments are kept in the review history.</p>
+  <a class="btn btn-primary" href="/review">Open review work</a>
+</div>
+{% else %}
+<h2>Project at a glance</h2>
+<div class="grid grid-4">
+  <div class="progress-card"><strong>{{ counts.pilot }}</strong><span>Pilot examples</span></div>
+  <div class="progress-card"><strong>{{ counts.evaluation }}</strong><span>Evaluation items</span></div>
+  <div class="progress-card"><strong>{{ counts.reviewed }}</strong><span>Reviewed translations</span></div>
+  <div class="progress-card"><strong>{{ counts.dataset_approved }}</strong><span>Approved for dataset preparation</span></div>
+</div>
+<div class="grid grid-2" style="margin-top: 1rem;">
+  <div class="card">
+    <h2>Source material</h2>
+    {% if source_imported_at %}
+    <p>{{ meta.source_dataset_name or "English source draft" }} was imported.</p>
+    <p class="small muted">Last import: {{ format_datetime(meta.source_imported_at) }}</p>
+    {% else %}
+    <p>No source examples have been imported. Open administration and import the validated English source draft.</p>
+    {% endif %}
+    <a class="btn btn-secondary" href="/admin">Open administration</a>
+  </div>
+  <div class="card">
+    <h2>Review and export</h2>
+    <p>Review work is separate from dataset preparation. An approval from a reviewer is not training authorization.</p>
+    <a class="btn btn-secondary" href="/review">Open review work</a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

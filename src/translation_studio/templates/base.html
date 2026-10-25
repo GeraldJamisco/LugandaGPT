@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <title>{{ title or "LugandaGPT Translation Studio" }} | LugandaGPT Translation Studio</title>
+  <link rel="stylesheet" href="/static/studio.css?v=20261025b">
+</head>
+{% set has_admin_sidebar = user and user.role == 'admin' and (current_path.startswith('/admin') or current_path.startswith('/review')) %}
+<body class="{{ 'admin-page' if has_admin_sidebar else '' }}{{ ' login-page-body' if current_path == '/login' else '' }}">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="{{ '/home' if user else '/login' }}">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span>
+          LugandaGPT
+          <small>Translation Studio</small>
+        </span>
+      </a>
+      {% if user %}
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/home" class="{{ 'active' if current_path == '/home' else '' }}">Welcome</a>
+        {% if user.role == 'translator' %}
+        <a href="/work" class="{{ 'active' if current_path.startswith('/work') else '' }}">My work</a>
+        <a href="/progress" class="{{ 'active' if current_path == '/progress' else '' }}">My progress</a>
+        <a href="/rewards" class="{{ 'active' if current_path == '/rewards' else '' }}">Rewards</a>
+        {% endif %}
+        {% if user.role in ('reviewer', 'admin') %}
+        <a href="/review" class="{{ 'active' if current_path.startswith('/review') else '' }}">Review</a>
+        {% endif %}
+        {% if user.role == 'reviewer' %}
+        <a href="/rewards" class="{{ 'active' if current_path == '/rewards' else '' }}">Rewards</a>
+        {% endif %}
+        {% if user.role == 'admin' %}
+        <a href="/admin" class="{{ 'active' if current_path.startswith('/admin') else '' }}">Admin</a>
+        {% endif %}
+        <span class="user-chip" title="{{ role_label(user.role) }}">{{ user.display_name }}</span>
+        <form method="post" action="/logout" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button type="submit" class="btn btn-quiet btn-small">Sign out</button>
+        </form>
+      </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  <main id="main" class="shell {{ 'admin-shell' if has_admin_sidebar else '' }}">
+    {% if has_admin_sidebar %}
+    <div class="admin-layout">
+      <aside class="admin-sidebar" aria-label="Administration">
+        <a class="side-link {{ 'active' if current_path == '/admin' else '' }}" href="/admin" {{ 'aria-current="page"' if current_path == '/admin' else '' }}><span aria-hidden="true">⌂</span><span>Overview</span></a>
+        <p class="side-heading">Project</p>
+        <a class="side-link" href="/admin#source-material"><span aria-hidden="true">▤</span><span>Source material</span></a>
+        <a class="side-link {{ 'active' if current_path == '/admin/assign' else '' }}" href="/admin/assign" {{ 'aria-current="page"' if current_path == '/admin/assign' else '' }}><span aria-hidden="true">▱</span><span>Assignments</span></a>
+        <a class="side-link {{ 'active' if current_path.startswith('/admin/items') else '' }}" href="/admin/items" {{ 'aria-current="page"' if current_path.startswith('/admin/items') else '' }}><span aria-hidden="true">▧</span><span>Translations</span></a>
+        <a class="side-link {{ 'active' if current_path.startswith('/review') else '' }}" href="/review" {{ 'aria-current="page"' if current_path.startswith('/review') else '' }}><span aria-hidden="true">✓</span><span>Reviews</span></a>
+        <a class="side-link {{ 'active' if current_path == '/admin/export' else '' }}" href="/admin/export" {{ 'aria-current="page"' if current_path == '/admin/export' else '' }}><span aria-hidden="true">⇩</span><span>Dataset export</span></a>
+        <p class="side-heading">People</p>
+        <a class="side-link {{ 'active' if current_path == '/admin/users' else '' }}" href="/admin/users" {{ 'aria-current="page"' if current_path == '/admin/users' else '' }}><span aria-hidden="true">♧</span><span>Manage accounts</span></a>
+        <p class="side-heading">Rewards</p>
+        <a class="side-link {{ 'active' if current_path == '/admin/payments' else '' }}" href="/admin/payments" {{ 'aria-current="page"' if current_path == '/admin/payments' else '' }}><span aria-hidden="true">◇</span><span>Translator rewards</span></a>
+        <p class="side-heading">System</p>
+        <a class="side-link {{ 'active' if current_path == '/admin/audit' else '' }}" href="/admin/audit" {{ 'aria-current="page"' if current_path == '/admin/audit' else '' }}><span aria-hidden="true">◷</span><span>Audit history</span></a>
+      </aside>
+      <div class="admin-main">
+    {% endif %}
+    {% if notice %}
+    <div class="notice" role="status">{{ notice }}</div>
+    {% endif %}
+    {% if error %}
+    <div class="error-box" role="alert">
+      <strong>{{ error }}</strong>
+      {% if errors %}
+      <ul class="notice-list">
+        {% for item in errors %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% if has_admin_sidebar %}
+      </div>
+    </div>
+    {% endif %}
+  </main>
+
+  <footer class="footer">
+    <p>LugandaGPT is early-stage research. A reviewed translation is not model training approval.</p>
+  </footer>
+  <script src="/static/studio.js?v=20261025b" defer></script>
+</body>
+</html>

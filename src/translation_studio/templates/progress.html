@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% set title = "My progress" %}
+{% block content %}
+<div class="section-label">
+  <span class="step-number">2</span>
+  <div>
+    <p class="eyebrow" style="margin: 0;">Your work record</p>
+    <h1>My progress</h1>
+  </div>
+</div>
+<p class="muted">This page shows the examples assigned to you and their current state. Saving a translation does not approve it. A reviewer may ask for changes.</p>
+
+<div class="grid grid-4">
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting to be translated</span></div>
+  <div class="progress-card"><strong>{{ counts.saved }}</strong><span>Saved translations</span></div>
+  <div class="progress-card"><strong>{{ counts.returned }}</strong><span>Returned for correction</span></div>
+  <div class="progress-card"><strong>{{ counts.ready }}</strong><span>Ready for review</span></div>
+</div>
+
+{% if reward is defined and reward %}
+{% include "reward_summary_card.html" %}
+{% else %}
+<div class="callout" style="margin-top: 1rem;">
+  <strong>The reward dashboard is not loaded.</strong> Stop the local server, start it again with the same command, and refresh this page. Your saved work is not affected.
+</div>
+{% endif %}
+
+{% if items %}
+<div class="list" style="margin-top: 1rem;">
+  {% for item in items %}
+  <article class="list-item">
+    <div>
+      <h3>{{ capability_label(item.source.primary_capability) }}</h3>
+      <p>{{ item.source.source_prompt|truncate(160) }}</p>
+      <div class="item-meta">
+        <span class="badge">{{ status_label(item.row.translation_status or 'not_started') }}</span>
+        {% if item.row.resolution_required %}<span class="badge badge-red">Owner resolution needed</span>{% endif %}
+      </div>
+    </div>
+    <div class="item-actions">
+      <a class="btn btn-secondary btn-small" href="/work/{{ item.row.item_id }}">Open example</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card empty">
+  <h2>No assigned work yet</h2>
+  <p>The project administrator will assign examples to you.</p>
+</div>
+{% endif %}
+{% endblock %}

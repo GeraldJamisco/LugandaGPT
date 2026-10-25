@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% set title = "Exports" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>Exports and dataset preparation</h1>
+<p class="muted">Exports are for the project owner. A reviewed translation is not training authorization. The existing training validator and provenance checks remain the final gate.</p>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Studio review export</h2>
+    <p>Download a CSV of source records, translations, review history, and dataset status. This is useful for inspection and handoff. It is not a training file.</p>
+    <form method="post" action="/admin/export">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="action" value="csv">
+      <div class="field">
+        <label for="csv_collection">Collection</label>
+        <select id="csv_collection" name="collection">
+          <option value="pilot">Pilot examples only</option>
+          <option value="evaluation">Evaluation items only</option>
+          <option value="all">Both, clearly labelled</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" type="submit">Download studio CSV</button>
+    </form>
+    <p class="small muted" style="margin-top: 0.6rem;">Evaluation rows are labelled and must not be added to training data.</p>
+  </div>
+
+  <div class="card">
+    <h2>Training-preparation export</h2>
+    <p>Download JSONL for pilot items that are <strong>approved for dataset preparation</strong>. The export checks every record against the existing training-record schema before writing.</p>
+    <div class="callout {{ 'callout-green' if approved_count else '' }}">
+      <strong>{{ approved_count }}</strong> pilot items are approved for dataset preparation.
+      {% if not approved_count %}Approve at least one reviewed pilot item before exporting.{% endif %}
+    </div>
+    <form method="post" action="/admin/export" style="margin-top: 1rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="action" value="training">
+      <button class="btn btn-primary" type="submit" {{ 'disabled' if not approved_count else '' }}>Download training-preparation JSONL</button>
+    </form>
+    <p class="small muted" style="margin-top: 0.6rem;">Evaluation items are excluded. The export is a preparation artifact. It does not launch training or replace the training-data authorization gate.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+  <h2>What the export does not do</h2>
+  <ul class="notice-list">
+    <li>It does not change the approved benchmark specification.</li>
+    <li>It does not create benchmark scores or claim model quality.</li>
+    <li>It does not include evaluation items in the training file.</li>
+    <li>It does not authorize training, inference, spending, or release.</li>
+    <li>It does not replace provenance, consent, licence, or retention records.</li>
+  </ul>
+</div>
+{% endblock %}

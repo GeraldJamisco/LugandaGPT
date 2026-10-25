@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% set title = "Assign work" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>Assign translation and review work</h1>
+<p class="muted">Assign a translator to examples that have no translator. Assign a reviewer to translations that are ready for review. The same person cannot review their own translation.</p>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Assign translation work</h2>
+    {% if translators %}
+    <form method="post" action="/admin/assign">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="assignment_type" value="translation">
+      <div class="field">
+        <label for="translator_id">Translator</label>
+        <select id="translator_id" name="user_id" required>
+          <option value="">Choose a translator</option>
+          {% for person in translators %}<option value="{{ person.id }}">{{ person.display_name }} · {{ person.public_id }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="translation_collection">Collection</label>
+        <select id="translation_collection" name="collection">
+          <option value="pilot">Pilot examples only</option>
+          <option value="evaluation">Evaluation items only</option>
+          <option value="">Both collections</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="translation_capability">Task type</label>
+        <select id="translation_capability" name="capability">
+          <option value="">All task types</option>
+          {% for capability in capabilities %}<option value="{{ capability }}">{{ capability_label(capability) }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="translation_limit">How many examples</label>
+        <input id="translation_limit" name="limit" type="number" min="1" max="200" value="10" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Assign translation work</button>
+    </form>
+    <p class="small muted" style="margin-top: 0.7rem;">{{ counts.unassigned }} examples currently have no translator.</p>
+    {% else %}
+    <p class="muted">Create a translator account first.</p>
+    <a class="btn btn-secondary" href="/admin/users">Manage people</a>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Assign review work</h2>
+    {% if reviewers %}
+    <form method="post" action="/admin/assign">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="assignment_type" value="review">
+      <div class="field">
+        <label for="reviewer_id">Reviewer</label>
+        <select id="reviewer_id" name="user_id" required>
+          <option value="">Choose a reviewer</option>
+          {% for person in reviewers %}<option value="{{ person.id }}">{{ person.display_name }} · {{ person.public_id }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="review_collection">Collection</label>
+        <select id="review_collection" name="collection">
+          <option value="pilot">Pilot translations only</option>
+          <option value="evaluation">Evaluation translations only</option>
+          <option value="">Both collections</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="review_capability">Task type</label>
+        <select id="review_capability" name="capability">
+          <option value="">All task types</option>
+          {% for capability in capabilities %}<option value="{{ capability }}">{{ capability_label(capability) }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="review_limit">How many translations</label>
+        <input id="review_limit" name="limit" type="number" min="1" max="200" value="10" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Assign review work</button>
+    </form>
+    <p class="small muted" style="margin-top: 0.7rem;">{{ counts.ready }} translations are waiting for review. Assign a second speaker to each one.</p>
+    {% else %}
+    <p class="muted">Create a reviewer account first.</p>
+    <a class="btn btn-secondary" href="/admin/users">Manage people</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+  <h2>Current accounts</h2>
+  <div class="grid grid-2">
+    <div>
+      <p class="eyebrow">Translators</p>
+      {% for person in translators %}<p>{{ person.display_name }} <span class="muted small">· {{ person.public_id }}</span></p>{% else %}<p class="muted">None yet.</p>{% endfor %}
+    </div>
+    <div>
+      <p class="eyebrow">Reviewers</p>
+      {% for person in reviewers %}<p>{{ person.display_name }} <span class="muted small">· {{ person.public_id }}</span></p>{% else %}<p class="muted">None yet.</p>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

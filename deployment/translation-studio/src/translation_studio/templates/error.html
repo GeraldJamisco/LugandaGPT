@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set title = "Problem" %}
+{% block content %}
+<div class="narrow">
+  <div class="card">
+    <p class="eyebrow">Request status {{ status }}</p>
+    <h1>{{ "Page not found" if status == 404 else ("Permission required" if status == 403 else "Something needs attention") }}</h1>
+    <p>{{ message }}</p>
+    {% if status == 500 %}
+    <div class="callout">
+      <strong>If this happened after a code update:</strong> stop the local server with Ctrl+C, start it again with the same command, and refresh this page. Your saved work was not changed.
+    </div>
+    {% endif %}
+    <div class="button-row">
+      <a class="btn btn-primary" href="{{ '/home' if user else '/login' }}">Go back</a>
+      {% if user %}
+      <form method="post" action="/logout">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="btn btn-secondary" type="submit">Sign out</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

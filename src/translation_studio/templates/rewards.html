@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% set title = "My rewards" %}
+{% block content %}
+<p class="eyebrow">{{ "Review activity" if reward.kind == "reviewer" else "Approved work" }}</p>
+<h1>My rewards</h1>
+<p class="muted">Your reward history is private to your account. Amounts are calculated in cents from recorded contributions and cleared payments.</p>
+
+<section class="card" style="margin-top: 1rem;">
+  <h2>Reward summary</h2>
+  {% if reward.kind == "reviewer" %}
+  <p>Confirmed rate: <strong>${{ "%.2f"|format(reward.per_review_usd) }}</strong> per completed valid review, whatever decision you record.</p>
+  <p>{{ reward.review_count }} completed valid review{{ '' if reward.review_count == 1 else 's' }}.</p>
+  {% else %}
+  <p>Confirmed rate: <strong>${{ "%.2f"|format(reward.per_contribution_usd) }}</strong> per translation approved by a reviewer.</p>
+  <p>{{ reward.approved_count }} approved translation{{ '' if reward.approved_count == 1 else 's' }}.</p>
+  {% endif %}
+  <div class="grid grid-3 reward-summary-grid">
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.accrued_usd) }}</strong><span>Total earned</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.paid_usd) }}</strong><span>Paid so far</span></div>
+    <div class="progress-card"><strong>${{ "%.2f"|format(reward.available_usd) }}</strong><span>Outstanding balance</span></div>
+  </div>
+  <p class="small muted">Payment status is unpaid until the project owner records a completed payment. The current payment workflow has no separate pending-payment state.</p>
+</section>
+
+<section class="card" style="margin-top: 1rem;">
+  <h2>{{ "Completed review history" if reward.kind == "reviewer" else "Approved translation history" }}</h2>
+  {% set entries = reward.reviews if reward.kind == "reviewer" else reward.approved_items %}
+  {% if entries %}
+  <div class="list">
+    {% for entry in entries %}
+    <article class="list-item reward-history-entry">
+      <div>
+        {% if reward.kind == "reviewer" %}
+        <h3>Review #{{ entry.review_id }} · {{ decision_label(entry.decision) }}</h3>
+        <p class="small muted">Translation {{ entry.item_id }} · version {{ entry.translation_version }} · earned {{ format_datetime(entry.earned_at) }}</p>
+        {% else %}
+        <h3>Translation {{ entry.item_id }} · {{ capability_label(entry.capability) }}</h3>
+        <p class="small muted">Version {{ entry.translation_version }} · approved {{ format_datetime(entry.earned_at) }}</p>
+        {% endif %}
+        <p><strong>${{ "%.2f"|format(entry.amount_usd) }}</strong> · <span class="badge {{ 'badge-green' if entry.payment_status == 'paid' else '' }}">{{ entry.payment_status|capitalize }}</span></p>
+        {% if entry.payment_references %}<p class="small muted">Payment reference: {{ entry.payment_references|join(", ") }}</p>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty"><h3>No rewards recorded yet</h3><p>{{ "A review reward appears after you submit a valid review decision." if reward.kind == "reviewer" else "A translation reward appears after a reviewer approves your translation." }}</p></div>
+  {% endif %}
+</section>
+
+<section class="card" style="margin-top: 1rem;">
+  <h2>Payment history</h2>
+  {% if reward.payments %}
+  <div class="list">
+    {% for payment in reward.payments %}
+    <article class="list-item"><div><h3>${{ "%.2f"|format(payment.amount_usd) }} paid</h3><p class="small muted">{{ format_datetime(payment.paid_at) }}{% if payment.note %} · {{ payment.note }}{% endif %}</p></div><span class="badge badge-green">Payment recorded</span></article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No payments are recorded for your account.</p>
+  {% endif %}
+</section>
+{% endblock %}

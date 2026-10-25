@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set title = "Audit history" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>Audit history</h1>
+<p class="muted">Significant changes are recorded with the account, action, record, and time. Passwords and translated text are not written into this log.</p>
+
+{% if audit %}
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Time</th><th>Account</th><th>Action</th><th>Record</th></tr></thead>
+    <tbody>
+      {% for event in audit %}
+      <tr>
+        <td>{{ format_datetime(event.created_at) }}</td>
+        <td>{{ event.actor_name or "System" }}{% if event.actor_public_id %}<br><span class="small muted">{{ event.actor_public_id }}</span>{% endif %}</td>
+        <td>{{ event.action.replace('_', ' ') }}</td>
+        <td>{{ event.entity_type }}{% if event.entity_type != 'session' %} {{ event.entity_id }}{% else %} event{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="card empty"><h2>No activity yet</h2><p>Activity appears after accounts, imports, translations, reviews, and exports are recorded.</p></div>
+{% endif %}
+{% endblock %}

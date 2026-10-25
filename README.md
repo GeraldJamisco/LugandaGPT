@@ -26,6 +26,7 @@ provider are **undecided** pending research and benchmarking.
 - Phase 0 (project foundation, documentation, Git hygiene) and early preparation are underway.
 - No approved Luganda training dataset and no trained model exist. A project-authored English source draft exists for the 100-example pilot; native translation and review are pending.
 - Guarded training, inference, source-validation, and benchmark tooling is present, but no GPU training run has occurred.
+- A local Translation Studio is available for native-speaker translation and review. It is not deployed.
 - No model has been trained or evaluated.
 - Local tooling now includes the project reporter: read-only activity
   collection, local report generation, and optional Telegram delivery to
@@ -61,6 +62,9 @@ LugandaGPT/
 - [Benchmark specification](docs/BENCHMARK-SPECIFICATION.md): approved benchmark specification
 - [Pilot data specification](docs/PILOT-DATA-SPECIFICATION.md): Luganda training schema and English source draft
 - [English source pilot report](reports/ENGLISH-SOURCE-PILOT-REPORT.md): counts, validation, and outstanding translation work
+- [Translation Studio](docs/TRANSLATION-STUDIO.md): local translation and review web application setup
+- [Translation Studio report](reports/TRANSLATION-STUDIO-REPORT.md): implementation, test, and limitation report
+- [PHP deployment edition](php/README.md): cPanel-friendly PHP translation and review app
 - [Reporter spec](docs/PROJECT_REPORTER_SPEC.md): requirements for automatic reporting and Telegram delivery
 - [Reporter guide](docs/PROJECT_REPORTER_README.md): running the reporter, checking delivery, retrying failures, enabling scheduling
 - [Data governance](data/README.md): dataset requirements and rules

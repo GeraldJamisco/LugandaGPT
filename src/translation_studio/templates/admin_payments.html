@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% set title = "Reward payments" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>Reward payments</h1>
+<p class="muted">Review the available amount and mark a payment as cleared after the payment is actually completed. Recording a payment resets the available balance for new work. This page does not move money.</p>
+
+{% if payables %}
+<div class="list">
+  {% for person in payables %}
+  <div class="card" style="margin-top: 0; margin-bottom: 1rem;">
+    <div class="item-meta">
+      <span class="badge">{{ role_label(person.role) }}</span>
+      <span class="badge">{{ person.public_id }}</span>
+      {% if person.available_usd > 0 %}<span class="badge badge-green">${{ "%.2f"|format(person.available_usd) }} available</span>{% else %}<span class="badge">No available balance</span>{% endif %}
+    </div>
+    <h2>{{ person.display_name }}</h2>
+    <p class="small muted">{{ person.work_count }} {{ "approved translations" if person.role == "translator" else "completed reviews" }}. Total earned ${{ "%.2f"|format(person.accrued_usd) }}. Total cleared ${{ "%.2f"|format(person.paid_usd) }}.</p>
+    {% if person.payments %}
+    <details class="details">
+      <summary>Payment history</summary>
+      {% for payment in person.payments %}
+      <p class="small">${{ "%.2f"|format(payment.amount_usd) }} · {{ format_datetime(payment.paid_at) }} · {{ payment.note }}</p>
+      {% endfor %}
+    </details>
+    {% endif %}
+    {% if person.available_usd > 0 %}
+    <form method="post" action="/admin/payments" class="filter-row" style="margin-top: 1rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="recipient_id" value="{{ person.user_id }}">
+      <input type="hidden" name="role" value="{{ person.role }}">
+      <div>
+        <label for="amount_{{ person.user_id }}">Amount to clear</label>
+        <input id="amount_{{ person.user_id }}" name="amount" type="number" min="0.01" step="0.01" value="{{ '%.2f'|format(person.available_usd) }}" required>
+      </div>
+      <div>
+        <label for="note_{{ person.user_id }}">Payment note or reference</label>
+        <input id="note_{{ person.user_id }}" name="note" placeholder="Payment method, reference, or date" required>
+      </div>
+      <div style="align-self: end;"><button class="btn btn-primary" type="submit">Mark payment cleared</button></div>
+    </form>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card empty"><h2>No reward accounts yet</h2><p>Create translator and reviewer accounts first.</p></div>
+{% endif %}
+{% endblock %}

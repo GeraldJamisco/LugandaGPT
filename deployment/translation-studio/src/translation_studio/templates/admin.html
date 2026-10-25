@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set title = "Studio overview" %}
+{% block content %}
+    <div class="admin-intro" id="source-material">
+      <div><p class="eyebrow">Project owner workspace</p><h1>Studio overview</h1>
+        <p class="muted">Manage contributors, translation quality, and source material.</p></div>
+      <form method="post" action="/admin/import">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="btn btn-primary" type="submit"><span aria-hidden="true">＋</span> Import source examples</button>
+      </form>
+    </div>
+
+    {% if import_result %}
+    <div class="card import-summary">
+      <strong>Last source import</strong>
+      <span>{{ import_result.status|capitalize }}: inserted {{ import_result.inserted or 0 }}, skipped {{ import_result.skipped or 0 }}, conflicts {{ import_result.conflicts|length if import_result.conflicts else 0 }}.</span>
+      {% if import_result.message %}<span class="muted">{{ import_result.message }}</span>{% endif %}
+      {% if import_result.conflicts %}<ul class="notice-list">{% for conflict in import_result.conflicts %}<li>{{ conflict.item_id }}: {{ conflict.message }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endif %}
+
+    <div class="grid grid-4 admin-metrics">
+      <a class="metric-card" href="/admin/items?collection=pilot"><span class="metric-icon">▤</span><span><strong>{{ counts.pilot }}</strong><small>Pilot examples</small></span><span class="metric-arrow">›</span></a>
+      <a class="metric-card" href="/admin/items?collection=evaluation"><span class="metric-icon">▱</span><span><strong>{{ counts.evaluation }}</strong><small>Evaluation items</small></span><span class="metric-arrow">›</span></a>
+      <a class="metric-card" href="/admin/items?status=ready_for_review"><span class="metric-icon">♧</span><span><strong>{{ counts.ready }}</strong><small>Ready for review</small></span><span class="metric-arrow">›</span></a>
+      <a class="metric-card" href="/admin/items?dataset=approved_for_dataset"><span class="metric-icon">✓</span><span><strong>{{ counts.dataset_approved }}</strong><small>Approved for dataset</small></span><span class="metric-arrow">›</span></a>
+    </div>
+
+    <div class="admin-workspace">
+      <section class="card workflow-card">
+        <div class="section-heading"><div><h2>Project workflow</h2><p class="muted">Follow these steps to prepare, assign, and validate translation work.</p></div></div>
+        <div class="workflow-list">
+          <div class="workflow-row"><span class="workflow-number">1</span><span class="metric-icon">▤</span><div class="workflow-copy"><strong>Source material</strong><small>{% if source_imported_at %}Validated English examples are available for work.{% else %}Import and manage the validated English source examples.{% endif %}</small></div><span class="badge {{ 'badge-green' if source_imported_at else 'badge-gold' }}">{{ 'Imported' if source_imported_at else 'Not imported' }}</span><form method="post" action="/admin/import"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="btn btn-secondary btn-small" type="submit">Import source&nbsp; ›</button></form></div>
+          <div class="workflow-row"><span class="workflow-number">2</span><span class="metric-icon">♧</span><div class="workflow-copy"><strong>Contributor accounts</strong><small>Create translator and reviewer accounts, then assign work.</small></div><span class="badge badge-blue">{{ counts.contributors }} accounts</span><a class="btn btn-secondary btn-small" href="/admin/assign">Assign work&nbsp; ›</a></div>
+          <div class="workflow-row"><span class="workflow-number">3</span><span class="metric-icon">✓</span><div class="workflow-copy"><strong>Translation and review</strong><small>{{ counts.translations }} translations started, {{ counts.disputes }} disagreements need owner resolution.</small></div><span class="badge {{ 'badge-gold' if counts.ready else '' }}">{{ counts.ready }} awaiting review</span><a class="btn btn-secondary btn-small" href="/review">Open review&nbsp; ›</a></div>
+          <div class="workflow-row"><span class="workflow-number">4</span><span class="metric-icon">⇩</span><div class="workflow-copy"><strong>Dataset preparation</strong><small>Check consent, licence, and validation before preparing an export.</small></div><span class="badge">{{ counts.dataset_approved }} approved</span><a class="btn btn-secondary btn-small" href="/admin/export">Review export&nbsp; ›</a></div>
+        </div>
+      </section>
+      <aside class="card status-card">
+        <h2>Studio status</h2>
+        {% if not source_imported_at %}
+        <div class="status-illustration" aria-hidden="true"><span>▤</span></div>
+        <h3>Your workspace is ready to set up.</h3><p class="muted">Import the validated source to begin assigning translation work.</p>
+        <form method="post" action="/admin/import"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="btn btn-primary" type="submit">＋ Import source examples</button></form>
+        {% else %}
+        <ul class="status-list"><li><span class="status-dot {{ 'success' if counts.pilot or counts.evaluation else '' }}"></span><span>Source examples imported</span><strong>{{ counts.pilot + counts.evaluation }}</strong></li><li><span class="status-dot {{ 'success' if counts.contributors else '' }}"></span><span>Contributor accounts</span><strong>{{ counts.contributors }}</strong></li><li><span class="status-dot {{ 'pending' if counts.ready else '' }}"></span><span>Awaiting review</span><strong>{{ counts.ready }}</strong></li><li><span class="status-dot {{ 'pending' if counts.disputes else '' }}"></span><span>Needs owner resolution</span><strong>{{ counts.disputes }}</strong></li></ul>
+        <p class="next-action"><strong>Next action</strong><br>{{ 'Resolve the open disagreements.' if counts.disputes else ('Review submitted translations.' if counts.ready else ('Assign examples to contributors.' if counts.unassigned else 'Check project activity and dataset readiness.')) }}</p>
+        <a class="btn btn-secondary btn-wide" href="{{ '/admin/items' if counts.disputes else ('/review' if counts.ready else '/admin/assign') }}">Continue&nbsp; ›</a>
+        {% endif %}
+      </aside>
+    </div>
+
+    <section class="card activity-card">
+      <div class="section-heading"><h2>Recent activity</h2><a class="btn btn-secondary btn-small" href="/admin/audit">View all activity&nbsp; →</a></div>
+      {% if audit %}<div class="activity-list">{% for event in audit %}<div class="activity-row"><span class="activity-icon">↗</span><div><strong>{{ event.action.replace('_', ' ')|capitalize }}</strong><small>{{ event.actor_name or "System" }}{% if event.actor_public_id %} · {{ event.actor_public_id }}{% endif %}</small></div><span class="activity-record">{% if event.entity_type != 'session' %}{{ event.entity_type }} {{ event.entity_id }}{% endif %}</span><time>{{ format_datetime(event.created_at) }}</time></div>{% endfor %}</div>
+      {% else %}<p class="muted">No activity has been recorded yet.</p>{% endif %}
+    </section>
+
+    <section class="card reward-compact"><span class="metric-icon">♧</span><div><h3>Contributor rewards</h3><p class="small muted">Confirmed rate: {{ format_money_cents(translation_reward_rate_cents) }} per approved translation and {{ format_money_cents(review_reward_rate_cents) }} per completed valid review.</p></div><div class="reward-notice">Payments are recorded here after they have been completed. This page does not transfer money.</div><a class="btn btn-secondary btn-small" href="/admin/payments">Reward records</a></section>
+{% endblock %}

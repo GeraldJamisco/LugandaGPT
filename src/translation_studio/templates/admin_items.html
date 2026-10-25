@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% set title = "All examples" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>All examples</h1>
+<p class="muted">Pilot and evaluation records are shown separately. The proposed split is visible here for administration, not to translators.</p>
+
+<div class="card">
+  <form method="get" action="/admin/items" class="field-row">
+    <div>
+      <label for="collection">Collection</label>
+      <select id="collection" name="collection">
+        <option value="">All</option>
+        <option value="pilot" {{ 'selected' if collection == 'pilot' else '' }}>Pilot</option>
+        <option value="evaluation" {{ 'selected' if collection == 'evaluation' else '' }}>Evaluation</option>
+      </select>
+    </div>
+    <div>
+      <label for="status">Translation state</label>
+      <select id="status" name="status">
+        <option value="">All</option>
+        {% for option in ['not_started', 'in_progress', 'ready_for_review', 'needs_revision', 'under_dispute', 'reviewed'] %}
+        <option value="{{ option }}" {{ 'selected' if status == option else '' }}>{{ status_label(option) }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="dataset">Dataset preparation</label>
+      <select id="dataset" name="dataset">
+        <option value="">All</option>
+        <option value="not_ready" {{ 'selected' if dataset == 'not_ready' else '' }}>Not ready</option>
+        <option value="approved_for_dataset" {{ 'selected' if dataset == 'approved_for_dataset' else '' }}>Approved</option>
+      </select>
+    </div>
+    <div>
+      <label for="q">Search</label>
+      <input id="q" name="q" value="{{ query }}" placeholder="Example ID or words in the source">
+    </div>
+    <div style="align-self: end;"><button class="btn btn-secondary" type="submit">Apply filters</button></div>
+  </form>
+</div>
+
+{% if items %}
+<div class="table-wrap" style="margin-top: 1rem;">
+  <table>
+    <thead>
+      <tr>
+        <th>Example</th>
+        <th>Collection</th>
+        <th>Task</th>
+        <th>Translator</th>
+        <th>Translation</th>
+        <th>Dataset</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><strong>{{ item.row.item_id }}</strong><br><span class="small muted">{{ item.source.source_prompt|truncate(80) }}</span></td>
+        <td>{{ collection_label(item.row.collection) }}</td>
+        <td>{{ capability_label(item.source.primary_capability) }}</td>
+        <td>
+          {% if item.row.translator_public_id %}{{ item.row.translator_name }}<br><span class="small muted">{{ item.row.translator_public_id }}</span>{% else %}<span class="muted">Unassigned</span>{% endif %}
+        </td>
+        <td>
+          <span class="badge">{{ status_label(item.row.translation_status or 'not_started') }}</span>
+          {% if item.row.resolution_required %}<br><span class="badge badge-red">Resolution needed</span>{% endif %}
+        </td>
+        <td><span class="badge {{ 'badge-green' if item.row.dataset_status == 'approved_for_dataset' else '' }}">{{ status_label(item.row.dataset_status or 'not_ready') }}</span></td>
+        <td><a class="btn btn-secondary btn-small" href="/admin/items/{{ item.row.item_id }}">Inspect</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="card empty">
+  <h2>No examples match</h2>
+  <p>Try clearing the filters or import the source examples from the administration page.</p>
+</div>
+{% endif %}
+{% endblock %}

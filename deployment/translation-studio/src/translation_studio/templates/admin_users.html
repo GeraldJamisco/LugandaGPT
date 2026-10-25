@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set title = "People" %}
+{% block content %}
+<p class="eyebrow">Administration</p>
+<h1>People and permissions</h1>
+<p class="muted">Create accounts for the project owner, translators, and reviewers. Usernames and passwords are stored only in the local project database. There is no public registration.</p>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Create an account</h2>
+    <form method="post" action="/admin/users">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <div class="field">
+        <label for="display_name">Display name</label>
+        <input id="display_name" name="display_name" value="{{ form.display_name if form else '' }}" required>
+      </div>
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" name="username" value="{{ form.username if form else '' }}" autocomplete="off" autocapitalize="none" required>
+        <p class="hint">Letters, numbers, dots, dashes, or underscores. At least 3 characters.</p>
+      </div>
+      <div class="field">
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+          <option value="">Choose a role</option>
+          <option value="translator" {{ 'selected' if form and form.role == 'translator' else '' }}>Translator</option>
+          <option value="reviewer" {{ 'selected' if form and form.role == 'reviewer' else '' }}>Reviewer</option>
+          <option value="admin" {{ 'selected' if form and form.role == 'admin' else '' }}>Administrator</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="password">Temporary password</label>
+        <input id="password" name="password" type="password" autocomplete="new-password" minlength="10" required>
+        <p class="hint">At least 10 characters. Share it privately. Do not put it in a document or chat transcript.</p>
+      </div>
+      <button class="btn btn-primary" type="submit">Create account</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Current accounts</h2>
+    {% if users %}
+    <div class="list">
+      {% for person in users %}
+      <div class="soft-card">
+        <div class="item-meta">
+          <span class="badge">{{ role_label(person.role) }}</span>
+          <span class="badge">{{ person.public_id }}</span>
+          {% if not person.active %}<span class="badge badge-red">Inactive</span>{% endif %}
+        </div>
+        <p style="margin-top: 0.5rem;"><strong>{{ person.display_name }}</strong> <span class="muted small">@{{ person.username }}</span></p>
+        <p class="small muted">Created {{ format_datetime(person.created_at) }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No accounts exist yet. Create the first administrator with the setup command described in <code>docs/TRANSLATION-STUDIO.md</code>.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

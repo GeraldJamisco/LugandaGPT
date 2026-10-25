@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% set title = "Review translation" %}
+{% block content %}
+<div class="section-label">
+  <span class="step-number">2</span>
+  <div>
+    <p class="eyebrow" style="margin: 0;">Independent review</p>
+    <h1>{{ capability_label(source.primary_capability) }}</h1>
+  </div>
+</div>
+<p class="muted">{{ capability_purpose(source.primary_capability) }}</p>
+
+{% if user.role == 'admin' %}
+<div class="callout callout-green"><strong>Administrator view.</strong> Reviewers submit decisions. Administrators resolve disagreements and prepare dataset records.</div>
+{% elif my_review %}
+<div class="notice"><strong>You already submitted a review for this version.</strong> Your decision and comments are shown below. You cannot silently replace them.</div>
+{% endif %}
+
+<div class="review-layout">
+  <div>
+    <section class="card">
+      <div class="section-label">
+        <span class="step-number">1</span>
+        <h2>Read the English source</h2>
+      </div>
+      {% if source.source_context %}
+      <div class="soft-card" style="margin-top: 1rem;">
+        <p class="eyebrow">{{ 'Original English text to rewrite' if source.primary_capability == 'rewriting_formal_luganda' else 'English passage to translate' }}</p>
+        <p class="context">{{ source.source_context }}</p>
+      </div>
+      {% endif %}
+      {% if source.conversation_turns %}
+      <div style="margin-top: 1.2rem;">
+        <p class="eyebrow">Earlier messages in English</p>
+        {% for turn in source.conversation_turns %}
+        <div class="turn {{ 'turn-user' if turn.role == 'user' else 'turn-assistant' }}">
+          <div class="speaker">{{ "Earlier request" if turn.role == "user" else "Earlier reply" }}</div>
+          <div class="turn-text">{{ turn.content }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if source.source_prompt|trim %}
+      <p class="eyebrow">{% if source.primary_capability == 'rewriting_formal_luganda' %}What to do with the text{% elif source.primary_capability in ('formal_generation', 'instruction_following') %}English instruction{% elif source.primary_capability == 'short_conversation' %}Latest message in English{% elif source.primary_capability == 'formal_comprehension' %}Question about the passage{% else %}English question{% endif %}</p>
+      <p class="instruction">{{ source.source_prompt }}</p>
+      {% endif %}
+      <div class="details">
+        <details>
+          <summary>Show the English meaning guide</summary>
+          <p class="small muted" style="margin-top: 0.6rem;">This is an English reference or rubric, not a Luganda answer.</p>
+          <p class="reference-text">{{ source.reference_answer_or_rubric.content }}</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 1rem;">
+      <div class="section-label">
+        <span class="step-number">2</span>
+        <h2>Read the Luganda translation</h2>
+      </div>
+      {% if translation.context_lg %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Original text translated into Luganda' if source.primary_capability == 'rewriting_formal_luganda' else 'Passage translated into Luganda' }}</p>
+        <div class="translation-text">{{ translation.context_lg }}</div>
+      </div>
+      {% endif %}
+      {% if source.source_context and not translation.context_lg %}
+      <div class="error-box">
+        {% if source.primary_capability == 'rewriting_formal_luganda' %}<strong>Required original text translation missing.</strong>{% else %}<strong>Required background passage missing.</strong>{% endif %} This translation does not include the required Luganda text. Request revision unless there is a documented reason to accept it.
+      </div>
+      {% endif %}
+      {% if source.conversation_turns %}
+      <div class="field">
+        <p class="eyebrow">Earlier messages translated into Luganda</p>
+        {% for turn in source.conversation_turns %}
+        <div class="soft-card" style="margin-bottom: 0.8rem;">
+          <p class="speaker">{{ "Earlier request" if turn.role == "user" else "Earlier reply" }}</p>
+          <p class="small context">{{ turn.content }}</p>
+          <div class="translation-text">{{ translation.turns[loop.index0] }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if source.source_prompt|trim or translation.prompt_lg|trim %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Instruction in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following', 'rewriting_formal_luganda') else 'Question or message in Luganda' }}</p>
+        <div class="translation-text">{{ translation.prompt_lg }}</div>
+      </div>
+      {% endif %}
+      {% if source.expected_response_criteria or translation.response_lg %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Formal rewrite in Luganda' if source.primary_capability == 'rewriting_formal_luganda' else ('Requested text in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following') else 'Answer in Luganda') }}</p>
+        <div class="translation-text">{{ translation.response_lg }}</div>
+      </div>
+      {% endif %}
+      {% if translation.notes %}
+      <div class="field">
+        <p class="eyebrow">Translator notes</p>
+        <p class="context">{{ translation.notes }}</p>
+      </div>
+      {% endif %}
+    </section>
+
+    <section class="card" style="margin-top: 1rem;">
+      <div class="section-label">
+        <span class="step-number">3</span>
+        <h2>Check the expected result</h2>
+      </div>
+      <p class="eyebrow">The Luganda answer should</p>
+      <ul class="notice-list">
+        {% for criterion in source.expected_response_criteria %}<li>{{ criterion }}</li>{% endfor %}
+      </ul>
+      {% if source.required_constraints %}
+      <p class="eyebrow" style="margin-top: 1rem;">Constraints</p>
+      <ul class="notice-list">
+        {% for constraint in source.required_constraints %}<li>{{ constraint }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% if source.uncertainty_behavior == 'state_uncertainty_if_unanswerable' %}
+      <div class="callout" style="margin-top: 1rem;">The response should state clearly when the information is missing instead of inventing an answer.</div>
+      {% elif source.uncertainty_behavior == 'ask_clarifying_question_if_ambiguous' %}
+      <div class="callout" style="margin-top: 1rem;">The response should ask a clear question when the request is ambiguous.</div>
+      {% endif %}
+    </section>
+
+    {% if reviews %}
+    <section class="card" style="margin-top: 1rem;">
+      <h2>Review history</h2>
+      {% for review in reviews %}
+      <div class="soft-card" style="margin-bottom: 0.7rem;">
+        <div class="item-meta">
+          <span class="badge badge-{{ 'green' if review.decision == 'approved' else ('red' if review.decision == 'needs_revision' else 'gold') }}">{{ decision_label(review.decision) }}</span>
+          <span class="small muted">{{ review.reviewer_name }} · {{ format_datetime(review.created_at) }} · version {{ review.translation_version }}</span>
+        </div>
+        {% if review.comments %}<p style="margin-top: 0.6rem;">{{ review.comments }}</p>{% endif %}
+        {% if review.suggested_correction %}
+        <p class="eyebrow" style="margin-top: 0.6rem;">Suggested correction</p>
+        <p class="context">{{ review.suggested_correction }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </section>
+    {% elif all_review_count %}
+    <section class="card" style="margin-top: 1rem;">
+      <p class="muted">Another review exists for this version. It will become visible after you submit your own review, or to an administrator now. This keeps the second review independent.</p>
+    </section>
+    {% endif %}
+  </div>
+
+  <aside class="review-side">
+    <div class="card">
+      <h2>Your review decision</h2>
+      {% if metadata.dataset_status == 'approved_for_dataset' %}
+      <div class="callout">This item is already approved for dataset preparation. Ask an administrator to revoke that approval before adding a review.</div>
+      {% elif my_review %}
+      <p><strong>Your recorded decision:</strong> {{ decision_label(my_review.decision) }}</p>
+      <p class="small muted">Submitted {{ format_datetime(my_review.created_at) }} for version {{ my_review.translation_version }}.</p>
+      {% elif can_review %}
+      <p>Decide after reading the English source and the full Luganda translation. Approval means the translation is acceptable for the next stage. It is not training authorization.</p>
+      <form method="post" action="/review/{{ item.item_id }}" data-dirty-form>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="field">
+          <label for="decision">Decision</label>
+          <select id="decision" name="decision" data-review-decision required>
+            <option value="">Choose a decision</option>
+            <option value="approved" {{ 'selected' if form_values.decision == 'approved' else '' }}>Approved</option>
+            <option value="needs_revision" {{ 'selected' if form_values.decision == 'needs_revision' else '' }}>Needs revision</option>
+            <option value="cannot_assess" {{ 'selected' if form_values.decision == 'cannot_assess' else '' }}>Cannot assess yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="comments">Comments and explanation</label>
+          <p class="hint" data-comment-hint>Please explain your decision. This is required when you request revision or cannot assess the translation.</p>
+          <textarea id="comments" name="comments" class="editor" lang="lg">{{ form_values.comments }}</textarea>
+        </div>
+        <div class="field">
+          <label for="suggested_correction">Suggested correction <span class="muted">(optional)</span></label>
+          <p class="hint">Write a correction in Luganda if it helps the translator. This does not replace the original submission.</p>
+          <textarea id="suggested_correction" name="suggested_correction" style="min-height: 130px;" lang="lg">{{ form_values.suggested_correction }}</textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit review</button>
+        <span class="saved-indicator" data-save-state>No unsaved changes</span>
+      </form>
+      {% else %}
+      <p>
+        {% if translation.status == 'ready_for_review' %}
+        This translation is waiting for a reviewer assigned by the administrator.
+        {% elif translation.status == 'under_dispute' %}
+        Two reviewers disagree. An administrator must resolve the record.
+        {% elif translation.status == 'reviewed' %}
+        This translation has been reviewed. See the review history.
+        {% elif translation.status == 'needs_revision' %}
+        The translator is revising this translation. A new version will need review.
+        {% else %}
+        This translation is not ready for review.
+        {% endif %}
+      </p>
+      <a class="btn btn-secondary" href="/review">Back to review work</a>
+      {% endif %}
+    </div>
+    <div class="card" style="margin-top: 1rem;">
+      <h2>Current state</h2>
+      <p><span class="badge">{{ status_label(translation.status) }}</span></p>
+      {% if translation.resolution_required %}
+      <p class="badge badge-red">Owner resolution needed</p>
+      <p class="small muted">{{ translation.resolution_reason }}</p>
+      {% endif %}
+      <p class="small muted">Your review is stored as a separate record. The translator's original text is preserved.</p>
+      <a class="btn btn-secondary btn-small" href="/review">Back to review work</a>
+    </div>
+  </aside>
+</div>
+{% endblock %}

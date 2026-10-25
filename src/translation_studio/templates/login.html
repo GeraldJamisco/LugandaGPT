@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set title = "Sign in" %}
+{% block content %}
+<div class="login-page">
+  <section class="login-brand-panel">
+    <div>
+      <p class="eyebrow">Private workspace</p>
+      <h1>Translation Studio</h1>
+      <p>We are building an AI assistant that understands and communicates naturally in Luganda. Your language work is the part that makes that possible.</p>
+    </div>
+    <div class="login-points">
+      <div class="login-point"><span>1</span><p>Read the English source and its context.</p> <br>
+        <p>Soma oluzungu nga bwelugabidwa n'amakulu galwo</p>
+      </div>
+      <div class="login-point"><span>2</span><p>Write a natural Luganda translation and save it safely.</p><br>
+      <p>Wandika mu Luganda oluvunuddwa obulunji omale olusevinge</p></div>
+      <div class="login-point"><span>3</span><p>A second speaker reviews the work independently.</p></div>
+    </div>
+  </section>
+
+  <section class="login-form-panel">
+    <div class="card login-card">
+      <p class="eyebrow">Sign in</p>
+      <h2>Welcome back</h2>
+      <p class="muted">Use the account provided by your project administrator. There is no public registration.</p>
+      <form method="post" action="/login">
+        <input type="hidden" name="preauth_token" value="{{ preauth_token }}">
+        <input type="hidden" name="next" value="{{ next or '' }}">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" value="{{ username or '' }}" autocomplete="username" autocapitalize="none" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary btn-wide" type="submit">Sign in</button>
+      </form>
+    </div>
+    <!-- <div class="soft-card login-help">
+      <p><strong>First time here?</strong> Ask the project administrator for a username and a temporary password. The administrator can create translator and reviewer accounts from the local administration page.</p>
+      <p class="small muted">If you are the administrator and no account exists yet, use the setup commands in <code>docs/TRANSLATION-STUDIO.md</code>.</p>
+    </div> -->
+  </section>
+</div>
+{% endblock %}

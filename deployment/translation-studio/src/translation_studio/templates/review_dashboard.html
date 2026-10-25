@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% set title = "Review work" %}
+{% block content %}
+<div class="section-label">
+  <span class="step-number">1</span>
+  <div>
+    <p class="eyebrow" style="margin: 0;">Independent language review</p>
+    <h1>Review translations</h1>
+  </div>
+</div>
+<p class="muted">Compare each Luganda translation with the English source. Record a decision and keep your comments specific. Do not edit the translator's original submission.</p>
+
+{% if user.role == 'reviewer' %}
+{% if reward is defined and reward %}{% include "reward_summary_card.html" %}{% endif %}
+<div class="grid grid-3">
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting for your review</span></div>
+  <div class="progress-card"><strong>{{ reward.review_count if reward else counts.completed }}</strong><span>{{ "Completed valid reviews" if user.role == 'reviewer' else "Reviewed translations" }}</span></div>
+  <div class="progress-card"><strong>{{ counts.total }}</strong><span>{{ "Assigned to you" if user.role == 'reviewer' else "Translations in view" }}</span></div>
+</div>
+{% else %}
+<div class="grid grid-3">
+  <div class="progress-card"><strong>{{ counts.total }}</strong><span>Translations in the studio</span></div>
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting or already reviewed</span></div>
+  <div class="progress-card"><strong>{{ counts.completed }}</strong><span>Completed by this account</span></div>
+</div>
+{% endif %}
+
+{% if items %}
+<div class="list" style="margin-top: 1rem;">
+  {% for item in items %}
+  <article class="list-item">
+    <div>
+      {% if user.role == 'admin' %}<p class="eyebrow" style="margin-bottom: 0.25rem;">{{ collection_label(item.row.collection) }}</p>{% endif %}
+      <h3>{{ capability_label(item.source.primary_capability) }}</h3>
+      <p>{{ item.source.source_prompt|truncate(180) }}</p>
+      <div class="item-meta">
+        <span class="badge">{{ status_label(item.row.translation_status) }}</span>
+        {% if user.role == 'admin' and item.row.translator_public_id %}<span class="badge">Translator {{ item.row.translator_public_id }}</span>{% endif %}
+        {% if item.row.resolution_required %}<span class="badge badge-red">Owner resolution needed</span>{% endif %}
+      </div>
+    </div>
+    <div class="item-actions">
+      {% if item.my_review %}
+        {% if item.my_review.decision == 'approved' %}
+        <span class="badge badge-green">Reviewed</span>
+        {% elif item.my_review.decision == 'needs_revision' %}
+        <span class="badge badge-red">Reviewed · Needs revision</span>
+        {% else %}
+        <span class="badge badge-gold">Reviewed · Cannot assess</span>
+        {% endif %}
+        <a class="btn btn-secondary btn-small" href="/review/{{ item.row.item_id }}">View review</a>
+      {% else %}
+      <a class="btn btn-primary btn-small" href="/review/{{ item.row.item_id }}">Open review</a>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card empty">
+  <h2>No review work assigned</h2>
+  <p>{{ "The project administrator will assign submitted translations to you." if user.role == 'reviewer' else "There are no submitted translations in the studio yet." }}</p>
+</div>
+{% endif %}
+{% endblock %}

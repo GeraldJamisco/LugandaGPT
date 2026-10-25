@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% set title = "Inspect example" %}
+{% block content %}
+<p class="eyebrow">Administration · {{ item.item_id }}</p>
+<h1>{{ capability_label(source.primary_capability) }}</h1>
+{% set latest_review = reviews|last if reviews else None %}
+<div class="item-meta">
+  <span class="badge">{{ collection_label(item.collection) }}</span>
+  <span class="badge">{{ source.proposed_split or "No training split" }}</span>
+  <span class="badge">Translation: {{ status_label(translation.status if translation else 'not_started') }}</span>
+  <span class="badge {{ 'badge-green' if latest_review and latest_review.decision == 'approved' else ('badge-red' if latest_review and latest_review.decision == 'needs_revision' else '') }}">Review: {{ decision_label(latest_review.decision) if latest_review else "Not reviewed" }}</span>
+  <span class="badge {{ 'badge-gold' if metadata.consent_status != 'recorded' else 'badge-green' }}">Consent: {{ metadata.consent_status.replace('_', ' ') }}</span>
+  <span class="badge {{ 'badge-gold' if metadata.licence_status != 'recorded' else 'badge-green' }}">Licence: {{ metadata.licence_status }}</span>
+  <span class="badge {{ 'badge-green' if reward_eligible else '' }}">Reward: {{ "Counts" if reward_eligible else "Not yet" }}</span>
+  <span class="badge {{ 'badge-green' if metadata.dataset_status == 'approved_for_dataset' else '' }}">Dataset: {{ status_label(metadata.dataset_status) }}</span>
+</div>
+
+<div class="grid grid-2" style="margin-top: 1rem;">
+  <div class="card">
+    <h2>English source</h2>
+    <p class="eyebrow">Request</p>
+    <p class="context">{{ source.source_prompt }}</p>
+    {% if source.source_context %}
+    <p class="eyebrow" style="margin-top: 1rem;">Background</p>
+    <p class="context">{{ source.source_context }}</p>
+    {% endif %}
+    {% if source.conversation_turns %}
+    <p class="eyebrow" style="margin-top: 1rem;">Conversation</p>
+    {% for turn in source.conversation_turns %}
+    <div class="turn {{ 'turn-user' if turn.role == 'user' else 'turn-assistant' }}">
+      <div class="speaker">{{ turn.role }}</div>
+      <div class="turn-text">{{ turn.content }}</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <details class="details">
+      <summary>Criteria, constraints, and English guide</summary>
+      <p class="eyebrow" style="margin-top: 0.7rem;">Criteria</p>
+      <ul class="notice-list">{% for criterion in source.expected_response_criteria %}<li>{{ criterion }}</li>{% endfor %}</ul>
+      <p class="eyebrow" style="margin-top: 0.7rem;">Constraints</p>
+      <ul class="notice-list">{% for constraint in source.required_constraints %}<li>{{ constraint }}</li>{% endfor %}</ul>
+      <p class="eyebrow" style="margin-top: 0.7rem;">English guide</p>
+      <p class="context">{{ source.reference_answer_or_rubric.content }}</p>
+    </details>
+    <details class="details">
+      <summary>Source provenance</summary>
+      <p class="small" style="margin-top: 0.7rem;">Origin: {{ source.source_provenance.origin }}</p>
+      <p class="small">Third-party source: {{ source.source_provenance.third_party_source }}</p>
+      <p class="small">Created: {{ source.source_provenance.created_date }}</p>
+      <p class="small">Author role: {{ source.source_provenance.author_role }}</p>
+      <p class="small">Rights note: {{ source.source_provenance.rights_note }}</p>
+      <p class="small">Approval reference: {{ source.source_provenance.approval_reference or "Not recorded" }}</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>Translation</h2>
+    {% if translation %}
+    <p class="small muted">Translator: {{ translation.translator_id }} · Version {{ translation.version }} · Updated {{ format_datetime(translation.updated_at) }}</p>
+    {% if translation.context_lg %}<p class="eyebrow">Background in Luganda</p><div class="translation-text">{{ translation.context_lg }}</div>{% endif %}
+    {% for turn in source.conversation_turns %}
+    <p class="eyebrow" style="margin-top: 0.7rem;">Earlier {{ turn.role }}</p>
+    <div class="translation-text">{{ translation.turns[loop.index0] if translation.turns|length > loop.index0 else "Missing" }}</div>
+    {% endfor %}
+    <p class="eyebrow" style="margin-top: 0.7rem;">Final request</p>
+    <div class="translation-text">{{ translation.prompt_lg }}</div>
+    <p class="eyebrow" style="margin-top: 0.7rem;">Response</p>
+    <div class="translation-text">{{ translation.response_lg }}</div>
+    {% if translation.notes %}<p class="eyebrow" style="margin-top: 0.7rem;">Notes</p><p class="context">{{ translation.notes }}</p>{% endif %}
+    {% else %}
+    <p class="muted">No translation has been saved.</p>
+    {% endif %}
+    <div class="details">
+      <p class="eyebrow">Assignments</p>
+      {% for assignment in assignments %}
+      <p class="small">{{ role_label(assignment.role) }}: {{ assignment.display_name }} ({{ assignment.public_id }}) · {{ assignment.assignment_type }}</p>
+      {% else %}<p class="small muted">No assignments.</p>{% endfor %}
+      <div class="button-row">
+        <form method="post" action="/admin/items/{{ item.item_id }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <input type="hidden" name="action" value="assign_translation">
+          <select name="user_id" aria-label="Translator">
+            <option value="">Choose translator</option>
+            {% for person in users if person.role == 'translator' %}<option value="{{ person.id }}">{{ person.display_name }} ({{ person.public_id }})</option>{% endfor %}
+          </select>
+          <button class="btn btn-secondary btn-small" type="submit">Assign translator</button>
+        </form>
+        <form method="post" action="/admin/items/{{ item.item_id }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <input type="hidden" name="action" value="assign_review">
+          <select name="user_id" aria-label="Reviewer">
+            <option value="">Choose reviewer</option>
+            {% for person in users if person.role == 'reviewer' %}<option value="{{ person.id }}">{{ person.display_name }} ({{ person.public_id }})</option>{% endfor %}
+          </select>
+          <button class="btn btn-secondary btn-small" type="submit">Assign reviewer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if translation and translation.resolution_required %}
+<div class="card" style="margin-top: 1rem;">
+  <h2>Resolve disagreement</h2>
+  <p>{{ translation.resolution_reason }}</p>
+  <form method="post" action="/admin/items/{{ item.item_id }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="action" value="resolve">
+    <div class="field">
+      <label for="resolution_decision">Resolution</label>
+      <select id="resolution_decision" name="decision" required>
+        <option value="">Choose</option>
+        <option value="approved">Approve the translation</option>
+        <option value="needs_revision">Return it for revision</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="resolution_notes">Reason for the resolution</label>
+      <textarea id="resolution_notes" name="notes" required></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Record resolution</button>
+  </form>
+</div>
+{% endif %}
+
+<div class="grid grid-2" style="margin-top: 1rem;">
+  <div class="card">
+    <h2>Review history</h2>
+    {% for review in reviews %}
+    <div class="soft-card" style="margin-bottom: 0.7rem;">
+      <div class="item-meta">
+        <span class="badge badge-{{ 'green' if review.decision == 'approved' else ('red' if review.decision == 'needs_revision' else 'gold') }}">{{ decision_label(review.decision) }}</span>
+        <span class="small muted">{{ review.reviewer_name }} · version {{ review.translation_version }} · {{ format_datetime(review.created_at) }}</span>
+      </div>
+      {% if review.comments %}<p style="margin-top: 0.5rem;">{{ review.comments }}</p>{% endif %}
+      {% if review.suggested_correction %}<p class="context">{{ review.suggested_correction }}</p>{% endif %}
+    </div>
+    {% else %}<p class="muted">No reviews yet.</p>{% endfor %}
+    {% if resolutions %}
+    <p class="eyebrow">Owner resolutions</p>
+    {% for resolution in resolutions %}
+    <p class="small"><strong>{{ resolution.decision }}</strong> · {{ resolution.admin_name }} · {{ format_datetime(resolution.created_at) }}</p>
+    <p class="small muted">{{ resolution.notes }}</p>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Dataset preparation</h2>
+    <p class="small muted">These fields are needed before an item can be included in a training-preparation export. Unresolved fields are shown here and block approval.</p>
+    {% if blockers %}
+    <div class="callout">
+      <strong>Not ready for dataset preparation.</strong>
+      <ul class="notice-list small">{% for blocker in blockers %}<li>{{ blocker }}</li>{% endfor %}</ul>
+    </div>
+    {% else %}
+    <div class="callout callout-green"><strong>All recorded dataset checks pass.</strong> Approval still does not authorize training.</div>
+    {% endif %}
+    <form method="post" action="/admin/items/{{ item.item_id }}" style="margin-top: 1rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="action" value="metadata">
+      <div class="field">
+        <label for="licence">Licence reference</label>
+        <input id="licence" name="licence" value="{{ metadata_form.licence }}" placeholder="Record the agreed translation licence">
+      </div>
+      <div class="field">
+        <label for="consent_ref">Consent reference</label>
+        <input id="consent_ref" name="consent_ref" value="{{ metadata_form.consent_ref }}" placeholder="Record the consent record reference">
+      </div>
+      <div class="field">
+        <label for="consent_status">Collaboration and consent status</label>
+        <select id="consent_status" name="consent_status">
+          {% for option in ['not_recorded', 'owner_reported', 'recorded'] %}
+          <option value="{{ option }}" {{ 'selected' if metadata_form.consent_status == option else '' }}>{{ option.replace('_', ' ')|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="licence_status">Licence status</label>
+        <select id="licence_status" name="licence_status">
+          {% for option in ['unresolved', 'recorded'] %}
+          <option value="{{ option }}" {{ 'selected' if metadata_form.licence_status == option else '' }}>{{ option|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="pii_check">Privacy check</label>
+        <select id="pii_check" name="pii_check">
+          {% for option in ['none', 'redacted', 'needs_review'] %}
+          <option value="{{ option }}" {{ 'selected' if metadata_form.pii_check == option else '' }}>{{ pii_label(option) }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="contamination_notes">Contamination check notes</label>
+        <textarea id="contamination_notes" name="contamination_notes">{{ metadata_form.contamination_notes }}</textarea>
+      </div>
+      <p class="eyebrow">Validation checks</p>
+      {% for check in validation_checks %}
+      <div class="checkbox-row">
+        <input id="validation_{{ check }}" name="validation_{{ check }}" type="checkbox" {{ 'checked' if metadata_form['validation_' ~ check] else '' }}>
+        <label for="validation_{{ check }}">{{ validation_labels[check] }}</label>
+      </div>
+      {% endfor %}
+      <button class="btn btn-secondary" type="submit">Save dataset fields</button>
+    </form>
+    {% if metadata.dataset_status == 'approved_for_dataset' %}
+    <form method="post" action="/admin/items/{{ item.item_id }}" style="margin-top: 1rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="action" value="revoke">
+      <button class="btn btn-danger" type="submit">Revoke dataset preparation approval</button>
+    </form>
+    {% else %}
+    <form method="post" action="/admin/items/{{ item.item_id }}" style="margin-top: 1rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="action" value="approve">
+      <button class="btn btn-primary" type="submit" {{ 'disabled' if blockers else '' }}>Approve for dataset preparation</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if versions %}
+<div class="card" style="margin-top: 1rem;">
+  <h2>Submitted versions</h2>
+  <p class="small muted">Each submitted version is kept. Reviews are attached to a version, so a revision does not erase the earlier submission.</p>
+  {% for version in versions %}
+  <details class="details">
+    <summary>Version {{ version.version }} · {{ format_datetime(version.submitted_at) }} · {{ version.translator_public_id }}</summary>
+    <div style="margin-top: 0.7rem;">
+      {% if version.context_lg %}<p class="eyebrow">Background</p><div class="translation-text">{{ version.context_lg }}</div>{% endif %}
+      {% for turn in version.turns %}
+      <p class="eyebrow" style="margin-top: 0.6rem;">Earlier turn {{ loop.index }}</p>
+      <div class="translation-text">{{ turn }}</div>
+      {% endfor %}
+      <p class="eyebrow" style="margin-top: 0.6rem;">Final request</p>
+      <div class="translation-text">{{ version.prompt_lg }}</div>
+      <p class="eyebrow" style="margin-top: 0.6rem;">Response</p>
+      <div class="translation-text">{{ version.response_lg }}</div>
+      {% if version.notes %}<p class="eyebrow" style="margin-top: 0.6rem;">Notes</p><p class="context">{{ version.notes }}</p>{% endif %}
+    </div>
+  </details>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if translation and translation.status in ('ready_for_review', 'under_dispute', 'reviewed') and metadata.dataset_status != 'approved_for_dataset' %}
+<div class="card" style="margin-top: 1rem;">
+  <h2>Return to the translator for correction</h2>
+  <p>Use this when required text is missing, such as the Luganda background passage, or when the submission needs another translation pass. This does not delete the translator's text or review history.</p>
+  <form method="post" action="/admin/items/{{ item.item_id }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="action" value="return_translation">
+    <div class="field">
+      <label for="return_reason">What needs correction?</label>
+      <textarea id="return_reason" name="reason" required></textarea>
+    </div>
+    <button class="btn btn-secondary" type="submit">Return for correction</button>
+  </form>
+</div>
+{% endif %}
+
+<div class="card" style="margin-top: 1rem;">
+  <h2>Audit history</h2>
+  {% for event in audit %}
+  <p class="small"><strong>{{ event.action.replace('_', ' ')|capitalize }}</strong> · {{ event.actor_name or "System" }} · {{ format_datetime(event.created_at) }}</p>
+  {% else %}<p class="muted">No item activity yet.</p>{% endfor %}
+</div>
+{% endblock %}

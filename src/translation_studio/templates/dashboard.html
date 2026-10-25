@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% set title = "My translation work" %}
+{% block content %}
+<div class="section-label">
+  <span class="step-number">1</span>
+  <div>
+    <p class="eyebrow" style="margin: 0;">Your assigned work</p>
+    <h1>My translation work</h1>
+  </div>
+</div>
+<p class="muted">Choose one example at a time. Read the English source, write the Luganda version, and save your progress. You can return later.</p>
+
+<div class="grid grid-4">
+  <div class="progress-card"><strong>{{ counts.waiting }}</strong><span>Waiting to be translated</span></div>
+  <div class="progress-card"><strong>{{ counts.saved }}</strong><span>Saved translations</span></div>
+  <div class="progress-card"><strong>{{ counts.returned }}</strong><span>Returned for correction</span></div>
+  <div class="progress-card"><strong>{{ counts.ready }}</strong><span>Ready for review</span></div>
+</div>
+
+{% if reward is defined and reward %}{% include "reward_summary_card.html" %}{% endif %}
+
+<div class="card" style="margin-top: 1rem;">
+  <form method="get" action="/work" class="filter-row">
+    <div>
+      <label for="q">Search my examples</label>
+      <input id="q" name="q" value="{{ query }}" placeholder="Search by words in the English example">
+    </div>
+    <div>
+      <label for="status">Show</label>
+      <select id="status" name="status">
+        <option value="">All my examples</option>
+        {% for option in status_options %}
+        <option value="{{ option }}" {{ 'selected' if status == option else '' }}>{{ status_label(option) }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div style="align-self: end;">
+      <button class="btn btn-secondary" type="submit">Filter my work</button>
+    </div>
+  </form>
+</div>
+
+{% if items %}
+<div class="list" style="margin-top: 1rem;">
+  {% for item in items %}
+  <article class="list-item">
+    <div>
+      <p class="eyebrow" style="margin-bottom: 0.25rem;">Example {{ item.number }} of {{ item.total }}</p>
+      <h3>{{ capability_label(item.source.primary_capability) }}</h3>
+      <p>{{ item.source.source_prompt|truncate(180) }}</p>
+      <div class="item-meta">
+        <span class="badge">{{ status_label(item.row.translation_status or 'not_started') }}</span>
+        {% if item.source.source_context %}<span class="badge">Has a background passage</span>{% endif %}
+        {% if item.source.conversation_turns %}<span class="badge">Conversation</span>{% endif %}
+        {% if item.row.resolution_required %}<span class="badge badge-red">Owner resolution needed</span>{% endif %}
+      </div>
+    </div>
+    <div class="item-actions">
+      <a class="btn btn-primary btn-small" href="/work/{{ item.row.item_id }}">
+        {{ 'Open' if (item.row.translation_status or 'not_started') == 'not_started' else 'Continue' }}
+      </a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card empty">
+  <h2>{{ "No examples match this filter" if query or status else "No work has been assigned yet" }}</h2>
+  <p>{{ "Try clearing the search or choosing all examples." if query or status else "Gerald will assign translation examples to you." }}</p>
+  {% if query or status %}<a class="btn btn-secondary" href="/work">Clear filters</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

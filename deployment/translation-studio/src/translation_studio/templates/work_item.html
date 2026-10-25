@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% set title = "Translate example" %}
+{% block content %}
+<div class="section-label">
+  <span class="step-number">1</span>
+  <div>
+    <p class="eyebrow" style="margin: 0;">Example {{ number }} of {{ total }}</p>
+    <h1>{{ capability_label(source.primary_capability) }}</h1>
+  </div>
+</div>
+<div class="example-progress" aria-label="Example {{ number }} of {{ total }}">
+  <div class="progress-track"><span style="width: {{ ((number / total) * 100)|round|int }}%"></span></div>
+  <span class="progress-label">Example {{ number }} of {{ total }}</span>
+</div>
+<p class="muted">{{ capability_purpose(source.primary_capability) }}</p>
+
+{% if user.role == 'admin' %}
+<div class="callout callout-green">
+  <strong>Administrator view.</strong> Only the assigned translator can edit this translation.
+</div>
+{% endif %}
+
+{% if not editable %}
+<div class="callout">
+  <strong>This translation is not open for editing.</strong>
+  {% if metadata.dataset_status == 'approved_for_dataset' %}
+  It is approved for dataset preparation. Ask an administrator to revoke that approval before changing it.
+  {% elif status == 'ready_for_review' %}
+  It has been sent for review. A reviewer or administrator must return it for correction before it can be edited.
+  {% elif status == 'under_dispute' %}
+  Two reviews disagree. An administrator must resolve the item.
+  {% elif status == 'reviewed' %}
+  It has been reviewed. A reviewer or administrator must return it for correction before it can be edited.
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="review-layout teacher-work-layout">
+  <div>
+    <section class="card">
+      <div class="section-label">
+        <span class="step-number">1</span>
+        <h2>Read the English example</h2>
+      </div>
+      {% if source.source_context %}
+      <div class="soft-card" style="margin-top: 1rem;">
+        <p class="eyebrow">{{ 'Original English text to rewrite' if source.primary_capability == 'rewriting_formal_luganda' else 'English passage to translate' }}</p>
+        <p class="context">{{ source.source_context }}</p>
+      </div>
+      {% endif %}
+
+      {% if source.conversation_turns %}
+      <div style="margin-top: 1.2rem;">
+        <p class="eyebrow">Earlier conversation</p>
+        {% for turn in source.conversation_turns %}
+        <div class="turn {{ 'turn-user' if turn.role == 'user' else 'turn-assistant' }}">
+          <div class="speaker">{{ "Earlier request" if turn.role == "user" else "Earlier reply" }}</div>
+          <div class="turn-text">{{ turn.content }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if source.source_prompt|trim %}
+      <p class="eyebrow">{% if source.primary_capability == 'rewriting_formal_luganda' %}What to do with the text{% elif source.primary_capability in ('formal_generation', 'instruction_following') %}English instruction{% elif source.primary_capability == 'short_conversation' %}Latest message in English{% elif source.primary_capability == 'formal_comprehension' %}Question about the passage{% else %}English question{% endif %}</p>
+      <p class="instruction">{{ source.source_prompt }}</p>
+      {% endif %}
+
+      <div class="details">
+        <details>
+          <summary>Show the English meaning guide</summary>
+          <p class="small muted" style="margin-top: 0.6rem;">This is an English reference or rubric. It is not a Luganda translation and should not be copied as the answer.</p>
+          <p class="reference-text">{{ source.reference_answer_or_rubric.content }}</p>
+        </details>
+      </div>
+    </section>
+
+    {% if source.expected_response_criteria or source.required_constraints %}
+    <section class="card" style="margin-top: 1rem;">
+      <div class="section-label">
+        <span class="step-number">2</span>
+        <h2>What the Luganda answer should include</h2>
+      </div>
+      <p class="eyebrow">Check these points in your answer</p>
+      <ul class="notice-list">
+        {% for criterion in source.expected_response_criteria %}<li>{{ criterion }}</li>{% endfor %}
+      </ul>
+      {% if source.required_constraints %}
+      <p class="eyebrow" style="margin-top: 1rem;">Important constraints</p>
+      <ul class="notice-list">
+        {% for constraint in source.required_constraints %}<li>{{ constraint }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% if source.uncertainty_behavior == 'state_uncertainty_if_unanswerable' %}
+      <div class="callout" style="margin-top: 1rem;">If the information is missing, say so instead of guessing.</div>
+      {% elif source.uncertainty_behavior == 'ask_clarifying_question_if_ambiguous' %}
+      <div class="callout" style="margin-top: 1rem;">If the request is ambiguous, ask a clear question instead of choosing an answer.</div>
+      {% endif %}
+      <p class="small muted" style="margin-top: 1rem;">Register: {{ source.intended_register }}. These notes guide the translation. They are not a Luganda answer.</p>
+    </section>
+    {% endif %}
+
+    <section class="card" style="margin-top: 1rem;">
+      <div class="section-label">
+        <span class="step-number">3</span>
+        <h2>Write in Luganda</h2>
+      </div>
+
+      <div class="callout callout-green">
+        <strong>Translate the English source, then write the requested Luganda response.</strong>
+        Keep the source meaning and instructions. Do not add a question, passage, or details that are not shown above.
+      </div>
+
+      {% if editable %}
+      <div class="notice" id="recovery-banner" hidden>
+        <strong>Unsaved text from earlier on this device is available.</strong>
+        <div class="button-row">
+          <button class="btn btn-secondary btn-small" type="button" data-recover-draft>Restore unsaved text</button>
+          <button class="btn btn-quiet btn-small" type="button" data-discard-draft>Discard this copy</button>
+        </div>
+      </div>
+      <form method="post" action="/work/{{ item.item_id }}" data-dirty-form data-autosave-url="/work/{{ item.item_id }}/autosave" data-item-id="{{ item.item_id }}" data-user-id="{{ user.user_id }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        <p class="small muted">This page saves a draft automatically while you type. Use <strong>Save progress</strong> if the automatic save fails or if you want to be certain before leaving.</p>
+
+        {% if source.source_context %}
+        <div class="field">
+          <label for="context_lg">{{ 'Original text translated into Luganda' if source.primary_capability == 'rewriting_formal_luganda' else 'Passage translated into Luganda' }} <span class="badge badge-gold">Required</span></label>
+          <p class="hint">{% if source.primary_capability == 'rewriting_formal_luganda' %}Translate the original English note into Luganda. Keep its current tone here. Write the formal version in the answer field below.{% elif source.primary_capability == 'formal_comprehension' %}Translate the passage into natural Luganda. Keep the facts that the question asks about.{% else %}Translate this English passage into natural Luganda. Keep its meaning and important details.{% endif %}</p>
+          <textarea id="context_lg" name="context_lg" class="editor" lang="lg" spellcheck="true">{{ form_values.context_lg }}</textarea>
+        </div>
+        {% endif %}
+
+        {% if source.conversation_turns %}
+        <div class="field">
+          <label>Earlier messages translated into Luganda</label>
+          <p class="hint">Translate each message in order. Keep clear who said each line. Translate the latest message in the field below.</p>
+          {% for turn in source.conversation_turns %}
+          <div class="soft-card" style="margin-bottom: 0.8rem;">
+            <p class="speaker">{{ "Earlier request" if turn.role == "user" else "Earlier reply" }}</p>
+            <p class="small context">{{ turn.content }}</p>
+            <label for="turn_{{ loop.index0 }}">Luganda for this earlier {{ 'message' if turn.role == 'user' else 'reply' }} <span class="badge badge-gold">Required</span></label>
+            <textarea id="turn_{{ loop.index0 }}" name="turn_{{ loop.index0 }}" class="editor" lang="lg" spellcheck="true">{{ form_values.turns[loop.index0] if form_values.turns|length > loop.index0 else '' }}</textarea>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if source.source_prompt|trim %}
+        <div class="field">
+          <label for="prompt_lg">{{ 'Instruction in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following', 'rewriting_formal_luganda') else 'Question or message in Luganda' }} <span class="badge badge-gold">Required</span></label>
+          <p class="hint">{% if source.primary_capability in ('formal_generation', 'instruction_following', 'rewriting_formal_luganda') %}Translate the English instruction into Luganda. Keep what it asks for and its limits. Do not write the answer here.{% elif source.primary_capability == 'formal_comprehension' %}Translate the question into Luganda. Do not answer it in this field or add new details.{% elif source.primary_capability == 'short_conversation' %}Translate the latest message into Luganda. Keep it connected to the earlier messages and do not add details.{% else %}Translate the English question into Luganda. Do not answer it in this field or add new details.{% endif %}</p>
+          <textarea id="prompt_lg" name="prompt_lg" class="editor" lang="lg" spellcheck="true">{{ form_values.prompt_lg }}</textarea>
+        </div>
+        {% endif %}
+
+        {% if source.expected_response_criteria %}
+        <div class="field">
+          <label for="response_lg">{{ 'Formal rewrite in Luganda' if source.primary_capability == 'rewriting_formal_luganda' else ('Requested text in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following') else 'Answer in Luganda') }} <span class="badge badge-gold">Required</span></label>
+          <p class="hint">{% if source.primary_capability == 'rewriting_formal_luganda' %}Rewrite the original text in clear, formal Luganda. Keep its meaning and do not add facts.{% elif source.primary_capability == 'formal_generation' %}Write the text requested by the English instruction in Luganda. Follow the points and limits above.{% elif source.primary_capability == 'instruction_following' %}Carry out the English instruction in Luganda. Follow its format, length, and other limits.{% elif source.primary_capability == 'formal_comprehension' %}Answer the question in natural Luganda. Use the passage and do not guess.{% elif source.primary_capability == 'question_answering' %}Answer the question in natural Luganda using the English details provided. Do not guess missing information.{% else %}Reply to the latest message in natural Luganda. Use the earlier conversation and do not guess missing information.{% endif %}</p>
+          <textarea id="response_lg" name="response_lg" class="editor" lang="lg" spellcheck="true">{{ form_values.response_lg }}</textarea>
+        </div>
+        {% endif %}
+
+        <div class="field">
+          <label for="notes">Translation notes <span class="muted">(optional)</span></label>
+          <p class="hint">Explain a difficult choice, an alternative expression, ambiguity, or cultural context.</p>
+          <textarea id="notes" name="notes" style="min-height: 100px;">{{ form_values.notes }}</textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" name="action" value="save">Save progress</button>
+          <button class="btn btn-secondary" type="submit" name="action" value="save_next">Save and next example</button>
+          <button class="btn btn-gold" type="submit" name="action" value="submit">Mark as ready for review</button>
+          <span class="saved-indicator" data-save-state>No unsaved changes</span>
+        </div>
+      </form>
+      {% else %}
+      {% if source.source_context %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Original text translated into Luganda' if source.primary_capability == 'rewriting_formal_luganda' else 'Passage translated into Luganda' }}</p>
+        {% if translation and translation.context_lg %}
+        <div class="translation-text">{{ translation.context_lg }}</div>
+        {% else %}
+        <div class="error-box">
+          <strong>Background passage missing.</strong> This required passage was not translated. Ask a reviewer or administrator to return the example for correction.
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if source.conversation_turns %}
+      <div class="field">
+        <p class="eyebrow">Earlier conversation in Luganda</p>
+        {% for turn in source.conversation_turns %}
+        <div class="soft-card" style="margin-bottom: 0.8rem;">
+          <p class="speaker">{{ "Earlier request" if turn.role == "user" else "Earlier reply" }}</p>
+          <p class="small context">{{ turn.content }}</p>
+          <div class="translation-text">{{ translation.turns[loop.index0] if translation and translation.turns|length > loop.index0 else "Not translated." }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if source.source_prompt|trim or (translation and translation.prompt_lg|trim) %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Instruction in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following', 'rewriting_formal_luganda') else 'Question or message in Luganda' }}</p>
+        <div class="translation-text">{{ translation.prompt_lg if translation and translation.prompt_lg else "Not translated." }}</div>
+      </div>
+      {% endif %}
+      {% if source.expected_response_criteria or (translation and translation.response_lg) %}
+      <div class="field">
+        <p class="eyebrow">{{ 'Formal rewrite in Luganda' if source.primary_capability == 'rewriting_formal_luganda' else ('Requested text in Luganda' if source.primary_capability in ('formal_generation', 'instruction_following') else 'Answer in Luganda') }}</p>
+        <div class="translation-text">{{ translation.response_lg if translation and translation.response_lg else "Not translated." }}</div>
+      </div>
+      {% endif %}
+      {% if translation and translation.notes %}
+      <div class="field">
+        <p class="eyebrow">Translation notes</p>
+        <p class="context">{{ translation.notes }}</p>
+      </div>
+      {% endif %}
+      {% endif %}
+    </section>
+
+    {% if reviews %}
+    <section class="card" style="margin-top: 1rem;">
+      <h2>Review feedback</h2>
+      <div class="list">
+        {% for review in reviews %}
+        <div class="soft-card">
+          <div class="item-meta">
+            <span class="badge badge-{{ 'green' if review.decision == 'approved' else ('red' if review.decision == 'needs_revision' else 'gold') }}">{{ decision_label(review.decision) }}</span>
+            <span class="small muted">{{ review.reviewer_name }} · {{ format_datetime(review.created_at) }} · version {{ review.translation_version }}</span>
+          </div>
+          {% if review.comments %}<p style="margin-top: 0.6rem;">{{ review.comments }}</p>{% endif %}
+          {% if review.suggested_correction %}
+          <p class="eyebrow" style="margin-top: 0.6rem;">Suggested correction</p>
+          <p class="context">{{ review.suggested_correction }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if resolutions %}
+    <section class="card" style="margin-top: 1rem;">
+      <h2>Owner resolution</h2>
+      {% for resolution in resolutions %}
+      <div class="soft-card">
+        <p><strong>{{ resolution.decision|capitalize }}</strong> · {{ resolution.admin_name }} · {{ format_datetime(resolution.created_at) }}</p>
+        <p>{{ resolution.notes }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+
+  <aside class="review-side teacher-work-aside">
+    <div class="card">
+      <h2>Save and navigate</h2>
+      <div class="item-meta">
+        <span class="badge">{{ status_label(status) }}</span>
+        {% if metadata.dataset_status == 'approved_for_dataset' %}<span class="badge badge-green">Dataset preparation approved</span>{% endif %}
+      </div>
+      {% if user.role == 'translator' %}
+      <div class="button-row">
+        {% if previous_id %}<a class="btn btn-secondary btn-small" href="/work/{{ previous_id }}">Previous example</a>{% endif %}
+        {% if next_id %}<a class="btn btn-secondary btn-small" href="/work/{{ next_id }}">Next example</a>{% endif %}
+        <a class="btn btn-quiet btn-small" href="/work">Back to my work</a>
+      </div>
+      {% endif %}
+      <div class="details">
+        <p class="small muted">Saving keeps your text in the project database. It does not approve the translation or send it for review.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 1rem;">
+      <h2>About this task</h2>
+      <p class="small">{{ capability_purpose(source.primary_capability) }}</p>
+      <p class="small muted">Translate the English parts shown above, then write the Luganda response. Ask the project administrator if anything is unclear.</p>
+      <details class="teacher-illustration">
+        <summary>See a simple example</summary>
+        <div class="soft-card" style="margin-top: 0.7rem;">
+          <span class="badge badge-gold">Illustration only</span>
+          <p class="small"><strong>Example passage:</strong> A farmer has 20 chickens and sells 5.</p>
+          <p class="small"><strong>Example question:</strong> How many chickens remain? This question is only part of the illustration, not your assigned source.</p>
+          <p class="small"><strong>Answer from the passage:</strong> 15 chickens.</p>
+          <p class="small muted">In your task, translate each English part that is provided into its matching Luganda field, then write the requested response. This example is not part of the dataset. Do not copy it into your translation.</p>
+        </div>
+      </details>
+    </div>
+  </aside>
+</div>
+{% endblock %}
