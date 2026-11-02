@@ -3,6 +3,9 @@
 A staged plan. **No dates or costs are asserted here**, and no phase is
 more advanced than its "Status" line indicates.
 
+See [WORKING-PLAN.md](WORKING-PLAN.md) for the gate sequence that applies
+these phases to the Sunflower baseline direction (D-017).
+
 Each phase lists Objectives, Deliverables, Exit criteria, and
 Dependencies / Risks.
 
@@ -33,7 +36,7 @@ Dependencies / Risks.
 
 ## Phase 1 — Research and baseline
 
-**Status:** Not started.
+**Status:** In progress. `docs/PHASE-1-RESEARCH.md` and the approved benchmark specification (D-007) exist. No benchmark items, native review, or baseline benchmark runs exist yet.
 
 **Objectives**
 - Survey existing Luganda resources, models, and prior work.
@@ -58,7 +61,7 @@ Dependencies / Risks.
 
 ## Phase 2 — Data acquisition and preparation
 
-**Status:** Blocked on Phase 1 approval.
+**Status:** Partly started. The English source pilot and the Translation Studio exist, and native translation has begun. No external dataset has been acquired, and acquisition stays blocked on owner approval.
 
 **Objectives**
 - Acquire datasets under approved licensing and privacy rules.

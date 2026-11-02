@@ -1,0 +1,464 @@
+{
+  "report_id": "RPT-20261019-192815-P8H",
+  "schema_version": 1,
+  "period": {
+    "start": "2026-10-19T19:27:20+03:00",
+    "end": "2026-10-19T19:28:15+03:00",
+    "interval_hours": 8
+  },
+  "generated_at": "2026-10-19T19:28:15+03:00",
+  "timezone": "EAT (Africa/Kampala, UTC+3)",
+  "timezone_note": "Report timestamps are East Africa Time (UTC+3, no daylight saving). Git evidence keeps the offset recorded by Git.",
+  "git": {
+    "available": true,
+    "error": null,
+    "branch": "main",
+    "head": {
+      "sha": "9e6e982d10758de6a037d3d92561a25b2c6753ae",
+      "subject": "chore: establish LugandaGPT project foundation",
+      "author": "Gerald Jamisco",
+      "authored_at": "2026-10-19T21:29:21+07:00"
+    },
+    "clean": false,
+    "changed_file_count": 14,
+    "changed_files": [
+      {
+        "index_status": " ",
+        "worktree_status": "M",
+        "path": ".gitignore"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "docs/PROJECT_REPORTER_SPEC.md"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "reports/reporter/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "src/reporter/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/__init__.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/support.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_collect.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_dashboard.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_gitcollect.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_redact.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_report.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_scheduler.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_store.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_telegram.py"
+      }
+    ]
+  },
+  "activity_note": "Activity in this period: 1 attempted or incomplete item(s).",
+  "summary": {
+    "verified_completed": [],
+    "attempted_or_incomplete": [
+      {
+        "text": "14 uncommitted working tree change(s) present",
+        "when": null,
+        "evidence": "git status --porcelain (branch main)"
+      }
+    ],
+    "failed_or_unavailable": [],
+    "human_reported": []
+  },
+  "events": [
+    {
+      "id": "commit:9e6e982d10758de6a037d3d92561a25b2c6753ae",
+      "kind": "commit",
+      "label": "chore: establish LugandaGPT project foundation",
+      "timestamp": "2026-10-19T21:29:21+07:00",
+      "evidence": "git commit 9e6e982d1075 (Gerald Jamisco)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "commit:dc177196dac60ea5a451b10c4062d4944f1ce887",
+      "kind": "commit",
+      "label": "first commit",
+      "timestamp": "2026-10-19T19:54:58+07:00",
+      "evidence": "git commit dc177196dac6 (Gerald Jamisco)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change: M:.gitignore",
+      "kind": "working_tree_change",
+      "label": ".gitignore [ M]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:docs/PROJECT_REPORTER_SPEC.md",
+      "kind": "working_tree_change",
+      "label": "docs/PROJECT_REPORTER_SPEC.md [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:reports/reporter/",
+      "kind": "working_tree_change",
+      "label": "reports/reporter/ [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:src/reporter/",
+      "kind": "working_tree_change",
+      "label": "src/reporter/ [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/__init__.py",
+      "kind": "working_tree_change",
+      "label": "tests/__init__.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/support.py",
+      "kind": "working_tree_change",
+      "label": "tests/support.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_collect.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_collect.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_dashboard.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_dashboard.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_gitcollect.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_gitcollect.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_redact.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_redact.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_report.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_report.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_scheduler.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_scheduler.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_store.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_store.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_telegram.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_telegram.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "decision-open:D-005",
+      "kind": "open_decision",
+      "label": "D-005 Model architecture, parameter count, and training strategy remain unselected is still Open",
+      "timestamp": null,
+      "evidence": "docs/DECISIONS.md (D-005)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "kind": "blocker",
+      "label": "Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 2)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "kind": "blocker",
+      "label": "Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 3)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "kind": "blocker",
+      "label": "Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 4)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "kind": "blocker",
+      "label": "Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 5)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "kind": "blocker",
+      "label": "Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 6)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    }
+  ],
+  "new_event_count": 0,
+  "duplicate_event_count": 22,
+  "tests": {
+    "status": "unavailable",
+    "reason": "no recorded test output files",
+    "source": "reports\\reporter\\test_runs",
+    "runs": []
+  },
+  "experiments": {
+    "status": "unavailable",
+    "reason": "no experiment records exist in the log",
+    "entries": []
+  },
+  "roadmap": {
+    "current_phase": {
+      "number": 0,
+      "title": "Project foundation",
+      "status": "In progress.",
+      "evidence": "docs/ROADMAP.md (Phase 0)"
+    },
+    "phases": [
+      {
+        "number": 0,
+        "title": "Project foundation",
+        "status": "In progress.",
+        "evidence": "docs/ROADMAP.md (Phase 0)"
+      },
+      {
+        "number": 1,
+        "title": "Research and baseline",
+        "status": "Not started.",
+        "evidence": "docs/ROADMAP.md (Phase 1)"
+      },
+      {
+        "number": 2,
+        "title": "Data acquisition and preparation",
+        "status": "Blocked on Phase 1 approval.",
+        "evidence": "docs/ROADMAP.md (Phase 2)"
+      },
+      {
+        "number": 3,
+        "title": "Tokenizer and feasibility",
+        "status": "Blocked on Phase 2.",
+        "evidence": "docs/ROADMAP.md (Phase 3)"
+      },
+      {
+        "number": 4,
+        "title": "Approved initial training or adaptation",
+        "status": "Blocked on Phase 3 and explicit approval.",
+        "evidence": "docs/ROADMAP.md (Phase 4)"
+      },
+      {
+        "number": 5,
+        "title": "Evaluation and iteration",
+        "status": "Blocked on Phase 4.",
+        "evidence": "docs/ROADMAP.md (Phase 5)"
+      },
+      {
+        "number": 6,
+        "title": "Instruction tuning and conversational evaluation",
+        "status": "Conditional — only if supported by earlier results.",
+        "evidence": "docs/ROADMAP.md (Phase 6)"
+      },
+      {
+        "number": 7,
+        "title": "Inference, deployment, monitoring",
+        "status": "Long-term.",
+        "evidence": "docs/ROADMAP.md (Phase 7)"
+      }
+    ],
+    "upcoming": [
+      {
+        "number": 1,
+        "title": "Research and baseline",
+        "status": "Not started.",
+        "evidence": "docs/ROADMAP.md (Phase 1)"
+      }
+    ]
+  },
+  "decisions": {
+    "open": [
+      {
+        "id": "D-005",
+        "title": "Model architecture, parameter count, and training strategy remain unselected",
+        "status": "Open",
+        "evidence": "docs/DECISIONS.md (D-005)"
+      }
+    ],
+    "total": 6
+  },
+  "blockers": [
+    {
+      "kind": "roadmap",
+      "text": "Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "evidence": "docs/ROADMAP.md (Phase 2)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "evidence": "docs/ROADMAP.md (Phase 3)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "evidence": "docs/ROADMAP.md (Phase 4)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "evidence": "docs/ROADMAP.md (Phase 5)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "evidence": "docs/ROADMAP.md (Phase 6)"
+    },
+    {
+      "kind": "open_decision",
+      "text": "D-005 Model architecture, parameter count, and training strategy remain unselected is Open",
+      "evidence": "docs/DECISIONS.md (D-005)"
+    }
+  ],
+  "api_spending": {
+    "status": "unavailable",
+    "spend_usd": null,
+    "source": null,
+    "retrieved_at": null,
+    "note": "no verified billing or usage export present"
+  },
+  "evidence": [],
+  "next_steps": [
+    {
+      "text": "Record real test output in reports/reporter/test_runs/ before any test result is reported.",
+      "basis": "test output is currently unavailable",
+      "verified": false
+    },
+    {
+      "text": "Supply a provider billing export to enable verified spending reports.",
+      "basis": "no verified billing or usage export present",
+      "verified": false
+    },
+    {
+      "text": "Verify a manual report and a Telegram delivery test before enabling scheduled reporting.",
+      "basis": "scheduled reporting is disabled",
+      "verified": false
+    },
+    {
+      "text": "Continue roadmap Phase 0: Project foundation (status: In progress.)",
+      "basis": "docs/ROADMAP.md (Phase 0)",
+      "verified": true
+    }
+  ],
+  "warnings": [],
+  "model_status": "No trained LugandaGPT model exists. This report does not evaluate a model."
+}

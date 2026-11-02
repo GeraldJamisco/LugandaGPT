@@ -70,3 +70,8 @@ built; they are noted here as required dimensions, not final values.
 - Include the model/tokenizer configuration, data version, and seeds used.
 - Record runs using `docs/EXPERIMENT_LOG.md`.
 - Never report scores for a model that was not actually run.
+- When comparing a candidate with a baseline such as Sunflower-14B, use the
+  same frozen benchmark version, the same blinded packets, and the same
+  reviewers, and report per-dimension distributions side by side. Report no
+  overall score or win rate unless the owner approves a decision rule
+  (`docs/BENCHMARK-SPECIFICATION.md` section 11.4).

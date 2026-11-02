@@ -17,21 +17,23 @@ educated Luganda, everyday and colloquial Luganda, and Luganda-English
 code-switching. LugandaGPT is not a translation application, a language
 education website, or a wrapper around another provider's chatbot API.
 
-The initial scope is **text-only**. Implementation strategy, base model,
-architecture, tokenizer, parameter count, training method, and compute
-provider are **undecided** pending research and benchmarking.
+The initial scope is **text-only**. The working direction (D-017) is to
+measure Sunbird's Sunflower-14B on the project benchmark and, if the
+evidence supports it, train a LoRA or QLoRA adapter on an open-weight base.
+The base model, architecture, tokenizer, parameter count, training method,
+and compute provider remain **undecided** until the base-selection gate in
+[docs/WORKING-PLAN.md](docs/WORKING-PLAN.md).
 
 ## Current development status
 
 - Phase 0 (project foundation, documentation, Git hygiene) and early preparation are underway.
-- No approved Luganda training dataset and no trained model exist. A project-authored English source draft exists for the 100-example pilot; native translation and review are pending.
-- Guarded training, inference, source-validation, and benchmark tooling is present, but no GPU training run has occurred.
+- Phase 1 research (`docs/PHASE-1-RESEARCH.md`) and the benchmark specification (approved 1.0, D-007) exist. No benchmark items and no baseline benchmark runs exist.
+- No approved Luganda training dataset and no trained model exist. A project-authored English source draft exists for the 100-example pilot; native translation and review are at an early stage (dated snapshot in `docs/WORKING-PLAN.md` section 7).
+- Source-validation, benchmark, and Sunbird API tooling is present. No GPU training run has occurred. The Gemma 1B training setup was archived on 2026-11-02 (D-018).
+- The Sunbird API connection (`src/sunbird_api/`, [guide](docs/SUNBIRD-API.md)) is built and unit-tested. No request has been sent to Sunbird yet.
 - The Python Translation Studio in `src/translation_studio/` is the sole supported implementation for native-speaker translation and review.
 - No model has been trained or evaluated.
-- Local tooling now includes the project reporter: read-only activity
-  collection, local report generation, and optional Telegram delivery to
-  the private group. Scheduled delivery stays disabled until the project
-  director enables it (see the [reporter guide](docs/PROJECT_REPORTER_README.md)).
+- The project reporter was archived on 2026-11-02 and is not running.
 
 See the [roadmap](docs/ROADMAP.md) for the staged plan.
 
@@ -41,12 +43,13 @@ See the [roadmap](docs/ROADMAP.md) for the staged plan.
 LugandaGPT/
 ├── AGENTS.md            Engineering rules and working arrangement
 ├── README.md            This file
-├── configs/             Proposed experiment and model configurations
+├── archive/             Archived Gemma 1B, Runpod, and reporter material (restorable)
+├── configs/             Experiment and model configurations (none active)
 ├── checkpoints/         Model checkpoints (ignored by Git; empty)
 ├── data/                Data governance, English source draft, and no approved training data
 ├── docs/                Project documentation
 ├── reports/             Gate, source, and research reports
-├── src/                 Benchmark, training-preparation, and reporter code
+├── src/                 Benchmark, source-draft, Translation Studio, and Sunbird API code
 ├── tests/               Python test suite
 └── tokenizer/           Tokenizer tooling and pinned checks
 ```
@@ -56,6 +59,7 @@ LugandaGPT/
 - [Vision](docs/VISION.md): mission, goals, scope, non-goals
 - [Architecture](docs/ARCHITECTURE.md): proposed system boundaries
 - [Roadmap](docs/ROADMAP.md): phased plan
+- [Working plan](docs/WORKING-PLAN.md): gate sequence from the Sunflower baseline to a demonstration
 - [Decisions](docs/DECISIONS.md): architecture decision records
 - [Experiment log](docs/EXPERIMENT_LOG.md): experiment record template
 - [Evaluation plan](docs/EVALUATION_PLAN.md): benchmark and rubric design
@@ -65,8 +69,8 @@ LugandaGPT/
 - [Translation Studio](docs/TRANSLATION-STUDIO.md): local translation and review web application setup
 - [Translation Studio report](reports/TRANSLATION-STUDIO-REPORT.md): implementation, test, and limitation report
 - [PythonAnywhere deployment guide](deployment/translation-studio/README.md): package contents and manual deployment instructions
-- [Reporter spec](docs/PROJECT_REPORTER_SPEC.md): requirements for automatic reporting and Telegram delivery
-- [Reporter guide](docs/PROJECT_REPORTER_README.md): running the reporter, checking delivery, retrying failures, enabling scheduling
+- [Sunbird API guide](docs/SUNBIRD-API.md): running Sunflower through Sunbird's API and collecting translation suggestions
+- [Archive](archive/2026-11-02-gemma-runpod-reporter/README.md): what was archived on 2026-11-02 and how to restore it
 - [Data governance](data/README.md): dataset requirements and rules
 - [Agents](AGENTS.md): engineering instructions and working arrangement
 

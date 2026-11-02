@@ -309,6 +309,8 @@ Every assistant turn becomes one prompt-completion expansion. The prompt is the 
 
 ## 12. Hash recording
 
+> **Archive note (2026-11-02, D-018):** the Gemma 1B config and the `validate-config`, `validate-data`, `preflight`, `train`, and `infer` commands named in sections 12 and 13 were archived under `archive/2026-11-02-gemma-runpod-reporter/`. The `validate-source`, `export-source`, and `hash` commands still run from `src/training/`. The schema rules in this specification still apply to any Luganda training data.
+
 File hashes are SHA-256 over the raw JSONL bytes. They must match in both places:
 
 - `dataset.split_hashes` in `configs/gemma3-1b-lora-smoke.yaml`;

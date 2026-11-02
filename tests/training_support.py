@@ -1,4 +1,7 @@
-"""Synthetic fixtures for training-pipeline tests.
+"""Synthetic fixtures for training-data tests.
+
+The config and Runpod fixtures moved to the 2026-11-02 archive with the Gemma
+1B training code.
 
 Nothing in this file is Luganda data, a teacher contribution, a consent record,
 a native review, or an experiment result. Every string is generated for schema
@@ -9,9 +12,6 @@ import copy
 import datetime as _datetime
 from pathlib import Path
 
-import yaml
-
-from training.config import load_config
 from training.constants import (
     CAPABILITIES,
     CAPABILITY_COUNTS,
@@ -21,7 +21,6 @@ from training.constants import (
 from training.storage import sha256_file, write_json, write_jsonl
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-BASE_CONFIG = PROJECT_ROOT / "configs" / "gemma3-1b-lora-smoke.yaml"
 REVIEW_DATE = "2026-10-20"
 AS_OF = _datetime.date(2026, 10, 21)
 
@@ -240,66 +239,3 @@ def _provenance(version, hashes, overrides=None):
     if overrides:
         value.update(copy.deepcopy(overrides))
     return value
-
-
-def write_synthetic_project(
-    root,
-    *,
-    pilot_splits=None,
-    evaluation_records=None,
-    version="pilot-v1-synthetic",
-    provenance_overrides=None,
-    config_mutator=None,
-):
-    """Write a complete synthetic data and config tree under ``root``."""
-    root = Path(root).resolve()
-    pilot_splits = copy.deepcopy(pilot_splits) if pilot_splits is not None else make_pilot_splits()
-    evaluation_records = (
-        copy.deepcopy(evaluation_records)
-        if evaluation_records is not None
-        else make_evaluation_records()
-    )
-    paths = {
-        "train": root / "data" / "pilot" / "v1" / "train.jsonl",
-        "validation": root / "data" / "pilot" / "v1" / "validation.jsonl",
-        "heldout": root / "data" / "pilot" / "v1" / "heldout.jsonl",
-        "evaluation": root / "data" / "evaluation" / "feasibility-v1.jsonl",
-    }
-    for split in ("train", "validation", "heldout"):
-        write_jsonl(paths[split], pilot_splits[split])
-    write_jsonl(paths["evaluation"], evaluation_records)
-    hashes = {name: sha256_file(path) for name, path in paths.items()}
-    provenance = _provenance(version, hashes, overrides=provenance_overrides)
-    provenance_path = root / "data" / "provenance" / "pilot-v1.json"
-    write_json(provenance_path, provenance)
-
-    base = load_config(BASE_CONFIG, project_root=PROJECT_ROOT)
-    config = copy.deepcopy(base.data)
-    config["experiment"]["status"] = "approved"
-    config["experiment"]["authorization_status"] = "approved"
-    config["experiment"]["execution_authorized"] = True
-    config["experiment"]["full_run_authorized"] = False
-    config["dataset"]["version"] = version
-    config["dataset"]["split_hashes"] = hashes
-    config["training"]["output_dir"] = str(root / "runs" / "smoke").replace("\\", "/")
-    config["hardware"]["image"] = "synthetic-test-image-digest"
-    config["hardware"]["region"] = "synthetic-test-region"
-    if config_mutator:
-        config_mutator(config)
-    config_path = root / "config.yaml"
-    config_path.write_text(
-        yaml.safe_dump(config, allow_unicode=True, sort_keys=False),
-        encoding="utf-8",
-        newline="\n",
-    )
-    loaded = load_config(config_path, project_root=root)
-    return {
-        "root": root,
-        "config": loaded,
-        "config_path": config_path,
-        "paths": paths,
-        "provenance_path": provenance_path,
-        "hashes": hashes,
-        "pilot_splits": pilot_splits,
-        "evaluation": evaluation_records,
-    }

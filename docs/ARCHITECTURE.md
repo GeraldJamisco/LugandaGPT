@@ -18,6 +18,10 @@ tokenizer, corpus size, or compute provider.
 These will be selected through documented experiments and constraints —
 not by assumption. See `docs/DECISIONS.md` (D-005).
 
+The working direction (D-017) names Sunflower-14B as the baseline and the
+preferred candidate base. It selects nothing until the base-selection gate
+in `docs/WORKING-PLAN.md`.
+
 ---
 
 ## System boundaries

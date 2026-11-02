@@ -73,3 +73,5 @@ Implementation strategy, base model, architecture, tokenizer, parameter
 count, training method, and compute provider remain **undecided** until
 sufficient research and benchmarking are completed. See
 `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `docs/DECISIONS.md`.
+The working direction in D-017 and `docs/WORKING-PLAN.md` is to benchmark
+Sunbird's Sunflower-14B first.

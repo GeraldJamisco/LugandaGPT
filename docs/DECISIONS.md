@@ -98,7 +98,7 @@ constraints (data volume, licensing, compute, budget), not assumptions.
 architecture yet. When a choice is proposed, it must be documented here with
 rationale and approved by the project director before implementation.
 
-**Status:** Open.
+**Status:** Open. The working direction is recorded in D-017. This decision closes only through a base-selection record at Gate 5 of `docs/WORKING-PLAN.md`.
 
 ---
 
@@ -202,7 +202,7 @@ charge at or below $20. No paid infrastructure was launched for this decision.
 See `reports/RUNPOD-FIRST-GATE-REPORT.md` and
 `configs/gemma3-1b-lora-smoke.yaml`.
 
-**Status:** Accepted for the bounded gate only. D-005 remains open.
+**Status:** Accepted for the bounded gate only. D-005 remains open. Materials archived 2026-11-02 under D-018; no GPU spending is currently approved.
 
 ---
 
@@ -338,5 +338,33 @@ unchanged. The 24-item feasibility set is not a benchmark.
 **Rationale:** A single maintained application keeps workflows and deployment guidance aligned with the Python source of truth.
 
 **Consequences:** This retirement does not change the database schema, initialize or migrate a database, or alter stored records. The Python deployment package remains separate from the live database and must be deployed manually under the existing approval process.
+
+**Status:** Accepted.
+
+---
+
+## D-017 - Sunflower-14B as baseline to beat and preferred candidate base
+
+**Context:** On 2026-11-02 the Project Director asked to align the project with a plan that builds on Sunbird's open Sunflower models instead of starting from scratch, and that proves improvement against them. `docs/PHASE-1-RESEARCH.md` already lists `Sunbird/Sunflower-14B` as shortlist candidate 2. D-005 leaves the base model and training strategy open. D-008 approved a bounded Gemma 3 1B smoke test only.
+
+**Decision:** Adopt Sunflower-14B in two roles. It is the baseline that every LugandaGPT candidate must be measured against on the frozen benchmark, and it is the preferred candidate base for adapter training. Work is sequenced through the gates in `docs/WORKING-PLAN.md`. Evaluation uses the approved benchmark specification unchanged: independent per-dimension scores from native reviewers, with no composite score. D-008 stays in force as a low-cost pipeline test. The base is chosen at Gate 5 from baseline evidence. If Sunflower already performs well on the conversational categories, the project picks a narrower niche before spending on training.
+
+**Rationale:** An Apache-2.0 model already trained on Ugandan languages avoids a corpus the project cannot assemble alone. Measuring the baseline first shows where a gap exists before any training money is spent, and it keeps public claims tied to category-level evidence.
+
+**Consequences:** D-005 stays Open and is closed only by a Gate 5 record. This record authorizes no spending, API call, dataset acquisition, gated-model download, or training run. Sunflower's weights and the data behind them need a licence and provenance review before any commercial or investor use: SALT is tagged CC BY-SA 4.0 and Sunflower's training data is not documented in the metadata reviewed. The training pipeline is pinned to Gemma 3 1B and needs a documented, tested change before it can train Sunflower. The benchmark specification, D-007, and the open owner items in its section 19 are unchanged. The owner's request to align status documents settles the question left open in O-16 about updating roadmap and README status; the specification text itself is not edited.
+
+**Status:** Accepted as the working direction for planning and baseline preparation. D-005 remains Open.
+
+---
+
+## D-018 - Archive the Gemma 1B and reporter material; connect to the Sunbird API
+
+**Context:** On 2026-11-02 the Project Director chose to proceed with the Sunflower plan in D-017 and asked that material outside it be removed, and for a connection that runs Sunflower through Sunbird's API and returns translations for comparison with the Director's own. Asked whether to delete or archive, the Director chose archive. The Translation Studio imports parts of `src/training/`, and its database holds teacher accounts and translations that are not in Git.
+
+**Decision:** Move the Gemma 1B training, inference, config, data, environment and artifact modules, the Runpod documents and configuration, the project reporter, and their tests into `archive/2026-11-02-gemma-runpod-reporter/`. Keep `training.constants`, `errors`, `storage`, `pilot`, and `source_pilot` and a slim `training` CLI because the Studio depends on them. Keep the Studio, its database, the benchmark, the English source data, the experiment records, and every decision record. Add `src/sunbird_api/`, a standard-library client for `POST /tasks/chat/completions` with the models `sunflower-9b` and `sunflower-14b`, and a `translate-source` command that writes machine suggestions to `data/machine/`. The Director's request is the approval for this provider, these models, and these two tasks (baseline chat and source-record translation suggestions). No budget was set, so every run is capped at 25 requests unless the cap is raised on the command line, and every request is logged without prompt text or credentials.
+
+**Rationale:** Archiving is reversible and avoids breaking the Studio. A request cap and ledger give spending control while Sunbird's pricing and rate limits are unpublished. Keeping suggestions out of the Studio keeps translators and reviewers independent of machine output.
+
+**Consequences:** D-008 authorized a bounded Gemma 1B gate. Its materials are archived and no GPU spending is currently approved. D-005 stays Open and closes at Gate 5, now defined as confirming Sunflower-14B as the base. Any Sunflower fine-tuning script, GPU rental, or budget needs a new approval. The hosted `sunflower-14b` may differ from the pinned Hugging Face revision, and API terms for retention and benchmark use are unverified, as recorded in `docs/SUNBIRD-API.md`. D-010 is unchanged: the Studio calls no AI service. The reporter is not running and its scheduled delivery, which was disabled, stays off.
 
 **Status:** Accepted.

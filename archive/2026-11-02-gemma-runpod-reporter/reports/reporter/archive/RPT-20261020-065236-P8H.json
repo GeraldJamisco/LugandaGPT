@@ -1,0 +1,519 @@
+{
+  "report_id": "RPT-20261020-065236-P8H",
+  "schema_version": 1,
+  "period": {
+    "start": "2026-10-19T20:23:30+03:00",
+    "end": "2026-10-20T06:52:36+03:00",
+    "interval_hours": 8,
+    "mode": "on-demand",
+    "source": "dashboard",
+    "covered_seconds": 37746,
+    "covered_text": "10 hours 29 minutes"
+  },
+  "generated_at": "2026-10-20T06:52:36+03:00",
+  "timezone": "EAT (Africa/Kampala, UTC+3)",
+  "timezone_note": "Report timestamps are East Africa Time (UTC+3, no daylight saving). Git evidence keeps the offset recorded by Git.",
+  "git": {
+    "available": true,
+    "error": null,
+    "branch": "main",
+    "head": {
+      "sha": "74770cacaedbc42be624bb58093fdf7cf05304c5",
+      "subject": "Add comprehensive test suite for scheduler, store, telegram client, and verification",
+      "author": "Gerald Jamisco",
+      "authored_at": "2026-10-20T10:30:23+07:00"
+    },
+    "clean": false,
+    "changed_file_count": 5,
+    "changed_files": [
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "src/benchmark/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/benchmark_support.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/fixtures/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_benchmark_item.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_benchmark_review.py"
+      }
+    ]
+  },
+  "repository_state": {
+    "available": true,
+    "branch": "main",
+    "clean": false,
+    "changed_file_count": 5,
+    "changed_files": [
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "src/benchmark/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/benchmark_support.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/fixtures/"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_benchmark_item.py"
+      },
+      {
+        "index_status": "?",
+        "worktree_status": "?",
+        "path": "tests/test_benchmark_review.py"
+      }
+    ],
+    "note": "Working-tree changes are a snapshot of repository state at collection time. An uncommitted change is not classified as an attempted or incomplete task."
+  },
+  "activity_note": "Activity in this period: 1 verified completed item(s).",
+  "summary": {
+    "verified_completed": [
+      {
+        "text": "Commit: Add comprehensive test suite for scheduler, store, telegram client, and verification",
+        "when": "2026-10-20T10:30:23+07:00",
+        "evidence": "git commit 74770cacaedb (Gerald Jamisco)",
+        "area": "repository change"
+      }
+    ],
+    "attempted_or_incomplete": [],
+    "failed_or_unavailable": [],
+    "human_reported": []
+  },
+  "events": [
+    {
+      "id": "commit:74770cacaedbc42be624bb58093fdf7cf05304c5",
+      "kind": "commit",
+      "label": "Add comprehensive test suite for scheduler, store, telegram client, and verification",
+      "timestamp": "2026-10-20T10:30:23+07:00",
+      "evidence": "git commit 74770cacaedb (Gerald Jamisco)",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "commit:9e6e982d10758de6a037d3d92561a25b2c6753ae",
+      "kind": "commit",
+      "label": "chore: establish LugandaGPT project foundation",
+      "timestamp": "2026-10-19T21:29:21+07:00",
+      "evidence": "git commit 9e6e982d1075 (Gerald Jamisco)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "commit:dc177196dac60ea5a451b10c4062d4944f1ce887",
+      "kind": "commit",
+      "label": "first commit",
+      "timestamp": "2026-10-19T19:54:58+07:00",
+      "evidence": "git commit dc177196dac6 (Gerald Jamisco)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:src/benchmark/",
+      "kind": "working_tree_change",
+      "label": "src/benchmark/ [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/benchmark_support.py",
+      "kind": "working_tree_change",
+      "label": "tests/benchmark_support.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/fixtures/",
+      "kind": "working_tree_change",
+      "label": "tests/fixtures/ [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_benchmark_item.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_benchmark_item.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "change:??:tests/test_benchmark_review.py",
+      "kind": "working_tree_change",
+      "label": "tests/test_benchmark_review.py [??]",
+      "timestamp": null,
+      "evidence": "git status --porcelain",
+      "previously_reported": false,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "test:2026-10-19-reporter-suite.json",
+      "kind": "test_run",
+      "label": "Ran 148 tests in 18.110s: OK",
+      "timestamp": "2026-10-19T16:53:59+00:00",
+      "evidence": "reports\\reporter\\test_runs/2026-10-19-reporter-suite.json",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "decision-open:D-005",
+      "kind": "open_decision",
+      "label": "D-005 Model architecture, parameter count, and training strategy remain unselected is still Open",
+      "timestamp": null,
+      "evidence": "docs/DECISIONS.md (D-005)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "kind": "blocker",
+      "label": "Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 2)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "kind": "blocker",
+      "label": "Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 3)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "kind": "blocker",
+      "label": "Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 4)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "kind": "blocker",
+      "label": "Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 5)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    },
+    {
+      "id": "blocker:Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "kind": "blocker",
+      "label": "Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "timestamp": null,
+      "evidence": "docs/ROADMAP.md (Phase 6)",
+      "previously_reported": true,
+      "duplicate_in_report": false
+    }
+  ],
+  "new_event_count": 6,
+  "new_activity_count": 1,
+  "duplicate_event_count": 9,
+  "tests": {
+    "status": "available",
+    "reason": null,
+    "source": "reports\\reporter\\test_runs",
+    "runs": [
+      {
+        "command": "python -m unittest discover -s tests -t . -v",
+        "summary": "Ran 148 tests in 18.110s: OK",
+        "exit_code": 0,
+        "tests_run": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "duration_seconds": 18.11,
+        "recorded_at": "2026-10-19T16:53:59+00:00",
+        "python": "3.13.14",
+        "note": "Full reporter suite after the shared pipeline change. All Telegram calls mocked; no network use.",
+        "file": "2026-10-19-reporter-suite.json"
+      }
+    ]
+  },
+  "experiments": {
+    "status": "unavailable",
+    "reason": "no experiment records exist in the log",
+    "entries": []
+  },
+  "roadmap": {
+    "current_phase": {
+      "number": 0,
+      "title": "Project foundation",
+      "status": "In progress.",
+      "exit_criteria": [
+        "Documentation inventory complete and internally consistent.",
+        "Git hygiene in place (ignore rules validated; no secrets committed).",
+        "Environment requirements recorded."
+      ],
+      "evidence": "docs/ROADMAP.md (Phase 0)"
+    },
+    "phases": [
+      {
+        "number": 0,
+        "title": "Project foundation",
+        "status": "In progress.",
+        "exit_criteria": [
+          "Documentation inventory complete and internally consistent.",
+          "Git hygiene in place (ignore rules validated; no secrets committed).",
+          "Environment requirements recorded."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 0)"
+      },
+      {
+        "number": 1,
+        "title": "Research and baseline",
+        "status": "Not started.",
+        "exit_criteria": [
+          "Baseline behavior of existing models documented.",
+          "Benchmark specification reviewed and approved.",
+          "Candidate data sources identified with licensing noted."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 1)"
+      },
+      {
+        "number": 2,
+        "title": "Data acquisition and preparation",
+        "status": "Blocked on Phase 1 approval.",
+        "exit_criteria": [
+          "Licensing and privacy reviewed and approved per dataset.",
+          "Quality checks pass; datasets versioned with integrity checks."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 2)"
+      },
+      {
+        "number": 3,
+        "title": "Tokenizer and feasibility",
+        "status": "Blocked on Phase 2.",
+        "exit_criteria": [
+          "Tokenizer choice documented with evidence (or explicitly left open).",
+          "Feasibility constraints understood and recorded."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 3)"
+      },
+      {
+        "number": 4,
+        "title": "Approved initial training or adaptation",
+        "status": "Blocked on Phase 3 and explicit approval.",
+        "exit_criteria": [
+          "Experiment completed within approved budget.",
+          "Results documented with failure analysis."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 4)"
+      },
+      {
+        "number": 5,
+        "title": "Evaluation and iteration",
+        "status": "Blocked on Phase 4.",
+        "exit_criteria": [
+          "Results compared against baselines with documented methodology.",
+          "Clear go / no-go decision for instruction tuning."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 5)"
+      },
+      {
+        "number": 6,
+        "title": "Instruction tuning and conversational evaluation",
+        "status": "Conditional — only if supported by earlier results.",
+        "exit_criteria": [
+          "Demonstrated improvement over the Phase 5 baseline on the approved"
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 6)"
+      },
+      {
+        "number": 7,
+        "title": "Inference, deployment, monitoring",
+        "status": "Long-term.",
+        "exit_criteria": [
+          "Defined and approved by the project director."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 7)"
+      }
+    ],
+    "upcoming": [
+      {
+        "number": 1,
+        "title": "Research and baseline",
+        "status": "Not started.",
+        "exit_criteria": [
+          "Baseline behavior of existing models documented.",
+          "Benchmark specification reviewed and approved.",
+          "Candidate data sources identified with licensing noted."
+        ],
+        "evidence": "docs/ROADMAP.md (Phase 1)"
+      }
+    ]
+  },
+  "decisions": {
+    "open": [
+      {
+        "id": "D-005",
+        "title": "Model architecture, parameter count, and training strategy remain unselected",
+        "status": "Open",
+        "evidence": "docs/DECISIONS.md (D-005)"
+      }
+    ],
+    "total": 6
+  },
+  "blockers": [
+    {
+      "kind": "roadmap",
+      "text": "Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "evidence": "docs/ROADMAP.md (Phase 2)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 3: Tokenizer and feasibility is Blocked on Phase 2.",
+      "evidence": "docs/ROADMAP.md (Phase 3)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "evidence": "docs/ROADMAP.md (Phase 4)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 5: Evaluation and iteration is Blocked on Phase 4.",
+      "evidence": "docs/ROADMAP.md (Phase 5)"
+    },
+    {
+      "kind": "roadmap",
+      "text": "Phase 6: Instruction tuning and conversational evaluation is Conditional — only if supported by earlier results.",
+      "evidence": "docs/ROADMAP.md (Phase 6)"
+    },
+    {
+      "kind": "open_decision",
+      "text": "D-005 Model architecture, parameter count, and training strategy remain unselected is Open",
+      "evidence": "docs/DECISIONS.md (D-005)"
+    }
+  ],
+  "api_spending": {
+    "status": "unavailable",
+    "spend_usd": null,
+    "source": null,
+    "retrieved_at": null,
+    "note": "no verified billing or usage export present"
+  },
+  "evidence": [
+    {
+      "claim": "Commit: Add comprehensive test suite for scheduler, store, telegram client, and verification",
+      "source": "git commit 74770cacaedb (Gerald Jamisco)"
+    }
+  ],
+  "next_steps": [
+    {
+      "text": "Phase 0 exit criterion: Documentation inventory complete and internally consistent.",
+      "basis": "docs/ROADMAP.md (Phase 0)",
+      "verified": true,
+      "kind": "mandatory"
+    },
+    {
+      "text": "Phase 0 exit criterion: Git hygiene in place (ignore rules validated; no secrets committed).",
+      "basis": "docs/ROADMAP.md (Phase 0)",
+      "verified": true,
+      "kind": "mandatory"
+    },
+    {
+      "text": "Phase 0 exit criterion: Environment requirements recorded.",
+      "basis": "docs/ROADMAP.md (Phase 0)",
+      "verified": true,
+      "kind": "mandatory"
+    },
+    {
+      "text": "D-005 Model architecture, parameter count, and training strategy remain unselected is Open",
+      "basis": "docs/DECISIONS.md (D-005)",
+      "verified": true,
+      "kind": "approval"
+    },
+    {
+      "text": "Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval.",
+      "basis": "docs/ROADMAP.md (Phase 2)",
+      "verified": true,
+      "kind": "approval"
+    },
+    {
+      "text": "Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval.",
+      "basis": "docs/ROADMAP.md (Phase 4)",
+      "verified": true,
+      "kind": "approval"
+    },
+    {
+      "text": "Supply a provider billing export to enable verified spending reports.",
+      "basis": "no verified billing or usage export present",
+      "verified": false,
+      "kind": "optional"
+    },
+    {
+      "text": "Scheduled reporting is disabled; enabling it requires the owner's decision.",
+      "basis": "reports/reporter/state.json schedule.enabled is false",
+      "verified": true,
+      "kind": "approval"
+    }
+  ],
+  "executive_summary": {
+    "changed": "1 new activity item(s) recorded: 1 commit.",
+    "completed": "1 verified item(s), listed in section 2.",
+    "incomplete": "No incomplete task or failure was recorded in this period. 5 uncommitted working-tree change(s) are repository state, not incomplete work. 6 documented blocker(s) or open decision(s) remain (section 9).",
+    "core_research": "No research result was recorded: no experiment or evaluation result in this period. Repository changes, recorded tests and reporter work do not measure Luganda language quality, so no capability advance is claimed. No trained model exists.",
+    "next_milestone": "Complete the Phase 0: Project foundation exit criteria. First recorded one: Documentation inventory complete and internally consistent. Completion is not verified.",
+    "owner_decisions": "Owner decision required: D-005 Model architecture, parameter count, and training strategy remain unselected is Open; Phase 2: Data acquisition and preparation is Blocked on Phase 1 approval; Phase 4: Approved initial training or adaptation is Blocked on Phase 3 and explicit approval."
+  },
+  "reporting": {
+    "observed_at": "2026-10-20T06:52:36+03:00",
+    "schedule_enabled": false,
+    "interval_hours": 8,
+    "next_run_at": null,
+    "last_attempt_at": null,
+    "last_result": null,
+    "delivery_test_passed": true,
+    "last_delivery": {
+      "report_id": "RPT-20261019-202330-P8H",
+      "ok": true,
+      "at": "2026-10-19T17:23:38+00:00",
+      "source": "dashboard",
+      "error": null,
+      "reason": null,
+      "attempts": 2,
+      "parts_sent": 2,
+      "parts_total": 2,
+      "message_ids": [
+        16,
+        17
+      ]
+    },
+    "pending_delivery": null
+  },
+  "warnings": [],
+  "model_status": "No trained LugandaGPT model exists. This report does not evaluate a model."
+}
