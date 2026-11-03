@@ -5,9 +5,9 @@ English-to-Luganda suggestions for the source records. Code is in
 `src/sunbird_api/`, tests in `tests/test_sunbird_api.py`. Decision record:
 D-018.
 
-**Status:** Built and unit-tested with a simulated server. No request has been
-sent to Sunbird from this repository, so the live response shape, pricing, and
-rate limits are unverified.
+**Status:** Built, unit-tested, and run live once on 2026-11-02 (14 requests, all
+HTTP 200). Pricing and rate limits are not published and remain unverified.
+See "First live run" below.
 
 **Evidence labels:** the endpoint, model names, and request fields below are a
 source claim from docs.sunbird.ai, read on 2026-11-02.
@@ -106,3 +106,34 @@ Sunbird's account dashboard for the real charges before raising the cap.
   base model is CC BY-NC 4.0, which matters if output ever feeds training data.
 - **Studio.** Showing suggestions inside the Studio would change D-010 and could
   anchor translators and reviewers. It is not done.
+
+## First live run (2026-11-02)
+
+Measured from `reports/sunbird/usage-ledger.jsonl` after `translate-source
+--limit 5`, model `sunflower-14b`:
+
+| Measure | Value |
+|---|---|
+| Requests | 14, all HTTP 200, no retries |
+| Tokens (prompt / completion / total) | 5,045 / 907 / 5,952 |
+| Average total per request | about 425 |
+| Average latency | about 11.6 s |
+| Projection for all 368 requests | about 156,000 tokens |
+
+Observations:
+
+- **Price is not public.** docs.sunbird.ai has no pricing, billing, quota, or
+  rate-limit text. sunbird.ai/sunflower says only that the web app is free and
+  that API terms come by email to info@sunbird.ai. The account response
+  includes a `show_billing` field, so a billing view probably exists in the
+  account dashboard. Whether the 14 test requests were charged is not known.
+- **Most tokens are overhead.** Prompts were about 350 tokens for inputs of
+  10 to 60 words. The docs say that without a system message each model applies
+  its own default one, so the overhead is probably that default prompt
+  (inference, not confirmed). If billing is per token, a short system message
+  could cut cost, but it may change translation quality and needs a side-by-side
+  test before use.
+- **Fields are translated independently.** In item E-001 the same English term,
+  "tool library", came back as three different Luganda phrases across the
+  context, question, and reference answer. Suggestions need a native pass for
+  consistency as well as correctness.

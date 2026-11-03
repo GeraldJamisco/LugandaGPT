@@ -34,7 +34,7 @@ The working direction is recorded in `docs/DECISIONS.md` D-017.
 
 | Gate | Question | Work | Existing support | Approval needed |
 |---|---|---|---|---|
-| 0 | Can the data and the people be used? | Signed consent, compensation, licence, withdrawal, retention terms for the native team | D-008, D-009. No records exist yet. | Owner |
+| 0 | Can the data and the people be used? | Signed consent, compensation, licence, withdrawal, retention terms for the native team | D-008, D-009, D-019. Owner confirmed on 2026-11-03 that translators and reviewers consented in writing. Confirmation is the owner's; no copy is stored in the repository. | Owner |
 | 1 | Is there reviewed Luganda data? | Translate 124 English source records (100 pilot, 24 evaluation) and second-review each | Translation Studio (`src/translation_studio/`), `data/source/pilot-v1/` | None for local work |
 | 2 | Is there a benchmark? | Author about 50 items across the nine categories, native-review, freeze v1 | `docs/BENCHMARK-SPECIFICATION.md` (approved 1.0, D-007), `src/benchmark/` | Owner: allocation (O-02), reviewer panel, freeze |
 | 3 | What does Sunflower actually do? | Run Sunflower-14B on the frozen benchmark, blind native scoring, failure analysis | `src/sunbird_api/` (built, see `docs/SUNBIRD-API.md`), run records and blind packets in `src/benchmark/`. The loop that runs benchmark items through the client is not written. | API use approved by D-018 within a request cap. Raise the cap only after checking Sunbird pricing and terms. |

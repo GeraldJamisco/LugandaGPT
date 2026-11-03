@@ -29,6 +29,8 @@ DEFAULT_INPUT = "data/source/pilot-v1/translator_export.csv"
 DEFAULT_OUTPUT = "data/machine/sunbird-suggestions.csv"
 DEFAULT_LEDGER = "reports/sunbird/usage-ledger.jsonl"
 DEFAULT_CAP = 25
+DEFAULT_BENCH_INPUT = "data/benchmark/drafts/pilot-weak-areas-0.2-draft.jsonl"
+DEFAULT_BENCH_OUTPUT = "data/machine/sunflower-benchmark-0.2-draft.csv"
 
 # The Studio fields each suggestion is meant to be compared against.
 FIELD_SOURCES = (
@@ -58,9 +60,13 @@ def _print(value):
 
 
 def _client_from_args(args):
+    kwargs = {}
+    if getattr(args, "timeout", None):
+        kwargs["timeout"] = args.timeout
     return SunbirdClient(
         request_cap=args.max_requests,
         ledger_path=PROJECT_ROOT / args.ledger,
+        **kwargs,
     )
 
 
@@ -250,6 +256,85 @@ def _translate_source(args, client_factory):
     return 2 if stopped == "error" else 0
 
 
+def _read_benchmark_items(path):
+    items = []
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        item = json.loads(line)
+        if item.get("review_status") == "excluded":
+            continue
+        if item.get("turns"):
+            continue  # multi-turn items are not supported by this command
+        items.append(item)
+    return items
+
+
+def _run_benchmark(args, client_factory):
+    """Send each draft benchmark prompt once and save Sunflower's answer.
+
+    Only the prompt text is sent. Output is for native review, not a score.
+    """
+    input_path = PROJECT_ROOT / args.input
+    output_path = PROJECT_ROOT / args.output
+    items = _read_benchmark_items(input_path)
+    done = _done_keys(output_path)
+    pending = [i for i in items if (i["id"], "benchmark_response") not in done]
+    summary = {
+        "input": str(input_path),
+        "output": str(output_path),
+        "model": args.model,
+        "items_total": len(items),
+        "items_already_done": len(items) - len(pending),
+        "requests_pending": len(pending),
+        "request_cap": args.max_requests,
+    }
+    if args.dry_run:
+        _print({"status": "dry_run", "sent_anything": False, **summary})
+        return 0
+    if not pending:
+        _print({"status": "nothing_to_do", **summary})
+        return 0
+    client = client_factory(args)
+    written = 0
+    stopped = "completed"
+    for item in pending:
+        if client.requests_made + 1 > args.max_requests:
+            stopped = "request_cap_reached"
+            break
+        try:
+            result = client.chat(
+                [{"role": "user", "content": item["prompt"]}],
+                model=args.model, temperature=args.temperature,
+                max_tokens=args.max_tokens, purpose="benchmark:" + item["id"],
+            )
+        except SunbirdError as error:
+            print(f"ERROR: {error}", file=sys.stderr)
+            stopped = "error"
+            break
+        usage = result.usage or {}
+        _append_row(output_path, {
+            "item_id": item["id"],
+            "field": "benchmark_response",
+            "english": item["prompt"],
+            "sunbird_luganda": result.text,
+            "model": result.model,
+            "temperature": args.temperature,
+            "finish_reason": result.finish_reason,
+            "prompt_tokens": usage.get("prompt_tokens", ""),
+            "completion_tokens": usage.get("completion_tokens", ""),
+            "created_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "machine_output": "true",
+            "review_status": "unreviewed",
+        })
+        written += 1
+    _print({"status": stopped, "items_written_this_run": written,
+            "requests_made": client.requests_made,
+            "items_remaining": len(pending) - written,
+            "note": "answers for native review only; not a benchmark score", **summary})
+    return 2 if stopped == "error" else 0
+
+
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="python -m sunbird_api",
@@ -264,6 +349,8 @@ def build_parser():
         p.add_argument("--max-requests", type=int, default=DEFAULT_CAP,
                        help="hard cap on requests this run (default %(default)s)")
         p.add_argument("--ledger", default=DEFAULT_LEDGER)
+        p.add_argument("--timeout", type=int, default=240,
+                       help="seconds to wait for each reply (default %(default)s)")
 
     check = sub.add_parser("check", help="verify the token without generating text")
     check.add_argument("--max-requests", type=int, default=DEFAULT_CAP)
@@ -287,6 +374,16 @@ def build_parser():
     ts.add_argument("--dry-run", action="store_true", help="count work, send nothing")
     common(ts)
     ts.set_defaults(handler=_translate_source)
+
+    rb = sub.add_parser(
+        "run-benchmark",
+        help="send each draft benchmark prompt to Sunflower once, for native review",
+    )
+    rb.add_argument("--input", default=DEFAULT_BENCH_INPUT)
+    rb.add_argument("--output", default=DEFAULT_BENCH_OUTPUT)
+    rb.add_argument("--dry-run", action="store_true", help="count work, send nothing")
+    common(rb)
+    rb.set_defaults(handler=_run_benchmark, max_tokens=700)
     return parser
 
 

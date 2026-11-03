@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunbird vs native Luganda</title>
+<style>
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --ink: #1c2330; --muted: #5d6677; --line: #d9dde5;
+  --accent: #1f4fd8; --accent-ink: #ffffff; --good: #1b7f4b; --warn: #a15c00; --bad: #b3261e;
+  --soft: #eef2ff; --sunbird: #fff7e6; --sunbird-line: #f0d9a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --panel: #1b2029; --ink: #e8ebf1; --muted: #9aa3b5; --line: #323a49;
+    --accent: #7ea2ff; --accent-ink: #0d1220; --good: #5fd39a; --warn: #f0b45a; --bad: #ff8a80;
+    --soft: #222a3d; --sunbird: #2a2416; --sunbird-line: #5a4a22;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+header { padding: 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+h1 { margin: 0 0 4px; font-size: 20px; }
+.sub { margin: 0; color: var(--muted); font-size: 13px; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.bar label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+button, .btn { font: inherit; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+input[type=text], select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+textarea { width: 100%; min-height: 84px; font: inherit; padding: 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); resize: vertical; }
+.spacer { flex: 1; }
+details.help { margin: 12px 16px 0; padding: 10px 14px; background: var(--soft); border-radius: 10px; }
+details.help summary { cursor: pointer; font-weight: 600; }
+details.help ol { margin: 8px 0 4px 20px; padding: 0; }
+.notice { margin: 12px 16px 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: 13px; color: var(--muted); }
+main { display: grid; grid-template-columns: 260px 1fr; gap: 16px; padding: 16px; align-items: start; }
+@media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+#list { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; max-height: 70vh; overflow: auto; }
+#list button { display: flex; width: 100%; gap: 8px; align-items: center; text-align: left; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+#list button[aria-current="true"] { background: var(--soft); font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); flex: none; }
+.dot.revealed { background: var(--warn); } .dot.done { background: var(--good); }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.card h2 { margin: 0 0 2px; font-size: 17px; }
+.meta { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+.box { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); white-space: pre-wrap; background: var(--bg); }
+.box.sunbird { background: var(--sunbird); border-color: var(--sunbird-line); }
+.step { margin-top: 16px; }
+.step h3 { margin: 0 0 6px; font-size: 14px; }
+.turn { margin-bottom: 10px; }
+.role { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+fieldset { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px 10px; margin: 0; }
+legend { font-size: 13px; color: var(--muted); padding: 0 4px; }
+.scale { display: flex; gap: 14px; flex-wrap: wrap; }
+.scale label, .tags label { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+.tags { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 14px; }
+.actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.empty { padding: 40px 16px; text-align: center; color: var(--muted); }
+.err { color: var(--bad); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sunbird vs native Luganda</h1>
+  <p class="sub">Pilot diagnostic for LugandaGPT. Local page: nothing you type leaves this computer.</p>
+</header>
+
+<details class="help" open>
+  <summary>How to use this page (5 steps)</summary>
+  <ol>
+    <li>Click <b>Load file</b> and choose <code>data\machine\sunbird-suggestions.csv</code>.</li>
+    <li>Type your reviewer code (for example <b>T1</b>, not a real name).</li>
+    <li>For each item, the <b>native speaker types their own Luganda first</b>. Sunbird's version stays hidden so it cannot influence them.</li>
+    <li>Click <b>Save and reveal Sunbird</b>. Then rate meaning (adequacy) and naturalness (fluency), tick the error types, and fix the Luganda if needed.</li>
+    <li>Click <b>Mark done</b>. When finished or stopping, click <b>Export CSV</b> and <b>Backup JSON</b>, and save both in <code>data\machine\</code>.</li>
+  </ol>
+</details>
+<p class="notice">Ratings here are a pilot diagnostic, not a benchmark score. The benchmark specification (section 16) needs an owner-approved protocol before any translation-quality claim. The final Luganda you write here is a <i>candidate</i>: it only becomes project data after it goes through the Translation Studio with consent and review.</p>
+
+<div class="bar">
+  <label class="btn" style="cursor:pointer">Load file
+    <input id="file" type="file" accept=".csv,.json" hidden>
+  </label>
+  <label>Reviewer code <input id="reviewer" type="text" size="8" maxlength="12" placeholder="T1" autocomplete="off"></label>
+  <label>Show
+    <select id="filter">
+      <option value="all">All</option><option value="todo">To do</option>
+      <option value="revealed">Revealed, not done</option><option value="done">Done</option>
+    </select>
+  </label>
+  <span id="progress" class="hint"></span>
+  <span class="spacer"></span>
+  <button id="summaryBtn">Summary</button>
+  <button id="exportCsv">Export CSV</button>
+  <button id="exportJson">Backup JSON</button>
+  <button id="clearAll">Clear all</button>
+</div>
+
+<main>
+  <nav id="list" aria-label="Items"></nav>
+  <section id="view" aria-live="polite"></section>
+</main>
+
+<script>
+"use strict";
+const STORE_KEY = "lugandagpt-compare-v1";
+const FIELD_LABELS = { source_context: "Background passage", source_prompt: "Question or request", reference_answer: "Reference answer", prior_turns: "Earlier turns" };
+const TAGS = [
+  ["none", "No errors found"], ["wrong_word", "Wrong word choice"], ["grammar", "Grammar"],
+  ["meaning_changed", "Meaning changed"], ["missing", "Content missing"], ["added", "Content added"],
+  ["name_number_day", "Wrong name, number, day or time"], ["inconsistent_term", "Inconsistent term"],
+  ["unnatural", "Unnatural or too literal"], ["english_left", "English left in"], ["truncated", "Cut off"]
+];
+let state = { rows: [], work: {}, reviewer: "", source: "" };
+let currentKey = null, showSummary = false, saveTimer = null;
+
+const $ = (id) => document.getElementById(id);
+const keyOf = (r) => r.item_id + "|" + r.field;
+const nowUtc = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
+
+/* ---------- storage ---------- */
+function persist() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage blocked: use Backup JSON */ } }, 250);
+}
+function restore() {
+  try { const raw = localStorage.getItem(STORE_KEY); if (raw) { const s = JSON.parse(raw); if (s && Array.isArray(s.rows)) state = s; } } catch (e) {}
+}
+
+/* ---------- CSV ---------- */
+function parseCsv(text) {
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  const rows = []; let row = [], field = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+      else field += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(field); field = ""; if (row.length > 1 || row[0] !== "") rows.push(row); row = []; }
+    else field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  if (!rows.length) return [];
+  const head = rows[0];
+  return rows.slice(1).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] === undefined ? "" : r[i]])));
+}
+function toCsv(columns, records) {
+  const q = (v) => '"' + String(v === undefined || v === null ? "" : v).replace(/"/g, '""') + '"';
+  return "﻿" + [columns.map(q).join(",")].concat(records.map((r) => columns.map((c) => q(r[c])).join(","))).join("\r\n") + "\r\n";
+}
+function download(name, text, type) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/* ---------- segments (one box per text; one per turn for earlier turns) ---------- */
+function parseTurns(text) {
+  try { const v = JSON.parse(text); if (Array.isArray(v) && v.every((t) => t && typeof t.content === "string")) return v.map((t) => ({ role: t.role || "", content: t.content })); } catch (e) {}
+  return null;
+}
+function segmentsOf(row, sunbirdText) {
+  if (row.field === "prior_turns") {
+    const en = parseTurns(row.english);
+    if (en) {
+      const sb = parseTurns(sunbirdText || row.sunbird_luganda || "");
+      return en.map((t, i) => ({ role: t.role, english: t.content, sunbird: sb && sb[i] ? sb[i].content : (sb ? "" : (sunbirdText || row.sunbird_luganda || "")) }));
+    }
+  }
+  return [{ role: "", english: row.english, sunbird: sunbirdText !== undefined ? sunbirdText : row.sunbird_luganda }];
+}
+function workOf(key) {
+  if (!state.work[key]) state.work[key] = { nativeFirst: null, revealedUtc: "", sunbirdSnapshot: null, finalText: null, adequacy: "", fluency: "", tags: [], notes: "", status: "todo", doneUtc: "", draft: null };
+  return state.work[key];
+}
+function statusOf(row) { const w = state.work[keyOf(row)]; return w ? w.status : "todo"; }
+
+/* ---------- similarity (export only, never shown before rating) ---------- */
+const norm = (s) => s.toLowerCase().replace(/[\s’'`".,;:!?()\-]+/g, "");
+function similarity(a, b) {
+  a = norm(a); b = norm(b);
+  if (!a && !b) return 1; if (!a || !b) return 0;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return 1 - prev[b.length] / Math.max(a.length, b.length);
+}
+
+/* ---------- load ---------- */
+function ingestSuggestions(records, filename) {
+  const need = ["item_id", "field", "english", "sunbird_luganda"];
+  if (!records.length || need.some((c) => !(c in records[0]))) throw new Error("This is not a Sunbird suggestions file. Expected columns: " + need.join(", "));
+  const have = new Map(state.rows.map((r) => [keyOf(r), r]));
+  let added = 0;
+  for (const rec of records) {
+    const k = keyOf(rec);
+    if (!have.has(k)) { state.rows.push({ item_id: rec.item_id, field: rec.field, english: rec.english, sunbird_luganda: rec.sunbird_luganda, model: rec.model || "" }); added++; }
+    else { const old = have.get(k); const w = state.work[k]; if (!w || w.status === "todo") { old.english = rec.english; old.sunbird_luganda = rec.sunbird_luganda; old.model = rec.model || old.model; } }
+  }
+  state.source = filename;
+  return added;
+}
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      if (/\.json$/i.test(file.name)) {
+        const s = JSON.parse(reader.result);
+        if (s.format !== "lugandagpt-compare-v1") throw new Error("This JSON is not a backup from this page.");
+        state = { rows: s.rows, work: s.work, reviewer: s.reviewer || "", source: s.source || "" };
+        flash("Backup restored.");
+      } else {
+        const added = ingestSuggestions(parseCsv(reader.result), file.name);
+        flash(added + " new item(s) added. Your earlier work was kept.");
+      }
+      currentKey = null; persist(); renderAll();
+    } catch (e) { flash(e.message, true); }
+  };
+  reader.readAsText(file, "utf-8");
+}
+function flash(msg, isErr) { const p = $("progress"); p.textContent = msg; p.className = "hint" + (isErr ? " err" : ""); setTimeout(updateProgress, 5000); }
+
+/* ---------- render ---------- */
+function visibleRows() {
+  const f = $("filter").value;
+  return state.rows.filter((r) => f === "all" || statusOf(r) === f);
+}
+function updateProgress() {
+  const done = state.rows.filter((r) => statusOf(r) === "done").length;
+  $("progress").className = "hint";
+  $("progress").textContent = state.rows.length ? done + " of " + state.rows.length + " done" : "";
+}
+function renderList() {
+  const list = $("list"); list.replaceChildren();
+  for (const r of visibleRows()) {
+    const b = document.createElement("button"); b.type = "button";
+    const dot = document.createElement("span"); dot.className = "dot " + statusOf(r);
+    const t = document.createElement("span"); t.textContent = r.item_id + "  " + FIELD_LABELS[r.field];
+    b.append(dot, t);
+    if (keyOf(r) === currentKey) b.setAttribute("aria-current", "true");
+    b.addEventListener("click", () => { currentKey = keyOf(r); showSummary = false; renderAll(); });
+    list.appendChild(b);
+  }
+  if (!list.children.length) { const d = document.createElement("div"); d.className = "empty"; d.textContent = "Nothing here."; list.appendChild(d); }
+}
+function el(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  if (props) for (const [k, v] of Object.entries(props)) { if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v); }
+  for (const kid of kids) if (kid) e.append(kid);
+  return e;
+}
+function renderView() {
+  const view = $("view"); view.replaceChildren();
+  if (showSummary) { view.appendChild(renderSummary()); return; }
+  if (!state.rows.length) { view.appendChild(el("div", { class: "card empty", text: "Load data\\machine\\sunbird-suggestions.csv to begin." })); return; }
+  let row = state.rows.find((r) => keyOf(r) === currentKey);
+  if (!row) { const v = visibleRows(); row = v[0]; currentKey = row ? keyOf(row) : null; }
+  if (!row) { view.appendChild(el("div", { class: "card empty", text: "No items match this filter." })); return; }
+  view.appendChild(renderCard(row));
+}
+function renderCard(row) {
+  const k = keyOf(row), w = workOf(k), card = el("div", { class: "card" });
+  const segs = segmentsOf(row, w.sunbirdSnapshot ? w.sunbirdSnapshot.join("") : undefined);
+  const revealed = w.status !== "todo", done = w.status === "done";
+  card.append(el("h2", { text: row.item_id + ": " + FIELD_LABELS[row.field] }),
+              el("div", { class: "meta", text: "Model: " + (row.model || "unknown") + "  |  status: " + w.status }));
+
+  // English + step 1
+  const s1 = el("div", { class: "step" }, el("h3", { text: "Step 1. English, and your own Luganda (do not look at Sunbird)" }));
+  const nativeBoxes = [];
+  segs.forEach((s, i) => {
+    const t = el("div", { class: "turn" });
+    if (s.role) t.append(el("div", { class: "role", text: s.role }));
+    t.append(el("div", { class: "box", text: s.english }));
+    const ta = el("textarea", { "aria-label": "Native Luganda" + (segs.length > 1 ? " for turn " + (i + 1) : ""), placeholder: "Type the Luganda here" });
+    ta.value = (w.nativeFirst ? w.nativeFirst[i] : (w.draft ? w.draft[i] : "")) || "";
+    ta.disabled = revealed;
+    ta.addEventListener("input", () => { w.draft = nativeBoxes.map((b) => b.value); persist(); revealBtn.disabled = !nativeBoxes.every((b) => b.value.trim()); });
+    nativeBoxes.push(ta); t.append(ta); s1.append(t);
+  });
+  card.append(s1);
+  const revealBtn = el("button", { type: "button", class: "primary", text: "Save and reveal Sunbird" });
+  revealBtn.disabled = revealed || !nativeBoxes.every((b) => b.value.trim());
+  revealBtn.addEventListener("click", () => {
+    w.nativeFirst = nativeBoxes.map((b) => b.value.trim());
+    w.sunbirdSnapshot = segs.map((s) => s.sunbird);
+    w.finalText = w.nativeFirst.slice(); w.revealedUtc = nowUtc(); w.status = "revealed";
+    persist(); renderAll();
+  });
+  if (!revealed) { card.append(el("div", { class: "actions" }, revealBtn), el("div", { class: "hint", text: "Sunbird's version stays hidden until you save your own." })); return card; }
+
+  // Step 2: compare
+  const s2 = el("div", { class: "step" }, el("h3", { text: "Step 2. Compare" }));
+  segs.forEach((s, i) => {
+    const g = el("div", { class: "grid2 turn" });
+    const left = el("div", null, el("div", { class: "role", text: "Native Luganda (your first version)" }), el("div", { class: "box", text: w.nativeFirst[i] }));
+    const right = el("div", null, el("div", { class: "role", text: "Sunbird Luganda" }), el("div", { class: "box sunbird", text: w.sunbirdSnapshot[i] }));
+    g.append(left, right); s2.append(g);
+  });
+  card.append(s2);
+
+  // Step 3: ratings
+  const scale = (name, label, hint) => {
+    const fs = el("fieldset", null, el("legend", { text: label }));
+    const wrap = el("div", { class: "scale" });
+    for (let n = 1; n <= 5; n++) {
+      const id = name + n, inp = el("input", { type: "radio", name: name, id: id, value: String(n) });
+      inp.checked = String(w[name]) === String(n); inp.disabled = done;
+      inp.addEventListener("change", () => { w[name] = n; persist(); updateDone(); });
+      wrap.append(el("label", { for: id }, inp, document.createTextNode(String(n))));
+    }
+    fs.append(wrap, el("div", { class: "hint", text: hint })); return fs;
+  };
+  const s3 = el("div", { class: "step" }, el("h3", { text: "Step 3. Rate Sunbird's version" }),
+    el("div", { class: "grid2" },
+      scale("adequacy", "Adequacy (meaning kept)", "1 = meaning lost, 5 = same meaning as the English"),
+      scale("fluency", "Fluency (natural Luganda)", "1 = unnatural or ungrammatical, 5 = sounds like a native speaker")));
+  card.append(s3);
+
+  const tagFs = el("fieldset", null, el("legend", { text: "Errors in Sunbird's version (tick all that apply)" }));
+  const tagWrap = el("div", { class: "tags" });
+  TAGS.forEach(([val, label]) => {
+    const inp = el("input", { type: "checkbox", value: val }); inp.checked = w.tags.includes(val); inp.disabled = done;
+    inp.addEventListener("change", () => {
+      let t = new Set(w.tags);
+      if (inp.checked) { if (val === "none") t = new Set(["none"]); else { t.delete("none"); t.add(val); } } else t.delete(val);
+      w.tags = [...t]; persist(); renderView(); updateDone();
+    });
+    tagWrap.append(el("label", null, inp, document.createTextNode(label)));
+  });
+  tagFs.append(tagWrap); card.append(el("div", { class: "step" }, tagFs));
+
+  // Step 4: final text + notes
+  const s4 = el("div", { class: "step" }, el("h3", { text: "Step 4. Final Luganda (candidate) and notes" }));
+  const finalBoxes = [];
+  segs.forEach((s, i) => {
+    const ta = el("textarea", { "aria-label": "Final Luganda" + (segs.length > 1 ? " for turn " + (i + 1) : "") });
+    ta.value = w.finalText[i] || ""; ta.disabled = done;
+    ta.addEventListener("input", () => { w.finalText = finalBoxes.map((b) => b.value); persist(); });
+    finalBoxes.push(ta); s4.append(ta);
+  });
+  s4.append(el("div", { class: "hint", text: "Starts as your first version. Improve it if Sunbird or discussion showed a better wording." }));
+  const notes = el("textarea", { "aria-label": "Notes", placeholder: "Notes (why it is wrong, regional variety, anything unclear)" });
+  notes.value = w.notes; notes.disabled = done; notes.style.marginTop = "8px";
+  notes.addEventListener("input", () => { w.notes = notes.value; persist(); });
+  s4.append(notes); card.append(s4);
+
+  const doneBtn = el("button", { type: "button", class: "primary", text: done ? "Done" : "Mark done" });
+  function updateDone() { doneBtn.disabled = done || !(w.adequacy && w.fluency && w.tags.length); }
+  doneBtn.addEventListener("click", () => {
+    w.status = "done"; w.doneUtc = nowUtc(); persist();
+    const v = visibleRows(); const idx = v.findIndex((r) => keyOf(r) === k);
+    const next = state.rows.find((r) => statusOf(r) !== "done");
+    currentKey = next ? keyOf(next) : k; renderAll();
+  });
+  const reopen = el("button", { type: "button", text: "Reopen" });
+  reopen.addEventListener("click", () => { w.status = "revealed"; w.doneUtc = ""; persist(); renderAll(); });
+  card.append(el("div", { class: "actions" }, doneBtn, done ? reopen : null));
+  updateDone();
+  return card;
+}
+
+/* ---------- summary ---------- */
+function renderSummary() {
+  const card = el("div", { class: "card" }, el("h2", { text: "Summary (finished items only)" }),
+    el("div", { class: "meta", text: "Pilot diagnostic. Adequacy and fluency are reported separately. No overall score is computed." }));
+  const done = state.rows.filter((r) => statusOf(r) === "done");
+  if (!done.length) { card.append(el("div", { class: "empty", text: "Mark some items done to see results." })); return card; }
+  const table = (title, head, rows) => {
+    const t = el("table"); t.append(el("thead", null, el("tr", null, ...head.map((h) => el("th", { text: h })))));
+    const tb = el("tbody"); rows.forEach((r) => tb.append(el("tr", null, ...r.map((c) => el("td", { text: String(c) }))))); t.append(tb);
+    return el("div", { class: "step" }, el("h3", { text: title }), t);
+  };
+  const dist = (name) => [1, 2, 3, 4, 5].map((n) => done.filter((r) => String(state.work[keyOf(r)][name]) === String(n)).length);
+  card.append(table("Rating counts", ["Dimension", "1", "2", "3", "4", "5"], [["Adequacy"].concat(dist("adequacy")), ["Fluency"].concat(dist("fluency"))]));
+  const byField = Object.keys(FIELD_LABELS).map((f) => {
+    const rs = done.filter((r) => r.field === f); if (!rs.length) return null;
+    const d = (n) => [1, 2, 3, 4, 5].map((v) => rs.filter((r) => String(state.work[keyOf(r)][n]) === String(v)).length).join(" / ");
+    return [FIELD_LABELS[f], rs.length, d("adequacy"), d("fluency")];
+  }).filter(Boolean);
+  card.append(table("By field", ["Field", "Items", "Adequacy counts 1/2/3/4/5", "Fluency counts 1/2/3/4/5"], byField));
+  const counts = {}; done.forEach((r) => state.work[keyOf(r)].tags.forEach((t) => { counts[t] = (counts[t] || 0) + 1; }));
+  const label = Object.fromEntries(TAGS);
+  card.append(table("Error types ticked", ["Error", "Items"], Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([t, n]) => [label[t] || t, n])));
+  return card;
+}
+
+/* ---------- export ---------- */
+function exportCsv() {
+  const cols = ["item_id", "field", "english", "sunbird_luganda", "model", "native_first_draft", "final_luganda", "adequacy", "fluency", "error_tags", "notes", "similarity_sunbird_vs_native_first", "reviewer_code", "revealed_utc", "done_utc", "status"];
+  const join = (row, arr) => {
+    if (!arr) return "";
+    if (row.field === "prior_turns") { const en = parseTurns(row.english); if (en) return JSON.stringify(en.map((t, i) => ({ role: t.role, content: arr[i] || "" }))); }
+    return arr.join("\n");
+  };
+  const recs = state.rows.map((row) => {
+    const w = state.work[keyOf(row)] || {};
+    const sb = w.sunbirdSnapshot ? join(row, w.sunbirdSnapshot) : row.sunbird_luganda;
+    const first = w.nativeFirst ? join(row, w.nativeFirst) : "";
+    let sim = "";
+    if (w.nativeFirst && w.sunbirdSnapshot) sim = (w.nativeFirst.reduce((a, t, i) => a + similarity(t, w.sunbirdSnapshot[i] || ""), 0) / w.nativeFirst.length).toFixed(3);
+    return { item_id: row.item_id, field: row.field, english: row.english, sunbird_luganda: sb, model: row.model, native_first_draft: first,
+      final_luganda: w.finalText ? join(row, w.finalText) : "", adequacy: w.adequacy || "", fluency: w.fluency || "", error_tags: (w.tags || []).join(";"),
+      notes: w.notes || "", similarity_sunbird_vs_native_first: sim, reviewer_code: state.reviewer, revealed_utc: w.revealedUtc || "", done_utc: w.doneUtc || "", status: w.status || "todo" };
+  });
+  download("sunbird-comparison-" + new Date().toISOString().slice(0, 10) + ".csv", toCsv(cols, recs), "text/csv;charset=utf-8");
+}
+function exportJson() {
+  const s = Object.assign({ format: "lugandagpt-compare-v1", exported_utc: nowUtc() }, state);
+  download("sunbird-comparison-backup-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify(s, null, 1), "application/json");
+}
+
+/* ---------- wire up ---------- */
+function renderAll() { updateProgress(); renderList(); renderView(); }
+$("file").addEventListener("change", (e) => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ""; });
+$("reviewer").addEventListener("input", (e) => { state.reviewer = e.target.value.trim(); persist(); });
+$("filter").addEventListener("change", () => { currentKey = null; renderAll(); });
+$("summaryBtn").addEventListener("click", () => { showSummary = !showSummary; renderView(); });
+$("exportCsv").addEventListener("click", exportCsv);
+$("exportJson").addEventListener("click", exportJson);
+$("clearAll").addEventListener("click", () => {
+  if (confirm("Delete everything saved in this page? Export a backup first if you need it.")) { state = { rows: [], work: {}, reviewer: "", source: "" }; currentKey = null; try { localStorage.removeItem(STORE_KEY); } catch (e) {} $("reviewer").value = ""; renderAll(); }
+});
+restore(); $("reviewer").value = state.reviewer || ""; renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+ "LGP-BENCH-INSTRUCTION-002": {
+  "exclusion_record": {
+   "exclusion_id": "EXC-001",
+   "item_id": "LGP-BENCH-INSTRUCTION-002",
+   "version": "0.2-draft",
+   "actor": "T2",
+   "date": "2026-11-02",
+   "reason": "Native reviewer T2: 'tool library' has no natural Luganda term and the sentence would never be asked. Replace with a term Luganda speakers really use."
+  }
+ }
+}

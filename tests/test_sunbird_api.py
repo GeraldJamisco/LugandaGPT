@@ -171,6 +171,18 @@ class ClientTests(unittest.TestCase):
         self.assertEqual(len(self.sleeps), 3)
         self.assertEqual(len(opener.requests), 4)
 
+    def test_read_timeout_is_retried_then_reported_clearly(self):
+        opener = ScriptedOpener([TimeoutError("The read operation timed out")] * 4)
+        with self.assertRaises(SunbirdError) as caught:
+            self.client(opener).chat([{"role": "user", "content": "Hi"}])
+        self.assertIn("no reply from Sunbird", str(caught.exception))
+        self.assertEqual(len(opener.requests), 4)
+
+    def test_read_timeout_then_success(self):
+        opener = ScriptedOpener([TimeoutError("t"), FakeResponse(chat_payload("ok"))])
+        result = self.client(opener).chat([{"role": "user", "content": "Hi"}])
+        self.assertEqual(result.text, "ok")
+
     def test_expired_token_is_replaced_by_logging_in_again(self):
         opener = ScriptedOpener(
             [http_error(401), FakeResponse({"access_token": "NEW"}), FakeResponse(chat_payload())]
@@ -329,6 +341,59 @@ class CliTests(unittest.TestCase):
         code, out, err = self.run_cli()
         self.assertEqual(code, 2)
         self.assertIn("missing columns", err)
+
+
+class RunBenchmarkTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        root = Path(self._tmp.name)
+        self.input = root / "items.jsonl"
+        self.output = root / "out.csv"
+        self.ledger = root / "ledger.jsonl"
+        items = [
+            {"id": "LGP-BENCH-A-001", "prompt": "Prompt one", "turns": [], "review_status": "draft"},
+            {"id": "LGP-BENCH-A-002", "prompt": "Prompt two", "turns": [], "review_status": "excluded"},
+            {"id": "LGP-BENCH-A-003", "prompt": "Prompt three", "turns": [], "review_status": "draft"},
+        ]
+        self.input.write_text("\n".join(json.dumps(i) for i in items) + "\n", encoding="utf-8")
+
+    def run_cli(self, *extra, cap="25"):
+        def factory(args):
+            return SunbirdClient(token=TOKEN, opener=echo_opener, sleep=lambda s: None,
+                                 request_cap=args.max_requests, ledger_path=self.ledger)
+        argv = ["run-benchmark", "--input", str(self.input), "--output", str(self.output),
+                "--ledger", str(self.ledger), "--max-requests", cap, *extra]
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = main(argv, client_factory=factory)
+        return code, json.loads(out.getvalue())
+
+    def test_excluded_items_are_skipped_and_answers_are_saved(self):
+        code, report = self.run_cli()
+        self.assertEqual(code, 0)
+        with open(self.output, newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual([r["item_id"] for r in rows], ["LGP-BENCH-A-001", "LGP-BENCH-A-003"])
+        self.assertTrue(all(r["field"] == "benchmark_response" for r in rows))
+        self.assertTrue(all(r["machine_output"] == "true" for r in rows))
+        self.assertEqual(report["requests_made"], 2)
+
+    def test_cap_and_resume(self):
+        _, first = self.run_cli(cap="1")
+        self.assertEqual(first["status"], "request_cap_reached")
+        _, second = self.run_cli()
+        self.assertEqual(second["items_written_this_run"], 1)
+
+    def test_dry_run_sends_nothing(self):
+        out = io.StringIO()
+        def forbidden(args):
+            raise AssertionError("no client on dry run")
+        with contextlib.redirect_stdout(out):
+            main(["run-benchmark", "--input", str(self.input), "--output", str(self.output), "--dry-run"],
+                 client_factory=forbidden)
+        self.assertEqual(json.loads(out.getvalue())["requests_pending"], 2)
+        self.assertFalse(self.output.exists())
 
 
 if __name__ == "__main__":

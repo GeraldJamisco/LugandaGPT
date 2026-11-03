@@ -1,0 +1,78 @@
+{
+ "format": "lugandagpt-bench-review-v1",
+ "reviewer": "T2",
+ "answers": {
+  "LGP-BENCH-EVERYDAY-001": {
+   "decision": "fix",
+   "fixedPrompt": "Nsisinkana mukwano gwange ku ssaawa ssatu ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?\n",
+   "fixedBehavior": "the ssaawa ssatu ez'enkya is correct but confusing to the people of these days, instead you need to say saawa ssattu ezokumakya kumakya meaning in the morning hours enkya means tomorrow even though it can be applied here but the meaning changes ",
+   "reference": "9 am ",
+   "alternatives": "9 in the morning \n",
+   "oneReading": "no",
+   "notes": ""
+  },
+  "LGP-BENCH-EVERYDAY-002": {
+   "decision": "fix",
+   "fixedPrompt": "Olukiiko lutandika ku ssaawa musanvu ez'emisana. Ssaawa eyo mu Luzungu ziba mmeka?\n",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": "if you are writing time i think you will notice the pattern on where i change from \"eba meka\" to \"ziba meka\" i dont know how to explain it better"
+  },
+  "LGP-BENCH-EVERYDAY-003": {
+   "decision": "fix",
+   "fixedPrompt": "Leero Lwokubiri. Enkya lujja kuba lunaku ki?\n",
+   "fixedBehavior": "i changed the tense here and the wording to match a native way of writing luganda ",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-FORMAL-001": {
+   "decision": "fix",
+   "fixedPrompt": "Wandiika ekiwandiiko ekitongole eky'okuyita abantu ku mwoleso gw'okuyamba abantu mu mbeera ey'amangu. Gunaaba ku Lwomukaaga, okuva ku ssaawa ssatu okutuuka ku ssaawa ttaano ez'okumakya, mu kizimbe ky'ekitundu.\n",
+   "fixedBehavior": "the time in luganda, you state the time first before stating the meridians (am or pm or afternoon) you state the numbers first and then the meridians last to make a good meaning ",
+   "reference": "Write a formal notice that is inviting people on the for a workshop that will be helping people in first aid. the workshop will be on Saturday, from 9am to 11 am in the community hall",
+   "alternatives": "Write a formal notice that is inviting people on the for a workshop that  will cover  first-aid session. It will be held on Saturday from nine to eleven in the community hall",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-001": {
+   "decision": "fix",
+   "fixedPrompt": "",
+   "fixedBehavior": "fixing the draft \n\n  Saturday is Lwomukaaga. The times are ssaawa ssatu ezokumakya okutuuka ku ssaawa musanvu ez'emisana\n\n\nGood translation: Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva saawa ssatu ezokumakya okutuuka ku saawa musanvu ez'emisana",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-002": {
+   "decision": "drop",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": "no one will ever ask for a tool library because that word is not there in the luganda vocabulary its actually a combination of some words to bring out the meaning actually the whole sentence involving toll library will never be used anywhere "
+  },
+  "LGP-BENCH-EXPLANATION-001": {
+   "decision": "fix",
+   "fixedPrompt": "Explains shortly the meaning of the word \"summary\" and also give me one example \n",
+   "fixedBehavior": "Summary kwekufunza ebigambo ebibade ebinji nobikendeeza mu bunji naye nga oyogera ku nsonga zamakulu zokka \n\nokugeza: \nebigambo ebinji/Full text : omulimi alina enkoko 20 ku faamu ye. Buli kumakya, aziliisa ate nazilondamu namajji. olunaku lumu,  atunda enkoko 5 eri neyiba/mulirwaana okufunamu ku sente\nsummary/olufuutifuuti/mubufunze: Omulunzi kunkoko 20 atundako 5 eri mulirwaana/neyiba okufunamu sente \n\nFull text: A farmer owns 20 chickens on his farm. Every morning, he feeds them and collects their eggs. One day, he sells 5 chickens to a neighbour to earn some money.\nSummary: A farmer sells 5 of his 20 chickens to earn money.",
+   "reference": "Summary kwekufunza ebigambo ebibade ebinji nobikendeeza mu bunji naye nga oyogera ku nsonga zamakulu zokka \n\nokugeza: \nebigambo ebinji/Full text : omulimi alina enkoko 20 ku faamu ye. Buli kumakya, aziliisa ate nazilondamu namajji. olunaku lumu,  atunda enkoko 5 eri neyiba/mulirwaana okufunamu ku sente\nsummary/olufuutifuuti/mubufunze: Omulunzi kunkoko 20 atundako 5 eri mulirwaana/neyiba okufunamu sente \n\nFull text: A farmer owns 20 chickens on his farm. Every morning, he feeds them and collects their eggs. One day, he sells 5 chickens to a neighbour to earn some money.\nSummary: A farmer sells 5 of his 20 chickens to earn money.",
+   "alternatives": "",
+   "oneReading": "no",
+   "notes": ""
+  },
+  "LGP-BENCH-CODESWITCH-001": {
+   "decision": "fix",
+   "fixedPrompt": "Help me write an email to my boss that i will be late in the thursday meeting of 9am.",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "no",
+   "notes": ""
+  }
+ }
+}

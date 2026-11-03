@@ -1,0 +1,242 @@
+[
+ [
+  "SIT-001",
+  "Message to a friend",
+  "Tell your friend you will meet at the market on Wednesday at 11 in the morning.",
+  "ssaawa ttaano ez'okumakya; Lwokusatu"
+ ],
+ [
+  "SIT-002",
+  "Reminder to a child",
+  "Remind your child that tomorrow the school bus comes at 7 in the morning.",
+  "ssaawa emu ez'okumakya; enkya"
+ ],
+ [
+  "SIT-003",
+  "Notice",
+  "Write a notice that the clinic opens at 7 in the morning on Thursday.",
+  "ssaawa emu ez'okumakya; Lwokuna"
+ ],
+ [
+  "SIT-004",
+  "Message",
+  "Invite a neighbour to church. The service starts at 11 in the morning on Sunday.",
+  "ssaawa ttaano ez'okumakya; Ssande"
+ ],
+ [
+  "SIT-005",
+  "Reply",
+  "Someone asks if you can come on Friday. Reply that you will be there at 3 in the afternoon.",
+  "ssaawa mwenda ez'emisana; Lwokutaano"
+ ],
+ [
+  "SIT-006",
+  "Notice",
+  "Write a notice that the shop closes at 6 in the evening today.",
+  "ssaawa kkumi na bbiri eza kawungeezi; leero"
+ ],
+ [
+  "SIT-007",
+  "Message to a boss",
+  "Tell your boss you will arrive at work at 7 in the morning on Monday.",
+  "ssaawa emu ez'okumakya; Mmande"
+ ],
+ [
+  "SIT-008",
+  "Reminder",
+  "Remind a friend to call their grandmother at 7 in the evening tonight.",
+  "ssaawa emu eya kawungeezi; leero"
+ ],
+ [
+  "SIT-009",
+  "School notice",
+  "Write a school notice that exams start at 7 in the morning on Tuesday.",
+  "ssaawa emu ez'okumakya; Lwokubiri"
+ ],
+ [
+  "SIT-010",
+  "Message",
+  "Tell your cousin the wedding starts at 12 noon on Saturday.",
+  "ssaawa mukaaga ez'emisana; Lwomukaaga"
+ ],
+ [
+  "SIT-011",
+  "Message to a customer",
+  "Tell a customer their order will be ready at 4 in the afternoon on Thursday.",
+  "ssaawa kkumi ez'emisana; Lwokuna"
+ ],
+ [
+  "SIT-012",
+  "Short chat",
+  "A friend asks what time the bus leaves. Answer that it leaves at 5 in the morning tomorrow.",
+  "ssaawa kkumi n'emu ez'okumakya; enkya"
+ ],
+ [
+  "SIT-013",
+  "Notice",
+  "Write a notice that the market opens at 6 in the morning on Saturday.",
+  "ssaawa kkumi na bbiri ez'okumakya; Lwomukaaga"
+ ],
+ [
+  "SIT-014",
+  "Message",
+  "Invite a friend for lunch at 12 noon on Sunday.",
+  "ssaawa mukaaga ez'emisana; Ssande"
+ ],
+ [
+  "SIT-015",
+  "Reminder",
+  "Remind your team that the meeting starts at 3 in the afternoon on Wednesday.",
+  "ssaawa mwenda ez'emisana; Lwokusatu"
+ ],
+ [
+  "SIT-016",
+  "Reply",
+  "You are running late. Tell your friend you will come at 4 in the afternoon.",
+  "ssaawa kkumi ez'emisana"
+ ],
+ [
+  "SIT-017",
+  "Notice",
+  "Write a notice that the water will be off from 7 in the morning until 3 in the afternoon tomorrow.",
+  "ssaawa emu ez'okumakya; ssaawa mwenda ez'emisana; enkya"
+ ],
+ [
+  "SIT-018",
+  "Message",
+  "Tell your friend the football match starts at 4 in the afternoon on Saturday.",
+  "ssaawa kkumi ez'emisana; Lwomukaaga"
+ ],
+ [
+  "SIT-019",
+  "Teacher to parents",
+  "Write a message to parents: the parents' meeting is at 3 in the afternoon on Friday.",
+  "ssaawa mwenda ez'emisana; Lwokutaano"
+ ],
+ [
+  "SIT-020",
+  "Message",
+  "Tell your sister you will arrive tonight at 7 in the evening.",
+  "ssaawa emu eya kawungeezi; leero"
+ ],
+ [
+  "SIT-021",
+  "Short chat",
+  "A friend asks if the shop is open on Sunday. Answer that it is open from 7 in the morning to 6 in the evening.",
+  "ssaawa emu ez'okumakya; ssaawa kkumi na bbiri eza kawungeezi; Ssande"
+ ],
+ [
+  "SIT-022",
+  "Reminder",
+  "Remind a student that class starts at 11 in the morning tomorrow.",
+  "ssaawa ttaano ez'okumakya; enkya"
+ ],
+ [
+  "SIT-023",
+  "Notice",
+  "Write a notice that the boat leaves at 6 in the morning on Tuesday.",
+  "ssaawa kkumi na bbiri ez'okumakya; Lwokubiri"
+ ],
+ [
+  "SIT-024",
+  "Message",
+  "Invite a friend to your house at 5 in the evening on Monday.",
+  "ssaawa kkumi n'emu eza kawungeezi; Mmande"
+ ],
+ [
+  "SIT-025",
+  "Short chat",
+  "Someone asks what day it is. Tell them that yesterday was Thursday, so today is Friday.",
+  "jjo; Lwokuna; Lwokutaano"
+ ],
+ [
+  "SIT-026",
+  "Message",
+  "Remind a friend that tomorrow is Wednesday and the meeting is at 11 in the morning.",
+  "ssaawa ttaano ez'okumakya; enkya; Lwokusatu"
+ ],
+ [
+  "SIT-027",
+  "Notice",
+  "Write a notice for a community clean-up at 7 in the morning on Saturday.",
+  "ssaawa emu ez'okumakya; Lwomukaaga"
+ ],
+ [
+  "SIT-028",
+  "Short chat",
+  "A friend asks when you will get home. Answer that you will arrive at 8 in the evening tonight.",
+  "ssaawa bbiri eza kawungeezi; leero"
+ ],
+ [
+  "SIT-029",
+  "Message",
+  "Tell a boda boda rider to pick you up at 6 in the morning tomorrow.",
+  "ssaawa kkumi na bbiri ez'okumakya; enkya"
+ ],
+ [
+  "SIT-030",
+  "Notice",
+  "Write a notice that the office closes at 5 in the evening on Friday.",
+  "ssaawa kkumi n'emu eza kawungeezi; Lwokutaano"
+ ],
+ [
+  "SIT-031",
+  "Message",
+  "Tell your friend you will call at 12 noon.",
+  "ssaawa mukaaga ez'emisana"
+ ],
+ [
+  "SIT-032",
+  "Reply",
+  "Someone asks when to come. Reply: come on Thursday at 3 in the afternoon.",
+  "ssaawa mwenda ez'emisana; Lwokuna"
+ ],
+ [
+  "SIT-033",
+  "Message",
+  "Remind members that prayer meeting is at 7 in the evening on Wednesday.",
+  "ssaawa emu eya kawungeezi; Lwokusatu"
+ ],
+ [
+  "SIT-034",
+  "Notice",
+  "Write an announcement that the radio programme starts at 7 in the evening every Sunday.",
+  "ssaawa emu eya kawungeezi; Ssande"
+ ],
+ [
+  "SIT-035",
+  "Message",
+  "Tell the workers that harvesting starts at 6 in the morning tomorrow.",
+  "ssaawa kkumi na bbiri ez'okumakya; enkya"
+ ],
+ [
+  "SIT-036",
+  "Reminder",
+  "Remind a parent to pay school fees before Friday.",
+  "Lwokutaano"
+ ],
+ [
+  "SIT-037",
+  "Short chat",
+  "A friend asks which day the party is. Answer: Saturday at 7 in the evening.",
+  "ssaawa emu eya kawungeezi; Lwomukaaga"
+ ],
+ [
+  "SIT-038",
+  "Notice",
+  "Write a notice that training starts at 11 in the morning on Monday.",
+  "ssaawa ttaano ez'okumakya; Mmande"
+ ],
+ [
+  "SIT-039",
+  "Message",
+  "Tell your friend the film starts at 9 at night.",
+  "ssaawa ssatu ez'ekiro"
+ ],
+ [
+  "SIT-040",
+  "Reminder",
+  "Remind the choir that practice is at 4 in the afternoon on Thursday.",
+  "ssaawa kkumi ez'emisana; Lwokuna"
+ ]
+]

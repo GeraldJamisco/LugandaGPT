@@ -208,6 +208,15 @@ class SunbirdClient:
                     self._sleep(self._delay(attempt, None))
                     continue
                 raise SunbirdError(f"network error: {error.reason}") from None
+            except (TimeoutError, ConnectionError) as error:
+                # A read that times out after the connection opens is not a URLError.
+                if attempt <= self.max_retries:
+                    self._sleep(self._delay(attempt, None))
+                    continue
+                raise SunbirdError(
+                    f"no reply from Sunbird after {attempt} attempts "
+                    f"(timeout {self.timeout}s): {error}"
+                ) from None
 
     # -- ledger ------------------------------------------------------------
 

@@ -368,3 +368,61 @@ unchanged. The 24-item feasibility set is not a benchmark.
 **Consequences:** D-008 authorized a bounded Gemma 1B gate. Its materials are archived and no GPU spending is currently approved. D-005 stays Open and closes at Gate 5, now defined as confirming Sunflower-14B as the base. Any Sunflower fine-tuning script, GPU rental, or budget needs a new approval. The hosted `sunflower-14b` may differ from the pinned Hugging Face revision, and API terms for retention and benchmark use are unverified, as recorded in `docs/SUNBIRD-API.md`. D-010 is unchanged: the Studio calls no AI service. The reporter is not running and its scheduled delivery, which was disabled, stays off.
 
 **Status:** Accepted.
+
+
+## D-019: Contributor terms reported by the owner (Gate 0)
+
+**Date:** 2026-11-03
+
+**Decision:** The Project Director reports the following terms, which he says the native translators and reviewers accepted in writing. The repository holds no copy of that agreement, so this is an owner report and not a verified or signed record.
+
+1. Pay: $0.20 per finished translation (the Studio also tracks $0.20 per approved review, D-015). Pay only for approved items. Keep a payment ledger and a monthly approval limit so the project does not overspend before any model is trained.
+2. Use: training, testing, and research reporting for the Luganda AI product (communication use first). Sharing is possible later and needs a separate decision.
+3. Names: contributors stay pseudonymous.
+4. Ownership: the data belongs to the project owner. Contributors help translate, understand, and give feedback and keep no ownership. Work already used cannot be withdrawn from a trained model. Larger data programmes later need new terms.
+5. Retention (proposal, owner said to proceed): keep approved translations and reviews for the life of the project and a period after it ends (suggested 3 years); delete login details 12 months after last activity; store locally with backups and owner-only access; on leaving, delete personal login details and keep contributed text.
+
+**Rationale:** The owner asked to proceed without sharing the agreement. This record states what is claimed so that no later document treats it as verified.
+
+**Consequences:** Gate 0 stays "owner reported". Strict data validation still needs signed consent records matched to each contributor's pseudonymous ID before any training. A lawyer should read the ownership terms before an investor pitch. No training or paid compute is authorized by this record.
+
+**Status:** Accepted. On 2026-11-03 the owner confirmed that the contributors consented in writing and that he is satisfied. The confirmation is the owner's own; the repository holds no copy. Per-contributor consent records for the data validator still need to be entered.
+
+
+## D-020: Rule-generated time and day practice data, with held-out hours
+
+**Date:** 2026-11-03
+
+**Decision:** Generate practice questions and answers for Luganda clock time and days of the week from rules confirmed by the native group (`data/rules/rules-check-Group-1-2026-11-03.csv`), using `src/rule_data/`. Hours 8, 9, 10, 13 and 14 and the day facts used by the benchmark are held out of generated data, so the benchmark tests the skill on hours the model was not taught. Generated rows are labelled `rule_generated_from_group_rules`, start as unreviewed, and are checked by native speakers on a sample before any use.
+
+**Rationale:** Sunflower failed time and day items in the pilot. The rules are fixed, so generated examples are cheap and consistent, but they are not native-authored data and could teach the wrong thing if a rule is wrong.
+
+**Consequences:** No training is authorized by this record. Open spelling questions are listed in `docs/PILOT-COMPARISON-2026-11-02.md`. Gate 0 still applies before any training.
+
+**Status:** Accepted as a working direction.
+
+
+## D-021: RunPod spending approved for Sunflower-14B QLoRA fine-tuning (not yet used)
+
+**Date:** 2026-11-03
+
+**Decision:** The Project Director approves up to $20 total on RunPod for fine-tuning Sunflower-14B with QLoRA, and the pod must be stopped after each run. The approval is recorded now and not yet used. No pod is running and no training run has started.
+
+**Rationale:** The owner stated that $20 of RunPod credit is available and gave this approval in his own words on 2026-11-03.
+
+**Consequences:** This replaces the statement in D-018 that no GPU spending is currently approved, for this one purpose and this cap only. It does not approve any other model, provider, or spend above $20. Each run should state its expected cost before starting. Practical prerequisites still apply and are not approvals: access to the gated Sunflower-14B weights, a training script, enough reviewed data, and the Gate 5 base confirmation.
+
+**Status:** Accepted. Waiting to use.
+
+
+## D-022: Luganda style rules from the native group
+
+**Date:** 2026-11-03
+
+**Decision:** Adopt the spelling and wording rules in `docs/LUGANDA-STYLE.md`, decided by the native group on 2026-11-03: ssaawa (not saawa), ez'emisana, kkumi, kkumi na bbiri; Lwo- after "on" and Lwa- when stating the day; 4pm accepted as ez'emisana or eza kawungeezi. Group-written text is stored raw and normalised separately, and only these rules are applied automatically.
+
+**Rationale:** The model learns spelling from the data, so inconsistent spellings count as different words.
+
+**Consequences:** `src/rule_data/` now follows these rules. Benchmark items EVERYDAY-003 and EVERYDAY-007 may need updating (open question).
+
+**Status:** Accepted.

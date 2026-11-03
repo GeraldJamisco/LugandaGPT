@@ -1,0 +1,221 @@
+{
+ "format": "lugandagpt-compare-v1",
+ "exported_utc": "2026-11-02T18:59:58Z",
+ "rows": [
+  {
+   "item_id": "LGP-BENCH-EVERYDAY-001",
+   "field": "benchmark_response",
+   "english": "Nsisinkana mukwano gwange ku ssaawa ssatu ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?",
+   "sunbird_luganda": "Ssaawa ssatu ez'okumakya ziba ssaawa mwenda ez'ekiro mu kiseera kyaffe.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-EVERYDAY-002",
+   "field": "benchmark_response",
+   "english": "Olukiiko lutandika ku ssaawa musanvu ez'emisana. Ssaawa eyo mu Luzungu ziba mmeka?",
+   "sunbird_luganda": "Olukiiko lutandika ku ssaawa musanvu ez'emisana. Mu Lungereza, ekyo kiba **1:00 PM**.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-EVERYDAY-003",
+   "field": "benchmark_response",
+   "english": "Leero Lwokubiri. Enkya lujja kuba lunaku ki?",
+   "sunbird_luganda": "Enkya lujja kuba Lwakusatu.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-FORMAL-001",
+   "field": "benchmark_response",
+   "english": "Wandiika ekiwandiiko ekitongole eky'okuyita abantu ku mwoleso gw'okuyamba abantu mu mbeera ey'amangu. Gunaaba ku Lwomukaaga, okuva ku ssaawa ssatu okutuuka ku ssaawa ttaano ez'okumakya, mu kizimbe ky'ekitundu.",
+   "sunbird_luganda": "**Ekiwandiiko ky'Okuyita Abantu ku Mwoleso gw'Obuyambi bw'Amangu**\n\nTukusaba okubaawo mu mwoleso gw'obuyambi bw'amangu ogugenda okubaawo ku Lwomukaaga, nga 15 Ogwomusanvu, okuva ku ssaawa ssatu okutuuka ku ssaawa ttaano ez'okumakya, mu kizimbe ky'ekitundu.\n\nMwoleso guno gwa kukuleetera obubaka obukulu ku ngeri y'okwekuuma n'okuyamba abantu abali mu buzibu obw'amangu. Tujja kusomesa ku by'obulamu, eby'okwerinda, n'engeri y'okukola obulungi mu biseera eby'amangu.\n\nJjangu otwegatteko, osobole okufuna obubaka obukulu era oyambe okukuuma obulamu bw'abantu bo.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-INSTRUCTION-001",
+   "field": "benchmark_response",
+   "english": "Translate into Luganda: \"The tool library opens on Saturday from 9am to 1pm.\" Use the Luganda way of telling the time.",
+   "sunbird_luganda": "\"Ekifo ky'ebyuma kiggulwawo ku Lwomukaaga okuva ku ssaawa ssatu ez'okumakya okutuuka ku ssaawa ttaano ez'emisana.\"",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-EXPLANATION-001",
+   "field": "benchmark_response",
+   "english": "Nnyonyola mu bufunze 'summary' kye ki, era mpa ekyokulabirako ekimu.",
+   "sunbird_luganda": "**Summary** kye kigambo ekikwata ku bintu ebikulu mu lugero oba ekiwandiko, nga kikendeeza ku bigambo ebyo okubikola mu bufunze.\n\n**Ekyokulabirako:**\n*   **Ekiwandiko:** \"Abantu bangi baali mu kibuga nga bali mu kusanyuka olw'ekyalo kyabwe okufuna obwetwaze.\"\n*   **Summary:** \"Abantu baasanyukira obwetwaze bw'ekyalo.\"",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "LGP-BENCH-CODESWITCH-001",
+   "field": "benchmark_response",
+   "english": "Nsaba onnyambe okuwandiika email eri boss wange nti nja kuba late ku meeting ya Lwokuna ku ssaawa ssatu ez'okumakya.",
+   "sunbird_luganda": "Nsonyiwa nti sirina kya kukola ku email, naye nsobola okukuyamba okuwandiika obubaka obwangu mu Luganda:\n\n**Obubaka:**  \nBoss wange omuganzi,  \nNsonyiwa nti sija kusobola okubaawo mu lukiiko lw’olwokuna ku ssaawa ssatu ez’okumakya. Nja kuba ndi mu kifo ekirala era nja kubeera nga nzira okutuuka mu budde. Nsaba onnyambe okutegeera ensonga eno. Nsaba onnyambe okufuna ekyokukola ekirala oba okunzizaamu obudde obulala.  \n\nWebale nnyo olw’okutegeera.",
+   "model": "sunflower-9b"
+  }
+ ],
+ "work": {
+  "LGP-BENCH-EVERYDAY-001|benchmark_response": {
+   "nativeFirst": [
+    "Ssaawa ssatu ez'okumakya is 9 am in the morning"
+   ],
+   "revealedUtc": "2026-11-02T18:42:04Z",
+   "sunbirdSnapshot": [
+    "Ssaawa ssatu ez'okumakya ziba ssaawa mwenda ez'ekiro mu kiseera kyaffe."
+   ],
+   "finalText": [
+    "Ssaawa ssatu ez'okumakya is 9 am in the morning"
+   ],
+   "adequacy": 1,
+   "fluency": 1,
+   "tags": [
+    "name_number_day"
+   ],
+   "notes": "it marked 9 am of luganda as 9 in english",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:43:07Z",
+   "draft": [
+    "Ssaawa ssatu ez'okumakya is 9 am in the morning "
+   ]
+  },
+  "LGP-BENCH-EVERYDAY-002|benchmark_response": {
+   "nativeFirst": [
+    "saawa musanvu is 1 pm (13:00)"
+   ],
+   "revealedUtc": "2026-11-02T18:44:07Z",
+   "sunbirdSnapshot": [
+    "Olukiiko lutandika ku ssaawa musanvu ez'emisana. Mu Lungereza, ekyo kiba **1:00 PM**."
+   ],
+   "finalText": [
+    "saawa musanvu is 1 pm (13:00)"
+   ],
+   "adequacy": 5,
+   "fluency": 5,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:44:27Z",
+   "draft": [
+    "saawa musanvu is 1 pm (13:00)"
+   ]
+  },
+  "LGP-BENCH-EVERYDAY-003|benchmark_response": {
+   "nativeFirst": [
+    "enkya lujja kuba Lwakusatu"
+   ],
+   "revealedUtc": "2026-11-02T18:44:43Z",
+   "sunbirdSnapshot": [
+    "Enkya lujja kuba Lwakusatu."
+   ],
+   "finalText": [
+    "enkya lujja kuba Lwakusatu"
+   ],
+   "adequacy": 5,
+   "fluency": 5,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:44:54Z",
+   "draft": [
+    "enkya lujja kuba Lwakusatu"
+   ]
+  },
+  "LGP-BENCH-FORMAL-001|benchmark_response": {
+   "nativeFirst": [
+    "Write a formal announcement that invites people for the workshop for the first aid. the workshop will be on saturday, from 9am to 11 am in the community hall"
+   ],
+   "revealedUtc": "2026-11-02T18:46:35Z",
+   "sunbirdSnapshot": [
+    "**Ekiwandiiko ky'Okuyita Abantu ku Mwoleso gw'Obuyambi bw'Amangu**\n\nTukusaba okubaawo mu mwoleso gw'obuyambi bw'amangu ogugenda okubaawo ku Lwomukaaga, nga 15 Ogwomusanvu, okuva ku ssaawa ssatu okutuuka ku ssaawa ttaano ez'okumakya, mu kizimbe ky'ekitundu.\n\nMwoleso guno gwa kukuleetera obubaka obukulu ku ngeri y'okwekuuma n'okuyamba abantu abali mu buzibu obw'amangu. Tujja kusomesa ku by'obulamu, eby'okwerinda, n'engeri y'okukola obulungi mu biseera eby'amangu.\n\nJjangu otwegatteko, osobole okufuna obubaka obukulu era oyambe okukuuma obulamu bw'abantu bo."
+   ],
+   "finalText": [
+    "Write a formal announcement that invites people for the workshop for the first aid. the workshop will be on saturday, from 9am to 11 am in the community hall"
+   ],
+   "adequacy": 5,
+   "fluency": 5,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:48:11Z",
+   "draft": [
+    "Write a formal announcement that invites people for the workshop for the first aid. the workshop will be on saturday, from 9am to 11 am in the community hall"
+   ]
+  },
+  "LGP-BENCH-INSTRUCTION-001|benchmark_response": {
+   "nativeFirst": [
+    "Saawa  ssatu ezokumakya okutuuka sswaama musanvu ez'emisana"
+   ],
+   "revealedUtc": "2026-11-02T18:49:02Z",
+   "sunbirdSnapshot": [
+    "\"Ekifo ky'ebyuma kiggulwawo ku Lwomukaaga okuva ku ssaawa ssatu ez'okumakya okutuuka ku ssaawa ttaano ez'emisana.\""
+   ],
+   "finalText": [
+    "Ekifo ky'ebyuma kiggulwawo ku Lwomukaaga okuva ku ssaawa ssatu ez'okumakya okutuuka ku ssaawa ttaano ez'emisana."
+   ],
+   "adequacy": 5,
+   "fluency": 5,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:49:38Z",
+   "draft": [
+    "Saawa  ssatu ezokumakya okutuuka sswaama musanvu ez'emisana"
+   ]
+  },
+  "LGP-BENCH-EXPLANATION-001|benchmark_response": {
+   "nativeFirst": [
+    "Summary kye kigambo ekikwata ku bintu ebikulu mu lugero oba ekiwandiko, nga kikendeeza emboozi empaanvu okudda mu bufunze."
+   ],
+   "revealedUtc": "2026-11-02T18:53:02Z",
+   "sunbirdSnapshot": [
+    "**Summary** kye kigambo ekikwata ku bintu ebikulu mu lugero oba ekiwandiko, nga kikendeeza ku bigambo ebyo okubikola mu bufunze.\n\n**Ekyokulabirako:**\n*   **Ekiwandiko:** \"Abantu bangi baali mu kibuga nga bali mu kusanyuka olw'ekyalo kyabwe okufuna obwetwaze.\"\n*   **Summary:** \"Abantu baasanyukira obwetwaze bw'ekyalo.\""
+   ],
+   "finalText": [
+    "Summary kye kigambo ekikwata ku bintu ebikulu mu lugero oba ekiwandiko, nga kikendeeza emboozi empaanvu okudda mu bufunze."
+   ],
+   "adequacy": 3,
+   "fluency": 3,
+   "tags": [
+    "grammar"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:53:26Z",
+   "draft": [
+    "Summary kye kigambo ekikwata ku bintu ebikulu mu lugero oba ekiwandiko, nga kikendeeza emboozi empaanvu okudda mu bufunze."
+   ]
+  },
+  "LGP-BENCH-CODESWITCH-001|benchmark_response": {
+   "nativeFirst": [
+    "Ssebo oba Nyabo,  \nNSaba kutegeeza nti sijja kusobola kubeerawo mu lukiiko. Nsonyiwa nti sija kusobola okubaawo mu lukiiko lw’olwokuna ku ssaawa ssatu ez’okumakya.  Nsaba onnyambe okutegeera ensonga eno. Nsaba onnyambe okufuna ekyokukola ekirala oba okunzizaamu obudde obulala.  \n\nwebale kutegeera kusaba kwange"
+   ],
+   "revealedUtc": "2026-11-02T18:55:24Z",
+   "sunbirdSnapshot": [
+    "Nsonyiwa nti sirina kya kukola ku email, naye nsobola okukuyamba okuwandiika obubaka obwangu mu Luganda:\n\n**Obubaka:**  \nBoss wange omuganzi,  \nNsonyiwa nti sija kusobola okubaawo mu lukiiko lw’olwokuna ku ssaawa ssatu ez’okumakya. Nja kuba ndi mu kifo ekirala era nja kubeera nga nzira okutuuka mu budde. Nsaba onnyambe okutegeera ensonga eno. Nsaba onnyambe okufuna ekyokukola ekirala oba okunzizaamu obudde obulala.  \n\nWebale nnyo olw’okutegeera."
+   ],
+   "finalText": [
+    "Ssebo oba Nyabo,  \nNSaba kutegeeza nti sijja kusobola kubeerawo mu lukiiko. Nsonyiwa nti sija kusobola okubaawo mu lukiiko lw’olwokuna ku ssaawa ssatu ez’okumakya.  Nsaba onnyambe okutegeera ensonga eno. Nsaba onnyambe okufuna ekyokukola ekirala oba okunzizaamu obudde obulala.  \n\nwebale kutegeera kusaba kwange"
+   ],
+   "adequacy": 3,
+   "fluency": 3,
+   "tags": [
+    "grammar",
+    "meaning_changed"
+   ],
+   "notes": "the title of the email is wrong and the meaning chnaged ",
+   "status": "done",
+   "doneUtc": "2026-11-02T18:56:03Z",
+   "draft": [
+    "Ssebo oba Nyabo,  \nNSaba kutegeeza nti sijja kusobola kubeerawo mu lukiiko. Nsonyiwa nti sija kusobola okubaawo mu lukiiko lw’olwokuna ku ssaawa ssatu ez’okumakya.  Nsaba onnyambe okutegeera ensonga eno. Nsaba onnyambe okufuna ekyokukola ekirala oba okunzizaamu obudde obulala.  \n\nwebale kutegeera kusaba kwange"
+   ]
+  }
+ },
+ "reviewer": "T3",
+ "source": "sunflower-benchmark-0.2-draft.csv"
+}

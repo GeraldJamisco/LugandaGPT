@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark item review</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#1c2330;--muted:#5d6677;--line:#d9dde5;--accent:#1f4fd8;--accent-ink:#fff;--good:#1b7f4b;--warn:#a15c00;--bad:#b3261e;--soft:#eef2ff}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--panel:#1b2029;--ink:#e8ebf1;--muted:#9aa3b5;--line:#323a49;--accent:#7ea2ff;--accent-ink:#0d1220;--good:#5fd39a;--warn:#f0b45a;--bad:#ff8a80;--soft:#222a3d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:16px;background:var(--panel);border-bottom:1px solid var(--line)}
+h1{margin:0 0 4px;font-size:21px}.sub{margin:0;color:var(--muted);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.spacer{flex:1}
+button,.btn{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text]{font:inherit;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);resize:vertical}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+.help{background:var(--soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.help summary{cursor:pointer;font-weight:600}.help ol{margin:8px 0 2px 20px;padding:0}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.dots button{padding:6px 10px;font-size:13px}
+.dots button[aria-current=true]{border-color:var(--accent);background:var(--soft);font-weight:700}
+.dots .d-keep,.dots .d-fix{border-left:4px solid var(--good)}.dots .d-drop{border-left:4px solid var(--bad)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h2{margin:0;font-size:18px}.meta{color:var(--muted);font-size:13px;margin-bottom:14px}
+.box{padding:12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);white-space:pre-wrap;font-size:17px}
+.lbl{display:block;font-weight:600;margin:16px 0 4px}.hint{font-size:13px;color:var(--muted);margin:2px 0 6px;font-weight:400}
+.choices{display:flex;gap:10px;flex-wrap:wrap}
+.choice{flex:1;min-width:150px;border:2px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:block}
+.choice input{margin-right:8px}.choice b{display:block}.choice span{font-size:13px;color:var(--muted)}
+.choice.on{border-color:var(--accent);background:var(--soft)}
+.nav{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.err{color:var(--bad)}.ok{color:var(--good)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Benchmark item review</h1>
+  <p class="sub">8 draft Luganda test items. Nothing you type leaves this computer.</p>
+</header>
+<div class="bar">
+  <label>Your reviewer code <input id="rev" type="text" size="6" maxlength="12" placeholder="T1" autocomplete="off"></label>
+  <span id="prog" class="sub"></span>
+  <span class="spacer"></span>
+  <label class="btn" style="cursor:pointer">Load backup<input id="file" type="file" accept=".json" hidden></label>
+  <button id="expCsv">Export CSV</button>
+  <button id="expJson">Backup JSON</button>
+</div>
+<div class="wrap">
+  <details class="help" open><summary>How to use (4 steps)</summary>
+    <ol>
+      <li>Type your reviewer code (for example T1) at the top. Use a code, not your name.</li>
+      <li>For each item, read the draft. It was written by an AI that is not a native speaker, so do not assume it is right.</li>
+      <li>Choose <b>Keep</b>, <b>Fix</b> or <b>Drop</b>, then fill in the boxes that appear.</li>
+      <li>When done, click <b>Export CSV</b> and <b>Backup JSON</b> and save both in <code>data\benchmark\drafts\</code>. Each reviewer should use their own code and their own export.</li>
+    </ol>
+  </details>
+  <div class="dots" id="dots"></div>
+  <div id="view"></div>
+</div>
+<script>
+"use strict";
+const KEY="lugandagpt-bench-review-v1";
+const ITEMS=[
+["LGP-BENCH-EVERYDAY-001","Everyday Luganda","Nsisinkana mukwano gwange ku ssaawa ssatu ez'enkya. Ssaawa eyo mu Luzungu eba mmeka?","A correct answer says that \"ssaawa ssatu ez'enkya\" is 9 in the morning. Saying 3am is wrong."],
+["LGP-BENCH-EVERYDAY-002","Everyday Luganda","Olukiiko lutandika ku ssaawa musanvu ez'emisana. Ssaawa eyo mu Luzungu eba mmeka?","A correct answer says that \"ssaawa musanvu ez'emisana\" is 1 in the afternoon (13:00)."],
+["LGP-BENCH-EVERYDAY-003","Everyday Luganda","Leero Lwokubiri. Enkya ejja kuba lunaku ki?","A correct answer says tomorrow is Lwokusatu (Wednesday)."],
+["LGP-BENCH-FORMAL-001","Formal Luganda","Wandiika ekiwandiiko ekitongole eky'okuyita abantu ku mwoleso gw'okuyamba abantu mu mbeera ey'amangu. Gunaaba ku Lwomukaaga, okuva ku ssaawa ssatu ez'enkya okutuuka ku ssaawa ttaano ez'enkya, mu kizimbe ky'ekitundu.","A formal notice in Luganda. It keeps Lwomukaaga and the Luganda times without changing them to English numbers, uses one word for the event, and sounds formal."],
+["LGP-BENCH-INSTRUCTION-001","Instruction following","Translate into Luganda: \"The tool library opens on Saturday from 9am to 1pm.\" Use the Luganda way of telling the time.","Saturday is Lwomukaaga. The times are ssaawa ssatu ez'enkya to ssaawa musanvu ez'emisana (or another wording you accept)."],
+["LGP-BENCH-INSTRUCTION-002","Instruction following","Translate into Luganda and use the same Luganda term for \"tool library\" every time it appears: \"The tool library is free for members. Members must register at the tool library before borrowing. The tool library closes on Sundays.\"","All three sentences are translated. The same term is used for tool library each time. Days and meaning are kept."],
+["LGP-BENCH-EXPLANATION-001","Explanation","Nnyonyola mu bufunze 'summary' kye ki, era mpa ekyokulabirako ekimu.","Explains in Luganda (the English word is allowed) that a summary is a short version of a longer text, with one correct example."],
+["LGP-BENCH-CODESWITCH-001","Luganda and English mixed","Nsaba onnyambe okuwandiika email eri boss wange nti nja kuba late ku meeting ya Lwokuna ku ssaawa ssatu ez'enkya.","An email in the same Luganda and English mix. Lwokuna and ssaawa ssatu ez'enkya (9am) stay correct."]
+];
+const FIELDS=["decision","fixedPrompt","fixedBehavior","reference","alternatives","oneReading","notes"];
+let st={reviewer:"",answers:{}},cur=0,timer=null;
+const $=id=>document.getElementById(id);
+const blank=()=>({decision:"",fixedPrompt:"",fixedBehavior:"",reference:"",alternatives:"",oneReading:"",notes:""});
+const ans=id=>st.answers[id]||(st.answers[id]=blank());
+function save(){clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}},200)}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.answers)st=s}catch(e){}}
+function isDone(id){const a=st.answers[id];if(!a||!a.decision)return false;if(a.decision==="drop")return !!a.notes.trim();if(a.decision==="keep")return !!a.reference.trim()&&!!a.oneReading;return !!a.fixedPrompt.trim()&&!!a.reference.trim()&&!!a.oneReading}
+function el(t,p,...k){const e=document.createElement(t);if(p)for(const[a,v]of Object.entries(p)){if(a==="class")e.className=v;else if(a==="text")e.textContent=v;else e.setAttribute(a,v)}k.forEach(x=>x&&e.append(x));return e}
+function field(label,hint,a,key,rows){
+  const wrap=el("div",null,el("label",{class:"lbl",text:label}));
+  if(hint)wrap.append(el("div",{class:"hint",text:hint}));
+  const ta=el("textarea",{"aria-label":label});ta.value=a[key];if(rows)ta.style.minHeight=rows+"px";
+  ta.addEventListener("input",()=>{a[key]=ta.value;save();upd()});wrap.append(ta);return wrap}
+function render(){
+  const dots=$("dots");dots.replaceChildren();
+  ITEMS.forEach((it,i)=>{const a=st.answers[it[0]];const b=el("button",{type:"button",class:(a&&a.decision?"d-"+a.decision:""),text:(isDone(it[0])?"✓ ":"")+(i+1)});
+    if(i===cur)b.setAttribute("aria-current","true");b.addEventListener("click",()=>{cur=i;render()});dots.append(b)});
+  const it=ITEMS[cur],id=it[0],a=ans(id),v=$("view");v.replaceChildren();
+  const card=el("div",{class:"card"},el("h2",{text:"Item "+(cur+1)+" of "+ITEMS.length+": "+it[1]}),el("div",{class:"meta",text:id}));
+  card.append(el("label",{class:"lbl",text:"Draft prompt (what the AI will be asked)"}),el("div",{class:"box",text:it[2]}),
+    el("label",{class:"lbl",text:"What a good answer must do (draft)"}),el("div",{class:"box",text:it[3]}));
+  card.append(el("label",{class:"lbl",text:"Your decision"}));
+  const ch=el("div",{class:"choices"});
+  [["keep","Keep","The prompt is good as written."],["fix","Fix","I will rewrite it."],["drop","Drop","Not a good test."]].forEach(([val,t,d])=>{
+    const inp=el("input",{type:"radio",name:"dec",value:val});inp.checked=a.decision===val;
+    const lab=el("label",{class:"choice"+(a.decision===val?" on":"")},inp,el("b",{text:t}),el("span",{text:d}));
+    inp.addEventListener("change",()=>{a.decision=val;save();render()});ch.append(lab)});
+  card.append(ch);
+  if(a.decision==="fix"){
+    card.append(field("Corrected prompt in native Luganda","Write the prompt the way a native speaker would say it.",a,"fixedPrompt",90),
+      field("Corrected description of a good answer (only if the draft above is wrong)","",a,"fixedBehavior",70))}
+  if(a.decision==="keep"||a.decision==="fix"){
+    card.append(field("Reference answer, written by a native speaker","What a good Luganda answer looks like. Never copy from an AI.",a,"reference",110),
+      field("Other acceptable answers (optional)","Other wordings that should also count as correct.",a,"alternatives",70));
+    card.append(el("label",{class:"lbl",text:"Is there only ONE correct way to read this prompt?"}));
+    const yn=el("div",{class:"choices"});
+    [["yes","Yes, it is clear"],["no","No, it is unclear (explain in notes)"]].forEach(([val,t])=>{
+      const inp=el("input",{type:"radio",name:"one",value:val});inp.checked=a.oneReading===val;
+      const lab=el("label",{class:"choice"+(a.oneReading===val?" on":"")},inp,el("b",{text:t}));
+      inp.addEventListener("change",()=>{a.oneReading=val;save();render()});yn.append(lab)});card.append(yn)}
+  if(a.decision){card.append(field(a.decision==="drop"?"Why drop it? (required)":"Notes (optional)","",a,"notes",70))}
+  const prev=el("button",{type:"button",text:"Back"}),next=el("button",{type:"button",class:"primary",text:cur<ITEMS.length-1?"Next item":"Finish"});
+  prev.disabled=cur===0;prev.addEventListener("click",()=>{cur--;render()});
+  next.addEventListener("click",()=>{if(cur<ITEMS.length-1){cur++;render();scrollTo(0,0)}else{upd();alert(ITEMS.filter(i=>isDone(i[0])).length+" of "+ITEMS.length+" items complete. Now click Export CSV and Backup JSON.")}});
+  card.append(el("div",{class:"nav"},prev,next));v.append(card);upd()}
+function upd(){const n=ITEMS.filter(i=>isDone(i[0])).length;$("prog").textContent=n+" of "+ITEMS.length+" complete"}
+function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function expCsv(){
+  const q=x=>'"'+String(x==null?"":x).replace(/"/g,'""')+'"';
+  const cols=["item_id","category","draft_prompt","draft_expected_behavior","decision","corrected_prompt","corrected_expected_behavior","reference_answer","other_acceptable_answers","one_correct_reading","notes","reviewer_code","complete"];
+  const rows=ITEMS.map(it=>{const a=st.answers[it[0]]||blank();return[it[0],it[1],it[2],it[3],a.decision,a.fixedPrompt,a.fixedBehavior,a.reference,a.alternatives,a.oneReading,a.notes,st.reviewer,isDone(it[0])?"yes":"no"]});
+  dl("benchmark-review-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".csv","﻿"+[cols.map(q).join(",")].concat(rows.map(r=>r.map(q).join(","))).join("\r\n")+"\r\n","text/csv;charset=utf-8")}
+function expJson(){dl("benchmark-review-backup-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify(Object.assign({format:"lugandagpt-bench-review-v1"},st),null,1),"application/json")}
+$("rev").addEventListener("input",e=>{st.reviewer=e.target.value.trim();save()});
+$("expCsv").addEventListener("click",()=>{if(!st.reviewer&&!confirm("You have not typed a reviewer code. Export anyway?"))return;expCsv()});
+$("expJson").addEventListener("click",expJson);
+$("file").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(s.format!=="lugandagpt-bench-review-v1")throw new Error("This is not a backup from this page.");st={reviewer:s.reviewer||"",answers:s.answers||{}};$("rev").value=st.reviewer;save();render()}catch(x){$("prog").textContent=x.message;$("prog").className="sub err"}};r.readAsText(f,"utf-8")});
+load();$("rev").value=st.reviewer||"";render();
+</script>
+</body>
+</html>

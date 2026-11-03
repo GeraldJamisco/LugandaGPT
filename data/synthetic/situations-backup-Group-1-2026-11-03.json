@@ -1,0 +1,206 @@
+{
+ "format": "lugandagpt-situations-v1",
+ "reviewer": "Group-1",
+ "a": {
+  "SIT-001": {
+   "text": "Tujja kusisinkana ku Lwokusatu ssaawa ttaano ez'okumakya mu katale",
+   "note": "",
+   "skip": false
+  },
+  "SIT-002": {
+   "text": "Mutabani nkujukiza baasi ekutwaala ku ssomero enkya etuuka ssaawa emu ey'okumakya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-003": {
+   "text": "\nEKIWANDIIKO: ESAAWA ZOKUGULAWO CLINIC\nKuno kutegeeza eri abalwadde bonna n'abagenyi nti clinic ejakugulwawo ssaawa emu ey'okumakya ku Lwokuna. \n\nMwebale nnyo",
+   "note": "",
+   "skip": false
+  },
+  "SIT-004": {
+   "text": "\nNkuwaniriza okutwegatako ku kusaba kwakelezia ku Sunday eno ku saawa ttaano ezokumakya. Kajja kuba kaseera kalunji akokusaba, okusinza nokwebaza. \n\nNsuubira ojakusobola okubeerawo. tukwaniriza n'essanyu elinji ",
+   "note": "",
+   "skip": false
+  },
+  "SIT-005": {
+   "text": "Njakubeerawo ku Lwokutaano ssaawa mwenda ezemisana",
+   "note": "",
+   "skip": false
+  },
+  "SIT-006": {
+   "text": "\nEKIWANDIIKO: ESAAWA Z'OKUGGALAWO EDUUKA\n\nTukutegeeza nti edduuka lijja kubeera nga liggale olwaleero akawungeezi saawa kuminabbiri.\ntukwebaza okutegeera obukulu bwekiwandiiko kino.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-007": {
+   "text": "Ssebo mukama wange nsaba okutegeeza nti njakutuuka ku mulimu saawa emu eyokumakya ku Mmande",
+   "note": "",
+   "skip": false
+  },
+  "SIT-008": {
+   "text": "Nkujukiza okukubira Jjajja wo essimu ku ssaawa emu eyakawungeezi leero",
+   "note": "",
+   "skip": false
+  },
+  "SIT-009": {
+   "text": "EKIWANDIIKO: OKUTANDIKA KWEBIGEZO\n\nAbayizi bonnna bategeezebwa nti ebigezo bijja kutandika ku Lwokubiri ssaawa emu ey'okumakya.\nabayizi basabibwa okutuuka ku ssomero mu budde ate bajje nga betegekedde ebigezo byaabwe.\nmwebale nnyo ",
+   "note": "",
+   "skip": false
+  },
+  "SIT-010": {
+   "text": "Kizibwe wange nkutegeeza nti embaga egenda kutandika ssaawa mukaaga ezemisana ku Lwomukaaga",
+   "note": "",
+   "skip": false
+  },
+  "SIT-011": {
+   "text": "Customer wange omulunji, nkutegeeza nti Order yo egenda kuba ntegeke ssaawa kkumi ezemisana ku Lwokuna\n\nCustomer wange omulunji, nkutegeeza nti Order yo egenda kuba ntegeke ku Lwokuna saawa kkumi \nCustomer wange omulunji, nkutegeeza ojje onone order yo ku  Lwokuna ssaawa kumi ",
+   "note": "i have have gave you 3 options meaning that all of them are correct sentences in there meaning to the question or situation displayed or asked ",
+   "skip": false
+  },
+  "SIT-012": {
+   "text": "Baasi essimbula saawa kumi n'emu ezokumakya enkya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-013": {
+   "text": "Otegezebwa nti akatale kagenda kuba kaggule ku ssaawa kumi nabbiri ezokumakya ku Lwomukaaga\n\notegezebwa nti akatale kajja kubeera kaggule ku Lwomukaaga saawa kumi nabbiri ezokumakya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-014": {
+   "text": "Nkuyita ojje tulyeemu ekyemisana ku saawa mukaaga emisana ku Ssande",
+   "note": "",
+   "skip": false
+  },
+  "SIT-015": {
+   "text": "Mbajukizza nti olukiiko lutandika saawa mwenda ez'emisana ku Lwokusatu",
+   "note": "",
+   "skip": false
+  },
+  "SIT-016": {
+   "text": "Nkereyeemu, ngenda ttuuka kikeerezi, ssaawa nga kkumi emisana\n\nNkereyeemu, ngenda ttuuka kikeerezi, ssaawa nga kkumi akawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-017": {
+   "text": "Tukutegeeza nti amazzi gajja kujibwaako  enkya okuva ku ssaawa emu ey'okumakya okutuuka ssaawa mwenda ezemisana ",
+   "note": "",
+   "skip": false
+  },
+  "SIT-018": {
+   "text": "Omupiira gugenda kutandika saawa kumi eza kawungeezi ku Lwomukaaga",
+   "note": "",
+   "skip": false
+  },
+  "SIT-019": {
+   "text": "\n\nAbazadde baffe abalunji, \nMutegezebwa nti olukiiko lwabazadde lwakubeerawo ku Lwokutaano ku ssaawa mwenda ezemisana. \nabazadde mwenna musabibwa okubeerawo mulukiiko ate mu budde. \nMwebale nnyo \n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-020": {
+   "text": "Mwanyinaze njakutuuka ekiro kyaleero ssaawa emu eyakawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-021": {
+   "text": "Edduuka libeera liggule ku Ssande okuva ssaawa emu ey'okumakya okutuuka ssaawa kkumi nabbiri eze kawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-022": {
+   "text": "Nkujjukizza nti ekibiina kitandika saawa ttaano ezokumakya enkya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-023": {
+   "text": "Ekiwandiiko\nMutegezebwa  nti eryaato lisimbula ssaawa kkumi nabbiri ez'okumakya ku Lwokubiri",
+   "note": "",
+   "skip": false
+  },
+  "SIT-024": {
+   "text": "Nkwaniriza mu nnyumba yange ku mmande saawa kkumi n'emu ezakawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-025": {
+   "text": "Eggulo lwabadde Lwakuna, ekitegeeza leero Lwakutaano",
+   "note": "",
+   "skip": false
+  },
+  "SIT-026": {
+   "text": "Nkujjukizza nti enkya Lwakusatu ate olukiiko lwa ssaawa ttaano ez'okumakya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-027": {
+   "text": "Ekiwandiiko: okulongoosa mu kitundu kyaffe\nBanakyaalo mwenna muyitibwa okwetaba mu kulongoosa ekitundu kyaffe ku Lwomukaaga saawa emu ey'okumakya\n\nBuli omu akubirizibwa okujja n'ebikozesebwa mu kulongoosa ne mu kuyambako okukuuma ekitundu kyaffe nga kiyonjo. \nMwebale nnyo \n\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-028": {
+   "text": "Nsuubira okutuuka ewaka ssaawa nga bbiri ez'olweggulo",
+   "note": "Olweggulo can also mean evening time but in times context ",
+   "skip": false
+  },
+  "SIT-029": {
+   "text": "Ngambira omuvuzi wa boda boda oyo ajje antwaleko ku saawa kkumi na bbiri ez'okumakya enkya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-030": {
+   "text": "Ekiwandiiko:\n\nMutegeezebwa nti offiisi ejja kuggalwaawo saawa kkumi n'emu ezakawungeezi ku Lwokutaano",
+   "note": "",
+   "skip": false
+  },
+  "SIT-031": {
+   "text": "Njakukubira essimu ku ssaawa mukaaga ez'emisana",
+   "note": "",
+   "skip": false
+  },
+  "SIT-032": {
+   "text": "Jjangu ku Lwokuna ssaawa mwenda ez'emisana",
+   "note": "",
+   "skip": false
+  },
+  "SIT-033": {
+   "text": "Mbajjukiza nti olukiiko lw'essaala lwa ssaawa emu ey'akawungeezi ku Lwokusatu",
+   "note": "",
+   "skip": false
+  },
+  "SIT-034": {
+   "text": "\n\nEkilango Kya radio programu yaffe \n\nN'essanyu elinji tutegeeza abawuliriza baffe nti radio programu yaffe ebeerawo buli Ssande ssaawa emu eyakawungeezi. Tubasaba mutege nga omukutu, muwulirizze ebiteeso, enyimba, n'ebyamakulu ebirala byonna. \n\nMwebale okuwulirizza radio yaffe",
+   "note": "",
+   "skip": false
+  },
+  "SIT-035": {
+   "text": "Abakozi mwenna mutegezebwa nti amakungula gatandika nkya ssaawa kkumi na bbiri ez'okumakya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-036": {
+   "text": "Omuzadde, \nOjjukizibwa okusasula ebisale by'essomero nga olw'okutaano terunatuuka",
+   "note": "",
+   "skip": false
+  },
+  "SIT-037": {
+   "text": "Akabaga kajja kutandika ku Lwomukaaga ssaawa emu ey'akawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-038": {
+   "text": "Ekiwandiiko \n\nMutegezebwa nti okutendekebwa kujja kutandika ssaawa ttaano ez'okumakya ku mmande",
+   "note": "",
+   "skip": false
+  },
+  "SIT-039": {
+   "text": "Filimu ettandika ssaawa ssattu ez'ekiro",
+   "note": "",
+   "skip": false
+  },
+  "SIT-040": {
+   "text": "Mbajukiza nti okutendekebwa kwa kkwaaya yaffe kutandika ssaawa kkumi ezakawungeezi ku Lwokuna",
+   "note": "",
+   "skip": false
+  }
+ }
+}

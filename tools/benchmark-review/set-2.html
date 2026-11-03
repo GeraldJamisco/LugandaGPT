@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark review set 2</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#1c2330;--muted:#5d6677;--line:#d9dde5;--accent:#1f4fd8;--accent-ink:#fff;--good:#1b7f4b;--warn:#a15c00;--bad:#b3261e;--soft:#eef2ff}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--panel:#1b2029;--ink:#e8ebf1;--muted:#9aa3b5;--line:#323a49;--accent:#7ea2ff;--accent-ink:#0d1220;--good:#5fd39a;--warn:#f0b45a;--bad:#ff8a80;--soft:#222a3d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:16px;background:var(--panel);border-bottom:1px solid var(--line)}
+h1{margin:0 0 4px;font-size:21px}.sub{margin:0;color:var(--muted);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.spacer{flex:1}
+button,.btn{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text]{font:inherit;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);resize:vertical}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+.help{background:var(--soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.help summary{cursor:pointer;font-weight:600}.help ol{margin:8px 0 2px 20px;padding:0}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.dots button{padding:6px 10px;font-size:13px}
+.dots button[aria-current=true]{border-color:var(--accent);background:var(--soft);font-weight:700}
+.dots .d-keep,.dots .d-fix{border-left:4px solid var(--good)}.dots .d-drop{border-left:4px solid var(--bad)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h2{margin:0;font-size:18px}.meta{color:var(--muted);font-size:13px;margin-bottom:14px}
+.box{padding:12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);white-space:pre-wrap;font-size:17px}
+.lbl{display:block;font-weight:600;margin:16px 0 4px}.hint{font-size:13px;color:var(--muted);margin:2px 0 6px;font-weight:400}
+.choices{display:flex;gap:10px;flex-wrap:wrap}
+.choice{flex:1;min-width:150px;border:2px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:block}
+.choice input{margin-right:8px}.choice b{display:block}.choice span{font-size:13px;color:var(--muted)}
+.choice.on{border-color:var(--accent);background:var(--soft)}
+.nav{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.err{color:var(--bad)}.ok{color:var(--good)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Benchmark item review: set 2</h1>
+  <p class="sub">23 draft Luganda test items (set 2). Nothing you type leaves this computer.</p>
+</header>
+<div class="bar">
+  <label>Your reviewer code <input id="rev" type="text" size="6" maxlength="12" placeholder="T1" autocomplete="off"></label>
+  <span id="prog" class="sub"></span>
+  <span class="spacer"></span>
+  <label class="btn" style="cursor:pointer">Load backup<input id="file" type="file" accept=".json" hidden></label>
+  <button id="expCsv">Export CSV</button>
+  <button id="expJson">Backup JSON</button>
+</div>
+<div class="wrap">
+  <details class="help" open><summary>How to use (4 steps)</summary>
+    <ol>
+      <li>Type your reviewer code (for example T1) at the top. Use a code, not your name.</li>
+      <li>For each item, read the draft. It was written by an AI that is not a native speaker, so do not assume it is right.</li>
+      <li>Choose <b>Keep</b>, <b>Fix</b> or <b>Drop</b>, then fill in the boxes that appear.</li>
+      <li>When done, click <b>Export CSV</b> and <b>Backup JSON</b> and save both in <code>data\benchmark\drafts\</code>. Each reviewer should use their own code and their own export.</li>
+    </ol>
+  </details>
+  <div class="dots" id="dots"></div>
+  <div id="view"></div>
+</div>
+<script>
+"use strict";
+const KEY="lugandagpt-bench-review-set2-v1";
+const ITEMS=[
+["LGP-BENCH-EVERYDAY-004", "Everyday Luganda", "Okusoma kutandika ku ssaawa nnya ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?", "States that ssaawa nnya ez'okumakya is 10 in the morning (10:00)."],
+["LGP-BENCH-EVERYDAY-005", "Everyday Luganda", "Tulya ekyemisana ku ssaawa munaana ez'emisana. Ssaawa eyo mu Luzungu ziba mmeka?", "States that ssaawa munaana ez'emisana is 2 in the afternoon (14:00)."],
+["LGP-BENCH-EVERYDAY-006", "Everyday Luganda", "Nninaayo okutuuka ku ssaawa bbiri ez'okumakya? Mu Luzungu ssaawa eyo eba ssaawa mmeka?", "Reverse direction. States that ssaawa bbiri ez'okumakya is 8 in the morning (8:00)."],
+["LGP-BENCH-EVERYDAY-007", "Everyday Luganda", "Jjo lyali Lwokutaano. Leero lunaku ki?", "Says today is Lwomukaaga (Saturday)."],
+["LGP-BENCH-FORMAL-002", "Formal Luganda", "Wandiika ekiwandiiko ekitongole nti olukiiko olwali lwa Lwokuna lusenguddwa okudda ku Lwokutaano, ku ssaawa nnya ez'okumakya.", "Formal notice in Luganda that the Thursday meeting moved to Lwokutaano at ssaawa nnya ez'okumakya. Keeps days and Luganda time unchanged. Formal register. Adds no invented date or facts."],
+["LGP-BENCH-FORMAL-003", "Formal Luganda", "Wandiika ebbaluwa ey'ekitiibwa eri omukulu w'essomero ng'osaba olukusa okubula ku ssomero ku Lwokubiri.", "Formal letter in Luganda asking the head teacher for permission to be absent on Lwokubiri. Respectful register. Adds no invented facts."],
+["LGP-BENCH-FORMAL-004", "Formal Luganda", "Wandiika ekiwandiiko ekitongole eky'okuyita abatuuze ku lukiiko lw'ekyalo ku Lwomukaaga ku ssaawa nnya ez'okumakya.", "Formal invitation notice. Keeps Lwomukaaga and ssaawa nnya ez'okumakya. Adds no invented date, venue or agenda."],
+["LGP-BENCH-FORMAL-005", "Formal Luganda", "Wandiika ebbaluwa ey'okwebaza omuntu eyayamba ekibiina kyaffe mu mwoleso gw'ekitundu.", "Formal thank-you letter in Luganda to a person who helped the group at the community workshop. Respectful register."],
+["LGP-BENCH-FORMAL-006", "Formal Luganda", "Wandiika ekiwandiiko ekitongole nti dduuka lijja kuggalwa ku Lwokutaano ne Lwomukaaga.", "Formal notice that the shop will be closed on Lwokutaano and Lwomukaaga. Days correct. Formal register."],
+["LGP-BENCH-CODESWITCH-002", "Luganda and English mixed", "Nsaba onnyambe okuwandiika WhatsApp message eri friend wange nti meeting ya Lwokubiri ku ssaawa nnya ez'okumakya ereteddwa ku ssaawa mukaaga ez'emisana.", "Short friendly WhatsApp message in a natural Luganda-English mix. Keeps Lwokubiri, ssaawa nnya ez'okumakya (10am) and ssaawa mukaaga ez'emisana (noon) correct."],
+["LGP-BENCH-CODESWITCH-003", "Luganda and English mixed", "Mpandiikira reply eri customer wange nti order ye egenda kutuuka Lwokuna.", "Short polite reply to a customer in a Luganda-English mix saying the order arrives Lwokuna. Does not invent other details."],
+["LGP-BENCH-CODESWITCH-004", "Luganda and English mixed", "Nnyonyola 'deadline' kye ki nga bwe nkozesa mu kukola.", "Explains what a deadline is in a natural Luganda-English mix, with a simple work example."],
+["LGP-BENCH-CODESWITCH-005", "Luganda and English mixed", "Njagala okuwandiika text eri mukwano gwange nti nja kuba late kuba ndi mu traffic.", "Short text message in a Luganda-English mix saying the person will be late because of traffic."],
+["LGP-BENCH-INSTRUCTION-003", "Instruction following", "Answer only in Luganda, in one short sentence: which day comes after Lwokuna?", "One short Luganda sentence saying Lwokutaano. Luganda only, one sentence."],
+["LGP-BENCH-INSTRUCTION-004", "Instruction following", "List the days Lwokubiri, Lwokusatu and Lwokuna in Luganda order as a numbered list. Reply in Luganda only.", "Numbered list of three days in the correct order, in Luganda."],
+["LGP-BENCH-INSTRUCTION-005", "Instruction following", "Translate into Luganda: \"The meeting starts at 10am on Wednesday.\" Use the Luganda way of telling the time.", "Luganda sentence with Wednesday as Lwokusatu and 10am as ssaawa nnya ez'okumakya."],
+["LGP-BENCH-INSTRUCTION-006", "Instruction following", "Translate into Luganda: \"School starts at 8am.\" Use the Luganda way of telling the time. Give only the translation.", "Only the translation, with 8am as ssaawa bbiri ez'okumakya. No extra text."],
+["LGP-BENCH-FACTUALITY-001", "Facts and honesty", "Ekibuga ekikulu ekya Uganda kye ki?", "States Kampala. Short and correct."],
+["LGP-BENCH-FACTUALITY-002", "Facts and honesty", "Obudde bunaabeera butya e Kampala nga wayise wiiki bbiri?", "Says it cannot know the future weather and does not invent a forecast. May give general climate information."],
+["LGP-BENCH-FACTUALITY-003", "Facts and honesty", "Mpa ennyonyola y'ekitabo ekiyitibwa 'Omuzira w'e Bukoba' eky'omuwandiisi Namukasa.", "Does not invent a plot or details for a book it cannot verify. Says it does not know of this book."],
+["LGP-BENCH-EXPLANATION-002", "Explanation", "Nnyonyola lwaki kikulu okuterekawo ssente buli mwezi.", "Explains in Luganda why saving money each month matters, with at least two sensible reasons."],
+["LGP-BENCH-EXPLANATION-003", "Explanation", "Nnyonyola email kye ki n'engeri gye bakozesaamu.", "Explains in Luganda (English term allowed) what email is and how it is used, correctly and simply."],
+["LGP-BENCH-EXPLANATION-004", "Explanation", "Nnyonyola lwaki abayizi balina okujja ku ssomero mu budde.", "Explains in Luganda why students should arrive at school on time, with sensible reasons."]
+];
+const FIELDS=["decision","fixedPrompt","fixedBehavior","reference","alternatives","oneReading","notes"];
+let st={reviewer:"",answers:{}},cur=0,timer=null;
+const $=id=>document.getElementById(id);
+const blank=()=>({decision:"",fixedPrompt:"",fixedBehavior:"",reference:"",alternatives:"",oneReading:"",notes:""});
+const ans=id=>st.answers[id]||(st.answers[id]=blank());
+function save(){clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}},200)}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.answers)st=s}catch(e){}}
+function isDone(id){const a=st.answers[id];if(!a||!a.decision)return false;if(a.decision==="drop")return !!a.notes.trim();if(a.decision==="keep")return !!a.reference.trim()&&!!a.oneReading;return !!a.fixedPrompt.trim()&&!!a.reference.trim()&&!!a.oneReading}
+function el(t,p,...k){const e=document.createElement(t);if(p)for(const[a,v]of Object.entries(p)){if(a==="class")e.className=v;else if(a==="text")e.textContent=v;else e.setAttribute(a,v)}k.forEach(x=>x&&e.append(x));return e}
+function field(label,hint,a,key,rows){
+  const wrap=el("div",null,el("label",{class:"lbl",text:label}));
+  if(hint)wrap.append(el("div",{class:"hint",text:hint}));
+  const ta=el("textarea",{"aria-label":label});ta.value=a[key];if(rows)ta.style.minHeight=rows+"px";
+  ta.addEventListener("input",()=>{a[key]=ta.value;save();upd()});wrap.append(ta);return wrap}
+function render(){
+  const dots=$("dots");dots.replaceChildren();
+  ITEMS.forEach((it,i)=>{const a=st.answers[it[0]];const b=el("button",{type:"button",class:(a&&a.decision?"d-"+a.decision:""),text:(isDone(it[0])?"✓ ":"")+(i+1)});
+    if(i===cur)b.setAttribute("aria-current","true");b.addEventListener("click",()=>{cur=i;render()});dots.append(b)});
+  const it=ITEMS[cur],id=it[0],a=ans(id),v=$("view");v.replaceChildren();
+  const card=el("div",{class:"card"},el("h2",{text:"Item "+(cur+1)+" of "+ITEMS.length+": "+it[1]}),el("div",{class:"meta",text:id}));
+  card.append(el("label",{class:"lbl",text:"Draft prompt (what the AI will be asked)"}),el("div",{class:"box",text:it[2]}),
+    el("label",{class:"lbl",text:"What a good answer must do (draft)"}),el("div",{class:"box",text:it[3]}));
+  card.append(el("label",{class:"lbl",text:"Your decision"}));
+  const ch=el("div",{class:"choices"});
+  [["keep","Keep","The prompt is good as written."],["fix","Fix","I will rewrite it."],["drop","Drop","Not a good test."]].forEach(([val,t,d])=>{
+    const inp=el("input",{type:"radio",name:"dec",value:val});inp.checked=a.decision===val;
+    const lab=el("label",{class:"choice"+(a.decision===val?" on":"")},inp,el("b",{text:t}),el("span",{text:d}));
+    inp.addEventListener("change",()=>{a.decision=val;save();render()});ch.append(lab)});
+  card.append(ch);
+  if(a.decision==="fix"){
+    card.append(field("Corrected prompt in native Luganda","Write the prompt the way a native speaker would say it.",a,"fixedPrompt",90),
+      field("Corrected description of a good answer (only if the draft above is wrong)","",a,"fixedBehavior",70))}
+  if(a.decision==="keep"||a.decision==="fix"){
+    card.append(field("Reference answer, written by a native speaker","What a good Luganda answer looks like. Never copy from an AI.",a,"reference",110),
+      field("Other acceptable answers (optional)","Other wordings that should also count as correct.",a,"alternatives",70));
+    card.append(el("label",{class:"lbl",text:"Is there only ONE correct way to read this prompt?"}));
+    const yn=el("div",{class:"choices"});
+    [["yes","Yes, it is clear"],["no","No, it is unclear (explain in notes)"]].forEach(([val,t])=>{
+      const inp=el("input",{type:"radio",name:"one",value:val});inp.checked=a.oneReading===val;
+      const lab=el("label",{class:"choice"+(a.oneReading===val?" on":"")},inp,el("b",{text:t}));
+      inp.addEventListener("change",()=>{a.oneReading=val;save();render()});yn.append(lab)});card.append(yn)}
+  if(a.decision){card.append(field(a.decision==="drop"?"Why drop it? (required)":"Notes (optional)","",a,"notes",70))}
+  const prev=el("button",{type:"button",text:"Back"}),next=el("button",{type:"button",class:"primary",text:cur<ITEMS.length-1?"Next item":"Finish"});
+  prev.disabled=cur===0;prev.addEventListener("click",()=>{cur--;render()});
+  next.addEventListener("click",()=>{if(cur<ITEMS.length-1){cur++;render();scrollTo(0,0)}else{upd();alert(ITEMS.filter(i=>isDone(i[0])).length+" of "+ITEMS.length+" items complete. Now click Export CSV and Backup JSON.")}});
+  card.append(el("div",{class:"nav"},prev,next));v.append(card);upd()}
+function upd(){const n=ITEMS.filter(i=>isDone(i[0])).length;$("prog").textContent=n+" of "+ITEMS.length+" complete"}
+function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function expCsv(){
+  const q=x=>'"'+String(x==null?"":x).replace(/"/g,'""')+'"';
+  const cols=["item_id","category","draft_prompt","draft_expected_behavior","decision","corrected_prompt","corrected_expected_behavior","reference_answer","other_acceptable_answers","one_correct_reading","notes","reviewer_code","complete"];
+  const rows=ITEMS.map(it=>{const a=st.answers[it[0]]||blank();return[it[0],it[1],it[2],it[3],a.decision,a.fixedPrompt,a.fixedBehavior,a.reference,a.alternatives,a.oneReading,a.notes,st.reviewer,isDone(it[0])?"yes":"no"]});
+  dl("benchmark-review-set2-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".csv","﻿"+[cols.map(q).join(",")].concat(rows.map(r=>r.map(q).join(","))).join("\r\n")+"\r\n","text/csv;charset=utf-8")}
+function expJson(){dl("benchmark-review-set2-backup-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify(Object.assign({format:"lugandagpt-bench-review-set2-v1"},st),null,1),"application/json")}
+$("rev").addEventListener("input",e=>{st.reviewer=e.target.value.trim();save()});
+$("expCsv").addEventListener("click",()=>{if(!st.reviewer&&!confirm("You have not typed a reviewer code. Export anyway?"))return;expCsv()});
+$("expJson").addEventListener("click",expJson);
+$("file").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(s.format!=="lugandagpt-bench-review-set2-v1")throw new Error("This is not a backup from this page.");st={reviewer:s.reviewer||"",answers:s.answers||{}};$("rev").value=st.reviewer;save();render()}catch(x){$("prog").textContent=x.message;$("prog").className="sub err"}};r.readAsText(f,"utf-8")});
+load();$("rev").value=st.reviewer||"";render();
+</script>
+</body>
+</html>

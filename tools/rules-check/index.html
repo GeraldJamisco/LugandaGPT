@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luganda time and days check</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#1c2330;--muted:#5d6677;--line:#d9dde5;--accent:#1f4fd8;--accent-ink:#fff;--soft:#eef2ff;--good:#1b7f4b;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--panel:#1b2029;--ink:#e8ebf1;--muted:#9aa3b5;--line:#323a49;--accent:#7ea2ff;--accent-ink:#0d1220;--soft:#222a3d;--good:#5fd39a;--bad:#ff8a80}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:16px;background:var(--panel);border-bottom:1px solid var(--line)}h1{margin:0 0 4px;font-size:21px}.sub{margin:0;color:var(--muted);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}.spacer{flex:1}
+button,.btn{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+input[type=text],select{font:inherit;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);width:100%}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.help{background:var(--soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}.help ol{margin:6px 0 2px 20px;padding:0}
+h2{font-size:18px;margin:22px 0 4px}.hint{font-size:13px;color:var(--muted);margin:0 0 8px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:170px 1fr 150px;gap:10px;align-items:center}
+.row .en{font-weight:600}.row .en small{display:block;font-weight:400;color:var(--muted)}
+.row.ok{border-left:5px solid var(--good)}.row.fix{border-left:5px solid var(--bad)}
+.row .note{grid-column:1/-1}
+@media(max-width:700px){.row{grid-template-columns:1fr}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.err{color:var(--bad)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Luganda time and days: check the rules</h1>
+  <p class="sub">We will teach the AI these rules, so they must be exactly right. Nothing you type leaves this computer.</p>
+</header>
+<div class="bar">
+  <label>Your reviewer code <input id="rev" type="text" size="8" maxlength="12" placeholder="Group-1" style="width:120px"></label>
+  <span id="prog" class="sub"></span><span class="spacer"></span>
+  <label class="btn" style="cursor:pointer">Load backup<input id="file" type="file" accept=".json" hidden></label>
+  <button id="expCsv" class="primary">Export CSV</button><button id="expJson">Backup JSON</button>
+</div>
+<div class="wrap">
+  <div class="help"><b>How to use</b>
+    <ol>
+      <li>Each row shows an English time or day and the Luganda I <i>guessed</i>. I am not a native speaker.</li>
+      <li>If it is exactly right, choose <b>Correct</b>. If not, choose <b>Fix</b> and type the right Luganda in the box.</li>
+      <li>Empty boxes are things I do not know. Please fill them in.</li>
+      <li>Where spellings differ (for example Lwokubiri or Lwakubiri), type the one the group agrees is best.</li>
+      <li>At the end, click <b>Export CSV</b> and <b>Backup JSON</b>, and save both in <code>data\rules\</code>.</li>
+    </ol></div>
+  <div id="out"></div>
+</div>
+<script>
+"use strict";
+const KEY="lugandagpt-rules-check-v1";
+/* [section, id, English, proposal, hint] */
+const ROWS=[
+["Clock hours (daytime)","h07","7 in the morning (07:00)","ssaawa emu ez'okumakya","Luganda counts the hours from 7. So 7am is the first hour."],
+["Clock hours (daytime)","h08","8 in the morning (08:00)","ssaawa bbiri ez'okumakya",""],
+["Clock hours (daytime)","h09","9 in the morning (09:00)","ssaawa ssatu ez'okumakya",""],
+["Clock hours (daytime)","h10","10 in the morning (10:00)","ssaawa nnya ez'okumakya",""],
+["Clock hours (daytime)","h11","11 in the morning (11:00)","ssaawa ttaano ez'okumakya",""],
+["Clock hours (daytime)","h12","12 noon (12:00)","ssaawa mukaaga ez'emisana","Is it ez'emisana or something else at noon?"],
+["Clock hours (daytime)","h13","1 in the afternoon (13:00)","ssaawa musanvu ez'emisana",""],
+["Clock hours (daytime)","h14","2 in the afternoon (14:00)","ssaawa munaana ez'emisana",""],
+["Clock hours (daytime)","h15","3 in the afternoon (15:00)","ssaawa mwenda ez'emisana",""],
+["Clock hours (daytime)","h16","4 in the afternoon (16:00)","ssaawa kkumi ez'emisana","Does the word change at this hour (for example ez'akawungeezi)?"],
+["Clock hours (daytime)","h17","5 in the evening (17:00)","ssaawa kkumi n'emu","What part-of-day word goes here?"],
+["Clock hours (daytime)","h18","6 in the evening (18:00)","ssaawa kkumi n'ebiri","What part-of-day word goes here?"],
+["Clock hours (night)","h19","7 in the evening (19:00)","","Please fill in, with the part-of-day word."],
+["Clock hours (night)","h20","8 at night (20:00)","",""],
+["Clock hours (night)","h21","9 at night (21:00)","",""],
+["Clock hours (night)","h22","10 at night (22:00)","",""],
+["Clock hours (night)","h23","11 at night (23:00)","",""],
+["Clock hours (night)","h00","12 midnight (00:00)","",""],
+["Clock hours (night)","h01","1 at night (01:00)","",""],
+["Clock hours (night)","h02","2 at night (02:00)","",""],
+["Clock hours (night)","h03","3 at night (03:00)","",""],
+["Clock hours (night)","h04","4 at night (04:00)","",""],
+["Clock hours (night)","h05","5 in the early morning (05:00)","",""],
+["Clock hours (night)","h06","6 in the early morning (06:00)","",""],
+["Days of the week","d_sun","Sunday","","Please fill in."],
+["Days of the week","d_mon","Monday","","Sunflower wrote Mmande for Monday. Is that right? Is Bbalaza also used?"],
+["Days of the week","d_tue","Tuesday","Lwokubiri","Some answers used Lwakubiri. Which spelling is best?"],
+["Days of the week","d_wed","Wednesday","Lwokusatu","Some answers used Lwakusatu."],
+["Days of the week","d_thu","Thursday","Lwokuna","Some answers used Lwakuna."],
+["Days of the week","d_fri","Friday","Lwokutaano","Some answers used Lwakutaano."],
+["Days of the week","d_sat","Saturday","Lwomukaaga","Some answers used Lwamukaaga."],
+["Other words","w_today","today","leero","Sunflower wrote Lwaleero. Which is right?"],
+["Other words","w_yest","yesterday","jjo","The group wrote Jjo, and said Egulo can also be used."],
+["Other words","w_tom","tomorrow","enkya","The group said enkya can also mean morning, so is there a clearer word for tomorrow?"],
+["Other words","w_morning","in the morning","ez'okumakya","All reviewers agreed on this."],
+["Other words","w_asks","What time is it? / How many hours?","ssaawa mmeka / ziba mmeka","T2 said the plural 'ziba mmeka' is used for hours. Please confirm."]
+];
+let st={reviewer:"",a:{}};
+const $=id=>document.getElementById(id);
+const get=id=>st.a[id]||(st.a[id]={decision:"",text:"",note:""});
+let timer;function save(){clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}},200)}
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.a)st=s}catch(e){}
+function done(r){const a=st.a[r[1]];if(!a||!a.decision)return false;if(a.decision==="ok")return !!r[3];return !!a.text.trim()}
+function upd(){$("prog").textContent=ROWS.filter(done).length+" of "+ROWS.length+" done"}
+function el(t,p,...k){const e=document.createElement(t);if(p)for(const[a,v]of Object.entries(p)){if(a==="class")e.className=v;else if(a==="text")e.textContent=v;else e.setAttribute(a,v)}k.forEach(x=>x&&e.append(x));return e}
+function render(){
+  const out=$("out");out.replaceChildren();let sec="";
+  ROWS.forEach(r=>{
+    if(r[0]!==sec){sec=r[0];out.append(el("h2",{text:sec}))}
+    const a=get(r[1]);
+    const row=el("div",{class:"row"+(a.decision==="ok"&&r[3]?" ok":a.decision==="fix"?" fix":"")});
+    row.append(el("div",{class:"en",text:r[2]}));
+    const t=el("input",{type:"text","aria-label":"Luganda for "+r[2],placeholder:r[3]?"":"Type the Luganda"});
+    t.value=a.decision==="fix"||!r[3]?a.text:r[3];t.disabled=a.decision==="ok"&&!!r[3];
+    t.addEventListener("input",()=>{a.text=t.value;if(!r[3]&&!a.decision)a.decision="fix";save();upd()});
+    row.append(t);
+    const sel=el("select",{"aria-label":"Decision for "+r[2]});
+    (r[3]?[["","Choose"],["ok","Correct"],["fix","Fix"]]:[["","Choose"],["fix","I filled it in"]]).forEach(([v,l])=>{const o=el("option",{value:v,text:l});sel.append(o)});
+    sel.value=a.decision;
+    sel.addEventListener("change",()=>{a.decision=sel.value;if(a.decision==="fix"&&r[3]&&!a.text)a.text=r[3];save();render()});
+    row.append(sel);
+    const n=el("input",{type:"text","aria-label":"Note",placeholder:r[4]||"Note (optional)",class:"note"});n.value=a.note;
+    n.addEventListener("input",()=>{a.note=n.value;save()});row.append(n);
+    out.append(row)});
+  upd()}
+function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+$("expCsv").addEventListener("click",()=>{
+  const q=x=>'"'+String(x==null?"":x).replace(/"/g,'""')+'"';
+  const cols=["section","id","english","proposed_luganda","decision","final_luganda","note","reviewer_code","complete"];
+  const rows=ROWS.map(r=>{const a=st.a[r[1]]||{decision:"",text:"",note:""};const fin=a.decision==="ok"?r[3]:a.text;return[r[0],r[1],r[2],r[3],a.decision,fin,a.note,st.reviewer,done(r)?"yes":"no"]});
+  dl("rules-check-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".csv","﻿"+[cols.map(q).join(",")].concat(rows.map(r=>r.map(q).join(","))).join("\r\n")+"\r\n","text/csv;charset=utf-8")});
+$("expJson").addEventListener("click",()=>dl("rules-check-backup-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify(Object.assign({format:"lugandagpt-rules-check-v1"},st),null,1),"application/json"));
+$("file").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(s.format!=="lugandagpt-rules-check-v1")throw new Error("Not a backup from this page.");st={reviewer:s.reviewer||"",a:s.a||{}};$("rev").value=st.reviewer;save();render()}catch(x){$("prog").textContent=x.message;$("prog").className="sub err"}};r.readAsText(f,"utf-8")});
+$("rev").addEventListener("input",e=>{st.reviewer=e.target.value.trim();save()});
+$("rev").value=st.reviewer||"";render();
+</script>
+</body>
+</html>

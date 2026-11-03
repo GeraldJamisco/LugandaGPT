@@ -1,0 +1,465 @@
+{
+ "format": "lugandagpt-compare-v1",
+ "exported_utc": "2026-11-02T16:31:50Z",
+ "rows": [
+  {
+   "item_id": "E-001",
+   "field": "source_context",
+   "english": "The tool library is open on Saturday from nine in the morning until one in the afternoon. Borrowers may take one tool at a time. A borrower must leave a contact number and return the tool by the following Wednesday. The notice does not mention a fee or a membership card.",
+   "sunbird_luganda": "Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva ssaawa mwenda ez’enkya okutuuka ssaawa emu ey’akawungeezi. Abasaba basobola okutwala ekikozesebwa kimu buli kiseera. Omusabi alina okuleka ennamba y’essimu n’okuddiza ekikozesebwa nga Wednesday ejja. Ekiwandiiko tekiraga ssente oba kaadi ya membership.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-001",
+   "field": "source_prompt",
+   "english": "According to the notice, when is the tool library open and what must a borrower leave?",
+   "sunbird_luganda": "Okusinziira ku kiwandiiko, ebbiikiro ly'ebyuma liggulwa ddi era kiki omuntu eyeewola ky'alina okuleka?",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-001",
+   "field": "reference_answer",
+   "english": "The tool library is open on Saturday from nine to one. A borrower must leave a contact number.",
+   "sunbird_luganda": "Ekitabo ky'ebikozesebwa kiggulwawo ku Lwomukaaga okuva ku ssaawa mwenda okutuuka ku emu. Omuntu ayagala okukozesa alina okuleka ennamba y'okumukubira.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-002",
+   "field": "source_context",
+   "english": "The team reviewed its weekly check-in time. The Monday slot now conflicts with the delivery meeting. The team considered Tuesday afternoon but chose Wednesday morning because more members are available. The change starts next week. The meeting length stays the same.",
+   "sunbird_luganda": "Ttiimu yaddamu okwekenneenya ekiseera ky’okukola buli wiiki. Ekifo kya Mmande kati kikontana n’olukiiko lw’okutwala ebintu. Ttiimu yasooka okulowooza ku Lwokubiri akawungeezi naye ne basalawo Lwakusatu enkya kubanga abantu bangi basobola okubaawo. Enkyukakyuka etandika mu wiiki ejja. Obuwanvu bw’olukiiko busigala bwe bumu.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-002",
+   "field": "source_prompt",
+   "english": "Summarize the main decision in the team note and the reason for it.",
+   "sunbird_luganda": "Kunyumya ku kusalawo okukulu mu kiwandiiko ky'ekibinja n'ensonga lwaki.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-002",
+   "field": "reference_answer",
+   "english": "The team will move the weekly check-in to Wednesday because the Monday slot conflicts with the delivery meeting.",
+   "sunbird_luganda": "Ttiimu ejja kusengula okwekebejja okwa buli wiiki okutuuke ku Lwokusatu kubanga ekiseera ky'Olwokubiri kibaamu olukiiko lw'okutambuza ebintu.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-003",
+   "field": "source_context",
+   "english": "The workshop will cover basic first aid and safety at home. It will run for three hours at the community center. Participants should wear comfortable clothing. The notice does not include a fee.",
+   "sunbird_luganda": "Workshop eno ejja kubaako ku by’okuyamba abantu mu mbeera ez’enjawulo n’obukuumi awaka. Ejja kutambula essaawa ssatu ku kifo ky’abantu. Abatendekeddwa balina okwambala engoye ezisanyusa. Ekiwandiiko tekirimu ssente zonna.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-003",
+   "field": "source_prompt",
+   "english": "How much does the workshop cost?",
+   "sunbird_luganda": "Workshop egula ssente mmeka?",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-003",
+   "field": "reference_answer",
+   "english": "The notice does not list a workshop fee. I cannot provide a price from the supplied information.",
+   "sunbird_luganda": "Ebbaluwa teyogera ku ssente z'okutendekebwa. Sisobola kuwa muwendo okuva ku bubaka obuweereddwa.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-004",
+   "field": "source_context",
+   "english": "The community garden is open to households that have registered. Gardeners must use the shared water tap and keep the path clear for other users. Tools should be returned to the shed after use. The notice does not mention a fee.",
+   "sunbird_luganda": "Ekibanja ky’ensuku kigguliddwa eri amaka agawandiisiddwa. Abalimi balina okukozesa omusulo gw’amazzi ogw’ekibanja era bakuumire ekkubo nga liri waggulu eri abalala abakikozesa. Ebikozesebwa birina okuddizibwa mu shed oluvannyuma lw’okukozesebwa. Ekiwandiiko tekiraga ssente ezisasulwa.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-004",
+   "field": "source_prompt",
+   "english": "What are the two rules for using the community garden?",
+   "sunbird_luganda": "Mateeka ki abiri agafuga okukozesa ennimiro y'ekitundu?",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-004",
+   "field": "reference_answer",
+   "english": "Gardeners must use the shared water tap and keep the path clear.",
+   "sunbird_luganda": "Abalimi balina okukozesa akatiba k'amazzi akagabanyizibwako era ne baba n'ekkubo eriyita mu nnimiro nga lirimu.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-005",
+   "field": "source_prompt",
+   "english": "Write a formal announcement for a first-aid session, including the date, time, and venue.",
+   "sunbird_luganda": "Wandiika ekirango eky'olukiiko lw'okuyamba abantu mu mbeera ey'amangu, nga mulimu ennaku, essaawa n'ekifo.",
+   "model": "sunflower-9b"
+  },
+  {
+   "item_id": "E-005",
+   "field": "reference_answer",
+   "english": "A first-aid session will be held on Saturday from nine to eleven in the community hall. Please register at the office before Friday. The session will cover basic home safety and emergency steps.",
+   "sunbird_luganda": "Olukungaana lw’okuyigiriza ku by’obulamu obusookerwako lujja kubeera ku Lwomukaaga okuva ku ssaawa mwenda okutuuka ku kkumi n’emu mu kizimbe ky’ekitundu. Mwewandiise mu ofiisi nga tonatuuka ku Lwokutaano. Olukungaana luno lunaakwata ku bukuumi bw’awaka n’enkola z’okusaba obuyambi mu mbeera ez’amangu.",
+   "model": "sunflower-9b"
+  }
+ ],
+ "work": {
+  "E-001|source_context": {
+   "nativeFirst": [
+    "Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva ssaawa Ssatu ez’enkya okutuuka ssaawa musanvu ezemisana. Abewola basobola okutwala ekikozesebwa kimu buli kiseera. Eyewola alina okuleka ennamba y’essimu n’okukomyaawo ekikozesebwa ku lwokusatu oludako. Ekiwandiiko tekiraga ssente oba kaadi ya membership."
+   ],
+   "revealedUtc": "2026-11-02T15:56:07Z",
+   "sunbirdSnapshot": [
+    "Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva ssaawa mwenda ez’enkya okutuuka ssaawa emu ey’akawungeezi. Abasaba basobola okutwala ekikozesebwa kimu buli kiseera. Omusabi alina okuleka ennamba y’essimu n’okuddiza ekikozesebwa nga Wednesday ejja. Ekiwandiiko tekiraga ssente oba kaadi ya membership."
+   ],
+   "finalText": [
+    "Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva ssaawa Ssatu ez’enkya okutuuka ssaawa musanvu ezemisana. Abewola basobola okutwala ekikozesebwa kimu buli kiseera. Eyewola alina okuleka ennamba y’essimu n’okukomyaawo ekikozesebwa ku lwokusatu oludako. Ekiwandiiko tekiraga ssente oba kaadi ya membership."
+   ],
+   "adequacy": 2,
+   "fluency": 2,
+   "tags": [
+    "wrong_word",
+    "unnatural",
+    "name_number_day"
+   ],
+   "notes": "in luganda, time is a bit different compared on how its written in English, if its 9am in the morning, in luganda its said as if its 3 (saaawa sattu thats where sunbird was wrong time is different ",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:10:44Z",
+   "draft": [
+    "Ekizimbe ky’ebikozesebwa kiggulwawo ku Lwomukaaga okuva ssaawa Ssatu ez’enkya okutuuka ssaawa musanvu ezemisana. Abewola basobola okutwala ekikozesebwa kimu buli kiseera. Eyewola alina okuleka ennamba y’essimu n’okukomyaawo ekikozesebwa ku lwokusatu oludako. Ekiwandiiko tekiraga ssente oba kaadi ya membership."
+   ]
+  },
+  "E-001|source_prompt": {
+   "nativeFirst": [
+    "Okusinziira ku kiwandiiko, ebbiikiro ly'ebyuma liggulwa ddi era kiki omuntu eyeewola ky'alina okuleka?"
+   ],
+   "revealedUtc": "2026-11-02T15:59:39Z",
+   "sunbirdSnapshot": [
+    "Okusinziira ku kiwandiiko, ebbiikiro ly'ebyuma liggulwa ddi era kiki omuntu eyeewola ky'alina okuleka?"
+   ],
+   "finalText": [
+    "Okusinziira ku kiwandiiko, ebbiikiro ly'ebyuma liggulwa ddi era kiki omuntu eyeewola ky'alina okuleka?"
+   ],
+   "adequacy": 2,
+   "fluency": 2,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:11:00Z",
+   "draft": [
+    "Okusinziira ku kiwandiiko, ebbiikiro ly'ebyuma liggulwa ddi era kiki omuntu eyeewola ky'alina okuleka?\n"
+   ]
+  },
+  "E-001|reference_answer": {
+   "nativeFirst": [
+    "Ekizimbe ky'ebikozesebwa kiggulwawo ku Lwomukaaga okuva ku ssaawa Ssattu okutuuka ku musanvu. Eyewola alina okuleka ennamba y'essimu"
+   ],
+   "revealedUtc": "2026-11-02T16:01:31Z",
+   "sunbirdSnapshot": [
+    "Ekitabo ky'ebikozesebwa kiggulwawo ku Lwomukaaga okuva ku ssaawa mwenda okutuuka ku emu. Omuntu ayagala okukozesa alina okuleka ennamba y'okumukubira."
+   ],
+   "finalText": [
+    "Ekizimbe ky'ebikozesebwa kiggulwawo ku Lwomukaaga okuva ku ssaawa Ssattu okutuuka ku musanvu. Eyewola alina okuleka ennamba y'essimu"
+   ],
+   "adequacy": 2,
+   "fluency": 2,
+   "tags": [
+    "wrong_word",
+    "grammar",
+    "name_number_day"
+   ],
+   "notes": "Time was wrong and some words were wrong in sunbird, they are corrected ",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:11:12Z",
+   "draft": [
+    "Ekizimbe ky'ebikozesebwa kiggulwawo ku Lwomukaaga okuva ku ssaawa Ssattu okutuuka ku musanvu. Eyewola alina okuleka ennamba y'essimu\n"
+   ]
+  },
+  "E-002|source_context": {
+   "nativeFirst": [
+    "Ttiimu yaddamu okwekenneenya ekiseera ky’okukola buli wiiki. Ekifo kya Mmande kati kikontana n’olukiiko lw’okutwala ebintu. Ttiimu yasooka okulowooza ku Lwokubiri Mu Ttuntu naye ne basalawo Lwakusatu kumakya kubanga ba memba abasinga babeerawo. Enkyukakyuka etandika wiiki ejja. Obuwanvu bw’olukiiko busigala bwe bumu."
+   ],
+   "revealedUtc": "2026-11-02T16:04:29Z",
+   "sunbirdSnapshot": [
+    "Ttiimu yaddamu okwekenneenya ekiseera ky’okukola buli wiiki. Ekifo kya Mmande kati kikontana n’olukiiko lw’okutwala ebintu. Ttiimu yasooka okulowooza ku Lwokubiri akawungeezi naye ne basalawo Lwakusatu enkya kubanga abantu bangi basobola okubaawo. Enkyukakyuka etandika mu wiiki ejja. Obuwanvu bw’olukiiko busigala bwe bumu."
+   ],
+   "finalText": [
+    "Ttiimu yaddamu okwekenneenya ekiseera ky’okukola buli wiiki. Ekifo kya Mmande kati kikontana n’olukiiko lw’okutwala ebintu. Ttiimu yasooka okulowooza ku Lwokubiri Mu Ttuntu naye ne basalawo Lwakusatu kumakya kubanga ba memba abasinga babeerawo. Enkyukakyuka etandika wiiki ejja. Obuwanvu bw’olukiiko busigala bwe bumu."
+   ],
+   "adequacy": 2,
+   "fluency": 2,
+   "tags": [
+    "missing",
+    "wrong_word",
+    "grammar",
+    "name_number_day",
+    "inconsistent_term",
+    "unnatural"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:11:23Z",
+   "draft": [
+    "Ttiimu yaddamu okwekenneenya ekiseera ky’okukola buli wiiki. Ekifo kya Mmande kati kikontana n’olukiiko lw’okutwala ebintu. Ttiimu yasooka okulowooza ku Lwokubiri Mu Ttuntu naye ne basalawo Lwakusatu kumakya kubanga ba memba abasinga babeerawo. Enkyukakyuka etandika wiiki ejja. Obuwanvu bw’olukiiko busigala bwe bumu.\n"
+   ]
+  },
+  "E-002|source_prompt": {
+   "nativeFirst": [
+    "Tematemamu ku kusalawo okukulu mu kiwandiiko ky'ekibinja n'ensonga lwaki."
+   ],
+   "revealedUtc": "2026-11-02T16:05:48Z",
+   "sunbirdSnapshot": [
+    "Kunyumya ku kusalawo okukulu mu kiwandiiko ky'ekibinja n'ensonga lwaki."
+   ],
+   "finalText": [
+    "Tematemamu ku kusalawo okukulu mu kiwandiiko ky'ekibinja n'ensonga lwaki."
+   ],
+   "adequacy": 4,
+   "fluency": 1,
+   "tags": [
+    "wrong_word",
+    "unnatural",
+    "grammar",
+    "name_number_day"
+   ],
+   "notes": "the vocabulary was missing on the word summary maybe it didn't understand it well",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:06:52Z",
+   "draft": [
+    "Tematemamu ku kusalawo okukulu mu kiwandiiko ky'ekibinja n'ensonga lwaki.\n"
+   ]
+  },
+  "E-002|reference_answer": {
+   "nativeFirst": [
+    "Ttiimu ejja kusengula okuyingira okwa buli wiiki okutuuke ku Lwokusatu kubanga ekiseera kya mmande kikontana n'olukiiko lw'okutambuza ebintu."
+   ],
+   "revealedUtc": "2026-11-02T16:08:57Z",
+   "sunbirdSnapshot": [
+    "Ttiimu ejja kusengula okwekebejja okwa buli wiiki okutuuke ku Lwokusatu kubanga ekiseera ky'Olwokubiri kibaamu olukiiko lw'okutambuza ebintu."
+   ],
+   "finalText": [
+    "Ttiimu ejja kusengula okuyingira okwa buli wiiki okutuuke ku Lwokusatu kubanga ekiseera kya mmande kikontana n'olukiiko lw'okutambuza ebintu."
+   ],
+   "adequacy": 2,
+   "fluency": 2,
+   "tags": [
+    "wrong_word",
+    "missing",
+    "name_number_day",
+    "grammar",
+    "unnatural"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:09:46Z",
+   "draft": [
+    "Ttiimu ejja kusengula okuyingira okwa buli wiiki okutuuke ku Lwokusatu kubanga ekiseera kya mmande kikontana n'olukiiko lw'okutambuza ebintu.\n"
+   ]
+  },
+  "E-003|source_context": {
+   "nativeFirst": [
+    "Workshop ejja kuyambako ku bwetaavu obusokerwaako n'okwekuuma ewaka. Ejja kutambula essaawa ssatu mu kibuga wakati. Abenetaba balina okwambala engoye ezibawama emirembe. Ekiwandiiko tekirimu ssente zonna."
+   ],
+   "revealedUtc": "2026-11-02T16:14:33Z",
+   "sunbirdSnapshot": [
+    "Workshop eno ejja kubaako ku by’okuyamba abantu mu mbeera ez’enjawulo n’obukuumi awaka. Ejja kutambula essaawa ssatu ku kifo ky’abantu. Abatendekeddwa balina okwambala engoye ezisanyusa. Ekiwandiiko tekirimu ssente zonna."
+   ],
+   "finalText": [
+    "Omwoleso gujja kuyambako ku bwetaavu obusokerwaako n'okwekuuma ewaka. Gujja kutambula okumala essaawa ssatu mu kibuga wakati. Abenetaba balina okwambala engoye ezibawa emirembe. Ekiwandiiko tekilaga ssente zonna."
+   ],
+   "adequacy": 3,
+   "fluency": 2,
+   "tags": [
+    "wrong_word",
+    "grammar",
+    "name_number_day"
+   ],
+   "notes": "The word workshop is omwoleso in luganda",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:20:12Z",
+   "draft": [
+    "Workshop ejja kuyambako ku bwetaavu obusokerwaako n'okwekuuma ewaka. Ejja kutambula essaawa ssatu mu kibuga wakati. Abenetaba balina okwambala engoye ezibawama emirembe. Ekiwandiiko tekirimu ssente zonna.\n"
+   ]
+  },
+  "E-003|source_prompt": {
+   "nativeFirst": [
+    "Omwoleso gwa sente mmeka?"
+   ],
+   "revealedUtc": "2026-11-02T16:15:22Z",
+   "sunbirdSnapshot": [
+    "Workshop egula ssente mmeka?"
+   ],
+   "finalText": [
+    "Omwoleso gwa sente mmeka?"
+   ],
+   "adequacy": 1,
+   "fluency": 1,
+   "tags": [
+    "wrong_word",
+    "meaning_changed",
+    "name_number_day",
+    "grammar",
+    "unnatural",
+    "inconsistent_term"
+   ],
+   "notes": "there was no meaning that could make a native understand what it meant ",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:16:08Z",
+   "draft": [
+    "Omwoleso gwa sente mmeka?"
+   ]
+  },
+  "E-003|reference_answer": {
+   "nativeFirst": [
+    "Ekiwandiiko tekilaga ku ssente z'omwoleso. Sisobola kuwa muwendo okuva ku bubaka obuweereddwa."
+   ],
+   "revealedUtc": "2026-11-02T16:17:00Z",
+   "sunbirdSnapshot": [
+    "Ebbaluwa teyogera ku ssente z'okutendekebwa. Sisobola kuwa muwendo okuva ku bubaka obuweereddwa."
+   ],
+   "finalText": [
+    "Ekiwandiiko tekilaga ku ssente z'omwoleso. Sisobola kuwa muwendo okuva ku bubaka obuweereddwa."
+   ],
+   "adequacy": 3,
+   "fluency": 2,
+   "tags": [
+    "grammar",
+    "name_number_day",
+    "wrong_word",
+    "unnatural",
+    "inconsistent_term"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:17:28Z",
+   "draft": [
+    "Ekiwandiiko tekilaga ku ssente z'omwoleso. Sisobola kuwa muwendo okuva ku bubaka obuweereddwa.\n"
+   ]
+  },
+  "E-004|source_context": {
+   "nativeFirst": [
+    "Olusuku lw'ekitundu lugulwaawo eri amaka agawandiisiddwa. Abalimi balina okukozesa amazzi agawamu era bakuume ekkubo eri abalala nabo okulikozesa. Ebikozesebwa birina okuddizibwa mu kisikirize oluvannyuma lw’okukozesebwa. Ekiwandiiko tekiraga ssente ezisasulwa."
+   ],
+   "revealedUtc": "2026-11-02T16:24:30Z",
+   "sunbirdSnapshot": [
+    "Ekibanja ky’ensuku kigguliddwa eri amaka agawandiisiddwa. Abalimi balina okukozesa omusulo gw’amazzi ogw’ekibanja era bakuumire ekkubo nga liri waggulu eri abalala abakikozesa. Ebikozesebwa birina okuddizibwa mu shed oluvannyuma lw’okukozesebwa. Ekiwandiiko tekiraga ssente ezisasulwa."
+   ],
+   "finalText": [
+    "Olusuku lw'ekitundu lugulwaawo eri amaka agawandiisiddwa. Abalimi balina okukozesa amazzi agawamu era bakuume ekkubo eri abalala nabo okulikozesa. Ebikozesebwa birina okuddizibwa mu kisikirize oluvannyuma lw’okukozesebwa. Ekiwandiiko tekiraga ssente ezisasulwa."
+   ],
+   "adequacy": 3,
+   "fluency": 2,
+   "tags": [
+    "missing",
+    "wrong_word",
+    "grammar",
+    "name_number_day",
+    "inconsistent_term"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:24:55Z",
+   "draft": [
+    "Olusuku lw'ekitundu lugulwaawo eri amaka agawandiisiddwa. Abalimi balina okukozesa amazzi agawamu era bakuume ekkubo eri abalala nabo okulikozesa. Ebikozesebwa birina okuddizibwa mu kisikirize oluvannyuma lw’okukozesebwa. Ekiwandiiko tekiraga ssente ezisasulwa.\n"
+   ]
+  },
+  "E-004|source_prompt": {
+   "nativeFirst": [
+    "Mateeka ki abiri agafuga okukozesa ennimiro y'ekitundu?"
+   ],
+   "revealedUtc": "2026-11-02T16:25:13Z",
+   "sunbirdSnapshot": [
+    "Mateeka ki abiri agafuga okukozesa ennimiro y'ekitundu?"
+   ],
+   "finalText": [
+    "Mateeka ki abiri agafuga okukozesa ennimiro y'ekitundu?"
+   ],
+   "adequacy": 4,
+   "fluency": 4,
+   "tags": [
+    "none"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:25:23Z",
+   "draft": [
+    "Mateeka ki abiri agafuga okukozesa ennimiro y'ekitundu?\n"
+   ]
+  },
+  "E-004|reference_answer": {
+   "nativeFirst": [
+    "Abalimi balina okukozesa akatiba k'amazzi akagabanyizibwako era n'ekkubo nga liri klia"
+   ],
+   "revealedUtc": "2026-11-02T16:26:19Z",
+   "sunbirdSnapshot": [
+    "Abalimi balina okukozesa akatiba k'amazzi akagabanyizibwako era ne baba n'ekkubo eriyita mu nnimiro nga lirimu."
+   ],
+   "finalText": [
+    "Abalimi balina okukozesa akatiba k'amazzi akagabanyizibwako era n'ekkubo nga liri klia"
+   ],
+   "adequacy": 4,
+   "fluency": 4,
+   "tags": [
+    "wrong_word",
+    "grammar"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:26:29Z",
+   "draft": [
+    "Abalimi balina okukozesa akatiba k'amazzi akagabanyizibwako era n'ekkubo nga liri klia\n"
+   ]
+  },
+  "E-005|source_prompt": {
+   "nativeFirst": [
+    "Wandiika ekirango ky'obuvunanyizibwa lw'okuyamba abantu mu mbeera ey'amangu, nga kilaga olunaku, essaawa n'ekifo."
+   ],
+   "revealedUtc": "2026-11-02T16:27:58Z",
+   "sunbirdSnapshot": [
+    "Wandiika ekirango eky'olukiiko lw'okuyamba abantu mu mbeera ey'amangu, nga mulimu ennaku, essaawa n'ekifo."
+   ],
+   "finalText": [
+    "Wandiika ekirango ky'obuvunanyizibwa lw'okuyamba abantu mu mbeera ey'amangu, nga kilaga olunaku, essaawa n'ekifo."
+   ],
+   "adequacy": 2,
+   "fluency": 4,
+   "tags": [
+    "wrong_word",
+    "grammar",
+    "name_number_day"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:28:12Z",
+   "draft": [
+    "Wandiika ekirango ky'obuvunanyizibwa lw'okuyamba abantu mu mbeera ey'amangu, nga kilaga olunaku, essaawa n'ekifo.\n"
+   ]
+  },
+  "E-005|reference_answer": {
+   "nativeFirst": [
+    "Olukungaana lw’okuyigiriza ku by’obulamu ebisookerwako lujja kubeera ku Lwomukaaga okuva ku ssaawa ssatu okutuuka ku ttaano mu kizimbe ky’ekitundu. Bambi wewandiise mu ofiisi nga tonatuuka Lwakutaano. Olukungaana luno lunaakwata ku bukuumi bw’awaka n’enkola z’okusaba obuyambi mu mbeera ez’amangu."
+   ],
+   "revealedUtc": "2026-11-02T16:30:06Z",
+   "sunbirdSnapshot": [
+    "Olukungaana lw’okuyigiriza ku by’obulamu obusookerwako lujja kubeera ku Lwomukaaga okuva ku ssaawa mwenda okutuuka ku kkumi n’emu mu kizimbe ky’ekitundu. Mwewandiise mu ofiisi nga tonatuuka ku Lwokutaano. Olukungaana luno lunaakwata ku bukuumi bw’awaka n’enkola z’okusaba obuyambi mu mbeera ez’amangu."
+   ],
+   "finalText": [
+    "Olukungaana lw’okuyigiriza ku by’obulamu ebisookerwako lujja kubeera ku Lwomukaaga okuva ku ssaawa ssatu okutuuka ku ttaano mu kizimbe ky’ekitundu. Bambi wewandiise mu ofiisi nga tonatuuka Lwakutaano. Olukungaana luno lunaakwata ku bukuumi bw’awaka n’enkola z’okusaba obuyambi mu mbeera ez’amangu."
+   ],
+   "adequacy": 3,
+   "fluency": 4,
+   "tags": [
+    "grammar",
+    "wrong_word"
+   ],
+   "notes": "",
+   "status": "done",
+   "doneUtc": "2026-11-02T16:30:23Z",
+   "draft": [
+    "Olukungaana lw’okuyigiriza ku by’obulamu ebisookerwako lujja kubeera ku Lwomukaaga okuva ku ssaawa ssatu okutuuka ku ttaano mu kizimbe ky’ekitundu. Bambi wewandiise mu ofiisi nga tonatuuka Lwakutaano. Olukungaana luno lunaakwata ku bukuumi bw’awaka n’enkola z’okusaba obuyambi mu mbeera ez’amangu.\n"
+   ]
+  }
+ },
+ "reviewer": "",
+ "source": "sunbird-suggestions.csv"
+}

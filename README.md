@@ -30,7 +30,7 @@ and compute provider remain **undecided** until the base-selection gate in
 - Phase 1 research (`docs/PHASE-1-RESEARCH.md`) and the benchmark specification (approved 1.0, D-007) exist. No benchmark items and no baseline benchmark runs exist.
 - No approved Luganda training dataset and no trained model exist. A project-authored English source draft exists for the 100-example pilot; native translation and review are at an early stage (dated snapshot in `docs/WORKING-PLAN.md` section 7).
 - Source-validation, benchmark, and Sunbird API tooling is present. No GPU training run has occurred. The Gemma 1B training setup was archived on 2026-11-02 (D-018).
-- The Sunbird API connection (`src/sunbird_api/`, [guide](docs/SUNBIRD-API.md)) is built and unit-tested. No request has been sent to Sunbird yet.
+- The Sunbird API connection (`src/sunbird_api/`, [guide](docs/SUNBIRD-API.md)) is built and unit-tested. A 14-request live test on 2026-11-02 succeeded. Sunbird publishes no API price, so spending beyond that test is not approved until the price is known.
 - The Python Translation Studio in `src/translation_studio/` is the sole supported implementation for native-speaker translation and review.
 - No model has been trained or evaluated.
 - The project reporter was archived on 2026-11-02 and is not running.

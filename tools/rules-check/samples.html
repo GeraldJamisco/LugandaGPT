@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check practice questions</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#1c2330;--muted:#5d6677;--line:#d9dde5;--accent:#1f4fd8;--accent-ink:#fff;--soft:#eef2ff;--good:#1b7f4b;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--panel:#1b2029;--ink:#e8ebf1;--muted:#9aa3b5;--line:#323a49;--accent:#7ea2ff;--accent-ink:#0d1220;--soft:#222a3d;--good:#5fd39a;--bad:#ff8a80}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:16px;background:var(--panel);border-bottom:1px solid var(--line)}h1{margin:0 0 4px;font-size:21px}.sub{margin:0;color:var(--muted);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}.spacer{flex:1}
+button,.btn{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+input[type=text],select{font:inherit;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);width:100%}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.help{background:var(--soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}.help ol{margin:6px 0 2px 20px;padding:0}
+h2{font-size:18px;margin:22px 0 4px}.hint{font-size:13px;color:var(--muted);margin:0 0 8px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:170px 1fr 150px;gap:10px;align-items:center}
+.row .en{font-weight:600}.row .en small{display:block;font-weight:400;color:var(--muted)}
+.row.ok{border-left:5px solid var(--good)}.row.fix{border-left:5px solid var(--bad)}
+.row .note{grid-column:1/-1}
+@media(max-width:700px){.row{grid-template-columns:1fr}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.err{color:var(--bad)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Check the practice questions</h1>
+  <p class="sub">A computer made these from your confirmed rules. Each one must be natural, correct Luganda. Nothing you type leaves this computer.</p>
+</header>
+<div class="bar">
+  <label>Your reviewer code <input id="rev" type="text" size="8" maxlength="12" placeholder="Group-1" style="width:120px"></label>
+  <span id="prog" class="sub"></span><span class="spacer"></span>
+  <label class="btn" style="cursor:pointer">Load backup<input id="file" type="file" accept=".json" hidden></label>
+  <button id="expCsv" class="primary">Export CSV</button><button id="expJson">Backup JSON</button>
+</div>
+<div class="wrap">
+  <div class="help"><b>How to use</b>
+    <ol>
+      <li>Each box on the left is a question. The box in the middle is the answer the computer made.</li>
+      <li>If it is exactly right, choose <b>Correct</b>. If not, choose <b>Fix</b> and type the right Luganda in the box.</li>
+      <li>If the question itself sounds wrong or unnatural, choose Fix and write the answer the way it should be, and say what was wrong in the note.</li>
+      <li>At the end, click <b>Export CSV</b> and <b>Backup JSON</b>, and save both in <code>data\synthetic\</code>.</li>
+    </ol></div>
+  <div id="out"></div>
+</div>
+<script>
+"use strict";
+const KEY="lugandagpt-sample-check-v1";
+/* [section, id, English, proposal, hint] */
+const ROWS=[
+["Luganda time to English time", "RG-TIME-001", "Ssaawa kkumi ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa kkumi ez'okumakya mu Luzungu zibeera 4:00am.", ""],
+["English time to Luganda time", "RG-TIME-002", "Ssaawa 11:00pm mu Luganda eba ssaawa mmeka?", "Ssaawa ttaano ez'ekiro.", ""],
+["The day after", "RG-TIME-003", "Olunaku oluddako Lwomukaaga lunaku ki?", "Olunaku oluddako Lwomukaaga ye Ssande.", ""],
+["Yesterday to today", "RG-TIME-004", "Jjo lwabade Lwomukaaga. Leero lunaku ki?", "Leero Ssande.", ""],
+["Today to tomorrow", "RG-TIME-005", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-006", "Ssaawa munaana ez'ekiro. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa munaana ez'ekiro mu Luzungu zibeera 2:00am.", ""],
+["English time to Luganda time", "RG-TIME-007", "Ssaawa 11:00am mu Luganda eba ssaawa mmeka?", "Ssaawa ttaano ez'okumakya.", ""],
+["The day after", "RG-TIME-008", "Olunaku oluddako Ssande lunaku ki?", "Olunaku oluddako Ssande ye Mmande.", ""],
+["Yesterday to today", "RG-TIME-009", "Jjo lwabade Lwokusatu. Leero lunaku ki?", "Leero Lwokuna.", ""],
+["Today to tomorrow", "RG-TIME-010", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-011", "Ssaawa emu eya kawungeezi. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa emu eya kawungeezi mu Luzungu zibeera 7:00pm.", ""],
+["English time to Luganda time", "RG-TIME-012", "Ssaawa 8:00pm mu Luganda eba ssaawa mmeka?", "Ssaawa bbiri eza kawungeezi.", ""],
+["The day after", "RG-TIME-013", "Olunaku oluddako Lwokutaano lunaku ki?", "Olunaku oluddako Lwokutaano ye Lwomukaaga.", ""],
+["Yesterday to today", "RG-TIME-014", "Jjo lwabade Lwokusatu. Leero lunaku ki?", "Leero Lwokuna.", ""],
+["Today to tomorrow", "RG-TIME-015", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-016", "Ssaawa kkumi na bbiri ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa kkumi na bbiri ez'okumakya mu Luzungu zibeera 6:00am.", ""],
+["English time to Luganda time", "RG-TIME-017", "Ssaawa 3:00am mu Luganda eba ssaawa mmeka?", "Ssaawa mwenda ez'ekiro.", ""],
+["The day after", "RG-TIME-018", "Olunaku oluddako Lwokusatu lunaku ki?", "Olunaku oluddako Lwokusatu ye Lwokuna.", ""],
+["Yesterday to today", "RG-TIME-019", "Jjo lwabade Ssande. Leero lunaku ki?", "Leero Mmande.", ""],
+["Today to tomorrow", "RG-TIME-020", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-021", "Ssaawa kkumi n'emu eza kawungeezi. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa kkumi n'emu eza kawungeezi mu Luzungu zibeera 5:00pm.", ""],
+["English time to Luganda time", "RG-TIME-022", "Ssaawa 6:00pm mu Luganda eba ssaawa mmeka?", "Ssaawa kkumi na bbiri eza kawungeezi.", ""],
+["Yesterday to today", "RG-TIME-023", "Jjo lwabade Lwomukaaga. Leero lunaku ki?", "Leero Ssande.", ""],
+["Today to tomorrow", "RG-TIME-024", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-025", "Ssaawa mukaaga ez'ekiro. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa mukaaga ez'ekiro mu Luzungu zibeera 12:00am.", ""],
+["English time to Luganda time", "RG-TIME-026", "Ssaawa 7:00pm mu Luganda eba ssaawa mmeka?", "Ssaawa emu eya kawungeezi.", ""],
+["The day after", "RG-TIME-027", "Olunaku oluddako Lwokubiri lunaku ki?", "Olunaku oluddako Lwokubiri ye Lwokusatu.", ""],
+["Today to tomorrow", "RG-TIME-028", "Leero Lwomukaaga. Enkya lujja kuba lunaku ki?", "Enkya Ssande.", ""],
+["Luganda time to English time", "RG-TIME-029", "Ssaawa emu ez'okumakya. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa emu ez'okumakya mu Luzungu zibeera 7:00am.", ""],
+["English time to Luganda time", "RG-TIME-030", "Ssaawa 11:00pm mu Luganda eba ssaawa mmeka?", "Ssaawa ttaano ez'ekiro.", ""],
+["The day after", "RG-TIME-031", "Olunaku oluddako Ssande lunaku ki?", "Olunaku oluddako Ssande ye Mmande.", ""],
+["Yesterday to today", "RG-TIME-032", "Jjo lwabade Lwokubiri. Leero lunaku ki?", "Leero Lwokusatu.", ""],
+["Today to tomorrow", "RG-TIME-033", "Leero Ssande. Enkya lujja kuba lunaku ki?", "Enkya Mmande.", ""],
+["Luganda time to English time", "RG-TIME-034", "Ssaawa mukaaga ez'ekiro. Ssaawa eyo mu Luzungu ziba mmeka?", "Ssaawa mukaaga ez'ekiro mu Luzungu zibeera 12:00am.", ""],
+["English time to Luganda time", "RG-TIME-035", "Ssaawa 12:00am mu Luganda eba ssaawa mmeka?", "Ssaawa mukaaga ez'ekiro.", ""],
+["The day after", "RG-TIME-036", "Olunaku oluddako Lwokutaano lunaku ki?", "Olunaku oluddako Lwokutaano ye Lwomukaaga.", ""]
+];
+let st={reviewer:"",a:{}};
+const $=id=>document.getElementById(id);
+const get=id=>st.a[id]||(st.a[id]={decision:"",text:"",note:""});
+let timer;function save(){clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}},200)}
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.a)st=s}catch(e){}
+function done(r){const a=st.a[r[1]];if(!a||!a.decision)return false;if(a.decision==="ok")return !!r[3];return !!a.text.trim()}
+function upd(){$("prog").textContent=ROWS.filter(done).length+" of "+ROWS.length+" done"}
+function el(t,p,...k){const e=document.createElement(t);if(p)for(const[a,v]of Object.entries(p)){if(a==="class")e.className=v;else if(a==="text")e.textContent=v;else e.setAttribute(a,v)}k.forEach(x=>x&&e.append(x));return e}
+function render(){
+  const out=$("out");out.replaceChildren();let sec="";
+  ROWS.forEach(r=>{
+    if(r[0]!==sec){sec=r[0];out.append(el("h2",{text:sec}))}
+    const a=get(r[1]);
+    const row=el("div",{class:"row"+(a.decision==="ok"&&r[3]?" ok":a.decision==="fix"?" fix":"")});
+    row.append(el("div",{class:"en",text:r[2]}));
+    const t=el("input",{type:"text","aria-label":"Luganda for "+r[2],placeholder:r[3]?"":"Type the Luganda"});
+    t.value=a.decision==="fix"||!r[3]?a.text:r[3];t.disabled=a.decision==="ok"&&!!r[3];
+    t.addEventListener("input",()=>{a.text=t.value;if(!r[3]&&!a.decision)a.decision="fix";save();upd()});
+    row.append(t);
+    const sel=el("select",{"aria-label":"Decision for "+r[2]});
+    (r[3]?[["","Choose"],["ok","Correct"],["fix","Fix"]]:[["","Choose"],["fix","I filled it in"]]).forEach(([v,l])=>{const o=el("option",{value:v,text:l});sel.append(o)});
+    sel.value=a.decision;
+    sel.addEventListener("change",()=>{a.decision=sel.value;if(a.decision==="fix"&&r[3]&&!a.text)a.text=r[3];save();render()});
+    row.append(sel);
+    const n=el("input",{type:"text","aria-label":"Note",placeholder:r[4]||"Note (optional)",class:"note"});n.value=a.note;
+    n.addEventListener("input",()=>{a.note=n.value;save()});row.append(n);
+    out.append(row)});
+  upd()}
+function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+$("expCsv").addEventListener("click",()=>{
+  const q=x=>'"'+String(x==null?"":x).replace(/"/g,'""')+'"';
+  const cols=["kind","id","question","generated_answer","decision","final_luganda","note","reviewer_code","complete"];
+  const rows=ROWS.map(r=>{const a=st.a[r[1]]||{decision:"",text:"",note:""};const fin=a.decision==="ok"?r[3]:a.text;return[r[0],r[1],r[2],r[3],a.decision,fin,a.note,st.reviewer,done(r)?"yes":"no"]});
+  dl("sample-check-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".csv","﻿"+[cols.map(q).join(",")].concat(rows.map(r=>r.map(q).join(","))).join("\r\n")+"\r\n","text/csv;charset=utf-8")});
+$("expJson").addEventListener("click",()=>dl("sample-check-backup-"+(st.reviewer||"noCode")+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify(Object.assign({format:"lugandagpt-sample-check-v1"},st),null,1),"application/json"));
+$("file").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(s.format!=="lugandagpt-sample-check-v1")throw new Error("Not a backup from this page.");st={reviewer:s.reviewer||"",a:s.a||{}};$("rev").value=st.reviewer;save();render()}catch(x){$("prog").textContent=x.message;$("prog").className="sub err"}};r.readAsText(f,"utf-8")});
+$("rev").addEventListener("input",e=>{st.reviewer=e.target.value.trim();save()});
+$("rev").value=st.reviewer||"";render();
+</script>
+</body>
+</html>

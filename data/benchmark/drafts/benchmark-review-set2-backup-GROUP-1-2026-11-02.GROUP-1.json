@@ -1,0 +1,213 @@
+{
+ "format": "lugandagpt-bench-review-set2-v1",
+ "reviewer": "GROUP-1",
+ "answers": {
+  "LGP-BENCH-EVERYDAY-004": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-EVERYDAY-005": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-EVERYDAY-006": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-EVERYDAY-007": {
+   "decision": "fix",
+   "fixedPrompt": "Jjo Lwabade Lwokutaano. Leero lunaku ki?\n",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "no",
+   "notes": "Jjo lwabade Lwokutaano. Leero lunaku ki?\n\nJjo can be Egullo with lwabade meaning was only on some instances sunbird was wrong there in grammar"
+  },
+  "LGP-BENCH-FORMAL-002": {
+   "decision": "fix",
+   "fixedPrompt": "Wandiika ekiwandiiko ekitongole nti olukiiko olwali olwo ku Lwokuna lusenguddwa okudda ku Lwokutaano, ku ssaawa nnya ez'okumakya.\ncan also be said as if\nWandiika ekiwandiiko ekitongole nti olukiiko olulina okubeerawo ku Lwokuna lusenguddwa okudda ku Lwokutaano, ku ssaawa nnya ez'okumakya.\n\n",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-FORMAL-003": {
+   "decision": "fix",
+   "fixedPrompt": "Wandiika ebbaluwa ey'ekitiibwa eri omukulu w'essomero ng'osaba olukusa olwobutaberawo ku ssomero ku Lwokubiri.\n",
+   "fixedBehavior": "obutaberawo meaning absent or not available, easy to understand and express",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-FORMAL-004": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-FORMAL-005": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-FORMAL-006": {
+   "decision": "fix",
+   "fixedPrompt": "Wandiika ekiwandiiko ekitongole nti edduuka lijja kuggalwa ku Lwokutaano n'oLwomukaaga.\n",
+   "fixedBehavior": "there was a missing letter to bring out the correct meaning of a shop, instead it said dduuka almost meaning to run ",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-CODESWITCH-002": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-CODESWITCH-003": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-CODESWITCH-004": {
+   "decision": "fix",
+   "fixedPrompt": "Nnyonyola 'deadline' kye ki nga bwe bwekikozebwa n'ekyokulabirako nga bwekikyogerwa.\n",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "no",
+   "notes": "had to give a more elaboration on how the word deadline would be explained and with examples instead the draft prompt was wasn't listing on what examples should be "
+  },
+  "LGP-BENCH-CODESWITCH-005": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-003": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-004": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-005": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-INSTRUCTION-006": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-FACTUALITY-001": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-FACTUALITY-002": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-FACTUALITY-003": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "yes",
+   "notes": ""
+  },
+  "LGP-BENCH-EXPLANATION-002": {
+   "decision": "fix",
+   "fixedPrompt": "Nnyonyola ensonga bbiri  lwaki kikulu okutereka ssente buli mwezi.\n",
+   "fixedBehavior": "reasons and why wasb't displayed anywhrer to bring out the correct meaning of the prompt\n2 reasons wasnt listed anywhere as bbiri",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-EXPLANATION-003": {
+   "decision": "fix",
+   "fixedPrompt": "Nnyonyola email kye ki n'engeri gye bajikozesaamu.\n",
+   "fixedBehavior": "some words were missing the correct meaing the words were gibberish ",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  },
+  "LGP-BENCH-EXPLANATION-004": {
+   "decision": "keep",
+   "fixedPrompt": "",
+   "fixedBehavior": "",
+   "reference": "",
+   "alternatives": "",
+   "oneReading": "",
+   "notes": ""
+  }
+ }
+}
