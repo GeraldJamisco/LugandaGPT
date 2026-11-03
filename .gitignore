@@ -220,3 +220,7 @@ reports/reporter/*
 # OS / local server artifacts (project lives under XAMPP htdocs)
 # -----------------------------------------------------------------------------
 *.stackdump
+
+# Downloaded outside data (large; provenance files are kept next to it)
+data/external/**
+!data/external/**/*.provenance.json

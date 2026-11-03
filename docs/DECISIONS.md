@@ -426,3 +426,16 @@ unchanged. The 24-item feasibility set is not a benchmark.
 **Consequences:** `src/rule_data/` now follows these rules. Benchmark items EVERYDAY-003 and EVERYDAY-007 may need updating (open question).
 
 **Status:** Accepted.
+
+
+## D-023: Approval to acquire outside Luganda data from open-licensed sources
+
+**Date:** 2026-11-04
+
+**Decision:** The Project Director approves acquiring outside Luganda text. Scope recorded here: open-licensed sources only, starting with the Luganda Wikipedia dump and the Sunbird SALT text subset. Newspapers and other copyrighted text are not downloaded or copied without a written licence from the publisher; native writers may use them only as topic inspiration and write new text in their own words.
+
+**Rationale:** More data is the main thing limiting the model. Open licences give us a clear basis for use, and the project rule is that a public web page is not a licence.
+
+**Consequences:** Each downloaded file gets a provenance record (URL, date, hash, licence, approval D-023) beside it, using `src/open_data/`. Downloads run on the owner's computer because the cloud workspace cannot reach those sites. CC BY-SA 4.0 requires attribution and share-alike for adapted material, so the licence terms must be read before any release of data or models. SALT is gated and its test splits stay out of training. Sunflower's training data is undocumented, so overlap with these sources is possible. This record does not authorize any training run beyond D-021.
+
+**Status:** Accepted.
