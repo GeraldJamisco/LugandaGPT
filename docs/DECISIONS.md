@@ -439,3 +439,23 @@ unchanged. The 24-item feasibility set is not a benchmark.
 **Consequences:** Each downloaded file gets a provenance record (URL, date, hash, licence, approval D-023) beside it, using `src/open_data/`. Downloads run on the owner's computer because the cloud workspace cannot reach those sites. CC BY-SA 4.0 requires attribution and share-alike for adapted material, so the licence terms must be read before any release of data or models. SALT is gated and its test splits stay out of training. Sunflower's training data is undocumented, so overlap with these sources is possible. This record does not authorize any training run beyond D-021.
 
 **Status:** Accepted.
+
+## D-024: Rules for using outside data (SALT and Luganda Wikipedia)
+
+**Date:** 2026-11-04
+
+**Decision:** The Project Director accepts these rules, based on the native group's quality check of 80 random passages (`data/external/outside-check-Group-1-2026-11-04.csv`). Results: SALT 35 good, 4 needs fixing, 1 don't use (of 40); Wikipedia 22 good, 16 needs fixing, 2 don't use (of 40). One group, 40 passages per source, so rates are rough.
+
+Rules:
+1. SALT train split may be used for training. The 4 passages the group corrected enter with their corrected text, and the 1 rejected passage is excluded. SALT dev and test splits never enter training.
+2. Luganda Wikipedia paragraphs are NOT used for training for now. The 38 paragraphs the group marked good or corrected form a small verified set that may be used.
+3. Science and technical articles are excluded until native speakers agree on the terms, because the group found invented, non-Luganda vocabulary there.
+4. The 20 before-and-after corrections are kept as a record of common mistakes (spelling, spacing, y'e vs ye, run-together words).
+5. Larger use of Wikipedia needs the group to correct a bigger batch first, and a fresh quality check showing a rate we accept. Any data source is re-checked this way before it is added.
+6. Held-out clock hours (8, 9, 10, 13, 14) and held-out day facts stay out of all training data (D-020), including outside data.
+
+**Rationale:** About 1 in 8 SALT sentences has a flaw, which is acceptable for a first run. About 4 in 10 Wikipedia paragraphs need fixing, and spelling and phrasing errors cannot be filtered automatically. Training on them would teach the model the mistakes.
+
+**Consequences:** The first training set is built from the time-and-day rule data, the native-written situations, and the cleaned SALT train split under these rules. SALT is translation pairs, not conversation, and Sunflower may already have seen it, so it adds volume more than new ability. This record does not authorize any training run beyond D-021.
+
+**Status:** Accepted.
