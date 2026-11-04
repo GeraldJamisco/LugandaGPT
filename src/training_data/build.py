@@ -36,7 +36,7 @@ def situations(path):
     return out
 
 
-def salt(train_path, check_csv, seed=7):
+def salt(train_path, check_csv, seed=7, max_salt=None):
     fixes, drops = {}, set()
     for r in csv.DictReader(open(check_csv, encoding="utf-8-sig")):
         if not r["id"].startswith("SALT-train-"):
@@ -59,15 +59,18 @@ def salt(train_path, check_csv, seed=7):
             out.append(_msg(r["id"], "salt_train", "Translate into Luganda: " + eng, lug))
         else:
             out.append(_msg(r["id"], "salt_train", "Translate into English: " + lug, eng))
+    if max_salt is not None and len(out) > max_salt:
+        rng.shuffle(out)
+        out = out[:max_salt]
     return out, len(fixes), len(drops)
 
 
-def build(root, out_path, repeat_rule=1, repeat_native=1):
+def build(root, out_path, repeat_rule=1, repeat_native=1, max_salt=None):
     root = Path(root)
     t = time_days(root / "data/synthetic/time-days-all.csv")
-    n = situations(root / "data/synthetic/situations-native-v0.1.jsonl")
+    n = situations(root / "data/synthetic/situations-native-v0.2.jsonl")
     s, nfix, ndrop = salt(root / "data/external/clean/salt-luganda-train.jsonl",
-                          root / "data/external/outside-check-Group-1-2026-11-04.csv")
+                          root / "data/external/outside-check-Group-1-2026-11-04.csv", max_salt=max_salt)
     rows = t * repeat_rule + n * repeat_native + s
     for r in rows:
         text = " ".join(m["content"] for m in r["messages"])
@@ -81,7 +84,7 @@ def build(root, out_path, repeat_rule=1, repeat_native=1):
     digest = hashlib.sha256(out_path.read_bytes()).hexdigest()
     manifest = {"file": out_path.name, "sha256": digest, "rows": len(rows),
                 "unique_time_days": len(t), "unique_native_situations": len(n), "salt_rows": len(s),
-                "repeat_rule": repeat_rule, "repeat_native": repeat_native,
+                "repeat_rule": repeat_rule, "repeat_native": repeat_native, "max_salt": max_salt,
                 "salt_corrected": nfix, "salt_dropped": ndrop, "decisions": ["D-020", "D-022", "D-023", "D-024"],
                 "excluded": ["salt dev/test", "wikipedia", "held-out clock hours and day facts"]}
     Path(str(out_path) + ".manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
@@ -95,5 +98,6 @@ if __name__ == "__main__":
     p.add_argument("--output", default="data/training/train-v0.1.jsonl")
     p.add_argument("--repeat-rule", type=int, default=1)
     p.add_argument("--repeat-native", type=int, default=1)
+    p.add_argument("--max-salt", type=int, default=None)
     a = p.parse_args()
-    print(json.dumps(build(a.root, a.output, a.repeat_rule, a.repeat_native), indent=1))
+    print(json.dumps(build(a.root, a.output, a.repeat_rule, a.repeat_native, a.max_salt), indent=1))
