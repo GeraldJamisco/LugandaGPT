@@ -471,3 +471,23 @@ Rules:
 **Consequences:** `docs/ROADMAP.md` Phase 6b and `docs/WORKING-PLAN.md` section 8 record the plan. Hosting any public page, collecting public input, and any preference-tuning run each need separate owner approval. Public claims follow `docs/WORKING-PLAN.md` section 6.
 
 **Status:** Accepted.
+
+## D-026: Public beta launch plan (Luganda AI under Schmarc Technologies)
+
+**Date:** 2026-11-04
+
+**Decision:** The Project Director sets the launch direction. A fine-tuned Luganda model will be hosted on a rented GPU and opened to the public as a beta, under Schmarc Technologies as the operating company. Confirmed choices:
+- **Name:** The product is called "Luganda AI". The interface shows a visible "Beta / research preview" label, but the product name is not "research preview".
+- **Sign-up:** Users sign up (so Schmarc can contact them about improvements). This makes Schmarc a data controller; data-protection law applies.
+- **Legal basis:** Launch as a company following Uganda's Data Protection and Privacy Act and other applicable law. A privacy notice and consent are required before public launch.
+- **Feedback loop:** The hosted chat collects feedback (thumbs, a "write a better answer" box, and A/B preference where two answers are shown). The native group reviews feedback; only reviewed, corrected examples enter retraining. Public input is never trained on without notice and approval.
+- **Safety:** Limits on harmful requests; the interface states the model is an early version and can be wrong.
+- **Staged launch:** private beta (native group) → friends and community → public.
+- **Infrastructure:** GPU rented (RunPod). Domain **castalore.com** (owned, no hosting yet) will host the web app. Budget is $20 now, with intent to raise toward $100+.
+- **Scale target:** plan for roughly 500 users per day as an initial ceiling.
+
+**Rationale:** Launching publicly builds an audience and a real-feedback loop, as the large labs did early. Sign-up and company operation let Schmarc stay legal and keep users informed.
+
+**Consequences:** Public hosting, collecting public data, and any retraining on public feedback each remain owner-gated and require the privacy notice and a cost estimate first (Gate 8). The product cannot launch until a fine-tuned model exists and has been compared to Sunflower on the frozen benchmark; launching plain Sunflower is not permitted (D-001). Serving cost must be estimated before any paid GPU is left running. This decision does not raise the training budget beyond D-021 ($20); any serving spend is a separate owner approval.
+
+**Status:** Accepted. Launch itself gated on the prerequisites above.
