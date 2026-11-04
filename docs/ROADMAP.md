@@ -188,3 +188,36 @@ Dependencies / Risks.
 **Dependencies / Risks**
 - Requires a validated model. Risks: hosting cost, privacy, misuse,
   maintenance burden.
+
+---
+
+## Phase 6b — Preference comparison (A/B) feedback
+
+**Status:** Planned (D-025). Not started. Added at the Project Director's request on 2026-11-04, following the early practice of showing people two answers and asking which they prefer.
+
+**Objectives**
+- Collect which of two answers native speakers prefer, to improve the model and to choose between model versions.
+- Build an audience of Luganda speakers who take part before a chat interface exists.
+
+**How it works**
+- Two answers to the same prompt are shown side by side in random order, with no labels. The rater picks "A is better", "B is better", "Both fine" or "Both bad", and may say why.
+- The pair can be our model against Sunflower, or two versions of our model, or two samples from the same model.
+- Each record keeps the prompt, both answers, which model and version produced each, the choice, and a pseudonymous rater code. No names or contact details.
+
+**Deliverables**
+- A comparison page (the local `tools/luganda-compare/` is the starting point).
+- A preference record format and storage under `data/`.
+- A report of preference counts per category, with the number of pairs.
+
+**Exit criteria**
+- Native-group pairs collected and read, with failure patterns written up.
+- A decision on whether enough clean pairs exist to try preference tuning (a later step, separate approval).
+
+**Rules**
+- Blind, random position, model identity hidden until the choice is saved.
+- The native group is the first rater pool. A public audience needs a consent notice on the page, no personal data collected, and owner approval to host it (Gate 8).
+- Prompts typed by the public are not used as training data without notice and approval.
+- Preference counts are a supplementary signal. Benchmark claims stay governed by spec 11.4 (no overall score, average or percentage without owner approval).
+
+**Dependencies / Risks**
+- Needs a first fine-tuned model to compare, and hosting approval for any public use. Risks: small or unrepresentative rater pools, raters preferring longer or more polite answers over correct ones, public data privacy.

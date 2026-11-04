@@ -127,3 +127,13 @@ available Sunbird model the budget allows.
    run `python -m sunbird_api check`, then a small `translate-source --limit 5`.
 4. Engineering, no spend: write the benchmark runner for Gate 3 once items
    exist, and the Sunflower QLoRA script for Gate 6 with tests.
+
+## 8. Preference comparison and early audience (D-025)
+
+Training approach, confirmed by the Project Director on 2026-11-04: Sunflower-14B has already been pretrained, so the project skips pretraining and adapts it with supervised fine-tuning using QLoRA (Gate 6, budget D-021). A later preference step (Roadmap Phase 6b) asks native speakers to choose between two blind answers, to guide improvement and to choose between versions.
+
+Early audience, no chat interface needed:
+1. The native group rates two blind answers per prompt (Phase 6b), starting with Sunflower against our first fine-tuned model.
+2. A hosted "which answer is better" page for wider Luganda speakers, with a consent notice. Hosting needs owner approval (Gate 8).
+3. Share measured findings only (section 6), for example "Sunflower gave the wrong hour in N of M items", with the item counts.
+4. Investor material shows evidence: native community size, reviewed data, benchmark results, number of preference ratings, and the run records.

@@ -459,3 +459,15 @@ Rules:
 **Consequences:** The first training set is built from the time-and-day rule data, the native-written situations, and the cleaned SALT train split under these rules. SALT is translation pairs, not conversation, and Sunflower may already have seen it, so it adds volume more than new ability. This record does not authorize any training run beyond D-021.
 
 **Status:** Accepted.
+
+## D-025: Training approach and preference comparison stage
+
+**Date:** 2026-11-04
+
+**Decision:** The Project Director confirms: (1) pretraining is skipped, because Sunflower-14B is already pretrained; (2) the first adaptation is supervised fine-tuning with QLoRA under the D-021 budget; (3) a preference comparison stage, in which native speakers choose between two blind answers, is added to the roadmap as Phase 6b; (4) an early audience is built through that comparison page and measured findings, before a chat interface exists.
+
+**Rationale:** Supervised fine-tuning on reviewed examples is the affordable step. Preference comparison gives evidence of what natives prefer and helps choose between versions. An audience and measured evidence make the project visible without claiming a finished product.
+
+**Consequences:** `docs/ROADMAP.md` Phase 6b and `docs/WORKING-PLAN.md` section 8 record the plan. Hosting any public page, collecting public input, and any preference-tuning run each need separate owner approval. Public claims follow `docs/WORKING-PLAN.md` section 6.
+
+**Status:** Accepted.
