@@ -1,0 +1,306 @@
+{
+ "format": "lugandagpt-situations-v2",
+ "reviewer": "Group-1",
+ "a": {
+  "SIT-041": {
+   "text": "I'm sorry, I don't know the date of the next village meeting because I haven't been informed yet. Kindly check with the chairman, who should be able to provide the correct information.\n\nSimanyi lunaku lutuufu lukiiko lwakyaalo lwelunabeerayo era teri yangambye. Ndowooza wandibuziza Chairman alina ebisingawo ku nsonga eyo",
+   "note": "",
+   "skip": false
+  },
+  "SIT-042": {
+   "text": "Bwenategeera delivare yo lwenatuuka njakutegeeza, webale nnyo",
+   "note": "",
+   "skip": false
+  },
+  "SIT-043": {
+   "text": "Ekiwandiiko \n\nOlunaku olukiiko lwe lunatuula lujja kutegezeebwa jebujja \n\nmwebale nnyo",
+   "note": "",
+   "skip": false
+  },
+  "SIT-044": {
+   "text": "Sekakasa lunaku lutuufu kigezo lwekinabeerayo kubanga silujukira. Osobola okubuuza omusomesa akutegeeze olunaku olutuufu olwekigezo.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-045": {
+   "text": "Jjajja, ekyuma ekiteeka amasannyalaze mu ssimu kiyitibwa charger. Kikozesebwa okujjuza amasannyalaze mu ssimu ng'okigasse ku masannyalaze. Omuliro ku ssimu bwegugwaako, okozesa charger okuguzzaamu, esobole okuddamu okukola.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-046": {
+   "text": "Naaba mu ngalo nga tonnaba kulya. Kino kikuyamba okuggyawo obuwuka obuyinza okukuleetera endwadde.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-047": {
+   "text": "Okusindika ssente ku Mobile Money, kola bino:\n1. Genda mu app ya Mobile Money ku ssimu yo oba nyiga *185#.\n2. Londa ekifo ekiwandiikiddwa nti **Send Money**.\n3. Yingiza ennamba y'essimu y'omuntu gw'ogenda okusindikira ssente.\n4. Wandiika omuwendo gwa ssente z'oyagala okusindika.\n5. Erinnya ly'omuntu gw'owereza sente lijja kujja ku screen yo.\n6. Kebera bulungi erinnya ly'omuntu n'omuwendo gw'osindika.\n7. Yingiza PIN yo okukakasa okusindika ssente.\n8. Linda obubaka mu messegi obukakasa nti ssente zisindikiddwa bulungi.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-048": {
+   "text": "Leero lwokya nnyo. Kyokka enkuba eyinza okutonnya akawungeezi.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-049": {
+   "text": "Twetaaga okunywa amazzi amayonjo okusobola okukuuma obulamu bwaffe n’okwewala endwadde.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-050": {
+   "text": "1. Londa ettaka eggimu era eririna amazzi agayitamu obulungi.\n2. Simba ensigo z'ebijanjaro mu bifo ebirina ebbanga erimala.\n3. Fuba okulima n'okuyoola omuddo buli kiseera guve mu nimiro y'ebijanjaro byo\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-051": {
+   "text": "Webale nnyo, Ssebo/Nnyabo, olw'okutuyigiriza n'okutuyamba okufuna okumanya n'amagezi.\nTusiima nnyo obukozi bwo, obugumiikiriza n'okutufaako.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-052": {
+   "text": "mutabani, ggalawo oluggi,",
+   "note": "Mutabani can mean son\nmuwala can mean daughter, \n\nthese two words in this context are relating to when a person that is telling the child they are in the age of birthing them or when they are older",
+   "skip": false
+  },
+  "SIT-053": {
+   "text": "Ye, nalidde emere",
+   "note": "",
+   "skip": false
+  },
+  "SIT-054": {
+   "text": "Kilo y'enyaanya ya sente mekka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-055": {
+   "text": "Omuwendo nga munene nnyo, nsaba ompe ku muwendo ogwa wansi ko",
+   "note": "",
+   "skip": false
+  },
+  "SIT-056": {
+   "text": "Sukali aweddewo mu dduuka leero, naye tujja kufuna enkya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-057": {
+   "text": "Njagala kugula kilo bbiri ez'omuceere ne kilo emu eya sukali.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-058": {
+   "text": "Omuwendo ogwa wamu silinji omutwaalo gumu, n'enkumi bbiri",
+   "note": "",
+   "skip": false
+  },
+  "SIT-059": {
+   "text": "Nsaba ompoleyo enkumi ttaano njakuzizza ku lwokutaano",
+   "note": "",
+   "skip": false
+  },
+  "SIT-060": {
+   "text": "Oba ani ono ankubide essimu? nsaba ombulire amanya go",
+   "note": "",
+   "skip": true
+  },
+  "SIT-061": {
+   "text": "Gw'okubide essimu taliiwo, ddamu ogezeeko okuba eddako",
+   "note": "",
+   "skip": false
+  },
+  "SIT-062": {
+   "text": "Ntuuse bulunji ewaka",
+   "note": "",
+   "skip": false
+  },
+  "SIT-063": {
+   "text": "Nsaba omperezeeko ku kifaananyi kyewankubye eggulo",
+   "note": "",
+   "skip": false
+  },
+  "SIT-064": {
+   "text": "Musawo, omwaana wange abade alina omusujja okumala enaku bbiri",
+   "note": "",
+   "skip": false
+  },
+  "SIT-065": {
+   "text": "nkusabira Katonda akuwonye obulwadde obukuluma amangu ddala ",
+   "note": "",
+   "skip": false
+  },
+  "SIT-066": {
+   "text": "Jjajja, jjukira okumira eddagala lyo ng’omaze okulya.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-067": {
+   "text": "Musomesa oli otya eyo, nkutegeeza nti omwana wange tajja kusobola kujja ku ssomero olwaleero olw'ensonga tulinayo emikolo j'ekika. Nkusaba omusonyiwe olw'obutabaawo.\nWebale nnyo.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-068": {
+   "text": "Abayizi enkya muleete ebitabo byamwe ne bayilo olunaku lwenkya",
+   "note": "",
+   "skip": false
+  },
+  "SIT-069": {
+   "text": "Musomesa nsaba oddemu onyinyonyole olusoma lwa leero, sabitegedde.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-070": {
+   "text": "Mwaniriziddwa nnyo mu nnyumba ya Katonda. Tuli basanyufu okubaaniriza mu kusaba kwaffe leero. Katonda abawe omukisa era abasembeze mu kusinza wamu naffe.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-071": {
+   "text": "Tubategeeza nti ekibiina ky'abayimbi (kwaaya) kijja kuyimba ku mbaga ku Lwomukaaga.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-072": {
+   "text": "Ndi wamu naawe era nkukwatirwaako ekisa mu kiseera kino eky'ennaku, olw'okufiirwa jjajjaawo. Katonda akuwe amaanyi n'obugumu okugumira ekikangabwa kino.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-073": {
+   "text": "Mbayozayoza ne mutabani wo olw'okuyita ebigezo, kino kiraga obukozi n'okubeera omugezi. Mbasanyukideko",
+   "note": "",
+   "skip": false
+  },
+  "SIT-074": {
+   "text": "Genda butereevu, ojakusanga  omuti omunene okyaame ku kkono. Akatale kali ku mukono gwo ogwa ddyo.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-075": {
+   "text": "Ssebo owa boda bwotuuka mu kkoona eridako nga oyimirira",
+   "note": "",
+   "skip": false
+  },
+  "SIT-076": {
+   "text": "NZe mbuuza eddwaaliro eriri okumpi wano liri ludda wa?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-077": {
+   "text": "Maama wasuze otya?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-078": {
+   "text": "Komawo ewaka nga obudde tebunaba kukwaata nzikiza",
+   "note": "",
+   "skip": false
+  },
+  "SIT-079": {
+   "text": "Bakadde baffe, tubayita mujje tulye ku mmere",
+   "note": "",
+   "skip": false
+  },
+  "SIT-080": {
+   "text": "Neyanzizza nnyo okunyambako okufuna amazzi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-081": {
+   "text": "Abakozi mwenna, mutandike okulima omuddo mu lusuku obudde nga bukyaali, era mumalirize nga enjuba tennaba kwokya nnyo.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-082": {
+   "text": "Matooke gange gatuse okutundibwa. Nsaba ojje ogalabe.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-083": {
+   "text": "Mukama wange, nsaba onzikirize okuva ku mulimu nga bukyaali enkya olw'ensonga nina ensonga za waka. Nja kukola enteekateeka okusobola okumaliriza emirimu gyange egyetaagisa. Webale nnyo olw'okutegeera.\n",
+   "note": "",
+   "skip": false
+  },
+  "SIT-084": {
+   "text": "Lipooti njajikusindikira akawungeezi ka leero",
+   "note": "",
+   "skip": false
+  },
+  "SIT-085": {
+   "text": "Mubuwombeefu obunji nsaba kunsonyiwa olwobutasobola kubeerawo, Nina obuvunanyizibwa obukulu ddala bwenzija okubeerako. ",
+   "note": "",
+   "skip": false
+  },
+  "SIT-086": {
+   "text": "NSaba onsonyiwe bambi olwokwelabira olunaku lw'amazalibwa go",
+   "note": "",
+   "skip": false
+  },
+  "SIT-087": {
+   "text": "Njakukyalirako olw'okutaano olujja kusaawa kkumi eza kawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-088": {
+   "text": "Akabaga kaali ka Lwamukaaga oluwedde ssaawa emu eyakawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-089": {
+   "text": "Nkusaba ojje okwoosa enkya saawa kkumi neemu ezokumakya",
+   "note": "okwoosa",
+   "skip": false
+  },
+  "SIT-090": {
+   "text": "Edduuka liggulawo ssaawa kkumi nabbiri ezokumakya neligalawo ssaawa ssattu ezekiro buli lunaku",
+   "note": "",
+   "skip": false
+  },
+  "SIT-091": {
+   "text": "Ssaawa ziri Mwenda ez'emisana",
+   "note": "",
+   "skip": false
+  },
+  "SIT-092": {
+   "text": "Ebula essaawa ssatu okutuuka ku mmere yakawungeezi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-093": {
+   "text": "Essomero litandika ssaawa emu ey'okumakya okutuuka ssaawa mwenda ez'emisana",
+   "note": "",
+   "skip": false
+  },
+  "SIT-094": {
+   "text": "Nkulamusiza, wasuze otya?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-095": {
+   "text": "Mwasiibye mutya?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-096": {
+   "text": "Onansonyiwa obutajja eggulo, sasobode kubanga enkuba yattonye",
+   "note": "",
+   "skip": false
+  },
+  "SIT-097": {
+   "text": "Kale saawa yakwebaka emboozi ewedde",
+   "note": "",
+   "skip": false
+  },
+  "SIT-098": {
+   "text": "Mwebale kufumba, emmere ewoomye",
+   "note": "",
+   "skip": false
+  },
+  "SIT-099": {
+   "text": "Njagade okulabula nti oluguudo olugenda mu kyalo lujjudde amazzi oluvannyuma lw'enkuba okutonnya, lwajjude amataba",
+   "note": "amataba is floods",
+   "skip": false
+  },
+  "SIT-100": {
+   "text": "Tubategeeza nti olugendo olwabadde lutegekeddwa enkya lusaziddwamu olw'enkuba. Olunaku olulala tujja kululangirira tubategeeze. Mwebale nnyo.\n",
+   "note": "",
+   "skip": false
+  }
+ }
+}

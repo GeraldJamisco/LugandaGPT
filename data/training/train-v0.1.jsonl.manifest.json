@@ -1,0 +1,23 @@
+{
+ "file": "train-v0.1.jsonl",
+ "sha256": "e536b356205f1830f46b2c6fc71b71aae6f75f094542da44572597d93af15ac5",
+ "rows": 24042,
+ "unique_time_days": 56,
+ "unique_native_situations": 40,
+ "salt_rows": 23946,
+ "repeat_rule": 1,
+ "repeat_native": 1,
+ "salt_corrected": 4,
+ "salt_dropped": 1,
+ "decisions": [
+  "D-020",
+  "D-022",
+  "D-023",
+  "D-024"
+ ],
+ "excluded": [
+  "salt dev/test",
+  "wikipedia",
+  "held-out clock hours and day facts"
+ ]
+}

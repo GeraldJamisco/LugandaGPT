@@ -1,0 +1,362 @@
+[
+ [
+  "SIT-041",
+  "Honest answer",
+  "Someone asks the date of the next village meeting, but nobody has told you. Reply politely that you do not know and suggest they ask the chairman.",
+  "Do not make up a date."
+ ],
+ [
+  "SIT-042",
+  "Honest answer",
+  "A customer asks when a delayed delivery will arrive. You do not know yet. Reply honestly and say you will tell them when you hear.",
+  "Do not make up a date."
+ ],
+ [
+  "SIT-043",
+  "Notice",
+  "Write a short notice that the date of the meeting will be announced later.",
+  "Do not make up a date."
+ ],
+ [
+  "SIT-044",
+  "Honest answer",
+  "A friend asks the date of the exam and you do not remember. Say you are not sure and advise them to check with the teacher.",
+  "Do not make up a date."
+ ],
+ [
+  "SIT-045",
+  "Explain simply",
+  "Explain to your grandmother what a phone charger is, using simple Luganda.",
+  "Use Luganda words where they exist. Keep an English word only for things with no Luganda name."
+ ],
+ [
+  "SIT-046",
+  "Explain simply",
+  "Tell a child to wash hands before eating, and say why, in two short sentences.",
+  "Two sentences only."
+ ],
+ [
+  "SIT-047",
+  "Explain simply",
+  "Explain to a neighbour how to send money by mobile money, in simple steps.",
+  "Use Luganda words where they exist."
+ ],
+ [
+  "SIT-048",
+  "Message",
+  "Say that it is hot today and that it may rain in the evening.",
+  "Use Luganda words where they exist."
+ ],
+ [
+  "SIT-049",
+  "Short answer",
+  "Answer in exactly one sentence: why do we need to drink clean water?",
+  "One sentence only."
+ ],
+ [
+  "SIT-050",
+  "Short answer",
+  "Give a farmer three short tips for planting beans. Write them as a numbered list.",
+  "Exactly three tips, numbered 1, 2, 3."
+ ],
+ [
+  "SIT-051",
+  "Short answer",
+  "Write a two-line message thanking a teacher.",
+  "Two lines only."
+ ],
+ [
+  "SIT-052",
+  "Short answer",
+  "Tell a child, in one short sentence, to close the door.",
+  "One short sentence."
+ ],
+ [
+  "SIT-053",
+  "Short answer",
+  "A visitor asks if you have eaten. Reply in one short sentence.",
+  "One short sentence."
+ ],
+ [
+  "SIT-054",
+  "Market",
+  "Ask a seller how much a kilo of tomatoes costs.",
+  ""
+ ],
+ [
+  "SIT-055",
+  "Market",
+  "Tell a seller the price is too high and ask for a lower price.",
+  ""
+ ],
+ [
+  "SIT-056",
+  "Market",
+  "Tell a customer the sugar is finished but more will come tomorrow.",
+  "enkya"
+ ],
+ [
+  "SIT-057",
+  "Market",
+  "Tell a shopkeeper you want two kilos of rice and one kilo of sugar.",
+  ""
+ ],
+ [
+  "SIT-058",
+  "Market",
+  "Tell a customer the total is 12,000 shillings.",
+  "Write the amount in Luganda words, the way you would say it."
+ ],
+ [
+  "SIT-059",
+  "Money",
+  "Ask a friend to lend you 5,000 shillings until Friday.",
+  "Write the amount in Luganda words. Friday: Lwokutaano"
+ ],
+ [
+  "SIT-060",
+  "Phone call",
+  "Answer the phone politely when someone calls you and you do not know who it is.",
+  ""
+ ],
+ [
+  "SIT-061",
+  "Phone call",
+  "Tell a caller that the person they want is not here and ask them to call back later.",
+  ""
+ ],
+ [
+  "SIT-062",
+  "Phone message",
+  "Send a message to say you have reached home safely.",
+  ""
+ ],
+ [
+  "SIT-063",
+  "Phone message",
+  "Ask a friend to send you the photo she took yesterday.",
+  "jjo"
+ ],
+ [
+  "SIT-064",
+  "Health",
+  "Tell the nurse that your child has had a fever for two days.",
+  ""
+ ],
+ [
+  "SIT-065",
+  "Health",
+  "Tell a sick friend you hope they get well soon.",
+  ""
+ ],
+ [
+  "SIT-066",
+  "Health",
+  "Remind an elderly relative to take their medicine after eating.",
+  ""
+ ],
+ [
+  "SIT-067",
+  "School",
+  "Write a short note to the teacher saying your child will be absent today because of a family event.",
+  "leero"
+ ],
+ [
+  "SIT-068",
+  "School",
+  "Tell students to bring their exercise books and a pen tomorrow.",
+  "enkya"
+ ],
+ [
+  "SIT-069",
+  "School",
+  "Ask your teacher to explain the lesson again.",
+  ""
+ ],
+ [
+  "SIT-070",
+  "Church",
+  "Welcome visitors at the church service.",
+  ""
+ ],
+ [
+  "SIT-071",
+  "Church",
+  "Announce that the choir will sing at the wedding on Saturday.",
+  "Lwomukaaga"
+ ],
+ [
+  "SIT-072",
+  "Condolence",
+  "Send a message to a friend whose grandfather has passed away.",
+  "Write it the way you would really say it to a friend."
+ ],
+ [
+  "SIT-073",
+  "Congratulations",
+  "Congratulate a friend whose child has passed the exams.",
+  ""
+ ],
+ [
+  "SIT-074",
+  "Directions",
+  "Explain how to get to the market: go straight, turn left at the big tree, and it is on the right.",
+  ""
+ ],
+ [
+  "SIT-075",
+  "Directions",
+  "Tell the boda boda rider to stop at the next junction.",
+  ""
+ ],
+ [
+  "SIT-076",
+  "Directions",
+  "Ask someone where the nearest health centre is.",
+  ""
+ ],
+ [
+  "SIT-077",
+  "Family",
+  "Ask your mother how she slept.",
+  ""
+ ],
+ [
+  "SIT-078",
+  "Family",
+  "Tell your child to come home before dark.",
+  ""
+ ],
+ [
+  "SIT-079",
+  "Family",
+  "Invite the elders to share a meal.",
+  ""
+ ],
+ [
+  "SIT-080",
+  "Family",
+  "Thank your neighbour for helping you carry water.",
+  ""
+ ],
+ [
+  "SIT-081",
+  "Farming",
+  "Tell the workers to start weeding the garden early and finish before the sun is hot.",
+  ""
+ ],
+ [
+  "SIT-082",
+  "Farming",
+  "Tell a buyer your matooke is ready for sale and ask them to come and see it.",
+  ""
+ ],
+ [
+  "SIT-083",
+  "Work",
+  "Ask your boss for permission to leave early tomorrow because of a family matter.",
+  "enkya"
+ ],
+ [
+  "SIT-084",
+  "Work",
+  "Tell a colleague you will send the report this evening.",
+  ""
+ ],
+ [
+  "SIT-085",
+  "Polite refusal",
+  "Politely refuse an invitation because you have another commitment.",
+  ""
+ ],
+ [
+  "SIT-086",
+  "Apology",
+  "Apologise to a friend for forgetting their birthday.",
+  ""
+ ],
+ [
+  "SIT-087",
+  "Days and times",
+  "Tell a friend you will visit them next Friday at 4 in the afternoon.",
+  "ssaawa kkumi ez'emisana; Lwokutaano"
+ ],
+ [
+  "SIT-088",
+  "Days and times",
+  "Tell your friend the party was last Saturday at 7 in the evening.",
+  "ssaawa emu eya kawungeezi; Lwomukaaga"
+ ],
+ [
+  "SIT-089",
+  "Days and times",
+  "Tell the driver to come at 5 in the morning the day after tomorrow.",
+  "ssaawa kkumi n'emu ez'okumakya. For 'the day after tomorrow' write the word you would really use and put it in the note."
+ ],
+ [
+  "SIT-090",
+  "Days and times",
+  "Say that the shop opens at 6 in the morning and closes at 9 at night every day.",
+  "ssaawa kkumi na bbiri ez'okumakya; ssaawa ssatu ez'ekiro"
+ ],
+ [
+  "SIT-091",
+  "Days and times",
+  "A friend asks what time it is. It is 3 in the afternoon. Answer.",
+  "ssaawa mwenda ez'emisana"
+ ],
+ [
+  "SIT-092",
+  "Days and times",
+  "A child asks how many hours until the evening meal at 7. It is now 4 in the afternoon. Answer.",
+  "Asking how many hours: ebulayo essaawa mmeka. The answer: 3 hours."
+ ],
+ [
+  "SIT-093",
+  "Days and times",
+  "Write: school starts at 7 in the morning on Monday and ends at 3 in the afternoon.",
+  "ssaawa emu ez'okumakya; ssaawa mwenda ez'emisana; Mmande"
+ ],
+ [
+  "SIT-094",
+  "Greeting",
+  "Greet an elder you meet on the road in the morning.",
+  ""
+ ],
+ [
+  "SIT-095",
+  "Greeting",
+  "Greet your neighbours in the evening.",
+  ""
+ ],
+ [
+  "SIT-096",
+  "Apology",
+  "Tell your friend you are sorry you could not come yesterday because it rained.",
+  "jjo"
+ ],
+ [
+  "SIT-097",
+  "Family",
+  "Tell your child the story is finished and it is time to sleep.",
+  ""
+ ],
+ [
+  "SIT-098",
+  "Thanks",
+  "Write a short thank-you message after a good meal at someone's home.",
+  ""
+ ],
+ [
+  "SIT-099",
+  "Warning",
+  "Warn a friend that the road to the village is flooded after the rain.",
+  ""
+ ],
+ [
+  "SIT-100",
+  "Notice",
+  "Tell a group that tomorrow's trip is cancelled because of rain and a new day will be announced later.",
+  "enkya. Do not make up a new date."
+ ]
+]
