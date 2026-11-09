@@ -130,7 +130,8 @@ def run_training(args):
     collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     out = Path(args.output)
     out.mkdir(parents=True, exist_ok=True)
-    targs = TrainingArguments(
+    import dataclasses
+    desired = dict(
         output_dir=str(out), num_train_epochs=cfg["epochs"],
         per_device_train_batch_size=cfg["per_device_batch_size"],
         gradient_accumulation_steps=cfg["grad_accum"],
@@ -139,6 +140,18 @@ def run_training(args):
         bf16=True, logging_steps=10, save_strategy="epoch", seed=cfg["seed"],
         optim="paged_adamw_8bit", report_to=[],
     )
+    # transformers versions differ in which TrainingArguments they accept;
+    # pass only the ones this installed version supports, so an upgrade cannot break the run.
+    try:
+        allowed = {f.name for f in dataclasses.fields(TrainingArguments)}
+    except Exception:
+        import inspect
+        allowed = set(inspect.signature(TrainingArguments.__init__).parameters)
+    kept = {k: v for k, v in desired.items() if k in allowed}
+    dropped = sorted(set(desired) - set(kept))
+    if dropped:
+        print("Note: TrainingArguments not supported in this version, skipped:", dropped)
+    targs = TrainingArguments(**kept)
     trainer = Trainer(
         model=model, args=targs, train_dataset=dataset, data_collator=collator,
     )
