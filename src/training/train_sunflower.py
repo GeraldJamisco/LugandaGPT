@@ -1,14 +1,17 @@
 """Guarded QLoRA fine-tune of Sunflower-14B (Gate 6, budget D-021 = $20).
 
 Runs on a rented GPU (RunPod), not on the owner's PC and not in the cloud
-workspace. Heavy libraries (torch, transformers, peft, trl, bitsandbytes) are
+workspace. Heavy libraries (torch, transformers, peft, bitsandbytes) are
 imported only inside run_training(), after the config and data checks pass, so
 --dry-run and the unit tests work on a plain Python with no GPU.
 
+Uses transformers.Trainer directly (its API is stable across versions) rather
+than a third-party trainer, so a library upgrade will not silently break it.
+
 Typical use on the pod:
-  python -m training.train_sunflower --train data/training/train-v0.1.jsonl --dry-run
-  python -m training.train_sunflower --train data/training/train-v0.1.jsonl \
-      --output runs/sunflower-v0.1 --confirm-approval D-021
+  python -m training.train_sunflower --train data/training/train-v0.2.jsonl --dry-run
+  python -m training.train_sunflower --train data/training/train-v0.2.jsonl \
+      --output runs/sunflower-v0.2 --confirm-approval D-021
 """
 
 import argparse
@@ -73,13 +76,13 @@ def run_training(args):
         )
 
     # --- Heavy imports happen only here, on the GPU box ---
-    import torch  # noqa: F401
-    from transformers import (  # noqa: F401
-        AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments,
+    import torch
+    from transformers import (
+        AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig,
+        TrainingArguments, Trainer, DataCollatorForLanguageModeling,
     )
     from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
     from datasets import Dataset
-    from trl import SFTTrainer
 
     if not torch.cuda.is_available():
         raise TrainingError("no CUDA GPU found; run this on a RunPod GPU pod")
@@ -91,13 +94,18 @@ def run_training(args):
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    def to_text(row):
-        return {"text": tokenizer.apply_chat_template(
-            row["messages"], tokenize=False, add_generation_prompt=False)}
+    max_len = int(cfg["max_seq_len"])
 
-    dataset = Dataset.from_list([to_text(r) for r in rows])
+    def encode(row):
+        text = tokenizer.apply_chat_template(
+            row["messages"], tokenize=False, add_generation_prompt=False)
+        enc = tokenizer(text, truncation=True, max_length=max_len)
+        return {"input_ids": enc["input_ids"], "attention_mask": enc["attention_mask"]}
 
-    compute_dtype = getattr(torch, "bfloat16")
+    dataset = Dataset.from_list([encode(r) for r in rows])
+    print(f"Prepared {len(dataset)} training examples.")
+
+    compute_dtype = torch.bfloat16
     bnb = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type=cfg["quantization"]["bnb_4bit_quant_type"],
@@ -108,6 +116,7 @@ def run_training(args):
         cfg["base_model"], revision=cfg["revision"],
         quantization_config=bnb, torch_dtype=compute_dtype, device_map="auto",
     )
+    model.config.use_cache = False
     model = prepare_model_for_kbit_training(model)
     lora = LoraConfig(
         task_type=cfg["lora"]["task_type"], r=cfg["lora"]["r"],
@@ -115,8 +124,10 @@ def run_training(args):
         bias=cfg["lora"]["bias"], target_modules=list(cfg["lora"]["target_modules"]),
     )
     model = get_peft_model(model, lora)
-    resolved_rev = getattr(getattr(model, "config", None), "_commit_hash", cfg["revision"])
+    model.print_trainable_parameters()
+    resolved_rev = getattr(model.config, "_commit_hash", None) or cfg["revision"]
 
+    collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     out = Path(args.output)
     out.mkdir(parents=True, exist_ok=True)
     targs = TrainingArguments(
@@ -126,21 +137,18 @@ def run_training(args):
         learning_rate=cfg["learning_rate"], warmup_ratio=cfg["warmup_ratio"],
         weight_decay=cfg["weight_decay"], lr_scheduler_type=cfg["lr_scheduler"],
         bf16=True, logging_steps=10, save_strategy="epoch", seed=cfg["seed"],
-        report_to=[],
+        optim="paged_adamw_8bit", report_to=[],
     )
-    trainer = SFTTrainer(
-        model=model, args=targs, train_dataset=dataset,
-        dataset_text_field="text", max_seq_length=cfg["max_seq_len"],
-        tokenizer=tokenizer,
+    trainer = Trainer(
+        model=model, args=targs, train_dataset=dataset, data_collator=collator,
     )
     trainer.train()
-    trainer.save_model(str(out))
+    model.save_pretrained(str(out))        # saves the LoRA adapter only (small)
     tokenizer.save_pretrained(str(out))
 
     manifest = {
         **{k: the_plan[k] for k in ("train_file", "train_sha256", "data_summary")},
-        "config": cfg, "resolved_revision": resolved_rev,
-        "adapter_dir": str(out),
+        "config": cfg, "resolved_revision": resolved_rev, "adapter_dir": str(out),
     }
     (out / "run-manifest.json").write_text(
         json.dumps(manifest, indent=1, ensure_ascii=False), encoding="utf-8")
@@ -151,8 +159,8 @@ def run_training(args):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="QLoRA fine-tune of Sunflower-14B")
-    p.add_argument("--train", default="data/training/train-v0.1.jsonl")
-    p.add_argument("--output", default="runs/sunflower-v0.1")
+    p.add_argument("--train", default="data/training/train-v0.2.jsonl")
+    p.add_argument("--output", default="runs/sunflower-v0.2")
     p.add_argument("--config", help="optional JSON file of hyper-parameter overrides")
     p.add_argument("--epochs", type=int)
     p.add_argument("--max-seq-len", type=int)
