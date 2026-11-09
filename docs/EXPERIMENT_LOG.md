@@ -217,3 +217,31 @@ appended in chronological order.
   instruction following, this adapter alone is insufficient and another
   candidate or additional data and training would need separate approval. No
   further experiment, training, or fine-tuning is approved.
+
+---
+
+### EXP-2026-003 — First Sunflower-14B QLoRA fine-tune (train-v0.2)
+
+- **Experiment ID:** EXP-2026-003
+- **Date:** 2026-11-09
+- **Research question:** Does a QLoRA fine-tune of Sunflower-14B on the native-written Luganda data improve the weak areas (clock time, part-of-day, hour conversion, not inventing dates) over the base model?
+- **Hypothesis:** A small LoRA adapter trained on the time/day rule data plus native situations will correct the hour-conversion and part-of-day errors the base model makes, and generalise to held-out hours.
+- **Dataset and version:** train-v0.2.jsonl, sha256 37c37b4e2cfb1aa351928756e816e020b8189a92b8dfe96296e22da1cbcea4d4. 4,762 chat examples: 4,000 SALT pairs (capped), 594 native situations (99 unique x6), 168 time/day (56 unique x3). Held-out hours {8,9,10,13,14} and held-out day facts kept out (D-020).
+- **Data permissions / provenance:** Native data owned by the project (D-019). SALT CC BY-SA 4.0 (D-023, D-024). Base weights Sunbird/Sunflower-14B, Apache-2.0, gated access granted to owner.
+- **Model and tokenizer configuration:** Base Sunbird/Sunflower-14B (Qwen3-14B, ~14.83B params). 4-bit NF4, double quant, bf16 compute. LoRA r=16, alpha=32, dropout=0.05, targets q/k/v/o/gate/up/down_proj. Trainable params 64,225,280 (0.433%). max_seq_len 1024, 1 epoch, batch 1 x grad_accum 16, lr 2e-4 cosine, seed 7, paged_adamw_8bit. (warmup_ratio unsupported by installed transformers and skipped.)
+- **Compute environment:** RunPod, 1x RTX 4090 (24 GB). PyTorch 2.8.0+cu128.
+- **Random seeds:** 7
+- **Software versions:** transformers 5.22.2, peft 0.21.2, bitsandbytes 0.50.2, torch 2.8.0+cu128.
+- **Budget and approval status:** D-021 ($20 cap). Actual training ~40.6 min; total pod use well under the cap.
+- **Procedure:** Uploaded code+data bundle to pod; `python -m training.train_sunflower --train data/training/train-v0.2.jsonl --output runs/sunflower-v0.2 --confirm-approval D-021`. Adapter saved to runs/sunflower-v0.2. Then greedy generation (max_new_tokens 100, do_sample False) on 5 prompts, base vs base+adapter.
+- **Metrics:** Training loss (start ~1.554, final train_loss 0.7517). Qualitative side-by-side on 5 prompts (2 held-out hours). No benchmark score computed; no blind native scoring yet.
+- **Results (measured, verbatim outputs):**
+  - Q1 "Ssaawa 9:00am ... ssaawa mmeka?" (held-out) — BASE: "...ssaawa ssatu ez'oku makya." ADAPTER: "Ssaawa ssatu ez'okumakya."
+  - Q2 "Ssaawa 1:00pm ... ssaawa mmeka?" (held-out) — BASE: "...ssaawa 7:00 ez'olweggulo." ADAPTER: "Ssaawa musanvu ez'emisana."
+  - Q3 "...meet at the market on Wednesday at 11 in the morning." — BASE: "...ku Lwokusatu ku ssaawa 11 ez'oku makya." ADAPTER: "Tujja kusisinkana ku Lwokusatu ssaawa ttaano ez'okumakya mu katale."
+  - Q4 "...does not know the date..." — BASE: restated the task; no date invented. ADAPTER: "Sekakasa lunaku lutuufu lwa nsisinkano, sonyiwa obutakutegeeza kubanga simanyi"; no date invented.
+  - Q5 "Good morning, how did you sleep?" — BASE: doubled/awkward. ADAPTER: "Wasuze otya?"
+- **Failure analysis:** Two library issues fixed before the run completed: transformers 5.x rejected warmup_ratio (now only supported TrainingArguments are passed) and returned tokenised input as a dict (generation now unpacks it). No training failure.
+- **Interpretation (not measured):** On these 5 prompts the adapter corrected the base model's wrong part-of-day (Q2) and its failure to convert the clock hour (Q3, ssaawa 11 -> ssaawa ttaano), including on held-out hours, and produced cleaner spellings and a natural reply for Q4. This is an encouraging first signal only; 5 author-graded prompts are not proof.
+- **Reproducibility instructions:** `docs/TRAINING-SUNFLOWER.md`. Rebuild train-v0.2 with `python -m training_data.build --output data/training/train-v0.2.jsonl --repeat-native 6 --repeat-rule 3 --max-salt 4000`. Do not commit or print HF tokens.
+- **Decision and next step:** Adapter runs/sunflower-v0.2 is the first LugandaGPT candidate. Next: freeze the benchmark and have the native group score the adapter vs base Sunflower **blind** (Gate 7) before any claim. No deployment or public launch approved by this run (D-026 prerequisites still open).
