@@ -224,3 +224,7 @@ reports/reporter/*
 # Downloaded outside data (large; provenance files are kept next to it)
 data/external/**
 !data/external/**/*.provenance.json
+
+# Local bundles and model artifacts (never commit large binaries)
+*.tar.gz
+runs/
