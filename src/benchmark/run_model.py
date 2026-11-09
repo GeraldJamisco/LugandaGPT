@@ -28,7 +28,7 @@ def read_items(paths, skip_multi_turn=True):
                 if not line:
                     continue
                 it = json.loads(line)
-                if it.get("excluded") is True:
+                if it.get("excluded") is True or it.get("review_status") == "excluded":
                     continue
                 if skip_multi_turn and it.get("turns"):
                     continue
