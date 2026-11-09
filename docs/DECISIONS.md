@@ -491,3 +491,17 @@ Rules:
 **Consequences:** Public hosting, collecting public data, and any retraining on public feedback each remain owner-gated and require the privacy notice and a cost estimate first (Gate 8). The product cannot launch until a fine-tuned model exists and has been compared to Sunflower on the frozen benchmark; launching plain Sunflower is not permitted (D-001). Serving cost must be estimated before any paid GPU is left running. This decision does not raise the training budget beyond D-021 ($20); any serving spend is a separate owner approval.
 
 **Status:** Accepted. Launch itself gated on the prerequisites above.
+
+## D-027: Pilot benchmark P1 frozen (29 items)
+
+**Date:** 2026-11-10
+
+**Decision:** The Project Director freezes the pilot benchmark set "P1": 29 items in `data/benchmark/frozen/pilot-p1-0.7-draft.jsonl`, SHA-256 `3a7b909ac817fad6814bcce2be0dd656146a99b8b2ae757a5f1c02cd302fa8ad`. Categories: everyday 7, formal 6, code-switching 5, instruction following 4, explanation 4, factuality 3. The native group (GROUP-1) confirmed the items on 2026-11-09 and 2026-11-10: 27 fine as written, 3 corrected, "zibeera mmeka" adopted in four time questions, and both "tool library" items dropped (EXC-001, EXC-002).
+
+**What this is not:** P1 is not the specification's approved version 1.0 (D-007). It keeps a draft version label because the approval conditions are not met: most reference answers are pending, contamination against Sunflower's training data is unchecked, the set has 29 items rather than about 50, and the group reviewed together rather than as independent reviewers. The validator refuses to mark such items approved, and that check was not bypassed.
+
+**Rationale:** A fixed set is needed so the base model and each fine-tune answer exactly the same questions, and so results across runs are comparable.
+
+**Consequences:** P1 items do not change. Any change makes a new set with a new hash. Blind comparisons on P1 are reported as pilot evidence with item counts per category, with no overall score (spec 11.4). Items whose clock phrase appears in training data are reported separately. An approved version 1.0 remains future work.
+
+**Status:** Accepted.
