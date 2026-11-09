@@ -82,7 +82,7 @@ def generate(count=36, seed=1):
         if kind in ("lug_to_en", "en_to_lug"):
             h = rng.choice(hours)
             if kind == "lug_to_en":
-                q = f"{lug_time(h).capitalize()}. Ssaawa eyo mu Luzungu ziba mmeka?"
+                q = f"{lug_time(h).capitalize()}. Ssaawa eyo mu Luzungu zibeera mmeka?"
                 a = f"{lug_time(h).capitalize()} mu Luzungu zibeera {english_time(h)}."
             else:
                 q = f"Ssaawa {english_time(h)} mu Luganda eba ssaawa mmeka?"
@@ -113,7 +113,7 @@ def generate_all():
             continue
         alt = lug_time_alt(h)
         rows.append({"kind": "lug_to_en",
-                     "question": f"{lug_time(h).capitalize()}. Ssaawa eyo mu Luzungu ziba mmeka?",
+                     "question": f"{lug_time(h).capitalize()}. Ssaawa eyo mu Luzungu zibeera mmeka?",
                      "answer": f"{lug_time(h).capitalize()} mu Luzungu zibeera {english_time(h)}.",
                      "alt_answer": ""})
         rows.append({"kind": "en_to_lug",

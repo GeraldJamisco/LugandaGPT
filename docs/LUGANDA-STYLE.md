@@ -41,3 +41,5 @@ eza kawungeezi (both accepted).
 - "Ssaawa mmeka?" asks the time. "Ebulayo essaawa mmeka?" asks how many hours.
 - Benchmark prompts EVERYDAY-003 and EVERYDAY-007 were updated to the Lwa- rule on
   2026-11-03 (Leero Lwakubiri, Jjo lwabade Lwakutaano).
+
+- Asking the English time of a Luganda hour: "Ssaawa eyo mu Luzungu zibeera mmeka?" (group decision 2026-11-10; not "ziba mmeka").
