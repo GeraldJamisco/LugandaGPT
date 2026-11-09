@@ -228,3 +228,4 @@ data/external/**
 # Local bundles and model artifacts (never commit large binaries)
 *.tar.gz
 runs/
+tools/benchmark-review/_sample/
