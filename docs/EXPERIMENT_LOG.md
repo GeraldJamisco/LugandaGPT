@@ -245,3 +245,26 @@ appended in chronological order.
 - **Interpretation (not measured):** On these 5 prompts the adapter corrected the base model's wrong part-of-day (Q2) and its failure to convert the clock hour (Q3, ssaawa 11 -> ssaawa ttaano), including on held-out hours, and produced cleaner spellings and a natural reply for Q4. This is an encouraging first signal only; 5 author-graded prompts are not proof.
 - **Reproducibility instructions:** `docs/TRAINING-SUNFLOWER.md`. Rebuild train-v0.2 with `python -m training_data.build --output data/training/train-v0.2.jsonl --repeat-native 6 --repeat-rule 3 --max-salt 4000`. Do not commit or print HF tokens.
 - **Decision and next step:** Adapter runs/sunflower-v0.2 is the first LugandaGPT candidate. Next: freeze the benchmark and have the native group score the adapter vs base Sunflower **blind** (Gate 7) before any claim. No deployment or public launch approved by this run (D-026 prerequisites still open).
+
+---
+
+### EXP-2026-004 — Blind group comparison on pilot benchmark P1 (base vs v0.2 adapter)
+
+- **Experiment ID:** EXP-2026-004
+- **Date:** 2026-11-10
+- **Research question:** On the frozen pilot set P1, which answer does the native group prefer when it does not know which model wrote it?
+- **Hypothesis:** The v0.2 adapter is preferred on time, day and formal items and is no worse elsewhere.
+- **Dataset and version:** Pilot benchmark P1, 29 items, `data/benchmark/frozen/pilot-p1-0.7-draft.jsonl`, SHA-256 3a7b909ac817fad6814bcce2be0dd656146a99b8b2ae757a5f1c02cd302fa8ad (D-027).
+- **Data permissions / provenance:** Project-authored items confirmed by GROUP-1.
+- **Model and tokenizer configuration:** Sunbird/Sunflower-14B, 4-bit NF4, bf16 compute, with and without adapter runs/sunflower-v0.2 (EXP-2026-003). Greedy, max_new_tokens 400, thinking disabled.
+- **Compute environment:** RunPod, 1x RTX 4090.
+- **Random seeds:** Pairing seed 11 (A/B side).
+- **Software versions:** As installed on the pod by `pip install -U` on 2026-11-10 (not recorded per package).
+- **Budget and approval status:** D-021.
+- **Procedure:** `python -m benchmark.run_model` for each model; `python -m benchmark.blind make`; GROUP-1 scored the blind page together; `python -m benchmark.blind tally`. Raw files: `data/benchmark/answers-base.jsonl`, `answers-v0.2.jsonl`, `data/benchmark/blind/blind-p1-v0.2-Group-1-2026-11-10.csv`, key in `data/benchmark/keys/`.
+- **Metrics:** Preference counts per category. No overall score (spec 11.4).
+- **Results (measured):** Preferred v0.2 / preferred base / both good / both bad. Everyday 3/2/2/0. Formal 3/1/2/0. Instruction 1/1/2/0. Code-switching 1/1/1/2. Explanation 1/0/3/0. Factuality 1/1/0/1. All 29 items: 10/6/10/3. Seen-hour items: FORMAL-001 both good, CODESWITCH-002 both bad.
+- **Failure analysis:** v0.2 faults seen in the answers: wrong English hour for held-out Luganda hours in EVERYDAY-004 (answered "ssaawa kkumi") and EVERYDAY-002 (answered "ssaawa emu ey'okumakya"); clock times added that the prompt did not give (CODESWITCH-003, FORMAL-006, FORMAL-002); an English reply to a Luganda request (CODESWITCH-005); a confident weather forecast where it should decline (FACTUALITY-002). Base faults: wrong day (EVERYDAY-007), repeated the question (EVERYDAY-005), invented organisation, date and place names in notices (FORMAL-004, FORMAL-006), English answer (EXPLANATION-001). Both invented a description of a book that may not exist (FACTUALITY-003).
+- **Limits:** One group scoring together, 29 items, differing writing styles may reveal the model, wording of four time questions ("zibeera mmeka") differs from the training wording ("ziba mmeka").
+- **Reproducibility instructions:** Commands above with the frozen file and the adapter.
+- **Decision and next step:** Pilot evidence only. v0.2 is not ready for release. Next: build v0.3 data to address the listed v0.2 faults, retrain, and repeat this comparison on P1.
