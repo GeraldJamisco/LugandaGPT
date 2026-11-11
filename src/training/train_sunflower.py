@@ -172,8 +172,8 @@ def run_training(args):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="QLoRA fine-tune of Sunflower-14B")
-    p.add_argument("--train", default="data/training/train-v0.2.jsonl")
-    p.add_argument("--output", default="runs/sunflower-v0.2")
+    p.add_argument("--train", default="data/training/train-v0.3.jsonl")
+    p.add_argument("--output", default="runs/sunflower-v0.3")
     p.add_argument("--config", help="optional JSON file of hyper-parameter overrides")
     p.add_argument("--epochs", type=int)
     p.add_argument("--max-seq-len", type=int)

@@ -32,11 +32,20 @@ def situations(path):
         r = json.loads(line)
         text = (r.get("luganda_normalised") or "").strip()
         if text:
-            out.append(_msg(r["id"], "native_situations", "Write this in Luganda: " + r["english_situation"], text))
+            prompt = r.get("prompt") or ("Write this in Luganda: " + r["english_situation"])
+            out.append(_msg(r["id"], "native_situations", prompt, text))
     return out
 
 
-def salt(train_path, check_csv, seed=7, max_salt=None):
+def time_frames(path):
+    """Luganda-hour to English-time questions in sentence frames written by the native group."""
+    if not Path(path).exists():
+        return []
+    return [_msg(r["id"], "rule_time_frames", r["question"], r["answer"])
+            for r in (json.loads(l) for l in open(path, encoding="utf-8") if l.strip())]
+
+
+def salt(train_path, check_csv, seed=7, max_salt=None, to_english=True):
     fixes, drops = {}, set()
     for r in csv.DictReader(open(check_csv, encoding="utf-8-sig")):
         if not r["id"].startswith("SALT-train-"):
@@ -55,7 +64,7 @@ def salt(train_path, check_csv, seed=7, max_salt=None):
         eng = r["english"].strip()
         if not lug or not eng:
             continue
-        if rng.random() < 0.5:
+        if not to_english or rng.random() < 0.5:
             out.append(_msg(r["id"], "salt_train", "Translate into Luganda: " + eng, lug))
         else:
             out.append(_msg(r["id"], "salt_train", "Translate into English: " + lug, eng))
@@ -65,13 +74,14 @@ def salt(train_path, check_csv, seed=7, max_salt=None):
     return out, len(fixes), len(drops)
 
 
-def build(root, out_path, repeat_rule=1, repeat_native=1, max_salt=None):
+def build(root, out_path, repeat_rule=1, repeat_native=1, max_salt=None, salt_to_english=True, repeat_frames=1):
     root = Path(root)
     t = time_days(root / "data/synthetic/time-days-all.csv")
-    n = situations(root / "data/synthetic/situations-native-v0.2.jsonl")
+    n = situations(root / "data/synthetic/situations-native-v0.3.jsonl")
     s, nfix, ndrop = salt(root / "data/external/clean/salt-luganda-train.jsonl",
-                          root / "data/external/outside-check-Group-1-2026-11-04.csv", max_salt=max_salt)
-    rows = t * repeat_rule + n * repeat_native + s
+                          root / "data/external/outside-check-Group-1-2026-11-04.csv", max_salt=max_salt, to_english=salt_to_english)
+    fr = time_frames(root / "data/synthetic/time-frames-v0.1.jsonl")
+    rows = t * repeat_rule + n * repeat_native + fr * repeat_frames + s
     for r in rows:
         text = " ".join(m["content"] for m in r["messages"])
         if HELDOUT_PATTERN.search(text):
@@ -85,6 +95,7 @@ def build(root, out_path, repeat_rule=1, repeat_native=1, max_salt=None):
     manifest = {"file": out_path.name, "sha256": digest, "rows": len(rows),
                 "unique_time_days": len(t), "unique_native_situations": len(n), "salt_rows": len(s),
                 "repeat_rule": repeat_rule, "repeat_native": repeat_native, "max_salt": max_salt,
+                "unique_time_frames": len(fr), "repeat_frames": repeat_frames, "salt_to_english": salt_to_english,
                 "salt_corrected": nfix, "salt_dropped": ndrop, "decisions": ["D-020", "D-022", "D-023", "D-024"],
                 "excluded": ["salt dev/test", "wikipedia", "held-out clock hours and day facts"]}
     Path(str(out_path) + ".manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
@@ -99,5 +110,7 @@ if __name__ == "__main__":
     p.add_argument("--repeat-rule", type=int, default=1)
     p.add_argument("--repeat-native", type=int, default=1)
     p.add_argument("--max-salt", type=int, default=None)
+    p.add_argument("--no-salt-to-english", action="store_true")
+    p.add_argument("--repeat-frames", type=int, default=1)
     a = p.parse_args()
-    print(json.dumps(build(a.root, a.output, a.repeat_rule, a.repeat_native, a.max_salt), indent=1))
+    print(json.dumps(build(a.root, a.output, a.repeat_rule, a.repeat_native, a.max_salt, not a.no_salt_to_english, a.repeat_frames), indent=1))
