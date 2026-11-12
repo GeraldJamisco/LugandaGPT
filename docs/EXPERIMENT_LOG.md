@@ -268,3 +268,21 @@ appended in chronological order.
 - **Limits:** One group scoring together, 29 items, differing writing styles may reveal the model, wording of four time questions ("zibeera mmeka") differs from the training wording ("ziba mmeka").
 - **Reproducibility instructions:** Commands above with the frozen file and the adapter.
 - **Decision and next step:** Pilot evidence only. v0.2 is not ready for release. Next: build v0.3 data to address the listed v0.2 faults, retrain, and repeat this comparison on P1.
+
+---
+
+### EXP-2026-005 — Blind group comparison on P1 (base vs v0.3 adapter)
+
+- **Experiment ID:** EXP-2026-005
+- **Date:** 2026-11-12
+- **Research question:** Did v0.3 (built to fix v0.2's faults) beat plain Sunflower by more than v0.2 did, on the frozen P1 set, scored blind?
+- **Dataset and version:** Pilot benchmark P1, 29 items (D-027). Training set train-v0.3.jsonl (5,108 ex: 142 native x6, 56 time/day x3, 44 time-frames x2, 4,000 SALT into-Luganda only).
+- **Model and tokenizer configuration:** Sunflower-14B 4-bit NF4 bf16, adapter runs/sunflower-v0.3 (EXP: train_loss 0.7164, 320 steps, 1 epoch, RTX 4090, ~50 min). Greedy, max_new_tokens 400, thinking disabled in the runner.
+- **Compute environment:** RunPod, 1x RTX 4090.
+- **Budget and approval status:** D-021.
+- **Procedure:** run_model for base and v0.3; benchmark.blind make; GROUP-1 scored blind; benchmark.blind tally. Files: data/benchmark/answers-base.jsonl, answers-v0.3.jsonl, blind-p1-v0.3-Group-1-2026-11-12.csv, key in data/benchmark/keys/.
+- **Metrics:** Preference counts per category. No overall score (spec 11.4).
+- **Results (measured):** v0.3 preferred / base preferred / both good / both bad. All 29: 12 / 5 / 9 / 3. Everyday 5/0/2/0. Formal 4/1/1/0. Instruction 0/1/3/0. Code-switching 2/2/0/1. Explanation 0/0/3/1. Factuality 1/1/0/1. Compare EXP-2026-004 (v0.2): all 29 = 10/6/10/3; everyday 3/2/2/0.
+- **Targeted faults (private author check before scoring):** v0.2's wrong Luganda-hour->English conversions now correct on held-out hours (ssaawa nnya ez'okumakya -> 10:00am; ssaawa musanvu ez'emisana -> 1:00pm); English-reply traffic text now in Luganda; shop-closure notice no longer invented times or names.
+- **Remaining faults (group notes):** still adds an unrequested detail (CODESWITCH-005 "tomorrow morning"); a `<think>` block leaked into one answer (serving must strip Qwen3 thinking); two explanation answers returned in English; factuality/honesty weakest (described a likely-nonexistent book; gave a two-week weather forecast) with only ~5 honesty training examples.
+- **Decision and next step:** v0.3 is a measurable improvement over v0.2 and clearly beats Sunflower on time/days (5-0). Not yet release-grade on honesty and code-switching. Next: (1) strip/suppress `<think>` at serve time; (2) build many more honesty ("I can't know") and code-switching examples for v0.4; (3) keep SALT-into-Luganda-only. Serving v0.3 behind the beta chat is acceptable only with the think-strip fix and the beta "early version" label.
