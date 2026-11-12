@@ -12,10 +12,26 @@ Heavy libraries import only inside run(), so --dry-run and tests work with no GP
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
 BASE_MODEL = "Sunbird/Sunflower-14B"
+
+_THINK_PAIR = re.compile(r"<think>.*?</think>", re.S)
+
+
+def strip_thinking(text: str) -> str:
+    """Remove Qwen3 reasoning so it never reaches a reader.
+
+    The model often begins generating *inside* a thinking block, so the output
+    looks like "...reasoning</think> real answer". Take whatever follows the last
+    </think>, then drop any remaining <think>...</think> pairs.
+    """
+    if "</think>" in text:
+        text = text.rsplit("</think>", 1)[-1]
+    text = _THINK_PAIR.sub("", text)
+    return text.strip()
 
 
 def read_items(paths, skip_multi_turn=True):
@@ -113,7 +129,7 @@ def run(args):
             with torch.no_grad():
                 g = model.generate(**enc, max_new_tokens=args.max_new_tokens,
                                    do_sample=False, pad_token_id=tok.eos_token_id)
-            answer = tok.decode(g[0][plen:], skip_special_tokens=True).strip()
+            answer = strip_thinking(tok.decode(g[0][plen:], skip_special_tokens=True))
             rec = {"item_id": it["item_id"], "category": it["category"],
                    "prompt": it["prompt"], "expected_behavior": it["expected_behavior"],
                    "model": args.model_name, "answer": answer}
