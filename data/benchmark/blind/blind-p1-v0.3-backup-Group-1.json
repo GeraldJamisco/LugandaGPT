@@ -1,0 +1,118 @@
+{
+ "LGP-BENCH-INSTRUCTION-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-006": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-001": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-005": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-006": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-005": {
+  "choice": "both_good",
+  "note": "A is better because it has all the formats of the letter which B is lacking but both a re better just letter formating missing on B"
+ },
+ "LGP-BENCH-FACTUALITY-002": {
+  "choice": "B",
+  "note": "B started with saying about Kampala lol, then gave the answer as asked but i will rule out B is better even though it started with stating what Kampala is which was inappropiriate in this request"
+ },
+ "LGP-BENCH-EVERYDAY-007": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-002": {
+  "choice": "A",
+  "note": "A is better and i think because they say the what the prompt is saying, i think we need to work on how our prompt is supposed to start withbecause since A is better, it started with what the prompt started with reasoning is needed there for better understading what the user would be asking and give a better answer, code switching "
+ },
+ "LGP-BENCH-FORMAL-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-005": {
+  "choice": "B",
+  "note": "but A invented that will arive tomorrow morning yet we were saying only late"
+ },
+ "LGP-BENCH-FORMAL-004": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-004": {
+  "choice": "A",
+  "note": "B has <think> in it, which will make the users question them selves on what this is or a bug somewhere but both  answers would be better"
+ },
+ "LGP-BENCH-EXPLANATION-001": {
+  "choice": "both_bad",
+  "note": "the answers are in english "
+ },
+ "LGP-BENCH-EVERYDAY-001": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-003": {
+  "choice": "both_bad",
+  "note": "they know the book and they gave the details about the book yet they are supposed to give an answer that they dont know "
+ },
+ "LGP-BENCH-FORMAL-006": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-002": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-004": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-003": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-001": {
+  "choice": "both_bad",
+  "note": "A has given the answer in a better way but there are words that really make the answer irrelevant or bad, saying njakuba nzirayo emabega, meaning i will be going backwards  but the rest of the words are correct to match what the request was i will rule this as bad"
+ },
+ "LGP-BENCH-EXPLANATION-004": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-005": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-002": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-001": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-002": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-004": {
+  "choice": "both_good",
+  "note": ""
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "LGP-BENCH-INSTRUCTION-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-006": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-001": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-005": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-006": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-005": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-002": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-007": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-002": {
+  "choice": "both_bad",
+  "note": "there is nothing written on the topic,but A would make it to 80% though time was not got right"
+ },
+ "LGP-BENCH-FORMAL-003": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-005": {
+  "choice": "B",
+  "note": "A gave english answer hhahahaha"
+ },
+ "LGP-BENCH-FORMAL-004": {
+  "choice": "A",
+  "note": "B invented new names of the organisation and the street names, we think this is wrong,it also invented the agenda lol"
+ },
+ "LGP-BENCH-CODESWITCH-004": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-001": {
+  "choice": "B",
+  "note": "A gave the answer in english "
+ },
+ "LGP-BENCH-EVERYDAY-001": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-003": {
+  "choice": "both_bad",
+  "note": "both gave answers of the book and its abouts"
+ },
+ "LGP-BENCH-FORMAL-006": {
+  "choice": "B",
+  "note": "A invented namesof the shop, the street number nad location, then gave reasons for the closure, i think the modelshouldn't invent what its not told not to"
+ },
+ "LGP-BENCH-EXPLANATION-002": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-004": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-003": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-001": {
+  "choice": "both_bad",
+  "note": "A  would score 90% on this it wrote the reason wrongly, well as B is asking the boss to call the writer on the time we think would be late for the meeting "
+ },
+ "LGP-BENCH-EXPLANATION-004": {
+  "choice": "both_good",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-005": {
+  "choice": "A",
+  "note": "look at B's answers lol, repeated the question many times "
+ },
+ "LGP-BENCH-FORMAL-002": {
+  "choice": "B",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-003": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-001": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-002": {
+  "choice": "A",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-004": {
+  "choice": "both_good",
+  "note": ""
+ }
+}

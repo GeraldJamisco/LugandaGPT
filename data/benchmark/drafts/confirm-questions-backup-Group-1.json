@@ -1,0 +1,122 @@
+{
+ "LGP-BENCH-EVERYDAY-001": {
+  "verdict": "change",
+  "note": "Plural agreement for hours zibeera"
+ },
+ "LGP-BENCH-EVERYDAY-002": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-001": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-001": {
+  "verdict": "change",
+  "note": "ez'okumakya "
+ },
+ "LGP-BENCH-EXPLANATION-001": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-001": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-004": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-005": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EVERYDAY-006": {
+  "verdict": "change",
+  "note": "the question is wrote wrongly it should be Nnina kutuuka ku ssaawa bbiri ez'okumakya? Mu Luzungu ssaawa eyo eba ssaawa mmeka?"
+ },
+ "LGP-BENCH-EVERYDAY-007": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-002": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-004": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-005": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FORMAL-006": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-002": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-004": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-CODESWITCH-005": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-004": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-005": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-INSTRUCTION-006": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-001": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-002": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-FACTUALITY-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-002": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-003": {
+  "verdict": "fine",
+  "note": ""
+ },
+ "LGP-BENCH-EXPLANATION-004": {
+  "verdict": "fine",
+  "note": ""
+ }
+}

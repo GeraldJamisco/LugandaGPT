@@ -1,0 +1,27 @@
+{
+ "file": "train-v0.3.jsonl",
+ "sha256": "654746cc7b34f2e3876957011f403c123e627b804795ed06717391f4cefde447",
+ "rows": 5108,
+ "unique_time_days": 56,
+ "unique_native_situations": 142,
+ "salt_rows": 4000,
+ "repeat_rule": 3,
+ "repeat_native": 6,
+ "max_salt": 4000,
+ "unique_time_frames": 44,
+ "repeat_frames": 2,
+ "salt_to_english": false,
+ "salt_corrected": 4,
+ "salt_dropped": 1,
+ "decisions": [
+  "D-020",
+  "D-022",
+  "D-023",
+  "D-024"
+ ],
+ "excluded": [
+  "salt dev/test",
+  "wikipedia",
+  "held-out clock hours and day facts"
+ ]
+}

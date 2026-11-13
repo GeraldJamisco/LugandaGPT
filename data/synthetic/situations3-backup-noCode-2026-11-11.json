@@ -1,0 +1,306 @@
+{
+ "format": "lugandagpt-situations-v3",
+ "reviewer": "",
+ "a": {
+  "SIT-101": {
+   "text": "Essimu yo etereezeddwa era kati etuuse okutwalibwa. Osobola okujja okugikima nga osobode.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-102": {
+   "text": "EKILANGO: \nTubategeeza nti oluguudo olugenda ku luzzi lugaddwawo okumala ekiseera era nga lugenda kuba nga luddaabirizibwa. Tubasaba mukozese  amakubo amalala okutuusa ng'emirimu gy'okuddaabiriza giwedde. Mwebale olw'okutegeera.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-103": {
+   "text": "Ssebo Landloodi, njagala okukutegeeza nti akasolya k'ennyumba katonya amazzi, enkuba bw'etonnya. Nkwegayiridde otuweereze omuntu akaddaabirize mu bwangu. Webale nnyo.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-104": {
+   "text": "Tusaba abantu bonna obutasuula kasasiro okumpi ne tank y'amazzi. Tukikuume nga kiyonjo okusobola okwewala okukyafuwaza amazzi n'okusaasaanya endwadde. Mwebale olw'obuyonjo n'obuvunaanyizibwa.",
+   "note": "this response offers also the better uses of why keeping nearby places of water clean",
+   "skip": false
+  },
+  "SIT-105": {
+   "text": "Mukwano, nkuweerezza ssente. Nsaba okebere akawunti yo okakase oba zituuse bulungi. Webale.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-106": {
+   "text": "Nkusaba onsonyiwe, naye lugoye lweayagade mu lutuwedeko mu stoocko.Naye osobola okukebera  ku ngoye endala",
+   "note": "this responses  also asks the user to check more in the store maybe they might want something else that is in stocl",
+   "skip": false
+  },
+  "SIT-107": {
+   "text": "Ekilango \n\nTubategeeza nti eddwaliro likyusizza ekifo era kati lisangibwa mu kizimbe ekiriraanye ekkanisa. Mwebale nnyo olw'okutegeera.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-108": {
+   "text": "Muganda wange, mbadde njagala okukutegeeza nti embuzi yaffe ezaadde obwaana bubiri",
+   "note": "",
+   "skip": false
+  },
+  "SIT-109": {
+   "text": "Muliraanwa wange, nkusaba onkuumire enkoko zange kubanga sigenda kubeerawo. Nsaba oziriisenga era n'okukakasa nti ziri bulungi. Webale nnyo olw'obuyambi bwo.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-110": {
+   "text": "EKILANGO\n\nEkisumuluzo ekyabula kizuuliddwa era kiri mu dduuka. Omuntu yenna akinoonya asobola okugenda mu dduuka akitwale. Mwebale.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-111": {
+   "text": "Ssebo/nyabo, \ntukutegeeza nti omwaana wo yakoze bulunji mu lusoma lwa Taamu eno, Afubye nnyo era alaze empisa ennungi mu kusoma kwe. Mwebale okumuwagira.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-112": {
+   "text": "Tukwanirizza nnyo mu kibiina kyaffe eky'okutereka n'okwewola ssente. Tuli basanyufu okuba naawe. Tusubira nti tujja kukolagana obulungi, okuyambagana n'okukulaakulana wamu. Tukwanirizza!",
+   "note": "",
+   "skip": false
+  },
+  "SIT-113": {
+   "text": "Ssebo omutunzi w'engoye, empale eno mpanvu nnyo. Mbade nkusaba ojikendeseeko katono entuuke bulungi",
+   "note": "",
+   "skip": false
+  },
+  "SIT-114": {
+   "text": "KINO KILANGO\n\nTubategeeza nti nayikondo  eyonoonese era kati eddaabirizibwa. Tubasaba okubeera abagumiikiriza okutuusa ng'eddaabiriziddwa. Mwebale olw'okutegeera.",
+   "note": "Nayikondo means borehole in luganda",
+   "skip": false
+  },
+  "SIT-115": {
+   "text": "Ye, ebbaasa najifunye bulunji, webale",
+   "note": "",
+   "skip": false
+  },
+  "SIT-116": {
+   "text": "Ekisaawe eky'omupiira kitobye nnyo olw'enkuba, n'olwekyo tetusobola kukoleramu zzowe olwaleero.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-117": {
+   "text": "**KINO KILANGO**\n\nTujjukiza bammemba bonna okujja ne kaadi zaabwe ez'obwammemba nga bajja mu nkuŋŋaana oba emirimu gy'ekibiina. Mwebale nnyo olw'okukolagana naffe.",
+   "note": "translates to \n\n**NOTICE**\n\nWe remind all members to bring their membership cards whenever they attend meetings or participate in group activities. Thank you for your cooperation.",
+   "skip": false
+  },
+  "SIT-118": {
+   "text": "Senga, emmere gye wawereza yali ewooma nnyo.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-119": {
+   "text": "Ssebo oweduuka mutunda Eyatayimu wano?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-120": {
+   "text": "**KINO KILANGO**\n\nTubategeeza nti olukiiko lusaziddwamu. Bammemba tujja kubategeeza enteekateeka empya mu bbanga ttono. Mwebale nnyo olw'okutegeera.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-121": {
+   "text": "Mukwano, eggaali yo etereezeddwa era kati osobola okugikozesa.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-122": {
+   "text": "Mwebale nnyo, tukakasiza nti tufunye ssente zo.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-123": {
+   "text": "KINO KILANGO \nEssomero lyetaaga abanayamba  mu kusiiga langi mu bibiina bya abayizi. Abo bonna abayinza okuyamba basaba okwewandiisa eri abakulembeze b'essomero. Mwebale nnyo olw'obuyambi bwammwe.",
+   "note": "translation \n\nThe school needs volunteers to help paint the students' classrooms. Anyone who is able to help is kindly requested to register with the school administration. Thank you very much for your support.",
+   "skip": false
+  },
+  "SIT-124": {
+   "text": "enkuba eyonoonye ekitundu ky'olusuku lwange. Ebimera ebimu byonoonese nnyo.",
+   "note": "The rain has damaged part of my garden. Some of the crops have been badly damaged.",
+   "skip": false
+  },
+  "SIT-125": {
+   "text": "Ssimanyi bulungi ani anawangula omupiira ogw'olwomukaaga. Nsaba ogoberere amawulire g'ebyemizannyo ku ttivvi oba ku leediyo ofune amawulire amatuufu.",
+   "note": "translation \n\nI'm not sure who will win Saturday's football match. Please follow sports news on television or radio to get accurate updates.",
+   "skip": false
+  },
+  "SIT-126": {
+   "text": "Ssimanyi bbeeyi ya kasooli eneebaawo omwaka ogujja, kubanga esobola okukyuuka okusinziira ku mbeera y’akatale. Osobola okubuuza abasuubuzi b’emmere oba abakugu mu by’obulimi ofune amawulire amatuufu.",
+   "note": "I don't know what the price of maize will be next year because it may change depending on market conditions. You can ask grain traders or agricultural experts to get accurate information.\n\n\ntranslation",
+   "skip": false
+  },
+  "SIT-127": {
+   "text": "Ssimanyi oba bbaasi ejja kulwawo enkya. Nsaba obuuze kampuni ya bbaasi oba okebere ku site yabwe ofune amawulire amatuufu.",
+   "note": "I don't know whether the bus will be late tomorrow. Please contact the bus company or check their website for accurate information.",
+   "skip": false
+  },
+  "SIT-128": {
+   "text": "simanyi muwendo mutuufu gwa bantu ababeera mu kyalo ekyo. Osobola okubuuza ssentebe w'ekyalo oba ofiisi y'obukulembeze bw'ekitundu ofune amawulire amatuufu.",
+   "note": "I don't know the exact number of people living in your village. You can ask the village chairman or the local administration office for accurate information.\n\ntranslate",
+   "skip": false
+  },
+  "SIT-129": {
+   "text": "simanyi nnamba ya ssimu y'omuntu oyo. Osobola okubuuza abantu abamumanyi oba okufuna nnamba ye ng'omutuukirira butereevu.",
+   "note": "I don't know that person's phone number. You can ask someone who knows them or contact the person directly to get their number.",
+   "skip": false
+  },
+  "SIT-130": {
+   "text": "simanyi bibuuzo ki ebigenda okuba mu kigezo. Osobola okubuuza omusomesa oba okusoma ebitabo n'ebyo bye mwasoma mu kibiina.",
+   "note": "I'm sorry, I don't know which questions will be in the exam. You can ask your teacher or revise your textbooks and class notes.",
+   "skip": false
+  },
+  "SIT-131": {
+   "text": "simanyi masanyalaze lwe ganaakomawo",
+   "note": "I don't know when the electricity will come back.",
+   "skip": false
+  },
+  "SIT-132": {
+   "text": "Simanyi linnya lya musawo ali ku mulimu mu ddwaliro eryo kubanga sirigendangamu. Osobola okukubira eddwaliro oba okubuuza abakozi abalirimu ofune amawulire amatuufu.",
+   "note": "I don't know the name of the doctor on duty at that clinic because I have never visited it. You can call the clinic or ask the staff there for accurate information.",
+   "skip": false
+  },
+  "SIT-133": {
+   "text": "Simanyi oba edduuka eddala lirina ekintu ekyo mu sitoowa. Osobola okubakubira essimu oba okugenda eyo okubuuza oba bakirina.",
+   "note": "I don't know whether the other shop has that item in stock. You can call them or visit the shop to confirm its availability.",
+   "skip": false
+  },
+  "SIT-134": {
+   "text": "sisobola kumanya muntu mulala ky'alowooza.",
+   "note": "I cannot know what another person is thinking.",
+   "skip": false
+  },
+  "SIT-135": {
+   "text": "Onansonyiwa, simanyi ebyayogerwa mu lukiiko kubanga saalwetabamu. Osobola okubuuza abaaliwo oba abakulembeze b'olukiiko bakutegeeze ebyateseebwa",
+   "note": "I'm sorry, I don't know what was discussed at the meeting because I did not attend. You can ask those who were present or the meeting leaders to tell you what was discussed.",
+   "skip": false
+  },
+  "SIT-136": {
+   "text": "onansonyiwa, simanyi ssente mmeka ezinaakuŋŋaanyizibwa mu kusonda ssente okw'omu wiiki ejja.",
+   "note": "I'm sorry, I don't know how much money will be collected at next week's fundraising",
+   "skip": false
+  },
+  "SIT-137": {
+   "text": "Hello landloodi, \nkansuubire oli bulunji, mbade nkusaba onyambe  ompeeyo enaku entonotono maaso awo, rent njamuwereza ku lwokutaano lwa week ejja",
+   "note": "",
+   "skip": false
+  },
+  "SIT-138": {
+   "text": "",
+   "note": "looks quite the same as the previous one i see no different ",
+   "skip": true
+  },
+  "SIT-139": {
+   "text": "Nfunye olukalala lwebintu byoyagala okugula",
+   "note": "seems irrelevant for now ",
+   "skip": true
+  },
+  "SIT-140": {
+   "text": "Tukakasiza nti tugifunye bulungi Invoice yo era tujja kugyekebejja",
+   "note": "",
+   "skip": false
+  },
+  "SIT-141": {
+   "text": "📢 AMAWULIRE AMALUNGI!\n\nTuli basanyufu okubategeeza nti tuguddewo edduuka lyaffe epya! 🎉\n\nMujje mutukyalire, mugule ebintu eby'enjawulo ku bbeeyi ensaamusaamu. Tuli beetegefu okubawa obuweereza obulungi.",
+   "note": "📢 GREAT NEWS!\n\nWe are excited to announce that our new shop is officially open! 🎉\n\nCome and visit us for a variety of products at affordable prices. We are ready to serve you with excellent customer service.",
+   "skip": false
+  },
+  "SIT-142": {
+   "text": "📢 AMAWULIRE AMALUNGI!\n\nTuli basanyufu okubategeeza nti tuguddewo edduuka lyaffe epya! 🎉\n\nMujje mutukyalire mugule ebintu byammwe ku bbeeyi ensaamusaamu. Tusuubira nnyo okubatuusaako obuweereza obulungi.",
+   "note": "",
+   "skip": false
+  },
+  "SIT-143": {
+   "text": "Password ye kigambo eky’ekyama oba ennamba z’okozesa okuggulawo essimu, akawunti oba App y'essimu yo. Ekuyamba okukuuma ebintu byo obutayingirwamu bantu balala abatalina lukusa. kilinga kisumuluzo ekya digito\n\nOkugeza, bw’oba oyagala okuyingira mu WhatsApp oba email yo, osobola okusabibwa okuwandiika password yo. Kirungi okukozesa password enzibu okuteebereza era togibuuliranga bantu balala.",
+   "note": "A password is a secret word, combination of letters, numbers or symbols that you use to access your phone, account or application. It helps protect your information from people who are not authorized to access it.\n\nFor example, when logging into your WhatsApp or email account, you may be asked to enter your password. It is important to use a strong password and never share it with others.",
+   "skip": false
+  },
+  "SIT-144": {
+   "text": "",
+   "note": "43 and 44 are the same questions and literally the same here",
+   "skip": false
+  },
+  "SIT-145": {
+   "text": "Hello musomesa, nsaba onsonyiwe. Omwana wange yeerabidde okukola oba okuleeta homework we. Nja kumujjukiza okumuleeta enkya. Webale olw'okutegeera.",
+   "note": "Dear Teacher, I apologize. My child forgot to do or bring the homework. I will remind them to complete it and bring it tomorrow. Thank you for your understanding.",
+   "skip": false
+  },
+  "SIT-146": {
+   "text": "",
+   "note": "45 and 46 are the same",
+   "skip": false
+  },
+  "SIT-147": {
+   "text": "Nsonyiwa, sijja kusobola kujja ku nsisinkano gye twategeka olw'ensonga ezitali ntekeretekere. Nsaba tusisinkane ku olunaku olulala. Webale olw'okutegeera.",
+   "note": "I'm sorry, I won't be able to attend our scheduled appointment due to unforeseen circumstances. Could we arrange another date? Thank you for your understanding.",
+   "skip": false
+  },
+  "SIT-148": {
+   "text": "Sijja kusobola kujja ku appointmenti jetwalagaana okusisisnkana nsaba tujiteeke ku lunaku olulala",
+   "note": "",
+   "skip": false
+  },
+  "SIT-149": {
+   "text": "Data bundle ye data oba yintaneeti gy'ogula ku ssimu yo okusobola okukozesa yintanet.\n\nOkugeza, bw'oba oguze data bundle, osobola okukozesa WhatsApp, Facebook, YouTube, Google n'emikutu emirala ku yintaneeti nga tonnaba kugimalawo.\n\nData bundle erina obungi obw'enjawulo nga  MB oba GB, era esobola okuggwaako ng'okozesa yintaneeti ennyingi oba ng'obudde bwayo buweddeko.",
+   "note": "A data bundle is a package of internet data that you buy for your phone so you can access the internet.\n\nFor example, when you buy a data bundle, you can use WhatsApp, Facebook, YouTube, Google and other online services until your data runs out.\n\nData bundles come in different sizes, such as MB or GB, and may expire when you use up the data or when their validity period ends.",
+   "skip": false
+  },
+  "SIT-150": {
+   "text": "same as 49",
+   "note": "",
+   "skip": true
+  },
+  "SIT-151": {
+   "text": "🎉 Amazaalibwa amalungi, mukwano era mukozi munnaffe! Nkusanyukideko ku lunaku luno olw'enjawulo. Katonda akuwe obulamu obulungi, essanyu, emikisa n'okukulaakulana mu bulamu bwo ne mu mirimu gyo. Osanyuke nnyo leero! 🎂🥳 happy birthday",
+   "note": "",
+   "skip": false
+  },
+  "SIT-152": {
+   "text": "",
+   "note": "same as 51",
+   "skip": true
+  },
+  "SIT-153": {
+   "text": "Bbaasi egenda kuva ku siteegi ku ssaawa emu ez'oku makya. Mu Lungereza zibeera essaawa?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-154": {
+   "text": "Edduuka ligenda kuggulawo ku ssaawa ttaano ez'oku makya. Mu Lungereza ziba saawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-155": {
+   "text": "Emmere ey'ekyemisana tugenda kugirya ku ssaawa mukaaga ez'emisana. Mu Lungereza zibeera saawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-156": {
+   "text": "Ekibiina kigenda kuwummula ku ssaawa mwenda ez'olweggulo. Mu Lungereza ziba ssaawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-157": {
+   "text": "Omupiira gugenda kubeera gwa ssaawa kkumi ez'olweggulo. Mu Lungereza zibeera ssaawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-158": {
+   "text": "Okusaba kw'ekiro kugenda kutandika ku ssaawa kkumi nabbiri ezakawungeezi. Mu Lungereza ze ssaawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-159": {
+   "text": "Tugenda kulya ekyeggulo ku ssaawa emu ey'ekiro. Mu Lungereza ziba ssaawa mmeka?",
+   "note": "",
+   "skip": false
+  },
+  "SIT-160": {
+   "text": "Pulogulaamu ya leediyo egenda kutandika ku ssaawa ssatu ez'ekiro. Mu Lungereza zibeera ssaawa mmeka?",
+   "note": "",
+   "skip": false
+  }
+ }
+}

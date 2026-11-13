@@ -1,0 +1,362 @@
+[
+ [
+  "SIT-101",
+  "No time given",
+  "Tell a customer their phone has been repaired and is ready to collect.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-102",
+  "No time given",
+  "Write a notice that the road to the well is closed for repairs.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-103",
+  "No time given",
+  "Tell your landlord the roof is leaking and ask him to send someone.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-104",
+  "No time given",
+  "Write a notice asking people not to throw rubbish near the water tank.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-105",
+  "No time given",
+  "Tell a friend you have sent the money and ask them to confirm.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-106",
+  "No time given",
+  "Reply to a customer that the dress they asked about is out of stock.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-107",
+  "No time given",
+  "Write a short notice that the clinic has moved to the building next to the church.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-108",
+  "No time given",
+  "Tell your brother the goat has given birth to two kids.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-109",
+  "No time given",
+  "Ask a neighbour to look after your chickens while you are away.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-110",
+  "No time given",
+  "Write a notice that a lost key was found and can be collected from the shop.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-111",
+  "No time given",
+  "Tell a parent their child did well in class this term.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-112",
+  "No time given",
+  "Write a message welcoming a new member to your savings group.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-113",
+  "No time given",
+  "Tell a tailor the trousers are too long and ask him to shorten them.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-114",
+  "No time given",
+  "Write a notice that the borehole pump is broken and is being fixed.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-115",
+  "No time given",
+  "Reply to a friend who asked whether you received the parcel: yes, it arrived safely.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-116",
+  "No time given",
+  "Tell the team the football pitch is too wet to play on.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-117",
+  "No time given",
+  "Write a notice reminding members to bring their membership cards.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-118",
+  "No time given",
+  "Tell your aunt the food she sent was delicious.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-119",
+  "No time given",
+  "Ask a shopkeeper whether they sell phone airtime.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-120",
+  "No time given",
+  "Write a notice that a meeting has been cancelled and that members will be told the new plan.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-121",
+  "No time given",
+  "Tell a friend their bicycle is fixed.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-122",
+  "No time given",
+  "Reply to a customer that you have received their payment.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-123",
+  "No time given",
+  "Write a notice that the school needs volunteers to paint the classrooms.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-124",
+  "No time given",
+  "Tell your friend the rain destroyed part of your garden.",
+  "Do not add any time, day or date that is not in the situation."
+ ],
+ [
+  "SIT-125",
+  "Honest answer",
+  "Someone asks who will win Saturday's football match. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-126",
+  "Honest answer",
+  "Someone asks what the price of maize will be next year. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-127",
+  "Honest answer",
+  "A friend asks whether the bus will be late tomorrow. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-128",
+  "Honest answer",
+  "Someone asks exactly how many people live in their village. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-129",
+  "Honest answer",
+  "Someone asks you for the phone number of a person you do not know. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-130",
+  "Honest answer",
+  "A student asks which questions will be in the exam. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-131",
+  "Honest answer",
+  "Someone asks when the electricity will come back. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-132",
+  "Honest answer",
+  "Someone asks the name of the doctor on duty at a clinic you have never visited. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-133",
+  "Honest answer",
+  "A customer asks whether another shop has an item in stock. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-134",
+  "Honest answer",
+  "Someone asks what their friend is thinking. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-135",
+  "Honest answer",
+  "Someone asks what was said at a meeting you did not attend. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-136",
+  "Honest answer",
+  "Someone asks how much money will be collected at next week's fundraising. Reply.",
+  "You cannot know this. Say so politely and say where or how they can find out. Do not guess."
+ ],
+ [
+  "SIT-137",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: help writing a message to the landlord saying the rent will be paid on Friday.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-138",
+  "Luganda reply",
+  "Now write what they asked for: help writing a message to the landlord saying the rent will be paid on Friday.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-139",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: a reply to a client confirming you received the invoice.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-140",
+  "Luganda reply",
+  "Now write what they asked for: a reply to a client confirming you received the invoice.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-141",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: a post for a WhatsApp group announcing a new shop.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-142",
+  "Luganda reply",
+  "Now write what they asked for: a post for a WhatsApp group announcing a new shop.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-143",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: an explanation of what a 'password' is.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-144",
+  "Luganda reply",
+  "Now write what they asked for: an explanation of what a 'password' is.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-145",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: a message to a teacher saying their child forgot the homework.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-146",
+  "Luganda reply",
+  "Now write what they asked for: a message to a teacher saying their child forgot the homework.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-147",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: a short message to cancel an appointment.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-148",
+  "Luganda reply",
+  "Now write what they asked for: a short message to cancel an appointment.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-149",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: an explanation of what a 'data bundle' is.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-150",
+  "Luganda reply",
+  "Now write what they asked for: an explanation of what a 'data bundle' is.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-151",
+  "Mixed-language request",
+  "Write how a person would really text this request, mixing Luganda and English the way people do. They want: a birthday message for a workmate.",
+  "Write the REQUEST only, the way people really text it."
+ ],
+ [
+  "SIT-152",
+  "Luganda reply",
+  "Now write what they asked for: a birthday message for a workmate.",
+  "Good Luganda. Keep an English word only where people really use it. Do not add a time or date that was not given."
+ ],
+ [
+  "SIT-153",
+  "Time question",
+  "Write one natural Luganda sentence about a bus leaving at 7 in the morning, then ask what time that is in English.",
+  "ssaawa emu ey'okumakya. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-154",
+  "Time question",
+  "Write one natural Luganda sentence about a shop opening at 11 in the morning, then ask what time that is in English.",
+  "ssaawa ttaano ez'okumakya. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-155",
+  "Time question",
+  "Write one natural Luganda sentence about lunch at 12 noon, then ask what time that is in English.",
+  "ssaawa mukaaga ez'emisana. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-156",
+  "Time question",
+  "Write one natural Luganda sentence about a class ending at 3 in the afternoon, then ask what time that is in English.",
+  "ssaawa mwenda ez'emisana. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-157",
+  "Time question",
+  "Write one natural Luganda sentence about a football match at 4 in the afternoon, then ask what time that is in English.",
+  "ssaawa kkumi ez'emisana. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-158",
+  "Time question",
+  "Write one natural Luganda sentence about evening prayers at 6 in the evening, then ask what time that is in English.",
+  "ssaawa kkumi na bbiri eza kawungeezi. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-159",
+  "Time question",
+  "Write one natural Luganda sentence about supper at 7 in the evening, then ask what time that is in English.",
+  "ssaawa emu eya kawungeezi. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ],
+ [
+  "SIT-160",
+  "Time question",
+  "Write one natural Luganda sentence about a radio programme at 9 at night, then ask what time that is in English.",
+  "ssaawa ssatu ez'ekiro. End with: Ssaawa eyo mu Luzungu zibeera mmeka?"
+ ]
+]

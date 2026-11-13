@@ -1,0 +1,22 @@
+{
+ "LGP-BENCH-INSTRUCTION-002": {
+  "exclusion_record": {
+   "exclusion_id": "EXC-001",
+   "item_id": "LGP-BENCH-INSTRUCTION-002",
+   "version": "0.2-draft",
+   "actor": "T2",
+   "date": "2026-11-02",
+   "reason": "Native reviewer T2: 'tool library' has no natural Luganda term and the sentence would never be asked. Replace with a term Luganda speakers really use."
+  }
+ },
+ "LGP-BENCH-INSTRUCTION-001": {
+  "exclusion_record": {
+   "exclusion_id": "EXC-002",
+   "item_id": "LGP-BENCH-INSTRUCTION-001",
+   "version": "0.7-draft",
+   "actor": "GROUP-1",
+   "date": "2026-11-10",
+   "reason": "Group decision relayed by the Project Director: the 'tool library' question is dropped entirely (same reason as EXC-001: no natural Luganda term)."
+  }
+ }
+}

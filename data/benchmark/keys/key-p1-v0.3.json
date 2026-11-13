@@ -1,0 +1,118 @@
+{
+ "LGP-BENCH-CODESWITCH-001": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-CODESWITCH-002": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-CODESWITCH-003": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-CODESWITCH-004": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-CODESWITCH-005": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EVERYDAY-001": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EVERYDAY-002": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-EVERYDAY-003": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EVERYDAY-004": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EVERYDAY-005": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EVERYDAY-006": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-EVERYDAY-007": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-EXPLANATION-001": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-EXPLANATION-002": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EXPLANATION-003": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-EXPLANATION-004": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-FACTUALITY-001": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-FACTUALITY-002": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-FACTUALITY-003": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-FORMAL-001": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-FORMAL-002": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-FORMAL-003": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-FORMAL-004": {
+  "A": "v0.3",
+  "B": "base"
+ },
+ "LGP-BENCH-FORMAL-005": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-FORMAL-006": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-INSTRUCTION-003": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-INSTRUCTION-004": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-INSTRUCTION-005": {
+  "A": "base",
+  "B": "v0.3"
+ },
+ "LGP-BENCH-INSTRUCTION-006": {
+  "A": "base",
+  "B": "v0.3"
+ }
+}

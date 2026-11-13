@@ -1,0 +1,362 @@
+[
+ [
+  "SIT-161",
+  "Honest answer",
+  "Someone asks what the winning lottery numbers will be this week. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-162",
+  "Honest answer",
+  "Someone asks whether it will rain in your village next month. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-163",
+  "Honest answer",
+  "A friend asks what grade they will get before the results are out. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-164",
+  "Honest answer",
+  "Someone asks exactly how long they will live. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-165",
+  "Honest answer",
+  "Someone asks what the president will say in a speech that has not happened yet. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-166",
+  "Honest answer",
+  "A customer asks the exact day a parcel will arrive, but you have no tracking information. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-167",
+  "Honest answer",
+  "Someone asks what the price of land in their village will be in five years. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-168",
+  "Honest answer",
+  "Someone asks whether a stranger they named is honest. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-169",
+  "Honest answer",
+  "Someone asks which team will win a match that has not been played. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-170",
+  "Honest answer",
+  "A student asks you for the answers to tomorrow's exam. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-171",
+  "Honest answer",
+  "Someone asks how many fish are in a named lake. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-172",
+  "Honest answer",
+  "Someone asks how much their neighbour earns. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-173",
+  "Honest answer",
+  "Someone asks whether their phone will break soon. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-174",
+  "Honest answer",
+  "Someone asks the population of a town you do not know. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-175",
+  "Honest answer",
+  "Someone asks in which year the world will end. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-176",
+  "Honest answer",
+  "A friend asks what you dreamed last night, but you do not remember. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-177",
+  "Honest answer",
+  "Someone asks the exact arrival time of a bus that has no timetable. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-178",
+  "Honest answer",
+  "Someone asks who stole an item, but you did not see it happen. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-179",
+  "Honest answer",
+  "Someone asks whether a medicine will cure them. You are not a health worker. Reply and advise them to see a clinician.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-180",
+  "Honest answer",
+  "Someone asks the phone number of a company you do not know. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-181",
+  "Honest answer",
+  "Someone asks whether a flight is delayed, but you have no information. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-182",
+  "Honest answer",
+  "Someone asks what the weather will be exactly one year from today. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-183",
+  "Honest answer",
+  "Someone asks how much money is in another person's bank account. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-184",
+  "Honest answer",
+  "Someone asks the name of the new head teacher before it has been announced. Reply.",
+  "You cannot truthfully know this. Say so politely and, where useful, say where they could find out. Do not guess or invent."
+ ],
+ [
+  "SIT-185",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Bro, enkya oja ku meeting?\" Reply.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-186",
+  "Reply (Luganda + English)",
+  "A customer texts: \"Hello, order yange etuuseko?\" You do not know yet. Reply honestly.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-187",
+  "Reply (Luganda + English)",
+  "Your boss texts: \"Please send me the report ku end of day.\" Reply that you will send it this evening.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-188",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Nkwetaaga help ne CV yange.\" Reply that you will help.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-189",
+  "Reply (Luganda + English)",
+  "A colleague texts: \"Can we reschedule olukiiko lwaffe?\" Reply and suggest another day.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-190",
+  "Reply (Luganda + English)",
+  "A customer texts: \"Mukama, delivery ya today esoboka?\" Reply.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-191",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Njagala kugula phone, which one osemba?\" Reply with your suggestion.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-192",
+  "Reply (Luganda + English)",
+  "A workmate texts: \"Leero oja ku office oba oja working from home?\" Reply.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-193",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Thanks for yesterday, really appreciated.\" Reply warmly.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-194",
+  "Reply (Luganda + English)",
+  "A customer texts: \"Price ya item eno emeka?\" Reply and give a price in Luganda words.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-195",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Sorry nze late, traffic yanzibidde.\" Reply that it is fine.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-196",
+  "Reply (Luganda + English)",
+  "A client texts: \"Nsobola okusasula ne mobile money?\" Reply yes.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-197",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Oli busy leero oba tusobola okukutana?\" Reply.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-198",
+  "Reply (Luganda + English)",
+  "A colleague texts: \"Did you finish ekipande kyo?\" Reply not yet, by tomorrow.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-199",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Happy birthday bro! Enjoy your day.\" Reply thanks.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-200",
+  "Reply (Luganda + English)",
+  "A customer texts: \"Item gye nnaguze yafuna damage, what do I do?\" Reply helpfully.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-201",
+  "Reply (Luganda + English)",
+  "A boss texts: \"Call me when you are free.\" Reply that you will call this evening.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-202",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Congrats on the new job man!\" Reply thanks.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-203",
+  "Reply (Luganda + English)",
+  "A customer texts: \"Mwattu, mukyaliko stock ya sugar?\" You are out of stock. Reply honestly.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-204",
+  "Reply (Luganda + English)",
+  "A friend texts: \"Weekend eno plan ki?\" Reply.",
+  "Reply the way you would really text back. Mixing Luganda with English is fine. Keep it natural. Do NOT add a time or date that was not given."
+ ],
+ [
+  "SIT-205",
+  "Explain in Luganda",
+  "Explain in Luganda what 'internet' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-206",
+  "Explain in Luganda",
+  "Explain in Luganda what a 'bank account' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-207",
+  "Explain in Luganda",
+  "Explain in Luganda what 'interest' on a loan means.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-208",
+  "Explain in Luganda",
+  "Explain in Luganda what 'summary' means, and give one example.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-209",
+  "Explain in Luganda",
+  "Explain in Luganda what a 'deadline' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-210",
+  "Explain in Luganda",
+  "Explain in simple Luganda what 'renewable energy' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-211",
+  "Explain in Luganda",
+  "Explain in Luganda what a 'budget' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-212",
+  "Explain in Luganda",
+  "Explain in simple Luganda what 'vaccination' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-213",
+  "Explain in Luganda",
+  "Explain in Luganda what a 'contract' is.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-214",
+  "Explain in Luganda",
+  "Explain in Luganda what 'savings' are and why they matter.",
+  "Answer in LUGANDA, not English. Keep an English word only for a thing with no Luganda name. Keep it simple."
+ ],
+ [
+  "SIT-215",
+  "No detail given",
+  "Tell a friend the meeting is on Monday.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ],
+ [
+  "SIT-216",
+  "No detail given",
+  "Tell a customer their item is ready.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ],
+ [
+  "SIT-217",
+  "No detail given",
+  "Write a short notice that the water will be back soon.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ],
+ [
+  "SIT-218",
+  "No detail given",
+  "Tell your brother you arrived safely.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ],
+ [
+  "SIT-219",
+  "No detail given",
+  "Tell a client the work is done.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ],
+ [
+  "SIT-220",
+  "No detail given",
+  "Remind a friend to bring the book.",
+  "Do NOT add any time, date, price or detail that is not in the situation."
+ ]
+]
